@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'core/routes/routes.dart';
+
 void main() {
   runApp(const ChefApp());
 }
@@ -12,15 +14,10 @@ class ChefApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.white
-          ),
-
-        ),
-      )
+      initialRoute: Routes.splash,
+      onGenerateRoute: AppRoutes.generateRoutes,
     );
   }
 }

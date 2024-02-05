@@ -1,0 +1,14 @@
+{
+   "getstarted": "Get started",
+   "welcome": "Welcome to Chef App",
+    "chooselanguage": "Please choose your language",
+    "english": "English",
+     "arabic": "العربيه",
+     "login": "Login",
+     "signup": "Sign-up",
+     "emailaddress":"Email address",
+     "password": "password",
+     "forgotpasscode": "Forgot passcode?",
+     "fieldrequired": "This field is required",
+      "register":"Sign up"
+}

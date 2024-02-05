@@ -1,0 +1,15 @@
+{
+  "getstarted": "ابدأ",
+  "welcome": "مرحبًا بك في تطبيق الشيف",
+  "chooselanguage": "الرجاء اختيار لغتك",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "login": "تسجيل الدخول",
+  "signup":"التسجيل",
+  "emailaddress": "عنوان البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "forgotpasscode": "هل نسيت رمز المرور؟",
+  "fieldrequired": "هذا الحقل مطلوب",
+  "register": "اشترك"
+
+}

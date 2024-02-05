@@ -4,6 +4,7 @@ import 'package:chef_app/features/auth/presentation/screens/change_language_scre
 import 'package:chef_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:chef_app/features/auth/presentation/screens/reset_password_screen.dart';
 import 'package:chef_app/features/auth/presentation/screens/send_code_screen.dart';
+import 'package:chef_app/features/auth/presentation/screens/signup_screen.dart';
 import 'package:chef_app/features/auth/presentation/screens/splash_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/add_meal_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/menu_screen.dart';
@@ -20,6 +21,7 @@ class Routes
   static const String splash='/';
   static const String changeLanguageScreen='/change_language';
   static const String loginScreen='/login_screen';
+  static const String signUpScreen='/signUp_screen';
   static const String resetPasswordScreen='/reset_password';
   static const String sendCodeScreen='/send_code';
   static const String addMealScreen='/add_meal';
@@ -62,6 +64,8 @@ class AppRoutes
       return MaterialPageRoute(builder: (context) => SettingsScreen(),);
       case Routes.updateProfileScreen:
       return MaterialPageRoute(builder: (context) => UpdateProfileScreen(),);
+      case Routes.signUpScreen:
+        return MaterialPageRoute(builder: (context) => SignupScreen(),);
       default:
         return MaterialPageRoute(builder: (context) => Scaffold(body: Center(child: Text('No Route Found')),),);
     }

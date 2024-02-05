@@ -3,6 +3,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class AppTextStyles
 {
@@ -14,7 +17,7 @@ class AppTextStyles
       color: AppColors.grey);
 
   static const TextStyle font24 = TextStyle(
-      fontSize: 24,
+      fontSize: 18 ,
       fontWeight: FontWeight.w700,
       fontFamily: 'poppins',
       color: AppColors.white);

@@ -1,8 +1,6 @@
 
 
 
-import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

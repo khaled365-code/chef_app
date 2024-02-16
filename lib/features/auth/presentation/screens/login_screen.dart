@@ -6,7 +6,9 @@ import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/utilis/commons.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
+import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../../core/widgets/shared_unoutlined_text_field.dart';
@@ -15,132 +17,159 @@ import '../../../../main.dart';
 
 class LoginScreen extends StatelessWidget {
 
-  static final loginFormKey=GlobalKey<FormState>();
-  late final  loginEmail;
-  late final passwordEmail;
-  //final emailController=TextEditingController();
-  //final passwordController=TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return BlocProvider(
+  create: (context) => LoginCubit(),
+  child: SafeArea(
         child: Scaffold(
 
           body: SingleChildScrollView(
-          child: Form(
-            key: loginFormKey,
+          child: BlocBuilder<LoginCubit, LoginState>(
+          builder: (context, state) {
+          return Form(
+            key: BlocProvider.of<LoginCubit>(context).loginForm,
             child: Column(
               children: [
                 Stack(
-                  children: [
-                    Image.asset(
-                      AppAssets.rectangle,
-                      width: double.infinity,
-                      height: 340,
+                      children: [
+                        Image.asset(
+                          AppAssets.rectangle,
+                          width: double.infinity,
+                          height: 340,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 80),
+                          child: Center(
+                              child: Image.asset(
+                            AppAssets.hat,
+                            width: 120,
+                            height: 130,
+                          )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 270),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    navigate(
+                                        context: context,
+                                        route: Routes.signUpScreen);
+                                  },
+                                  child: Text(
+                                    S.of(context).signup,
+                                    style: AppTextStyles.font16
+                                        .copyWith(color: AppColors.black),
+                                  )),
+                              TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    S.of(context).login,
+                                    style: AppTextStyles.font16
+                                        .copyWith(color: AppColors.black),
+                                  )),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 80),
-                      child: Center(
-                          child: Image.asset(
-                        AppAssets.hat,
-                        width: 120,
-                        height: 130,
-                      )),
+                SizedBox(
+                      height: 5,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 270),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 62),
+                      child: Column(
                         children: [
-                          TextButton(
-                              onPressed: () {
-                                navigate(context: context, route: Routes.signUpScreen);
-                              },
-                              child: Text(
-                                S.of(context).signup,
-                                style: AppTextStyles.font16
-                                    .copyWith(color: AppColors.black),
-                              )),
-                          TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                S.of(context).login,
-                                style: AppTextStyles.font16
-                                    .copyWith(color: AppColors.black),
-                              )),
+                          UnoutlinedTextField(
+                            controller: BlocProvider.of<LoginCubit>(context)
+                                .emailController,
+                            labelText: S.of(context).emailaddress,
+                            textInputType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value!.isEmpty ||
+                                  !value.contains('@gmail.com')) {
+                                return S.of(context).please_enter_email;
+                              }
+                              return null;
+                            },
+                          ),
+                          UnoutlinedTextField(
+                            controller: BlocProvider.of<LoginCubit>(context)
+                                .passwordController,
+                            textInputType: TextInputType.visiblePassword,
+                            labelText: S.of(context).password,
+                            obsecureText: BlocProvider.of<LoginCubit>(context)
+                                .passwordHide,
+                            suffixIcon:
+                                BlocProvider.of<LoginCubit>(context).suffixIcon,
+                            validator: (value) {
+                              if (value!.isEmpty || value.length < 8) {
+                                return S
+                                    .of(context)
+                                    .please_enter_valid_password;
+                              }
+                              return null;
+                            },
+                            suffixIconOnPressed: () {
+                              BlocProvider.of<LoginCubit>(context)
+                                  .changePasswordEye();
+                            },
+                          )
                         ],
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 62),
-                child: Column(
-                  children: [
-                    UnoutlinedTextField(
-                      //controller: emailController,
-                      labelText: S.of(context).emailaddress,
-                      textInputType: TextInputType.emailAddress,
-                      onFieldSubmitted: (value) {
-                        loginEmail = value;
-                      },
                     ),
-                    UnoutlinedTextField(
-                      //controller: passwordController,
-                      textInputType: TextInputType.visiblePassword,
-                      labelText: S.of(context).password,
-                      obsecureText: true,
-                      onFieldSubmitted: (value) {
-                        passwordEmail = value;
+                SizedBox(
+                      height: 14,
+                    ),
+                Padding(
+                      padding:
+                          EdgeInsets.only(left: 48, right: isArabic() ? 40 : 0),
+                      child: Align(
+                          alignment: isArabic()
+                              ? Alignment.centerRight
+                              : Alignment.centerLeft,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                S.of(context).forgotpasscode,
+                                style: AppTextStyles.font16
+                                    .copyWith(color: AppColors.primary),
+                              ))),
+                    ),
+                SizedBox(
+                      height: 50,
+                    ),
+                SharedButton(
+                      text: S.of(context).login,
+                      width: 280,
+                      height: 60,
+                      textStyle:
+                          AppTextStyles.font14.copyWith(color: AppColors.white),
+                      borderRadius: BorderRadius.circular(30),
+                      buttonColor: AppColors.primary,
+                      onPressed: () {
+                        if (BlocProvider.of<LoginCubit>(context)
+                            .loginForm
+                            .currentState!
+                            .validate()) {
+                          navigate(
+                              context: context, route: Routes.profileScreen);
+                        }
                       },
                     )
                   ],
-                ),
-              ),
-              SizedBox(
-                  height: 14,
-                ),
-                Padding(
-                  padding:  EdgeInsets.only(left: 48,right: isArabic()?40:0),
-                  child: Align(
-                      alignment: isArabic()? Alignment.centerRight:Alignment.centerLeft,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            S.of(context).forgotpasscode,
-                            style: AppTextStyles.font16
-                                .copyWith(color: AppColors.primary),
-                          ))),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                SharedButton(
-                  text: S.of(context).login,
-                  width: 280,
-                  height: 60,
-                  textStyle:
-                      AppTextStyles.font14.copyWith(color: AppColors.white),
-                  borderRadius: BorderRadius.circular(30),
-                  buttonColor: AppColors.primary,
-                  onPressed: () {
-                    if (loginFormKey.currentState!.validate()) {
-                      navigate(context: context, route: Routes.profileScreen);
-                      //emailController.clear();
-                      //passwordController.clear();
-                    }
-                  },
-                )
-              ],
             ),
-          ),
+          );
+  },
+),
         )
       ),
-      );
+      ),
+);
   }
 }
 

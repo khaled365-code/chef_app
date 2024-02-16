@@ -27,7 +27,7 @@ class ChefApp extends StatelessWidget {
           BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
             builder: (context, state) {
               return MaterialApp(
-
+                
                 locale: Locale(BlocProvider.of<ChangeLanguageCubit>(context).langCode),
                 localizationsDelegates: [
                   S.delegate,

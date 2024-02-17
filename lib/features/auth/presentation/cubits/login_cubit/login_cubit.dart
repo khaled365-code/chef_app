@@ -16,7 +16,7 @@ part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit(this.api) : super(LoginInitial());
-  final DioConsumer api;
+  final ApiConsumer api;
   TextEditingController passwordController=TextEditingController();
   TextEditingController emailController=TextEditingController();
   bool passwordHide=true;

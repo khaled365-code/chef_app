@@ -1,11 +1,11 @@
 
 
-class EndPoints
-{
 
-  static const String baseUrl='https://food-api-omega.vercel.app/api/v1';
-  static const String signUp='/chef/signup';
-  static const String signIn='/chef/signin';
+class EndPoint
+{
+  static const String baseUrl="https://food-api-omega.vercel.app/api/v1";
+  static const String signUp="/chef/signup";
+  static const String signIn="/chef/signin";
   static const String checkEmail='/chef/check-email';
   static const String sendCode='/chef/send-code';
   static const String forgetPassChange='/chef/change-forgotten-password';
@@ -21,36 +21,18 @@ class EndPoints
   static const String deleteMeal='/meal/delete-meal/64ce29541643ae79d15fc123';
   static const String getAllMeal='/meal/get-meals';
 
-  static String getdeleteChef(id)
-  {
-    return '$deleteChef$id';
-  }
-  static String getChefData(id)
-  {
-    return '$chefData$id';
-  }
-  static String getChefMeals(id)
-  {
-    return '$chefMeals$id';
-  }
-  static String doUpdateMeal(id)
-  {
-    return '$updateMeal$id';
-  }static String doDeleteMeal(id)
-  {
-    return '$deleteMeal$id';
-  }
 
+}
 
-
-
-
-
-
-
-
-
-
+class ApiKeys
+{
+  static  String status='status';
+  static  String errorMessage='ErrorMessage';
+  static  String email='email';
+  static  String password='password';
+  static  String message='message';
+  static  String token='token';
+  static  String id='id';
 
 
 

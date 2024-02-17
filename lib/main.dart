@@ -1,4 +1,5 @@
 import 'package:chef_app/core/bloc_observer/bloc_observer.dart';
+import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/global_cubits/change_language_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +11,8 @@ import 'core/routes/routes.dart';
 import 'generated/l10n.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  CacheHelper().init();
   runApp(BlocProvider(create: (BuildContext context) => ChangeLanguageCubit(),
       child: const ChefApp()));
   Bloc.observer=MyBlocObserver();

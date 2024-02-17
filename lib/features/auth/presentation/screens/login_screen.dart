@@ -7,9 +7,11 @@ import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/utilis/commons.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/database/api/dio_consumer.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/widgets/shared_unoutlined_text_field.dart';
 import '../../../../generated/l10n.dart';
@@ -22,12 +24,23 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => LoginCubit(),
+  create: (context) => LoginCubit(DioConsumer(dio: Dio())),
   child: SafeArea(
         child: Scaffold(
 
           body: SingleChildScrollView(
-          child: BlocBuilder<LoginCubit, LoginState>(
+          child: BlocConsumer<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (state is LoginSuccessState)
+                {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Signin Successfully')));
+                }
+              else if (state is LoginFailureState)
+                {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Signin Failled')));
+
+                }
+            },
           builder: (context, state) {
           return Form(
             key: BlocProvider.of<LoginCubit>(context).loginForm,
@@ -143,25 +156,28 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                       height: 50,
                     ),
-                SharedButton(
-                      text: S.of(context).login,
-                      width: 280,
-                      height: 60,
-                      textStyle:
-                          AppTextStyles.font14.copyWith(color: AppColors.white),
-                      borderRadius: BorderRadius.circular(30),
-                      buttonColor: AppColors.primary,
-                      onPressed: () {
-                        if (BlocProvider.of<LoginCubit>(context)
-                            .loginForm
-                            .currentState!
-                            .validate()) {
-                          navigate(
-                              context: context, route: Routes.profileScreen);
-                        }
-                      },
-                    )
-                  ],
+                state is LoginLoadingState ?Center(child: CircularProgressIndicator()) : SharedButton(
+                  text: S.of(context).login,
+                  width: 280,
+                  height: 60,
+                  textStyle:
+                  AppTextStyles.font14.copyWith(color: AppColors.white),
+                  borderRadius: BorderRadius.circular(30),
+                  buttonColor: AppColors.primary,
+                  onPressed: () {
+                    if (BlocProvider.of<LoginCubit>(context)
+                        .loginForm
+                        .currentState!
+                        .validate())
+                    {
+                      BlocProvider.of<LoginCubit>(context).signIn();
+                     // navigate(context: context, route: Routes.profileScreen);
+
+                    }
+                  },
+                ),
+
+              ],
             ),
           );
   },

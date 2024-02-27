@@ -2,20 +2,23 @@
 
 
 
-import 'package:chef_app/core/utilis/app_assets.dart';
-import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:chef_app/core/utilis/app_text_styles.dart';
-import 'package:chef_app/core/utilis/commons.dart';
-import 'package:chef_app/core/widgets/shared_button.dart';
-import 'package:chef_app/core/widgets/shared_image.dart';
+
+
+
+import 'package:chef_app/core/database/api/end_points.dart';
+import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
-
-import '../../../../core/routes/routes.dart';
-import '../../../../generated/l10n.dart';
-import '../../../../main.dart';
+import '../../../../../core/routes/routes.dart';
+import '../../../../../core/utilis/app_assets.dart';
+import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/utilis/commons.dart';
+import '../../../../../core/widgets/shared_button.dart';
+import '../../../../../core/widgets/shared_image.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../../../main.dart';
 
 class SplashScreen extends StatelessWidget {
 
@@ -94,9 +97,10 @@ class SplashScreen extends StatelessWidget {
                     textStyle: AppTextStyles.font16,
                     textcolor: AppColors.red,
                     buttonColor: AppColors.white,
-                    onPressed: () {
-                      navigate(
-                          context: context, route: Routes.changeLanguageScreen);
+                    onPressed: () async
+                    {
+                      await CacheHelper().getData(key: ApiKeys.token)==null ? navigate(context: context, route: Routes.changeLanguageScreen) : navigate(context: context, route: Routes.homeScreen);
+
                     }),
               ),
             ],

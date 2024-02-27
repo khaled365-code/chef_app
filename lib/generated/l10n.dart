@@ -140,10 +140,20 @@ class S {
     );
   }
 
-  /// `Forgot passcode?`
+  /// `Forget password`
+  String get forgetpassword {
+    return Intl.message(
+      'Forget password',
+      name: 'forgetpassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot passcode ?`
   String get forgotpasscode {
     return Intl.message(
-      'Forgot passcode?',
+      'Forgot passcode ?',
       name: 'forgotpasscode',
       desc: '',
       args: [],
@@ -210,6 +220,26 @@ class S {
     );
   }
 
+  /// `Signup Sucessfully`
+  String get signupSucessfully {
+    return Intl.message(
+      'Signup Sucessfully',
+      name: 'signupSucessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signup Failld`
+  String get signupFailed {
+    return Intl.message(
+      'Signup Failld',
+      name: 'signupFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Email`
   String get email {
     return Intl.message(
@@ -240,6 +270,36 @@ class S {
     );
   }
 
+  /// `Send Code`
+  String get sendcode {
+    return Intl.message(
+      'Send Code',
+      name: 'sendcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verify {
+    return Intl.message(
+      'Verify',
+      name: 'verify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Password`
+  String get showpassword {
+    return Intl.message(
+      'Show Password',
+      name: 'showpassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Confirm Password`
   String get confirmPassword {
     return Intl.message(
@@ -260,11 +320,21 @@ class S {
     );
   }
 
-  /// `Enter your email address below and we will send you a code via your mail to reset your password.`
-  String get sendResetLinkInfo {
+  /// `Enter your email address we will`
+  String get sendResetemail {
     return Intl.message(
-      'Enter your email address below and we will send you a code via your mail to reset your password.',
-      name: 'sendResetLinkInfo',
+      'Enter your email address we will',
+      name: 'sendResetemail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send you code to reset password`
+  String get sendResetcode {
+    return Intl.message(
+      'Send you code to reset password',
+      name: 'sendResetcode',
       desc: '',
       args: [],
     );
@@ -405,6 +475,56 @@ class S {
     return Intl.message(
       'Please Enter valid Description',
       name: 'please_enter_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords doesn't match!`
+  String get confirmPasswordError {
+    return Intl.message(
+      'Passwords doesn\'t match!',
+      name: 'confirmPasswordError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter valid Brand Name`
+  String get pleaseEnterBrandName {
+    return Intl.message(
+      'Please Enter valid Brand Name',
+      name: 'pleaseEnterBrandName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter valid Charge `
+  String get pleaseEnterMinumumCharge {
+    return Intl.message(
+      'Please Enter valid Charge ',
+      name: 'pleaseEnterMinumumCharge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter valid Location `
+  String get pleaseEnterValidLocation {
+    return Intl.message(
+      'Please Enter valid Location ',
+      name: 'pleaseEnterValidLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disc length must be at least 20 characters`
+  String get pleaseDiscLength {
+    return Intl.message(
+      'Disc length must be at least 20 characters',
+      name: 'pleaseDiscLength',
       desc: '',
       args: [],
     );
@@ -735,6 +855,156 @@ class S {
     return Intl.message(
       'Gallery',
       name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Brand Name`
+  String get brandname {
+    return Intl.message(
+      'Brand Name',
+      name: 'brandname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minumum Charge`
+  String get mincharge {
+    return Intl.message(
+      'Minumum Charge',
+      name: 'mincharge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Discreption`
+  String get disc {
+    return Intl.message(
+      'Discreption',
+      name: 'disc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delicious`
+  String get delicious {
+    return Intl.message(
+      'Delicious',
+      name: 'delicious',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `food for you`
+  String get foodforyou {
+    return Intl.message(
+      'food for you',
+      name: 'foodforyou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete meal ? `
+  String get deletemeal {
+    return Intl.message(
+      'Delete meal ? ',
+      name: 'deletemeal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No meals yet`
+  String get nomealsyet {
+    return Intl.message(
+      'No meals yet',
+      name: 'nomealsyet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hit the orange button`
+  String get hitorangebutton {
+    return Intl.message(
+      'Hit the orange button',
+      name: 'hitorangebutton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `down below to add meal`
+  String get belowaddmeal {
+    return Intl.message(
+      'down below to add meal',
+      name: 'belowaddmeal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get category {
+    return Intl.message(
+      'Category',
+      name: 'category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get descriptiontextfield {
+    return Intl.message(
+      'Description',
+      name: 'descriptiontextfield',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number`
+  String get number {
+    return Intl.message(
+      'Number',
+      name: 'number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quantity`
+  String get quantity {
+    return Intl.message(
+      'Quantity',
+      name: 'quantity',
       desc: '',
       args: [],
     );

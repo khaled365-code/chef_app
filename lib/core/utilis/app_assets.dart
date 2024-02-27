@@ -14,6 +14,19 @@ class AppAssets
   static const String toyFace2='${basePath}toyface2.png';
   static const String hat='${basePath}hat.png';
   static const String rectangle='${basePath}rectangle.png';
+  static const String person='${basePath}person.png';
+  static const String khaled='${basePath}khaled.jpeg';
+  static const String plus='${basePath}plus.png';
+  static const String maskgroup='${basePath}maskgroup.png';
+  static const String forgotpass='${basePath}forgotpass.png';
+  static const String lines3='${basePath}lines3.png';
+  static const String shopCart='${basePath}shopcart.png';
+
+
+
+
+
+
 
 
 

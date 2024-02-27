@@ -26,7 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أضف طبق إلى القائمة"),
         "addToMenu": MessageLookupByLibrary.simpleMessage("إضافة إلى القائمة"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+        "belowaddmeal":
+            MessageLookupByLibrary.simpleMessage("أسفل لإضافة وجبة"),
+        "brandname":
+            MessageLookupByLibrary.simpleMessage("اسم العلامة التجارية"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "category": MessageLookupByLibrary.simpleMessage("فئة الوجبه"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
         "checkMail":
@@ -38,9 +43,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "confirmPasswordError":
+            MessageLookupByLibrary.simpleMessage("كلمات المرور غير متطابقة!"),
         "createYourNewPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور جديدة"),
+        "deletemeal": MessageLookupByLibrary.simpleMessage("حذف الوجبة ؟"),
+        "delicious": MessageLookupByLibrary.simpleMessage("طعام"),
         "description": MessageLookupByLibrary.simpleMessage("اكتب وصفًا"),
+        "descriptiontextfield":
+            MessageLookupByLibrary.simpleMessage("وصف الوجبه"),
+        "disc": MessageLookupByLibrary.simpleMessage("الوصف"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
@@ -49,10 +61,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
         "fieldrequired":
             MessageLookupByLibrary.simpleMessage("هذا الحقل مطلوب"),
+        "foodforyou": MessageLookupByLibrary.simpleMessage("لذيذ لك"),
+        "forgetpassword":
+            MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور"),
         "forgotpasscode":
-            MessageLookupByLibrary.simpleMessage("هل نسيت رمز المرور؟"),
+            MessageLookupByLibrary.simpleMessage("هل نسيت رمز المرور ؟"),
         "getstarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
+        "hitorangebutton":
+            MessageLookupByLibrary.simpleMessage("اضغط على الزر البرتقالي"),
         "le": MessageLookupByLibrary.simpleMessage("ج.م"),
+        "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "loginFailed": MessageLookupByLibrary.simpleMessage("بيانات غير صحيحة"),
         "loginSucessfully":
@@ -71,9 +89,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "mealQuantity": MessageLookupByLibrary.simpleMessage("الكمية"),
         "mealUpdatedSucessfully":
             MessageLookupByLibrary.simpleMessage("تم تحديث الوجبة بنجاح"),
+        "mincharge": MessageLookupByLibrary.simpleMessage("الحد الأدنى للشحن"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
+        "nomealsyet": MessageLookupByLibrary.simpleMessage("لا توجد وجبات بعد"),
+        "number": MessageLookupByLibrary.simpleMessage("العدد"),
         "offline": MessageLookupByLibrary.simpleMessage("غير متصل"),
         "ok": MessageLookupByLibrary.simpleMessage("حسنًا"),
         "oldPassword":
@@ -83,8 +104,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordChangedSucessfully":
             MessageLookupByLibrary.simpleMessage("تم تغيير كلمة المرور بنجاح"),
         "phone_number": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "pleaseDiscLength": MessageLookupByLibrary.simpleMessage(
+            "يجب أن يكون طول الوصف على الأقل 20 حرفًا"),
+        "pleaseEnterBrandName": MessageLookupByLibrary.simpleMessage(
+            "الرجاء إدخال اسم علامة تجارية صالح"),
+        "pleaseEnterMinumumCharge":
+            MessageLookupByLibrary.simpleMessage("الرجاء إدخال قيمة صالحة"),
         "pleaseEnterValidCode":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال رمز صالح"),
+        "pleaseEnterValidLocation":
+            MessageLookupByLibrary.simpleMessage("الرجاء إدخال موقع صالح"),
         "pleaseEnterValidMealDesc":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال وصف وجبة صالح"),
         "pleaseEnterValidMealName":
@@ -109,15 +138,26 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرجاء إدخال وسائل التواصل الاجتماعي الصالحة"),
         "please_enter_valid_password": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال كلمة مرور صالحة"),
+        "price": MessageLookupByLibrary.simpleMessage("سعر الوجبه"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "quantity": MessageLookupByLibrary.simpleMessage("الكمية"),
         "register": MessageLookupByLibrary.simpleMessage("اشترك"),
         "sendResetLink":
             MessageLookupByLibrary.simpleMessage("إرسال رابط إعادة تعيين"),
-        "sendResetLinkInfo": MessageLookupByLibrary.simpleMessage(
-            "أدخل عنوان بريدك الإلكتروني أدناه وسنرسل لك رمزًا عبر بريدك الإلكتروني لإعادة تعيين كلمة المرور الخاصة بك."),
+        "sendResetcode": MessageLookupByLibrary.simpleMessage(
+            "سنرسل لك الرمز لإعادة تعيين كلمة المرور"),
+        "sendResetemail":
+            MessageLookupByLibrary.simpleMessage("ادخل عنوان بريدك الإلكتروني"),
+        "sendcode": MessageLookupByLibrary.simpleMessage("إرسال الرمز"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+        "showpassword":
+            MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signup": MessageLookupByLibrary.simpleMessage("التسجيل"),
+        "signupFailed": MessageLookupByLibrary.simpleMessage("فشل التسجيل"),
+        "signupSucessfully":
+            MessageLookupByLibrary.simpleMessage("تم التسجيل بنجاح"),
         "upladPhoto": MessageLookupByLibrary.simpleMessage("تحميل صورة"),
+        "verify": MessageLookupByLibrary.simpleMessage("تحقق"),
         "welcome":
             MessageLookupByLibrary.simpleMessage("مرحبًا بك في تطبيق الشيف"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا مجددًا"),

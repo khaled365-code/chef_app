@@ -2,6 +2,8 @@
 
 
 
+import 'package:chef_app/core/database/api/end_points.dart';
+import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:dio/dio.dart';
 
 class ApiInterceptor extends Interceptor
@@ -27,6 +29,10 @@ class ApiInterceptor extends Interceptor
       options.contentType = contentType;
     }
     handler.next(options);
+    options.headers[ApiKeys.token]=CacheHelper().getData(key: ApiKeys.token) !=null ?
+    'FOODAPI ${CacheHelper().getData(key: ApiKeys.token)}':null;
+
+
   }
 }
 

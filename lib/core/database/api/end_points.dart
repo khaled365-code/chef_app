@@ -9,7 +9,6 @@ class EndPoint
   static const String checkEmail='/chef/check-email';
   static const String sendCode='/chef/send-code';
   static const String forgetPassChange='/chef/change-forgotten-password';
-  static const String changePass='/chef/change-password';
   static const String updateChef='/chef/update';
   static const String deleteChef='/chef/delete?id=649789d769bd2c36dce15979';
   static const String changeChefStatus='/chef/change-chef-status';
@@ -33,6 +32,24 @@ class ApiKeys
   static  String message='message';
   static  String token='token';
   static  String id='id';
+  static  String name='name';
+  static  String phone='phone';
+  static  String confirmPassword='confirmPassword';
+  static  String location='location';
+  static  String healthImage='healthCertificate';
+  static  String frontImage='frontId';
+  static  String backImage='backId';
+  static  String profileImage='profilePic';
+  static  String brandName='brandName';
+  static  String minCharge='minCharge';
+  static  String disc='disc';
+  static  String code='code';
+
+
+
+
+
+
 
 
 

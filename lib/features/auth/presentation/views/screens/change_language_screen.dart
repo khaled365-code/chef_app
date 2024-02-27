@@ -2,20 +2,23 @@
 
 
 
-import 'package:chef_app/core/global_cubits/change_language_cubit.dart';
-import 'package:chef_app/core/utilis/app_assets.dart';
-import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:chef_app/core/utilis/app_text_styles.dart';
-import 'package:chef_app/core/utilis/commons.dart';
-import 'package:chef_app/core/widgets/shared_button.dart';
-import 'package:chef_app/core/widgets/shared_image.dart';
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/routes/routes.dart';
-import '../../../../generated/l10n.dart';
-
+import '../../../../../core/global_cubits/change_language_cubit.dart';
+import '../../../../../core/routes/routes.dart';
+import '../../../../../core/utilis/app_assets.dart';
+import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/utilis/commons.dart';
+import '../../../../../core/widgets/shared_button.dart';
+import '../../../../../core/widgets/shared_image.dart';
+import '../../../../../generated/l10n.dart';
 
 class ChangeLanguageScreen extends StatefulWidget {
 

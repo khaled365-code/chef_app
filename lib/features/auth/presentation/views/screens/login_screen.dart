@@ -1,21 +1,26 @@
 
 
 
-import 'package:chef_app/core/utilis/app_assets.dart';
-import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:chef_app/core/utilis/app_text_styles.dart';
-import 'package:chef_app/core/utilis/commons.dart';
-import 'package:chef_app/core/widgets/shared_button.dart';
-import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
+
+
+
+import 'package:chef_app/features/auth/presentation/viewmodels/cubits/login_cubit/login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/database/api/dio_consumer.dart';
-import '../../../../core/routes/routes.dart';
-import '../../../../core/widgets/shared_unoutlined_text_field.dart';
-import '../../../../generated/l10n.dart';
-import '../../../../main.dart';
+import '../../../../../core/database/api/dio_consumer.dart';
+import '../../../../../core/routes/routes.dart';
+import '../../../../../core/utilis/app_assets.dart';
+import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/utilis/commons.dart';
+import '../../../../../core/widgets/custom_progress_indicator.dart';
+import '../../../../../core/widgets/shared_button.dart';
+import '../../../../../core/widgets/shared_unoutlined_text_field.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../../../main.dart';
+import '../../../data/repos/user_repository_implementation.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -24,20 +29,20 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => LoginCubit(DioConsumer(dio: Dio())),
+  create: (context) => LoginCubit(user: UserRepoImplementation(api: DioConsumer(dio: Dio()))),
   child: SafeArea(
         child: Scaffold(
-
           body: SingleChildScrollView(
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginSuccessState)
                 {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Signin Successfully')));
+                  showToast(msg: 'Login Successfully',toastStates: ToastStates.success);
+                  navigate(context: context, route: Routes.homeScreen);
                 }
               else if (state is LoginFailureState)
                 {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Signin Failled')));
+                  showToast(msg: 'Login failled',toastStates: ToastStates.error);
 
                 }
             },
@@ -146,7 +151,9 @@ class LoginScreen extends StatelessWidget {
                               ? Alignment.centerRight
                               : Alignment.centerLeft,
                           child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                navigate(context: context, route: Routes.sendCodeScreen);
+                              },
                               child: Text(
                                 S.of(context).forgotpasscode,
                                 style: AppTextStyles.font16
@@ -156,7 +163,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                       height: 50,
                     ),
-                state is LoginLoadingState ?Center(child: CircularProgressIndicator()) : SharedButton(
+                state is LoginLoadingState ?Center(child: CustomProgressIndicator()) : SharedButton(
                   text: S.of(context).login,
                   width: 280,
                   height: 60,
@@ -170,8 +177,8 @@ class LoginScreen extends StatelessWidget {
                         .currentState!
                         .validate())
                     {
-                      BlocProvider.of<LoginCubit>(context).signIn();
-                     // navigate(context: context, route: Routes.profileScreen);
+                      BlocProvider.of<LoginCubit>(context).signin();
+
 
                     }
                   },
@@ -188,5 +195,7 @@ class LoginScreen extends StatelessWidget {
 );
   }
 }
+
+
 
 

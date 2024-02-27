@@ -26,8 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add Dish To Menu"),
         "addToMenu": MessageLookupByLibrary.simpleMessage("Add To Menu"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربيه"),
+        "belowaddmeal":
+            MessageLookupByLibrary.simpleMessage("down below to add meal"),
+        "brandname": MessageLookupByLibrary.simpleMessage("Brand Name"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "category": MessageLookupByLibrary.simpleMessage("Category"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "checkMail": MessageLookupByLibrary.simpleMessage("Check Your Mail"),
@@ -38,21 +42,34 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "confirmPasswordError":
+            MessageLookupByLibrary.simpleMessage("Passwords doesn\'t match!"),
         "createYourNewPassword":
             MessageLookupByLibrary.simpleMessage("Create Your New Password"),
+        "deletemeal": MessageLookupByLibrary.simpleMessage("Delete meal ? "),
+        "delicious": MessageLookupByLibrary.simpleMessage("Delicious"),
         "description":
             MessageLookupByLibrary.simpleMessage("Write some Description"),
+        "descriptiontextfield":
+            MessageLookupByLibrary.simpleMessage("Description"),
+        "disc": MessageLookupByLibrary.simpleMessage("Discreption"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "fieldrequired":
             MessageLookupByLibrary.simpleMessage("This field is required"),
+        "foodforyou": MessageLookupByLibrary.simpleMessage("food for you"),
+        "forgetpassword":
+            MessageLookupByLibrary.simpleMessage("Forget password"),
         "forgotpasscode":
-            MessageLookupByLibrary.simpleMessage("Forgot passcode?"),
+            MessageLookupByLibrary.simpleMessage("Forgot passcode ?"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "getstarted": MessageLookupByLibrary.simpleMessage("Get started"),
+        "hitorangebutton":
+            MessageLookupByLibrary.simpleMessage("Hit the orange button"),
         "le": MessageLookupByLibrary.simpleMessage("L.E"),
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginFailed": MessageLookupByLibrary.simpleMessage("Invalid Data"),
         "loginSucessfully":
@@ -71,9 +88,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "mealQuantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "mealUpdatedSucessfully":
             MessageLookupByLibrary.simpleMessage("Meal Updated Sucessfully"),
+        "mincharge": MessageLookupByLibrary.simpleMessage("Minumum Charge"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "no": MessageLookupByLibrary.simpleMessage("no"),
+        "nomealsyet": MessageLookupByLibrary.simpleMessage("No meals yet"),
+        "number": MessageLookupByLibrary.simpleMessage("Number"),
         "offline": MessageLookupByLibrary.simpleMessage("Offline"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "oldPassword": MessageLookupByLibrary.simpleMessage("Old Password"),
@@ -82,8 +102,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordChangedSucessfully": MessageLookupByLibrary.simpleMessage(
             "Password Changed Sucessfully"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "pleaseDiscLength": MessageLookupByLibrary.simpleMessage(
+            "Disc length must be at least 20 characters"),
+        "pleaseEnterBrandName": MessageLookupByLibrary.simpleMessage(
+            "Please Enter valid Brand Name"),
+        "pleaseEnterMinumumCharge":
+            MessageLookupByLibrary.simpleMessage("Please Enter valid Charge "),
         "pleaseEnterValidCode":
             MessageLookupByLibrary.simpleMessage("Please Enter Valid Code"),
+        "pleaseEnterValidLocation": MessageLookupByLibrary.simpleMessage(
+            "Please Enter valid Location "),
         "pleaseEnterValidMealDesc": MessageLookupByLibrary.simpleMessage(
             "Please Enter Valid Meal Description"),
         "pleaseEnterValidMealName": MessageLookupByLibrary.simpleMessage(
@@ -108,15 +136,25 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please Enter valid Social Media"),
         "please_enter_valid_password":
             MessageLookupByLibrary.simpleMessage("Please Enter valid password"),
+        "price": MessageLookupByLibrary.simpleMessage("Price"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "register": MessageLookupByLibrary.simpleMessage("Sign up"),
         "sendResetLink":
             MessageLookupByLibrary.simpleMessage("Send Reset Link"),
-        "sendResetLinkInfo": MessageLookupByLibrary.simpleMessage(
-            "Enter your email address below and we will send you a code via your mail to reset your password."),
+        "sendResetcode": MessageLookupByLibrary.simpleMessage(
+            "Send you code to reset password"),
+        "sendResetemail": MessageLookupByLibrary.simpleMessage(
+            "Enter your email address we will"),
+        "sendcode": MessageLookupByLibrary.simpleMessage("Send Code"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "showpassword": MessageLookupByLibrary.simpleMessage("Show Password"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign-up"),
+        "signupFailed": MessageLookupByLibrary.simpleMessage("Signup Failld"),
+        "signupSucessfully":
+            MessageLookupByLibrary.simpleMessage("Signup Sucessfully"),
         "upladPhoto": MessageLookupByLibrary.simpleMessage("Uplad Photo"),
+        "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Chef App"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome Back"),
         "yes": MessageLookupByLibrary.simpleMessage("yes")

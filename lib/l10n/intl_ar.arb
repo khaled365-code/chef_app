@@ -8,23 +8,28 @@
   "signup":"التسجيل",
   "emailaddress": "عنوان البريد الإلكتروني",
   "password": "كلمة المرور",
-  "forgotpasscode": "هل نسيت رمز المرور؟",
+  "verify": "تحقق",
+  "showpassword": "إظهار كلمة المرور",
+  "forgetpassword": "نسيت كلمة المرور",
+  "forgotpasscode": "هل نسيت رمز المرور ؟",
   "fieldrequired": "هذا الحقل مطلوب",
   "register": "اشترك",
   "chefApp": "تطبيق الطباخ",
   "welcomeBack": "مرحبًا مجددًا",
   "loginSucessfully": "تم تسجيل الدخول بنجاح",
   "loginFailed": "بيانات غير صحيحة",
+  "signupSucessfully": "تم التسجيل بنجاح",
+  "signupFailed": "فشل التسجيل",
   "email": "البريد الإلكتروني",
   "name": "الاسم",
   "phone_number": "رقم الهاتف",
   "confirmPassword": "تأكيد كلمة المرور",
   "sendResetLink": "إرسال رابط إعادة تعيين",
-  "sendResetLinkInfo": "أدخل عنوان بريدك الإلكتروني أدناه وسنرسل لك رمزًا عبر بريدك الإلكتروني لإعادة تعيين كلمة المرور الخاصة بك.",
   "createYourNewPassword": "إنشاء كلمة مرور جديدة",
   "newPassword": "كلمة مرور جديدة",
   "oldPassword": "كلمة المرور القديمة",
   "code": "الكود",
+  "sendcode": "إرسال الرمز",
   "description": "اكتب وصفًا",
   "profile": "الملف الشخصي",
   "confirm": "تأكيد",
@@ -35,6 +40,11 @@
   "please_enter_address": "الرجاء إدخال عنوان صالح",
   "please_enter_social": "الرجاء إدخال وسائل التواصل الاجتماعي الصالحة",
   "please_enter_desc": "الرجاء إدخال وصف صالح",
+  "confirmPasswordError":"كلمات المرور غير متطابقة!",
+  "pleaseEnterBrandName": "الرجاء إدخال اسم علامة تجارية صالح",
+  "pleaseEnterMinumumCharge": "الرجاء إدخال قيمة صالحة",
+  "pleaseEnterValidLocation": "الرجاء إدخال موقع صالح",
+  "pleaseDiscLength": "يجب أن يكون طول الوصف على الأقل 20 حرفًا",
   "yes": "نعم",
   "no": "لا",
   "le": "ج.م",
@@ -65,6 +75,32 @@
   "checkMail": "تحقق من بريدك الإلكتروني",
   "pleaseEnterValidCode": "الرجاء إدخال رمز صالح",
   "passwordChangedSucessfully": "تم تغيير كلمة المرور بنجاح",
-  "pleaseEnterValidNumber": "الرجاء إدخال رقم صالح"
+  "pleaseEnterValidNumber": "الرجاء إدخال رقم صالح",
+  "location": "الموقع",
+  "brandname": "اسم العلامة التجارية",
+  "mincharge": "الحد الأدنى للشحن",
+  "disc": "الوصف",
+  "sendResetemail": "ادخل عنوان بريدك الإلكتروني",
+  "sendResetcode": "سنرسل لك الرمز لإعادة تعيين كلمة المرور",
+  "delicious": "طعام",
+  "foodforyou": "لذيذ لك",
+  "deletemeal": "حذف الوجبة ؟",
+  "nomealsyet": "لا توجد وجبات بعد",
+  "hitorangebutton": "اضغط على الزر البرتقالي",
+  "belowaddmeal": "أسفل لإضافة وجبة",
+  "price": "سعر الوجبه",
+  "category": "فئة الوجبه",
+  "descriptiontextfield": "وصف الوجبه",
+  "number": "العدد",
+  "quantity": "الكمية"
+
+
+
+
+
+
+
+
+
 }
 

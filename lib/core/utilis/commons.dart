@@ -30,7 +30,7 @@ void showToast({required String msg,required ToastStates toastStates}) async
 
 }
 
-Future<XFile?> imagePick(ImageSource imageSource) async
+Future<XFile?> imagePick({required ImageSource imageSource}) async
 {
   XFile? image =await ImagePicker().pickImage(source: imageSource);
   return image!=null? image : null;

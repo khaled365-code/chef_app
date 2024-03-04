@@ -84,6 +84,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تم حذف الوجبة بنجاح"),
         "mealDesc": MessageLookupByLibrary.simpleMessage("وصف الوجبة"),
         "mealName": MessageLookupByLibrary.simpleMessage("اسم الوجبة"),
+        "mealNotAddedSucessfully":
+            MessageLookupByLibrary.simpleMessage(" لم يتم إضافة الوجبة بنجاح"),
+        "mealNotDeletedSucessfully":
+            MessageLookupByLibrary.simpleMessage("لم يتم حذف الوجبة بنجاح"),
         "mealNumber": MessageLookupByLibrary.simpleMessage("العدد"),
         "mealPrice": MessageLookupByLibrary.simpleMessage("سعر الوجبة"),
         "mealQuantity": MessageLookupByLibrary.simpleMessage("الكمية"),

@@ -6,9 +6,9 @@ abstract class ApiConsumer
 
   Future<dynamic>   post(String pathName,{Object? data,Map<String,dynamic>? queryParams,bool formData=false});
 
-  Future<dynamic>  patch(String pathName,{Object? data,Map<String,dynamic>? queryParams});
+  Future<dynamic>  patch(String pathName,{Object? data,Map<String,dynamic>? queryParams,bool formData=false});
 
-  Future<dynamic>  delete(String pathName,{Object? data,Map<String,dynamic>? queryParams});
+  Future<dynamic>  delete(String pathName,{Object? data,Map<String,dynamic>? queryParams,bool formData=false});
 
 
 

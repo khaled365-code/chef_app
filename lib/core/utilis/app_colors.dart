@@ -13,6 +13,9 @@ class AppColors
    static const Color red=Color(0xffF47B0A);
    static const Color pink=Color(0xffEB4796);
    static const Color grey2=Color(0xffEDEDED);
+   static const Color profileIconsColor=Color(0xff9796A1);
+   static const Color replacementColor=Color(0xffFE724C);
+
 
 
 

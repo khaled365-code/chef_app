@@ -59,7 +59,10 @@
  "upladPhoto": "Uplad Photo",
  "addToMenu": "Add To Menu",
  "mealAddedSucessfully": "Meal Added Sucessfully",
- "mealDeletedSucessfully": "mealDeletedSucessfully",
+ "mealNotAddedSucessfully": "Meal Not Added Sucessfully",
+ "mealDeletedSucessfully": "Meal Deleted Sucessfully",
+ "mealNotDeletedSucessfully": "Meal Not Deleted Sucessfully",
+
  "mealUpdatedSucessfully": "Meal Updated Sucessfully",
  "offline": "Offline",
  "online": "Online",
@@ -94,7 +97,13 @@
  "category":"Category",
  "descriptiontextfield": "Description",
  "number":"Number",
- "quantity": "Quantity"
-
+ "quantity": "Quantity",
+ "policy": "Privacy Policy",
+ "faq": "FAQ",
+ "logoutsure": "Are you sure you want to logout?",
+ "deleteMealSure": "Are you sure you want to delete meal?",
+  "search": " Find for food or restaurant..",
+ "update": "Update",
+ "language": "Language"
 
 }

@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:chef_app/features/auth/data/repos/user_repository_implementation.dart';
+import 'package:chef_app/features/menu/data/repos/menue_repo_implementation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
@@ -6,7 +8,10 @@ import 'package:meta/meta.dart';
 part 'add_meal_state.dart';
 
 class AddMealCubit extends Cubit<AddMealState> {
-  AddMealCubit() : super(AddMealInitial());
+  AddMealCubit({required this.menueRepoImplementation}) : super(AddMealInitial());
+
+
+  MenueRepoImplementation menueRepoImplementation;
 
 
   XFile? image;
@@ -44,4 +49,20 @@ class AddMealCubit extends Cubit<AddMealState> {
     emit(AddMealRadioValueChanged());
 
   }
+
+  addMeal() async
+  {
+    emit(AddMealLoadingState());
+    final response = await menueRepoImplementation.addMeal(
+        name: nameController.text,
+        desc: descController.text,
+        price: priceController.text,
+        category: selectedItem,
+        howToSell: groupValue,
+        mealImage: image!);
+
+    response.fold((error) => emit(AddMealFailureState(errorMessage: error))
+        , (success) => emit(AddMealSuccessState(succesMessage: success)));
+  }
+
 }

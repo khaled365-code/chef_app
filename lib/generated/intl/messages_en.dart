@@ -46,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passwords doesn\'t match!"),
         "createYourNewPassword":
             MessageLookupByLibrary.simpleMessage("Create Your New Password"),
+        "deleteMealSure": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete meal?"),
         "deletemeal": MessageLookupByLibrary.simpleMessage("Delete meal ? "),
         "delicious": MessageLookupByLibrary.simpleMessage("Delicious"),
         "description":
@@ -57,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailaddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "english": MessageLookupByLibrary.simpleMessage("English"),
+        "faq": MessageLookupByLibrary.simpleMessage("FAQ"),
         "fieldrequired":
             MessageLookupByLibrary.simpleMessage("This field is required"),
         "foodforyou": MessageLookupByLibrary.simpleMessage("food for you"),
@@ -68,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getstarted": MessageLookupByLibrary.simpleMessage("Get started"),
         "hitorangebutton":
             MessageLookupByLibrary.simpleMessage("Hit the orange button"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "le": MessageLookupByLibrary.simpleMessage("L.E"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -77,12 +81,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutSucessfully":
             MessageLookupByLibrary.simpleMessage("Logout Sucessfully"),
+        "logoutsure": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to logout?"),
         "mealAddedSucessfully":
             MessageLookupByLibrary.simpleMessage("Meal Added Sucessfully"),
         "mealDeletedSucessfully":
-            MessageLookupByLibrary.simpleMessage("mealDeletedSucessfully"),
+            MessageLookupByLibrary.simpleMessage("Meal Deleted Sucessfully"),
         "mealDesc": MessageLookupByLibrary.simpleMessage("Meal Description"),
         "mealName": MessageLookupByLibrary.simpleMessage("Meal Name"),
+        "mealNotAddedSucessfully":
+            MessageLookupByLibrary.simpleMessage("Meal Not Added Sucessfully"),
+        "mealNotDeletedSucessfully": MessageLookupByLibrary.simpleMessage(
+            "Meal Not Deleted Sucessfully"),
         "mealNumber": MessageLookupByLibrary.simpleMessage("Number"),
         "mealPrice": MessageLookupByLibrary.simpleMessage("Meal Price"),
         "mealQuantity": MessageLookupByLibrary.simpleMessage("Quantity"),
@@ -136,10 +146,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please Enter valid Social Media"),
         "please_enter_valid_password":
             MessageLookupByLibrary.simpleMessage("Please Enter valid password"),
+        "policy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "quantity": MessageLookupByLibrary.simpleMessage("Quantity"),
         "register": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "search": MessageLookupByLibrary.simpleMessage(
+            " Find for food or restaurant.."),
         "sendResetLink":
             MessageLookupByLibrary.simpleMessage("Send Reset Link"),
         "sendResetcode": MessageLookupByLibrary.simpleMessage(
@@ -153,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signupFailed": MessageLookupByLibrary.simpleMessage("Signup Failld"),
         "signupSucessfully":
             MessageLookupByLibrary.simpleMessage("Signup Sucessfully"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "upladPhoto": MessageLookupByLibrary.simpleMessage("Uplad Photo"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome to Chef App"),

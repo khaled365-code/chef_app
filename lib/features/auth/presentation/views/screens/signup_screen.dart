@@ -29,6 +29,7 @@ class SignupScreen extends StatelessWidget {
 
 
 
+
   @override
   Widget build(BuildContext context)
   {
@@ -77,7 +78,7 @@ class SignupScreen extends StatelessWidget {
                                     CustomImagePickerAvatar(
                                       galleryOnTap: ()
                                       {
-                                        imagePick(ImageSource.gallery).then((value) => BlocProvider
+                                        imagePick(imageSource: ImageSource.gallery).then((value) => BlocProvider
                                             .of<SignupCubit>(
                                             context)
                                             .updateProfileImage(
@@ -86,7 +87,7 @@ class SignupScreen extends StatelessWidget {
                                       },
                                       cameraOnTap: ()
                                       {
-                                        imagePick(ImageSource.camera).then((value) => BlocProvider
+                                        imagePick(imageSource: ImageSource.camera).then((value) => BlocProvider
                                             .of<SignupCubit>(
                                             context)
                                             .updateProfileImage(

@@ -97,9 +97,9 @@ class SplashScreen extends StatelessWidget {
                     textStyle: AppTextStyles.font16,
                     textcolor: AppColors.red,
                     buttonColor: AppColors.white,
-                    onPressed: () async
+                    onPressed: ()
                     {
-                      await CacheHelper().getData(key: ApiKeys.token)==null ? navigate(context: context, route: Routes.changeLanguageScreen) : navigate(context: context, route: Routes.homeScreen);
+                      CacheHelper().getData(key: ApiKeys.token)==null? navigate(context: context, route: Routes.changeLanguageScreen):navigate(context: context, route: Routes.homeScreen);
 
                     }),
               ),

@@ -56,12 +56,12 @@ void handleExceptions(DioException e) {
       }
     case DioExceptionType.cancel:
       throw ServerException(
-          errorModel: ErrorModel.fromjson(e.response!.data));
+          errorModel: ErrorModel(statusCode: 500,errorMessage: e.toString()));
     case DioExceptionType.connectionError:
       throw ServerException(
           errorModel: ErrorModel.fromjson(e.response!.data));
     case DioExceptionType.unknown:
       throw ServerException(
-          errorModel: ErrorModel.fromjson(e.response!.data));
+          errorModel: ErrorModel(statusCode: 500,errorMessage: e.toString()));
   }
 }

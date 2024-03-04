@@ -14,11 +14,11 @@ import 'package:chef_app/features/auth/presentation/views/screens/splash_screen.
 import 'package:chef_app/features/home/presentation/views/screens/home_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/add_meal_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/menu_screen.dart';
-import 'package:chef_app/features/profile/presentation/screens/change_password_screen.dart';
-import 'package:chef_app/features/profile/presentation/screens/profile_screen.dart';
-import 'package:chef_app/features/profile/presentation/screens/settings_screen.dart';
-import 'package:chef_app/features/profile/presentation/screens/update_profile_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../features/home/presentation/views/screens/change_password_screen.dart';
+import '../../features/home/presentation/views/screens/settings_screen.dart';
+import '../../features/home/presentation/views/screens/update_profile_screen.dart';
 
 
 class Routes
@@ -34,7 +34,6 @@ class Routes
   static const String addMealScreen='/add_meal';
   static const String menuScreen='/menu';
   static const String changePasswordScreen='/change_password';
-  static const String profileScreen='/profile';
   static const String settingsScreen='/settings';
   static const String updateProfileScreen='/update_profile';
 
@@ -65,9 +64,7 @@ class AppRoutes
       return MaterialPageRoute(builder: (context) => MenueScreen(),settings: routeSettings);
       case Routes.changePasswordScreen:
       return MaterialPageRoute(builder: (context) => ChangePasswordScreen(),settings: routeSettings);
-      case Routes.profileScreen:
-        return MaterialPageRoute(builder: (context) => ProfileScreen(),settings: routeSettings);
-        case Routes.settingsScreen:
+      case Routes.settingsScreen:
       return MaterialPageRoute(builder: (context) => SettingsScreen(),settings: routeSettings);
       case Routes.updateProfileScreen:
       return MaterialPageRoute(builder: (context) => UpdateProfileScreen(),settings: routeSettings);

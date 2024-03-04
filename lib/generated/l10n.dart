@@ -650,11 +650,31 @@ class S {
     );
   }
 
-  /// `mealDeletedSucessfully`
+  /// `Meal Not Added Sucessfully`
+  String get mealNotAddedSucessfully {
+    return Intl.message(
+      'Meal Not Added Sucessfully',
+      name: 'mealNotAddedSucessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meal Deleted Sucessfully`
   String get mealDeletedSucessfully {
     return Intl.message(
-      'mealDeletedSucessfully',
+      'Meal Deleted Sucessfully',
       name: 'mealDeletedSucessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meal Not Deleted Sucessfully`
+  String get mealNotDeletedSucessfully {
+    return Intl.message(
+      'Meal Not Deleted Sucessfully',
+      name: 'mealNotDeletedSucessfully',
       desc: '',
       args: [],
     );
@@ -1005,6 +1025,76 @@ class S {
     return Intl.message(
       'Quantity',
       name: 'quantity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get policy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FAQ`
+  String get faq {
+    return Intl.message(
+      'FAQ',
+      name: 'faq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to logout?`
+  String get logoutsure {
+    return Intl.message(
+      'Are you sure you want to logout?',
+      name: 'logoutsure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete meal?`
+  String get deleteMealSure {
+    return Intl.message(
+      'Are you sure you want to delete meal?',
+      name: 'deleteMealSure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Find for food or restaurant..`
+  String get search {
+    return Intl.message(
+      ' Find for food or restaurant..',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
       desc: '',
       args: [],
     );

@@ -10,7 +10,8 @@ class OutlinedTextField extends StatelessWidget {
 
   final TextInputType textInputType;
   final bool? obsecureText;
-  final String hintText;
+  final String? hintText;
+  final String? labelText;
   final TextEditingController controller;
   final IconData? suffixIcon;
   final VoidCallback? suffixIconOnPressed;
@@ -27,7 +28,7 @@ class OutlinedTextField extends StatelessWidget {
 
 
 
-  const OutlinedTextField({super.key, required this.textInputType, this.obsecureText, required this.hintText, required this.controller, this.suffixIcon, this.suffixIconOnPressed, required this.validator, this.fillColor=AppColors.white, this.borderRadiusValue= 16, this.top=50, this.left=20, this.right=0, this.bottom=0, this.suffixIconColor=AppColors.black, });
+  const OutlinedTextField({super.key, required this.textInputType, this.obsecureText,  this.hintText=' ', required this.controller, this.suffixIcon, this.suffixIconOnPressed, required this.validator, this.fillColor=AppColors.white, this.borderRadiusValue= 16, this.top=50, this.left=20, this.right=0, this.bottom=0, this.suffixIconColor=AppColors.black, this.labelText=' ', });
   @override
   Widget build(BuildContext context) {
 
@@ -38,6 +39,7 @@ class OutlinedTextField extends StatelessWidget {
       keyboardType: textInputType,
       obscureText: obsecureText??false,
       decoration: InputDecoration(
+        labelText: labelText,
         contentPadding: EdgeInsetsDirectional.only(top: top!,start: left!,bottom: bottom!,end: right!),
         hintText: hintText,
         fillColor: fillColor,

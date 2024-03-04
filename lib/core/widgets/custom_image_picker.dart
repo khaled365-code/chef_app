@@ -12,7 +12,7 @@ import '../utilis/app_colors.dart';
 
 class CustomImagePickerAvatar extends StatelessWidget {
   const CustomImagePickerAvatar({
-    super.key,this.imageRadius=40, this.plusPaddingRightValue=10, this.plusPaddingBottomValue=0, this.plusIconRadius=10, this.cameraOnTap, this.galleryOnTap,
+    super.key,this.imageRadius=40, this.plusPaddingRightValue=10, this.plusPaddingBottomValue=0, this.plusIconRadius=10, this.cameraOnTap, this.galleryOnTap, this.image=AppAssets.user, this.icon=AppAssets.plus, this.plusPaddingTopValue=0, this.circleAvatarColor=AppColors.blue,
   });
 
   final double? imageRadius;
@@ -21,6 +21,11 @@ class CustomImagePickerAvatar extends StatelessWidget {
   final double? plusIconRadius;
   final VoidCallback? cameraOnTap;
   final VoidCallback? galleryOnTap;
+  final String? image;
+  final String? icon;
+  final double? plusPaddingTopValue;
+  final Color? circleAvatarColor;
+
 
 
 
@@ -32,13 +37,14 @@ class CustomImagePickerAvatar extends StatelessWidget {
       alignment: Alignment.bottomRight,
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage(AppAssets.user),
+          backgroundImage: AssetImage(image!),
           radius: imageRadius,
         ),
         Padding(
           padding:  EdgeInsets.only(
             right: plusPaddingRightValue!,
-            bottom: plusPaddingBottomValue!
+            bottom: plusPaddingBottomValue!,
+            top: plusPaddingTopValue!
           ),
           child: Container(
             child: GestureDetector(
@@ -73,10 +79,10 @@ class CustomImagePickerAvatar extends StatelessWidget {
               },
               child: CircleAvatar(
                   backgroundImage: AssetImage(
-                      AppAssets.plus),
+                     icon!),
                   radius: plusIconRadius,
                   backgroundColor:
-                  AppColors.blue),
+                  circleAvatarColor),
             ),
           ),
         ),

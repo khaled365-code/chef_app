@@ -1060,10 +1060,10 @@ class S {
     );
   }
 
-  /// `Are you sure you want to delete meal?`
+  /// `You want to delete this meal?`
   String get deleteMealSure {
     return Intl.message(
-      'Are you sure you want to delete meal?',
+      'You want to delete this meal?',
       name: 'deleteMealSure',
       desc: '',
       args: [],
@@ -1095,6 +1095,406 @@ class S {
     return Intl.message(
       'Language',
       name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get deleteaccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteaccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure ?`
+  String get areyousure {
+    return Intl.message(
+      'Are you sure ?',
+      name: 'areyousure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please choose your language`
+  String get pleasechooselanguage {
+    return Intl.message(
+      'Please choose your language',
+      name: 'pleasechooselanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `you want for this app`
+  String get youwantforthisapp {
+    return Intl.message(
+      'you want for this app',
+      name: 'youwantforthisapp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What happens during signup and login ?`
+  String get question1 {
+    return Intl.message(
+      'What happens during signup and login ?',
+      name: 'question1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How do we handle password reset ?`
+  String get question2 {
+    return Intl.message(
+      'How do we handle password reset ?',
+      name: 'question2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How privacy is maintained ?`
+  String get question3 {
+    return Intl.message(
+      'How privacy is maintained ?',
+      name: 'question3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to ensure the security of user data ?`
+  String get question4 {
+    return Intl.message(
+      'How to ensure the security of user data ?',
+      name: 'question4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can users customize their language ?`
+  String get question5 {
+    return Intl.message(
+      'Can users customize their language ?',
+      name: 'question5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How can users manage their accounts ?`
+  String get question6 {
+    return Intl.message(
+      'How can users manage their accounts ?',
+      name: 'question6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What about account deletion ?`
+  String get question7 {
+    return Intl.message(
+      'What about account deletion ?',
+      name: 'question7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How does the app utilize user data ?`
+  String get question8 {
+    return Intl.message(
+      'How does the app utilize user data ?',
+      name: 'question8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How are user interactions with the app ?`
+  String get question9 {
+    return Intl.message(
+      'How are user interactions with the app ?',
+      name: 'question9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `During signup and login, we collect basic user information such as email address, username, and password to facilitate account creation and authentication.`
+  String get answer1 {
+    return Intl.message(
+      'During signup and login, we collect basic user information such as email address, username, and password to facilitate account creation and authentication.',
+      name: 'answer1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password reset requests are handled securely by sending a verification code to the user's registered email address. Once received, users can reset their password within the app.`
+  String get answer2 {
+    return Intl.message(
+      'Password reset requests are handled securely by sending a verification code to the user\'s registered email address. Once received, users can reset their password within the app.',
+      name: 'answer2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User-added meals are treated as confidential information. The app allows users to add and manage their meals independently. Users have control over the visibility and management of their meal data.`
+  String get answer3 {
+    return Intl.message(
+      'User-added meals are treated as confidential information. The app allows users to add and manage their meals independently. Users have control over the visibility and management of their meal data.',
+      name: 'answer3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We prioritize the security of user data by implementing robust encryption techniques and adhering to industry best practices. User data is stored securely and accessed only for necessary app functionalities.`
+  String get answer4 {
+    return Intl.message(
+      'We prioritize the security of user data by implementing robust encryption techniques and adhering to industry best practices. User data is stored securely and accessed only for necessary app functionalities.',
+      name: 'answer4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, users have the flexibility to choose their preferred language between English and Arabic within the app settings.`
+  String get answer5 {
+    return Intl.message(
+      'Yes, users have the flexibility to choose their preferred language between English and Arabic within the app settings.',
+      name: 'answer5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Users have full control over their accounts and profile information. They can update their profile details, including personal information and meal preferences, at any time.`
+  String get answer6 {
+    return Intl.message(
+      'Users have full control over their accounts and profile information. They can update their profile details, including personal information and meal preferences, at any time.',
+      name: 'answer6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The app provides options for users to logout, delete their accounts, or deactivate their profiles. These features are accessible through the app settings for user convenience.`
+  String get answer7 {
+    return Intl.message(
+      'The app provides options for users to logout, delete their accounts, or deactivate their profiles. These features are accessible through the app settings for user convenience.',
+      name: 'answer7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User data collected during app usage is utilized solely for improving user experience and providing personalized services within the app. We do not share user data with third parties without user consent.`
+  String get answer8 {
+    return Intl.message(
+      'User data collected during app usage is utilized solely for improving user experience and providing personalized services within the app. We do not share user data with third parties without user consent.',
+      name: 'answer8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User interactions within the app, such as meal additions and updates, are tracked to enhance app functionality and tailor user experiences. This data helps us improve the app's performance and cater to user preferences.`
+  String get answer9 {
+    return Intl.message(
+      'User interactions within the app, such as meal additions and updates, are tracked to enhance app functionality and tailor user experiences. This data helps us improve the app\'s performance and cater to user preferences.',
+      name: 'answer9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can I contact support for assistance ?`
+  String get faq1 {
+    return Intl.message(
+      'Can I contact support for assistance ?',
+      name: 'faq1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can I change my language ?`
+  String get faq2 {
+    return Intl.message(
+      'Can I change my language ?',
+      name: 'faq2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How can I delete my account?`
+  String get faq3 {
+    return Intl.message(
+      'How can I delete my account?',
+      name: 'faq3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What info is collected during signup?`
+  String get faq4 {
+    return Intl.message(
+      'What info is collected during signup?',
+      name: 'faq4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is my meal data private?`
+  String get faq5 {
+    return Intl.message(
+      'Is my meal data private?',
+      name: 'faq5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can I manage my profile information?`
+  String get faq6 {
+    return Intl.message(
+      'Can I manage my profile information?',
+      name: 'faq6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are there any security for user data?`
+  String get faq7 {
+    return Intl.message(
+      'Are there any security for user data?',
+      name: 'faq7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How do I add meals to the app?`
+  String get faq8 {
+    return Intl.message(
+      'How do I add meals to the app?',
+      name: 'faq8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is there a way to logout from the app?`
+  String get faq9 {
+    return Intl.message(
+      'Is there a way to logout from the app?',
+      name: 'faq9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, you can contact our support team for further assistance. Simply reach out through the app's help center or contact us via email, and we'll be happy to assist you with any queries or concerns.`
+  String get faqanswer1 {
+    return Intl.message(
+      'Yes, you can contact our support team for further assistance. Simply reach out through the app\'s help center or contact us via email, and we\'ll be happy to assist you with any queries or concerns.',
+      name: 'faqanswer1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, you can change your language preference within the app's settings. You have the option to switch between English and Arabic languages.`
+  String get faqanswer2 {
+    return Intl.message(
+      'Yes, you can change your language preference within the app\'s settings. You have the option to switch between English and Arabic languages.',
+      name: 'faqanswer2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To delete your account, go to the account settings section in the app and select the option to delete your account. Please note that this action is irreversible and will permanently delete all your data.`
+  String get faqanswer3 {
+    return Intl.message(
+      'To delete your account, go to the account settings section in the app and select the option to delete your account. Please note that this action is irreversible and will permanently delete all your data.',
+      name: 'faqanswer3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `During signup, we collect basic user information such as email address, username, and password to create your account and ensure secure login.`
+  String get faqanswer4 {
+    return Intl.message(
+      'During signup, we collect basic user information such as email address, username, and password to create your account and ensure secure login.',
+      name: 'faqanswer4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, your meal data is private. Only you have access to the meals you add through the app. We prioritize the security and privacy of your data.`
+  String get faqanswer5 {
+    return Intl.message(
+      'Yes, your meal data is private. Only you have access to the meals you add through the app. We prioritize the security and privacy of your data.',
+      name: 'faqanswer5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, you can manage your profile information within the app. Simply navigate to the profile settings where you can update your personal details and meal preferences.`
+  String get faqanswer6 {
+    return Intl.message(
+      'Yes, you can manage your profile information within the app. Simply navigate to the profile settings where you can update your personal details and meal preferences.',
+      name: 'faqanswer6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We have implemented robust security measures to protect user data. This includes encryption techniques and adherence to industry best practices to ensure the confidentiality and integrity of your information.`
+  String get faqanswer7 {
+    return Intl.message(
+      'We have implemented robust security measures to protect user data. This includes encryption techniques and adherence to industry best practices to ensure the confidentiality and integrity of your information.',
+      name: 'faqanswer7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can add meals to the app by using the meal addition feature. As a user, you are treated as a chef and can add your meals through the app's interface or API.`
+  String get faqanswer8 {
+    return Intl.message(
+      'You can add meals to the app by using the meal addition feature. As a user, you are treated as a chef and can add your meals through the app\'s interface or API.',
+      name: 'faqanswer8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, you can logout from the app by accessing the logout option in the app's settings or menu.`
+  String get faqanswer9 {
+    return Intl.message(
+      'Yes, you can logout from the app by accessing the logout option in the app\'s settings or menu.',
+      name: 'faqanswer9',
       desc: '',
       args: [],
     );

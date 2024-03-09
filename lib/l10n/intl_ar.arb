@@ -94,7 +94,11 @@
   "category": "فئة الوجبه",
   "descriptiontextfield": "وصف الوجبه",
   "number": "العدد",
-  "quantity": "الكمية"
+  "quantity": "الكمية",
+  "deleteaccount": "حذف الحساب",
+  "areyousure": "هل أنت متأكد؟"
+
+
 
 
 

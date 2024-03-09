@@ -16,6 +16,9 @@ abstract class HomeRepo
 
   Future<Either<String,String>> logout();
 
+  Future<Either<String,String>>deleteChef(id);
+
+
 
 
 

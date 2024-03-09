@@ -53,6 +53,17 @@ class AppAssets
   static const String bento='${basePath}bento.png';
   static const String crustaceans='${basePath}crustaceans.png';
   static const String prawn='${basePath}prawn.png';
+  static const String Asian='${basePath}Asian.png';
+  static const String donat='${basePath}donat.png';
+  static const String mexican='${basePath}mexican.png';
+  static const String burgercurrentapp='${basePath}burgercurrentapp.png';
+  static const String authelipsis1='${basePath}authelipsis1.png';
+  static const String authelipsis2='${basePath}authelipsis2.png';
+  static const String authelipsis3='${basePath}authelipsis3.png';
+  static const String foodhub='${basePath}foodhub.png';
+  static const String splashdivider='${basePath}splashdivider.png';
+  static const String   welcomephoto='${basePath}welcomephoto.png';
+
 
 
 

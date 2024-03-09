@@ -69,9 +69,26 @@ class HomeRepoImplementation implements HomeRepo {
     }
   }
 
+  @override
+  Future<Either<String, String>> deleteChef(id) async
+  {
+
+    try
+    {
+      final response= await api.delete(
+        EndPoint.deleteChef(id),);
+
+      return Right(response[ApiKeys.message]);
+    }
+    on ServerException catch(e)
+    {
+      return Left(e.errorModel.errorMessage);
+    }
+
+  }
+
 
 
 
 
 }
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Y2ZlNzBkMjkyMjlkMmMzMzA0NWYwMCIsImVtYWlsIjoia2hhbGVkbW9raGFsZWQxMjNAZ21haWwuY29tIiwibmFtZSI6IktoYWxlZCBNb2hhbWVkICIsImlhdCI6MTcwOTUwMDQ2Nn0.RQrSTCZ_Op3Uqf2d3v45ozCb0qFWOQ09NlyogbuyT90

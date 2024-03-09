@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أضف طبق إلى القائمة"),
         "addToMenu": MessageLookupByLibrary.simpleMessage("إضافة إلى القائمة"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+        "areyousure": MessageLookupByLibrary.simpleMessage("هل أنت متأكد؟"),
         "belowaddmeal":
             MessageLookupByLibrary.simpleMessage("أسفل لإضافة وجبة"),
         "brandname":
@@ -47,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمات المرور غير متطابقة!"),
         "createYourNewPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور جديدة"),
+        "deleteaccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "deletemeal": MessageLookupByLibrary.simpleMessage("حذف الوجبة ؟"),
         "delicious": MessageLookupByLibrary.simpleMessage("طعام"),
         "description": MessageLookupByLibrary.simpleMessage("اكتب وصفًا"),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppColors
 {
-   static const Color primary=Color(0xffFF4B3A);
+   static const Color primary=Color(0xffFE724C);
    static const Color black=Color(0xff1E1E1E);
    static const Color white=Color(0xffFFFFFF);
    static const Color grey=Color(0xff9A9A9D);
@@ -15,6 +15,10 @@ class AppColors
    static const Color grey2=Color(0xffEDEDED);
    static const Color profileIconsColor=Color(0xff9796A1);
    static const Color replacementColor=Color(0xffFE724C);
+   static const Color homeColor=Color(0xffDADADA);
+   static const Color str=Color(0xffD9D9D9);
+
+
 
 
 

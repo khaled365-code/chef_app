@@ -16,6 +16,7 @@ import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/utilis/commons.dart';
+import '../../../../../core/widgets/custom_body_bar.dart';
 import '../../../../../core/widgets/outlined_text_field.dart';
 import '../../../../../core/widgets/shared_button.dart';
 import '../../../../../generated/l10n.dart';
@@ -44,75 +45,88 @@ class SendCodeScreen extends StatelessWidget {
   },
   builder: (context, state) {
     return SafeArea(
-      child: Form(
-        key: BlocProvider.of<SendCodeCubit>(context).sendCodeKey,
-        child: Scaffold(
-          body:SingleChildScrollView(
+      child: Scaffold(
+        body:Form(
+          key: BlocProvider.of<SendCodeCubit>(context).sendCodeKey,
+          child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
-                  height: 39,),
-                Center(child: Text(S.of(context).forgotpasscode,style: AppTextStyles.font32.copyWith(color: AppColors.black,fontWeight: FontWeight.bold),)),
-                SizedBox(
-                  height: 5,
-                ),
-                Image.asset(AppAssets.forgotpass),
-                SizedBox(
-                  height: 16,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26),
-                  child: Column(
-                    children: [
-                      Text(S.of(context).sendResetemail,style: AppTextStyles.font16.copyWith(color: AppColors.black)),
-                      Text(S.of(context).sendResetcode,style: AppTextStyles.font16.copyWith(color: AppColors.black)),
-                      SizedBox(height: 20,),
-                      OutlinedTextField(
-                        top: 20,
-                        controller: BlocProvider.of<SendCodeCubit>(context).emailController,
-                        fillColor: AppColors.grey2,
-                        hintText: S.of(context).email,
-                        textInputType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !value.contains('@gmail.com')) {
-                            return S.of(context).please_enter_email;
-                          }
-                          return null;
-                        },
+                CustomBodyBar(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 26),
+                      child: Text(S.of(context).forgotpasscode,style: AppTextStyles.font32.copyWith(color: AppColors.black,fontWeight: FontWeight.bold),),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 26),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(S.of(context).sendResetemail,style: AppTextStyles.font14.copyWith(color: AppColors.grey)),
+                          Text(S.of(context).sendResetcode,style: AppTextStyles.font14.copyWith(color: AppColors.grey)),
+                          SizedBox(height: 40,),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 26),
+                            child: OutlinedTextField(
+                              borderSide: BorderSide(
+                                color: AppColors.primary
+                              ),
+                              top: 35,
+                              controller: BlocProvider.of<SendCodeCubit>(context).emailController,
+                              fillColor: AppColors.white,
+                              hintText: S.of(context).email,
+
+                              textInputType: TextInputType.emailAddress,
+                              validator: (value) {
+                                if (value!.isEmpty ||
+                                    !value.contains('@gmail.com')) {
+                                  return S.of(context).please_enter_email;
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 51,),
+                        ],
                       ),
-                      SizedBox(height: 25,),
-                      state is SendCodeLoading? Center(child: CustomProgressIndicator(),) :SharedButton(
-                          text: S.of(context).sendcode,
-                          width: 328,
-                          height: 57,
-                          textStyle: AppTextStyles.font24,
-                          buttonColor: AppColors.primary,
-                          borderRadius: BorderRadius.circular(25),
-                          onPressed: ()
-                        {
-                          if(BlocProvider.of<SendCodeCubit>(context).sendCodeKey.currentState!.validate())
-                            {
-                              BlocProvider.of<SendCodeCubit>(context).sendCode();
+                    ),
 
-                            }
-                        },
-                      ),
-                    ],
-                  ),
-                )
+                  ],
+                ),
+                state is SendCodeLoading? Center(child: CustomProgressIndicator(),) :SharedButton(
+                  text: S.of(context).sendcode,
+                  width: 248,
+                  height: 60,
+                  textStyle: AppTextStyles.font24,
+                  buttonColor: AppColors.primary,
+                  borderRadius: BorderRadius.circular(25),
+                  onPressed: ()
+                  {
+                    if(BlocProvider.of<SendCodeCubit>(context).sendCodeKey.currentState!.validate())
+                    {
+                      BlocProvider.of<SendCodeCubit>(context).sendCode();
 
+                    }
+                  },
+                ),
 
+      
+      
               ],
             ),
-          )
-        ),
-
-        ),
-      );
+          ),
+        )
+      ),
+    );
   },
 ),
     
 );
   }
 }
+

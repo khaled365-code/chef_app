@@ -30,9 +30,9 @@ class RhombicContainer extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 5,),
-          CircleAvatar(backgroundImage: AssetImage(foodCategoriesModel.image),radius: 25,backgroundColor: AppColors.white),
+          Image.asset(foodCategoriesModel.image),
           SizedBox(height: 5,),
-          Text(foodCategoriesModel.name,style: AppTextStyles.font16.copyWith(color: AppColors.white),)
+          Text(foodCategoriesModel.name,style: AppTextStyles.font14.copyWith(color: AppColors.white),)
         ],
       ),
     );

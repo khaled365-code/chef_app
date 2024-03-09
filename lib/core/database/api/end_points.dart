@@ -16,6 +16,17 @@ class EndPoint
   static const String chefLogout='/chef/logout';
 
 
+  static String deleteChef(id)
+  {
+    return '/chef/delete?id=$id';
+  }
+
+  static String updateMeal(id)
+  {
+    return '/chef/update-meal/$id';
+  }
+
+
 
   static String getAllChefMeals(id)
   {

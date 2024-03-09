@@ -11,7 +11,10 @@ import 'package:chef_app/features/auth/presentation/views/screens/reset_password
 import 'package:chef_app/features/auth/presentation/views/screens/send_code_screen.dart';
 import 'package:chef_app/features/auth/presentation/views/screens/signup_screen.dart';
 import 'package:chef_app/features/auth/presentation/views/screens/splash_screen.dart';
+import 'package:chef_app/features/auth/presentation/views/screens/start_screen.dart';
+import 'package:chef_app/features/home/presentation/views/screens/faq_screen.dart';
 import 'package:chef_app/features/home/presentation/views/screens/home_screen.dart';
+import 'package:chef_app/features/home/presentation/views/screens/privacy_policy_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/add_meal_screen.dart';
 import 'package:chef_app/features/menu/presentation/screens/menu_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +28,7 @@ class Routes
 {
 
   static const String splash='/';
+  static const String startScreen='/start_screen';
   static const String changeLanguageScreen='/change_language';
   static const String loginScreen='/login_screen';
   static const String signUpScreen='/signUp_screen';
@@ -36,8 +40,13 @@ class Routes
   static const String changePasswordScreen='/change_password';
   static const String settingsScreen='/settings';
   static const String updateProfileScreen='/update_profile';
+  static const String privacyScreen='/privacy_screen';
+  static const String faqScreen='/faq_screen';
 
-  
+
+
+
+
 
 
 }
@@ -49,7 +58,9 @@ class AppRoutes
     switch(routeSettings.name)
     {
       case Routes.splash:
-        return MaterialPageRoute(builder: (context) => SplashScreen(),settings: routeSettings);
+      return MaterialPageRoute(builder: (context) => SplashScreen(),settings: routeSettings);
+      case Routes.startScreen:
+        return MaterialPageRoute(builder: (context) => StartScreen(),settings: routeSettings);
       case Routes.changeLanguageScreen:
         return MaterialPageRoute(builder: (context) => ChangeLanguageScreen(),settings: routeSettings);
         case Routes.loginScreen:
@@ -72,6 +83,10 @@ class AppRoutes
         return MaterialPageRoute(builder: (context) => SignupScreen(),settings: routeSettings);
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (context) => HomeScreen(),settings: routeSettings);
+      case Routes.privacyScreen:
+        return MaterialPageRoute(builder: (context) => PrivacyPolicyScreen(),settings: routeSettings);
+      case Routes.faqScreen:
+        return MaterialPageRoute(builder: (context) => FaqScreen(),settings: routeSettings);
       default:
         return MaterialPageRoute(builder: (context) => Scaffold(body: Center(child: Text('No Route Found')),),);
     }

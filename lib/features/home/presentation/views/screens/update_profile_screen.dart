@@ -10,6 +10,7 @@ import 'package:chef_app/core/widgets/custom_progress_indicator.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/viewmodels/update_profile_cubit/update_profile_cubit.dart';
+import 'package:chef_app/features/home/presentation/views/screens/home_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,8 @@ class UpdateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return BlocProvider(
     create: (context) => UpdateProfileCubit(homeRepoImplementation: HomeRepoImplementation(api: DioConsumer(dio: Dio()))),
     child: BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
@@ -106,7 +109,7 @@ class UpdateProfileScreen extends StatelessWidget {
                     children:
                     [
                       OutlinedTextField(
-                        labelText: S.of(context).name,
+                        hintText: S.of(context).name,
                         textInputType: TextInputType.text,
                         controller: updateProfileCubit.nameController,
                         validator: (value) {
@@ -124,7 +127,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 20,),
                       OutlinedTextField(
-                        labelText: S.of(context).phone_number,
+                        hintText: S.of(context).phone_number,
                         textInputType: TextInputType.phone,
                         controller: updateProfileCubit.phoneController,
                         validator: (value) {
@@ -142,7 +145,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 20,),
                       OutlinedTextField(
-                      labelText: S.of(context).brandname,
+                      hintText: S.of(context).brandname,
                       textInputType: TextInputType.text,
                       controller: updateProfileCubit.brandController,
                       validator: (value) {
@@ -160,7 +163,7 @@ class UpdateProfileScreen extends StatelessWidget {
                     ),
                       SizedBox(height: 20,),
                       OutlinedTextField(
-                      labelText: S.of(context).mincharge,
+                      hintText: S.of(context).mincharge,
                       textInputType: TextInputType.number,
                       controller: updateProfileCubit.chargeController,
                       validator: (value) {
@@ -178,7 +181,7 @@ class UpdateProfileScreen extends StatelessWidget {
                     ),
                       SizedBox(height: 20,),
                       OutlinedTextField(
-                      labelText: S.of(context).descriptiontextfield,
+                      hintText: S.of(context).descriptiontextfield,
                       textInputType: TextInputType.text,
                       controller: updateProfileCubit.descController,
                       validator: (value) {

@@ -6,6 +6,7 @@ import 'package:chef_app/core/database/api/end_points.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/global_cubits/get_chef_meals_cubit/get_chef_meals_cubit.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
+import 'package:chef_app/features/home/presentation/viewmodels/delete_account_cubit/delete_account_cubit.dart';
 import 'package:chef_app/features/home/presentation/viewmodels/logout_cubit/logout_cubit.dart';
 import 'package:chef_app/features/menu/data/repos/menue_repo_implementation.dart';
 import 'package:dio/dio.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/global_cubits/change_language_cubit/change_language_cubit.dart';
 import 'core/routes/routes.dart';
+import 'core/utilis/commons.dart';
 import 'generated/l10n.dart';
 
 void main() {
@@ -31,7 +33,7 @@ void main() {
         BlocProvider(create: (context) =>
             GetChefMealsCubit(menueRepoImplementation: MenueRepoImplementation(
                 api: DioConsumer(dio: Dio()))),),
-
+        BlocProvider(create: (context) => DeleteAccountCubit(homeRepoImplementation: HomeRepoImplementation(api: DioConsumer(dio: Dio())))),
       ],
       child: const ChefApp()));
   Bloc.observer = MyBlocObserver();
@@ -46,41 +48,55 @@ class ChefApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(414, 896),
       builder: (context, child) =>
-          BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
-            builder: (context, state) {
-              return BlocConsumer<LogoutCubit, LogoutState>(
-                listener: (context, state) async
-                {
-                  if (state is LogoutSuccessState) {
-                    await CacheHelper().clearData();
-                    exit(0);
-                  }
-                },
-                builder: (context, state) {
-                  return BlocBuilder<GetChefMealsCubit, GetChefMealsState>(
-                    builder: (context, state) {
-                      return MaterialApp(
-
-                        locale: Locale(BlocProvider
-                            .of<ChangeLanguageCubit>(context)
-                            .langCode),
-                        localizationsDelegates: [
-                          S.delegate,
-                          GlobalMaterialLocalizations.delegate,
-                          GlobalWidgetsLocalizations.delegate,
-                          GlobalCupertinoLocalizations.delegate,
-                        ],
-                        supportedLocales: S.delegate.supportedLocales,
-                        theme: ThemeData.light(),
-                        debugShowCheckedModeBanner: false,
-                        initialRoute: Routes.splash,
-                        onGenerateRoute: AppRoutes.generateRoutes,
-                      );
-                    },
-                  );
-                },
-              );
+          BlocListener<DeleteAccountCubit, DeleteAccountState>(
+            listener: (context, state) async
+            {
+              if(state is DeleteAccountSuccessState)
+              {
+                await CacheHelper().clearData();
+                exit(0);
+              }
+              else if (State is DeleteAccountFailureState )
+              {
+                showToast(msg: state.errorMessage, toastStates: ToastStates.error);
+              }
             },
+            child: BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
+              builder: (context, state) {
+                return BlocConsumer<LogoutCubit, LogoutState>(
+                  listener: (context, state) async
+                  {
+                    if (state is LogoutSuccessState) {
+                      await CacheHelper().clearData();
+                      exit(0);
+                    }
+                  },
+                  builder: (context, state) {
+                    return BlocBuilder<GetChefMealsCubit, GetChefMealsState>(
+                      builder: (context, state) {
+                        return MaterialApp(
+
+                          locale: Locale(BlocProvider
+                              .of<ChangeLanguageCubit>(context)
+                              .langCode),
+                          localizationsDelegates: [
+                            S.delegate,
+                            GlobalMaterialLocalizations.delegate,
+                            GlobalWidgetsLocalizations.delegate,
+                            GlobalCupertinoLocalizations.delegate,
+                          ],
+                          supportedLocales: S.delegate.supportedLocales,
+                          theme: ThemeData.light(),
+                          debugShowCheckedModeBanner: false,
+                          initialRoute: Routes.splash,
+                          onGenerateRoute: AppRoutes.generateRoutes,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
           ),
     );
   }

@@ -131,7 +131,7 @@ class AddMealScreen extends StatelessWidget {
                            color: AppColors.grey2,
                            borderRadius: BorderRadius.circular(16),
                            border: Border.all(
-                             color: AppColors.grey2,
+                             color: AppColors.white,
                              width: 2
                            ),
                          ),

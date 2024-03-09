@@ -1,6 +1,7 @@
 
 
 
+import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +15,9 @@ class SharedButton extends StatelessWidget {
   final TextStyle textStyle;
   final Color buttonColor;
   final void Function()? onPressed;
+  final BoxBorder? border;
 
-  const SharedButton({required this.text, this.textcolor, this.onPressed, required this.width, required this.height, this.borderRadius, required this.textStyle, required this.buttonColor});
+  const SharedButton({required this.text, this.textcolor, this.onPressed, required this.width, required this.height, this.borderRadius, required this.textStyle, required this.buttonColor, this.border});
   @override
 
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class SharedButton extends StatelessWidget {
     height: height,
     decoration: BoxDecoration(
     borderRadius: borderRadius,
+    border: border,
     color: buttonColor,),
     child:MaterialButton(onPressed: onPressed,
       child: Center(child: Text(text,style:textStyle.copyWith(color: textcolor),)),

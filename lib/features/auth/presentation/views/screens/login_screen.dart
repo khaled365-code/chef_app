@@ -29,28 +29,29 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => LoginCubit(user: UserRepoImplementation(api: DioConsumer(dio: Dio()))),
-  child: SafeArea(
+    create: (context) => LoginCubit(user: UserRepoImplementation(api: DioConsumer(dio: Dio()))),
+     child: BlocConsumer<LoginCubit, LoginState>(
+     listener: (context, state)
+  {
+    if (state is LoginSuccessState)
+    {
+      showToast(msg: 'Login Successfully',toastStates: ToastStates.success);
+      navigate(context: context, route: Routes.homeScreen);
+    }
+    else if (state is LoginFailureState)
+    {
+      showToast(msg: 'Login failled',toastStates: ToastStates.error);
+
+    }
+  },
+  builder: (context, state) {
+    return SafeArea(
         child: Scaffold(
           body: SingleChildScrollView(
-          child: BlocConsumer<LoginCubit, LoginState>(
-            listener: (context, state) {
-              if (state is LoginSuccessState)
-                {
-                  showToast(msg: 'Login Successfully',toastStates: ToastStates.success);
-                  navigate(context: context, route: Routes.homeScreen);
-                }
-              else if (state is LoginFailureState)
-                {
-                  showToast(msg: 'Login failled',toastStates: ToastStates.error);
-
-                }
-            },
-          builder: (context, state) {
-          return Form(
-            key: BlocProvider.of<LoginCubit>(context).loginForm,
-            child: Column(
-              children: [
+              child:Form(
+              key: BlocProvider.of<LoginCubit>(context).loginForm,
+               child: Column(
+               children: [
                 Stack(
                       children: [
                         Image.asset(
@@ -163,35 +164,34 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                       height: 50,
                     ),
-                state is LoginLoadingState ?Center(child: CustomProgressIndicator()) : SharedButton(
-                  text: S.of(context).login,
-                  width: 280,
-                  height: 60,
-                  textStyle:
-                  AppTextStyles.font14.copyWith(color: AppColors.white),
-                  borderRadius: BorderRadius.circular(30),
-                  buttonColor: AppColors.primary,
-                  onPressed: () {
-                    if (BlocProvider.of<LoginCubit>(context)
-                        .loginForm
-                        .currentState!
-                        .validate())
-                    {
-                      BlocProvider.of<LoginCubit>(context).signin();
+                state is LoginLoadingState ? Center(child: CustomProgressIndicator()) : SharedButton(
+                        text: S.of(context).login,
+                        width: 280,
+                        height: 60,
+                        textStyle:
+                        AppTextStyles.font14.copyWith(color: AppColors.white),
+                        borderRadius: BorderRadius.circular(30),
+                        buttonColor: AppColors.primary,
+                        onPressed: () {
+                          if (BlocProvider.of<LoginCubit>(context)
+                              .loginForm
+                              .currentState!
+                              .validate())
+                          {
+                            BlocProvider.of<LoginCubit>(context).signin();
 
-
-                    }
-                  },
-                ),
+                          }
+                        },
+                      )
 
               ],
             ),
-          );
+          )
+         ),
+        )
+      );
   },
 ),
-        )
-      ),
-      ),
 );
   }
 }

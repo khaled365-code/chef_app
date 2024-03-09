@@ -9,6 +9,7 @@ import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/commons.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
+import 'package:chef_app/features/home/presentation/viewmodels/delete_account_cubit/delete_account_cubit.dart';
 import 'package:chef_app/features/home/presentation/viewmodels/logout_cubit/logout_cubit.dart';
 import 'package:chef_app/features/home/presentation/views/components/header_body_item.dart';
 import 'package:flutter/cupertino.dart';
@@ -93,6 +94,19 @@ class HomeDrawerBody extends StatelessWidget {
                           subTitle: S.of(context).logoutsure));
                 },),
               SizedBox(height: 35,),
+              HeaderBodyItem(icon: Icons.delete_outline_outlined, text: S.of(context).deleteaccount,
+                onTap: ()
+                {
+                  showDialog(
+                      context: context,
+                      builder: (context) => CustomAlertDialog(
+                          confirmPressed: ()
+                          {
+                            BlocProvider.of<DeleteAccountCubit>(context).deleteAccount();
+                          },
+                          subTitle: S.of(context).areyousure));
+                },),
+
 
             ],
           ),

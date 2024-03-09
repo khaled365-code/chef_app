@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/widgets/custom_alert_dialog.dart';
 import '../../../../generated/l10n.dart';
+import '../../../home/presentation/views/screens/home_screen.dart';
 
 class MenueScreen extends StatelessWidget {
 
@@ -34,6 +35,7 @@ class MenueScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => DeleteMealCubit(menueRepoImplementation: MenueRepoImplementation(api: DioConsumer(dio: Dio()))),
         ),
+
       ],
       child: BlocConsumer<MenueCubit, MenueState>(
         listener: (context, state)
@@ -80,11 +82,11 @@ class MenueScreen extends StatelessWidget {
                             child: FoodContainer(
                               meals: mealsCubit.meals![index],
                               width: 158,
-                              textLeft: 25,
-                              textBottom: 45,
+                              textLeft: 50,
+                              textBottom: 35,
                               imageTop: -30,
                               imageLeft: 40,
-                              onTap: () {
+                              deleteOnTap: () {
                                 showDialog(
                                   context: context,
                                   builder: (context) =>
@@ -99,13 +101,18 @@ class MenueScreen extends StatelessWidget {
                                       ),
                                 );
                               },
+                              updateMealOnTap: ()
+                              {
+
+                              },
+                              updateMealRightPos: 30,
                             ),
                           ),
                     ),
                     gridDelegate:
                     SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisSpacing: 90,
+                      mainAxisSpacing: 70,
                       crossAxisSpacing: 5,
                     ),
                   )
@@ -116,7 +123,7 @@ class MenueScreen extends StatelessWidget {
                 ],
               ),
               floatingActionButton: Padding(
-                padding: const EdgeInsets.only(bottom: 10, right: 10),
+                padding: const EdgeInsets.only(bottom: 10, right: 10,),
                 child: GestureDetector(onTap: () {
                   navigate(context: context, route: Routes.addMealScreen);
                 },

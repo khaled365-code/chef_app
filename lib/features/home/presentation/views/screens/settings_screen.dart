@@ -1,9 +1,11 @@
 
 
 
+import 'package:chef_app/core/utilis/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/custom_alert_dialog.dart';
@@ -45,7 +47,7 @@ class SettingsScreen extends StatelessWidget {
 
             }, onTap3: ()
             {
-
+              navigate(context: context, route: Routes.privacyScreen);
             },
             icon1: Icons.security_outlined,
             text1: 'Security',
@@ -71,7 +73,7 @@ class SettingsScreen extends StatelessWidget {
 
             }, onTap3: ()
           {
-
+            navigate(context: context, route: Routes.faqScreen);
           },
             icon1: Icons.wallet_travel_outlined,
             text1: 'My Subscribtion',

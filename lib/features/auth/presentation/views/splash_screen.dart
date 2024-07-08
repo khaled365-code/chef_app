@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children:
           [
             Spacer(),
-            Center(child: Image.asset(imageConstants.foodhub)),
+            Center(child: Image.asset(imageConstants.rectangle)),
             Spacer(),
             Image.asset(imageConstants.splashdivider),
             SizedBox(height: 16.h,),

@@ -60,7 +60,6 @@ class imageConstants
   static const String authelipsis1='${basePath}authelipsis1.png';
   static const String authelipsis2='${basePath}authelipsis2.png';
   static const String authelipsis3='${basePath}authelipsis3.png';
-  static const String foodhub='${basePath}foodhub.png';
   static const String splashdivider='${basePath}splashdivider.png';
   static const String   welcomephoto='${basePath}welcomephoto.png';
 

@@ -33,6 +33,7 @@ class ChefsApp extends StatelessWidget {
               {
                 await CacheHelper().clearData();
                 exit(0);
+
               }
               else if (State is DeleteAccountFailureState )
               {
@@ -66,7 +67,7 @@ class ChefsApp extends StatelessWidget {
                           supportedLocales: S.delegate.supportedLocales,
                           theme: ThemeData.light(),
                           debugShowCheckedModeBanner: false,
-                          initialRoute: Routes.splash,
+                          initialRoute: Routes.loginScreen,
                           onGenerateRoute: AppRouter.generateRoutes,
                         );
                       },

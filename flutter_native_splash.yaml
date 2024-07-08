@@ -1,0 +1,20 @@
+
+
+
+
+flutter_native_splash:
+
+  color: "#FE724C"
+  image: assets/images/food_app_normal_logo.png
+
+    # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
+    # the leading # character.
+
+    # The image parameter allows you to specify an image used in the splash screen.  It must be a
+  # png file and should be sized for 4x pixel density.
+
+
+
+  android_12:
+    color: "#FE724C"
+    image: assets/images/food_hub_logo_android_12.png

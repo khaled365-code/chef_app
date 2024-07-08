@@ -24,8 +24,8 @@ class CustomBodyBar extends StatelessWidget {
           Stack(
               children:
               [
-                Image.asset(AppAssets.authelipsis2),
-                Image.asset(AppAssets.authelipsis3),
+                Image.asset(imageConstants.authelipsis2),
+                Image.asset(imageConstants.authelipsis3),
                 Padding(
                     padding: const EdgeInsets.only(top: 35, left: 20),
                     child:  GestureDetector(
@@ -48,7 +48,7 @@ class CustomBodyBar extends StatelessWidget {
           Spacer(),
           Align(
               alignment: Alignment.topRight,
-              child: Image.asset(AppAssets.authelipsis1)),
+              child: Image.asset(imageConstants.authelipsis1)),
         ],
       ),
     );

@@ -4,9 +4,10 @@
 
 
 import 'package:chef_app/core/utilis/app_assets.dart';
-import 'package:chef_app/core/utilis/commons.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_colors.dart';
@@ -31,18 +32,15 @@ class _SplashScreenState extends State<SplashScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.primary,
-        body: Center(
-          child: Column(
-            children:
-            [
-              Padding(
-                padding: const EdgeInsets.only(top: 310),
-                child: Image.asset(AppAssets.foodhub),
-              ),
-              SizedBox(height: 250,),
-              Image.asset(AppAssets.splashdivider)
-            ],
-          ),
+        body: Column(
+          children:
+          [
+            Spacer(),
+            Center(child: Image.asset(imageConstants.foodhub)),
+            Spacer(),
+            Image.asset(imageConstants.splashdivider),
+            SizedBox(height: 16.h,),
+          ],
         ),
 
 

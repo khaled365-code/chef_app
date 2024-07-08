@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:chef_app/core/utilis/commons.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,14 +20,14 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 GlobalKey<FormState> updateProfileKey=GlobalKey<FormState>();
 
 
-XFile? profileImage;
+  XFile? profileImage;
 
-updateImage(XFile image)
-{
-  profileImage=image;
-  emit(UpdateProfilePicState());
+  updateImage(XFile image)
+  {
+    profileImage=image;
+    emit(UpdateProfilePicState());
 
-}
+  }
 
   updateProfile() async
   {

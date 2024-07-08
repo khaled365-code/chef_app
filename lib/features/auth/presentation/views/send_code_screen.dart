@@ -15,13 +15,13 @@ import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
-import '../../../../../core/utilis/commons.dart';
+import '../../../../../core/commons/commons.dart';
 import '../../../../../core/widgets/custom_body_bar.dart';
 import '../../../../../core/widgets/outlined_text_field.dart';
 import '../../../../../core/widgets/shared_button.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../data/repos/user_repository_implementation.dart';
-import '../../viewmodels/cubits/send_code_cubit/send_code_cubit.dart';
+import '../../data/repos/user_repository_implementation.dart';
+import '../viewmodels/cubits/send_code_cubit/send_code_cubit.dart';
 
 class SendCodeScreen extends StatelessWidget {
 

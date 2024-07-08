@@ -15,7 +15,8 @@ class CacheHelper {
 
   String? getDataString({
     required String key,
-  }) {
+  })
+  {
     return sharedPreferences.getString(key);
   }
 

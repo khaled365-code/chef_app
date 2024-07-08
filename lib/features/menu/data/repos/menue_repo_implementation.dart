@@ -6,11 +6,13 @@ import 'package:chef_app/core/database/api/api_consumer.dart';
 import 'package:chef_app/core/database/api/end_points.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/database/errors/server_exception.dart';
-import 'package:chef_app/core/utilis/commons.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/features/menu/data/models/MealModel.dart';
 import 'package:chef_app/features/menu/data/repos/menue_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../../core/database/api/api_keys.dart';
 
 class MenueRepoImplementation implements MenueRepo {
 
@@ -24,7 +26,7 @@ class MenueRepoImplementation implements MenueRepo {
     try
     {
      final response= await api.post(
-       EndPoint.addMeal,
+       EndPoints.addMeal,
        data: {
          ApiKeys.name:name,
          ApiKeys.description:desc,
@@ -50,7 +52,7 @@ class MenueRepoImplementation implements MenueRepo {
     try
     {
      final respnse=await api.get(
-          EndPoint.getAllChefMeals(id)
+          EndPoints.getAllChefMeals(id)
       );
      return Right(MealModel.fromJson(respnse));
     }
@@ -66,7 +68,7 @@ class MenueRepoImplementation implements MenueRepo {
   {
     try {
       final response =await api.delete(
-        EndPoint.deleteMeal(id),
+        EndPoints.deleteMeal(id),
       );
       return Right(response[ApiKeys.message]);
     }on ServerException catch(e)

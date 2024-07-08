@@ -12,7 +12,7 @@ import '../utilis/app_colors.dart';
 
 class CustomImagePickerAvatar extends StatelessWidget {
   const CustomImagePickerAvatar({
-    super.key,this.imageRadius=40, this.plusPaddingRightValue=10, this.plusPaddingBottomValue=0, this.plusIconRadius=10, this.cameraOnTap, this.galleryOnTap, this.image=AppAssets.user, this.icon=AppAssets.plus, this.plusPaddingTopValue=0, this.circleAvatarColor=AppColors.blue,
+    super.key,this.imageRadius=40, this.plusPaddingRightValue=10, this.plusPaddingBottomValue=0, this.plusIconRadius=10, this.cameraOnTap, this.galleryOnTap, this.image=imageConstants.user, this.icon=imageConstants.plus, this.plusPaddingTopValue=0, this.circleAvatarColor=AppColors.blue,
   });
 
   final double? imageRadius;

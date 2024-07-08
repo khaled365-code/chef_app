@@ -8,6 +8,8 @@ import 'package:chef_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/database/api/api_keys.dart';
+
 class HomeRepoImplementation implements HomeRepo {  
   
   final ApiConsumer api;
@@ -23,7 +25,7 @@ class HomeRepoImplementation implements HomeRepo {
       required String description,
       required XFile profilePic}) async {
     try {
-      final response = await api.patch(EndPoint.updateProfile,
+      final response = await api.patch(EndPoints.updateProfile,
           data: {
             ApiKeys.name: profileName,
             ApiKeys.phone: phone,
@@ -45,7 +47,7 @@ class HomeRepoImplementation implements HomeRepo {
   Future<Either<String, String>> changePassword({required String oldPass, required String newPass, required String confirmPass}) async
   {
     try {
-      final response = await api.patch(EndPoint.chefChangePass, data: {
+      final response = await api.patch(EndPoints.chefChangePass, data: {
         ApiKeys.oldPass: oldPass,
         ApiKeys.newPass: newPass,
         ApiKeys.confirmPassword: confirmPass
@@ -61,7 +63,7 @@ class HomeRepoImplementation implements HomeRepo {
   Future<Either<String, String>> logout() async
   {
     try {
-      final response = await api.get(EndPoint.chefLogout);
+      final response = await api.get(EndPoints.chefLogout);
       return Right(response[ApiKeys.message]);
     } on ServerException catch (e)
     {
@@ -76,7 +78,7 @@ class HomeRepoImplementation implements HomeRepo {
     try
     {
       final response= await api.delete(
-        EndPoint.deleteChef(id),);
+        EndPoints.deleteChef(id),);
 
       return Right(response[ApiKeys.message]);
     }

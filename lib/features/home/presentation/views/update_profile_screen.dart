@@ -5,12 +5,11 @@ import 'dart:io';
 
 import 'package:chef_app/core/database/api/dio_consumer.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:chef_app/core/utilis/commons.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/widgets/custom_progress_indicator.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/viewmodels/update_profile_cubit/update_profile_cubit.dart';
-import 'package:chef_app/features/home/presentation/views/screens/home_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,13 +55,13 @@ class UpdateProfileScreen extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    Image.asset(AppAssets.editprofilegroup),
+                    Image.asset(imageConstants.editprofilegroup),
                     updateProfileCubit.profileImage==null?
                     Positioned(
                       left: 143,
                       top: 90,
                       child: CustomImagePickerAvatar(
-                        image: AppAssets.khaled,
+                        image: imageConstants.khaled,
                         imageRadius: 45,
                         plusPaddingRightValue: 5,
                         plusPaddingBottomValue: 0,

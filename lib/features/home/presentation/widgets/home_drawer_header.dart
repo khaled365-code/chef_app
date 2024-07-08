@@ -27,7 +27,7 @@ class HomeDrawerHeader extends StatelessWidget {
           children:
           [
             CustomImagePickerAvatar(
-              image: AppAssets.khaled,
+              image: imageConstants.khaled,
               imageRadius: 45,
               plusPaddingRightValue: 2,
               plusPaddingBottomValue: 0,

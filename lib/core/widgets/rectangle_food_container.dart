@@ -67,7 +67,7 @@ class RectangleFoodContainer extends StatelessWidget {
               child: Row(
                 children:
                 [
-                  Image.asset(AppAssets.smallFood),
+                  Image.asset(imageConstants.smallFood),
                   Text(meals.category!,style: AppTextStyles.font14.copyWith(color: AppColors.grey),),
                   SizedBox(width: 10,),
                   Row(

@@ -1,6 +1,6 @@
 
 
-class AppAssets
+class imageConstants
 {
   static const String basePath='assets/images/';
   static const String logo='${basePath}logo.png';
@@ -63,6 +63,10 @@ class AppAssets
   static const String foodhub='${basePath}foodhub.png';
   static const String splashdivider='${basePath}splashdivider.png';
   static const String   welcomephoto='${basePath}welcomephoto.png';
+
+
+  static const String   desiredStartBackgroundImage='${basePath}desired_start_screen_background_image.png';
+
 
 
 

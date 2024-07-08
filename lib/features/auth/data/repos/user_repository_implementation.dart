@@ -10,10 +10,11 @@ import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import '../../../../core/database/api/api_keys.dart';
 import '../../../../core/database/api/end_points.dart';
 import '../../../../core/database/cache/cache_helper.dart';
 import '../../../../core/database/errors/server_exception.dart';
-import '../../../../core/utilis/commons.dart';
+import '../../../../core/commons/commons.dart';
 
 class UserRepoImplementation implements UserRepo {
 
@@ -26,7 +27,7 @@ class UserRepoImplementation implements UserRepo {
 
     try
     {
-      final response = await api.post(EndPoint.signIn, data: {
+      final response = await api.post(EndPoints.signIn, data: {
         ApiKeys.email:email,
         ApiKeys.password:password
       });
@@ -48,7 +49,7 @@ class UserRepoImplementation implements UserRepo {
     try
     {
       final response= await api.post(
-          EndPoint.signUp,
+          EndPoints.signUp,
           data:{
             ApiKeys.name:name,
             ApiKeys.email:email,
@@ -79,7 +80,7 @@ class UserRepoImplementation implements UserRepo {
   {
     try {
       final response=await api.post(
-        EndPoint.sendCode,
+        EndPoints.sendCode,
         data:
         {
           ApiKeys.email:email
@@ -100,7 +101,7 @@ class UserRepoImplementation implements UserRepo {
   
     try
     {
-    final response= await api.patch(EndPoint.forgetPassChange,
+    final response= await api.patch(EndPoints.forgetPassChange,
       data: {
         ApiKeys.email:email,
         ApiKeys.password:password,

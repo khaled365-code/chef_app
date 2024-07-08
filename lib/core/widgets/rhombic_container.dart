@@ -2,13 +2,10 @@
 
 
 
-import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../features/menu/data/models/Meals.dart';
-import '../global_models/food_categories_model/FoodCategoriesModel.dart';
+import '../commons/global_models/food_categories_model/FoodCategoriesModel.dart';
 import '../utilis/app_text_styles.dart';
 
 class RhombicContainer extends StatelessWidget {

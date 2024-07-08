@@ -18,7 +18,7 @@ class NoMealsYet extends StatelessWidget {
       [
         Padding(
           padding: EdgeInsets.only(left: 55,right:70,top: 100),
-          child: Image.asset(AppAssets.shopCart),
+          child: Image.asset(imageConstants.shopCart),
         ),
         Padding(
           padding:EdgeInsets.only(left: 20),

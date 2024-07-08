@@ -4,7 +4,7 @@
 import 'package:chef_app/core/database/api/dio_consumer.dart';
 import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:chef_app/core/utilis/commons.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/widgets/custom_progress_indicator.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/viewmodels/change_password_cubit/change_password_cubit.dart';
@@ -60,7 +60,7 @@ class ChangePasswordScreen extends StatelessWidget {
                      Spacer(),
                      Align(
                        alignment: Alignment.topRight,
-                         child: Image.asset(AppAssets.pizzachangepass)),
+                         child: Image.asset(imageConstants.pizzachangepass)),
                    ],
                  ),
                ),

@@ -1,27 +1,19 @@
 
 
 
-
-import 'dart:io';
-
-import 'package:chef_app/core/database/api/end_points.dart';
-import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:chef_app/core/utilis/commons.dart';
-import 'package:chef_app/core/widgets/shared_button.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/features/home/presentation/viewmodels/delete_account_cubit/delete_account_cubit.dart';
 import 'package:chef_app/features/home/presentation/viewmodels/logout_cubit/logout_cubit.dart';
-import 'package:chef_app/features/home/presentation/views/components/header_body_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/global_cubits/change_language_cubit/change_language_cubit.dart';
+import '../../../../../core/commons/global_cubits/change_language_cubit/change_language_cubit.dart';
 import '../../../../../core/routes/routes.dart';
-import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/custom_alert_dialog.dart';
 import '../../../../../core/widgets/two_choices_alert_dialog.dart';
 import '../../../../../generated/l10n.dart';
+import 'header_body_item.dart';
 
 class HomeDrawerBody extends StatelessWidget {
 

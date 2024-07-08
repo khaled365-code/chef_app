@@ -17,13 +17,13 @@ import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
-import '../../../../../core/utilis/commons.dart';
+import '../../../../../core/commons/commons.dart';
 import '../../../../../core/widgets/custom_image_picker.dart';
 import '../../../../../core/widgets/custom_progress_indicator.dart';
 import '../../../../../core/widgets/shared_button.dart';
 import '../../../../../core/widgets/shared_unoutlined_text_field.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../data/repos/user_repository_implementation.dart';
+import '../../data/repos/user_repository_implementation.dart';
 
 class SignupScreen extends StatelessWidget {
 
@@ -66,7 +66,7 @@ class SignupScreen extends StatelessWidget {
                       child: Stack(
                         children: [
                           Image.asset(
-                            AppAssets.rectangle,
+                            imageConstants.rectangle,
                             width: double.infinity,
                             height: 190,
                             fit: BoxFit.fill,

@@ -5,29 +5,23 @@
 
 import 'dart:io';
 
-import 'package:chef_app/core/database/api/dio_consumer.dart';
-import 'package:chef_app/core/database/cache/cache_helper.dart';
-import 'package:chef_app/core/global_cubits/get_chef_meals_cubit/get_chef_meals_cubit.dart';
 import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
-import 'package:chef_app/core/utilis/commons.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/widgets/custom_nav_bar.dart';
 import 'package:chef_app/core/widgets/outlined_text_field.dart';
-import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
-import 'package:chef_app/features/home/presentation/viewmodels/delete_account_cubit/delete_account_cubit.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/global_models/food_categories_model/FoodCategoriesModel.dart';
+import '../../../../../core/commons/global_cubits/get_chef_meals_cubit/get_chef_meals_cubit.dart';
+import '../../../../../core/commons/global_models/food_categories_model/FoodCategoriesModel.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/widgets/rectangle_food_container.dart';
 import '../../../../../core/widgets/rhombic_container.dart';
 import '../../../../../generated/l10n.dart';
-import '../components/home_drawer_body.dart';
-import '../components/home_drawer_header.dart';
+import '../widgets/home_drawer_body.dart';
+import '../widgets/home_drawer_header.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -48,23 +42,23 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   List<FoodCategoriesModel> foodCategories=
   [
-    FoodCategoriesModel(image: AppAssets.mexican,name: 'Burger'),
-    FoodCategoriesModel(image: AppAssets.donat,name: 'Donat'),
-    FoodCategoriesModel(image: AppAssets.pizza,name: 'Pizza'),
-    FoodCategoriesModel(image: AppAssets.mexican,name: 'Mexican'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Asian'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Rice'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Vegetar.'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Vegan'),
-    FoodCategoriesModel(image: AppAssets.mexican,name: 'Morning'),
-    FoodCategoriesModel(image: AppAssets.pizza,name: 'Lunch'),
-    FoodCategoriesModel(image: AppAssets.mexican,name: 'Dinner'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Dairy'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Salads'),
-    FoodCategoriesModel(image: AppAssets.mexican,name: 'Sammie'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Snacks'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Dessert'),
-    FoodCategoriesModel(image: AppAssets.Asian,name: 'Meat'),
+    FoodCategoriesModel(image: imageConstants.mexican,name: 'Burger'),
+    FoodCategoriesModel(image: imageConstants.donat,name: 'Donat'),
+    FoodCategoriesModel(image: imageConstants.pizza,name: 'Pizza'),
+    FoodCategoriesModel(image: imageConstants.mexican,name: 'Mexican'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Asian'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Rice'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Vegetar.'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Vegan'),
+    FoodCategoriesModel(image: imageConstants.mexican,name: 'Morning'),
+    FoodCategoriesModel(image: imageConstants.pizza,name: 'Lunch'),
+    FoodCategoriesModel(image: imageConstants.mexican,name: 'Dinner'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Dairy'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Salads'),
+    FoodCategoriesModel(image: imageConstants.mexican,name: 'Sammie'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Snacks'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Dessert'),
+    FoodCategoriesModel(image: imageConstants.Asian,name: 'Meat'),
 
 
   ];
@@ -82,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(left: 30),
             child: Builder(
               builder: (context) {
-                return GestureDetector(child: Image.asset(AppAssets.lines3),onTap: (){
+                return GestureDetector(child: Image.asset(imageConstants.lines3),onTap: (){
                   Scaffold.of(context).openDrawer();
                 }, );
               }
@@ -94,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(right: 20),
               child: GestureDetector(onTap: (){
                 navigate(context: context, route: Routes.updateProfileScreen);
-              },child: CircleAvatar(backgroundImage: AssetImage(AppAssets.khaled,),radius: 20,))
+              },child: CircleAvatar(backgroundImage: AssetImage(imageConstants.khaled,),radius: 20,))
             ),
           ],
         ),
@@ -142,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 51,
                             height: 51,
                             color: AppColors.grey2,
-                            child: Image.asset(AppAssets.control2))
+                            child: Image.asset(imageConstants.control2))
                       ],
                     ),
                   ),

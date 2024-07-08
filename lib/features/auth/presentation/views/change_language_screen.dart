@@ -9,17 +9,12 @@
 import 'package:chef_app/core/widgets/custom_body_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../core/global_cubits/change_language_cubit/change_language_cubit.dart';
+import '../../../../../core/commons/global_cubits/change_language_cubit/change_language_cubit.dart';
 import '../../../../../core/routes/routes.dart';
-import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
-import '../../../../../core/utilis/commons.dart';
-import '../../../../../core/widgets/outlined_text_field.dart';
+import '../../../../../core/commons/commons.dart';
 import '../../../../../core/widgets/shared_button.dart';
-import '../../../../../core/widgets/shared_image.dart';
 import '../../../../../generated/l10n.dart';
 
 class ChangeLanguageScreen extends StatefulWidget {
@@ -105,6 +100,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
                             height: 50,
                             onPressed: ()
                             {
+
                               desiredCode='ar';
                               setState(() {
 

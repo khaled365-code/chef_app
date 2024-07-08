@@ -1,17 +1,16 @@
 
 
 
-import 'package:chef_app/core/utilis/commons.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/custom_alert_dialog.dart';
 import '../../../../../generated/l10n.dart';
-import '../../viewmodels/logout_cubit/logout_cubit.dart';
-import '../components/settings_container.dart';
+import '../viewmodels/logout_cubit/logout_cubit.dart';
+import '../widgets/settings_container.dart';
 
 class SettingsScreen extends StatelessWidget {
 

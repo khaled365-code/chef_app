@@ -1,38 +1,35 @@
 
-
-
-import 'package:chef_app/core/utilis/app_colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../utilis/app_colors.dart';
+
 
 class SharedButton extends StatelessWidget {
+  const SharedButton({super.key, required this.btnText, this.btnTextStyle, this.borderRadiusValue, this.btnColor, this.btnSize,});
 
-  final String text;
-  final Color? textcolor;
-  final double width;
-  final double height;
-  final BorderRadius? borderRadius;
-  final TextStyle textStyle;
-  final Color buttonColor;
-  final void Function()? onPressed;
-  final BoxBorder? border;
-
-  const SharedButton({required this.text, this.textcolor, this.onPressed, required this.width, required this.height, this.borderRadius, required this.textStyle, required this.buttonColor, this.border});
+  final String btnText;
+  final TextStyle? btnTextStyle;
+  final double? borderRadiusValue;
+  final WidgetStateProperty<Color?>? btnColor;
+  final WidgetStateProperty<Size?>? btnSize;
   @override
-
   Widget build(BuildContext context) {
+    return ElevatedButton(
 
-  return Container(
-    width: width,
-    height: height,
-    decoration: BoxDecoration(
-    borderRadius: borderRadius,
-    border: border,
-    color: buttonColor,),
-    child:MaterialButton(onPressed: onPressed,
-      child: Center(child: Text(text,style:textStyle.copyWith(color: textcolor),)),
-    ),
-  );
+      style: ButtonStyle(
+        fixedSize: btnSize??WidgetStatePropertyAll(Size(327.w, 62.h)),
+        backgroundColor: btnColor??WidgetStatePropertyAll(AppColors.primaryColor),
+        shape: WidgetStatePropertyAll(
+           RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadiusValue??12),
 
+          ),
+        )
+      ),
+        onPressed: (){}, child: Text(btnText,style: btnTextStyle??AppTextStyles.bold14(context).copyWith(
+      color: Color(0xffFFFFFF),
+    ),));
   }
 }

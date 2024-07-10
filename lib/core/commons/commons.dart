@@ -45,11 +45,11 @@ Color getColor(ToastStates toastStates)
   switch (toastStates)
   {
     case ToastStates.success:
-      return AppColors.grey2;
+      return Colors.grey;
     case ToastStates.error:
       return Colors.red;
     case ToastStates.warning:
-      return AppColors.orange;
+      return Colors.grey;
   }
 }
 

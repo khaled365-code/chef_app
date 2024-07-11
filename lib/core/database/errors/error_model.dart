@@ -17,7 +17,7 @@ class ErrorModel
   {
      return ErrorModel(
          statusCode: json[ApiKeys.status],
-         errorMessage: json[ApiKeys.errorMessage]);
+         errorMessage: json[ApiKeys.ErrorMessage]);
 
   }
 

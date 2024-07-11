@@ -3,6 +3,7 @@
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -29,12 +30,12 @@ void showToast({required String msg,required ToastStates toastStates}) async
 {
  await Fluttertoast.showToast(
       msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
+      toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       backgroundColor: getColor(toastStates),
-      textColor: Colors.black,
-      fontSize: 16.0
+      textColor: Colors.white,
+      fontSize: 16.0.sp
   );
 
 }
@@ -53,11 +54,11 @@ Color getColor(ToastStates toastStates)
   switch (toastStates)
   {
     case ToastStates.success:
-      return Colors.grey;
+      return AppColors.primaryColor;
     case ToastStates.error:
-      return Colors.red;
+      return AppColors.primaryColor;
     case ToastStates.warning:
-      return Colors.grey;
+      return AppColors.primaryColor;
   }
 }
 

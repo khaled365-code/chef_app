@@ -28,6 +28,9 @@ class AppColors
 
  static const c646982= Color(0xff646982);
 
+ static const c1E1E2E= Color(0xff1E1E2E);
+
+
 
 
 

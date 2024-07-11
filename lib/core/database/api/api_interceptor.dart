@@ -1,8 +1,3 @@
-
-
-
-
-import 'package:chef_app/core/database/api/end_points.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:dio/dio.dart';
 
@@ -21,7 +16,8 @@ class ApiInterceptor extends Interceptor
       if (data is FormData)
       {
         contentType = Headers.multipartFormDataContentType;
-      } else if (data is Map)
+      }
+      else if (data is Map)
       {
         contentType = Headers.formUrlEncodedContentType;
       } else if (data is String) {

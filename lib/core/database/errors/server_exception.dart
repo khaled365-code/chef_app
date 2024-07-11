@@ -13,8 +13,10 @@ class ServerException implements Exception
   ServerException({required this.errorModel});
 }
 
-void handleExceptions(DioException e) {
-  switch (e.type) {
+void handleExceptions(DioException e)
+{
+  switch (e.type)
+  {
     case DioExceptionType.connectionTimeout:
       throw ServerException(
           errorModel: ErrorModel.fromjson(e.response!.data));
@@ -28,7 +30,8 @@ void handleExceptions(DioException e) {
       throw ServerException(
           errorModel: ErrorModel.fromjson(e.response!.data));
     case DioExceptionType.badResponse:
-      switch (e.response?.statusCode) {
+      switch (e.response?.statusCode)
+      {
         case 401:
           throw ServerException(
               errorModel: ErrorModel.fromjson(e.response!.data));

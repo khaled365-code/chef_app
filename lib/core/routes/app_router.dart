@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/auth/presentation/views/signup_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/onbaording_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/splash2_screen.dart';
 
@@ -29,6 +30,11 @@ class AppRouter {
                   create: (context) => LoginCubit(authRepoImplementation: AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
                   child: LoginScreen(),
                 ), settings: routeSettings);
+
+      case Routes.signUpScreen:
+        return MaterialPageRoute(
+            builder: (context) =>
+                SignupScreen(), settings: routeSettings);
     }
   }
 

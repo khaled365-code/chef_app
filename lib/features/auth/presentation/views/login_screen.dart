@@ -14,7 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utilis/app_colors.dart';
 import '../widgets/dont_have_account_widget.dart';
-import '../widgets/login_header.dart';
+import '../widgets/auth_header.dart';
+import '../widgets/name_and_text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,12 +26,11 @@ class LoginScreen extends StatelessWidget {
   listener: (context, state) {
     if(state is LoginFailureState)
       {
-        showToast(msg: state.errorMessage, toastStates: ToastStates.error);
+       buildScaffoldMessenger(context: context, msg: state.errorMessage);
       }
     if(state is LoginSuccessState)
       {
-        showToast(msg: state.successLoginModel.message, toastStates: ToastStates.success);
-
+        buildScaffoldMessenger(context: context, msg: state.successLoginModel.message);
 
       }
   },
@@ -40,7 +40,10 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            LoginHeader(),
+            AuthHeaderWidget(
+              title: 'Log In',
+              subTitle: 'Please sign in to your existing account',
+            ),
             Form(
               key: loginCubit.loginFormKey,
               child: Align(
@@ -63,73 +66,76 @@ class LoginScreen extends StatelessWidget {
                         children:
                         [
                           SizedBox(height: 24.h,),
-                          Text('Email',style: AppTextStyles.regular13(context).copyWith(color: Color(0xff32343E)),),
-                          SizedBox(height: 8.h,),
-                          Padding(
-                            padding:  EdgeInsetsDirectional.only(end: 24.w),
-                            child: CustomOutlineTextField(
-                              validator: (value)
-                              {
-                                if(value!.isEmpty)
+                          NameAndTextFieldWidget(
+                            title: 'Email',
+                            textField: Padding(
+                              padding:  EdgeInsetsDirectional.only(end: 24.w),
+                              child: CustomOutlineTextField(
+                                validator: (value)
+                                {
+                                  if(value!.isEmpty)
                                   {
                                     return 'You must enter your email';
                                   }
-                                else
+                                  else
                                   {
                                     return null;
                                   }
-                              },
-                              onFieldSubmitted: (value)
-                              {
-                                if(loginCubit.loginFormKey.currentState!.validate())
+                                },
+                                onFieldSubmitted: (value)
+                                {
+                                  if(loginCubit.loginFormKey.currentState!.validate())
                                   {
-                                   loginCubit.loginFun(email: loginCubit.emailController.text,
-                                       password: loginCubit.passwordController.text);
+                                    loginCubit.loginFun(email: loginCubit.emailController.text,
+                                        password: loginCubit.passwordController.text);
                                   }
-                              },
-                              controller: loginCubit.emailController,
-                              hintText: 'example@gmail.com',
-                              keyboardType: TextInputType.emailAddress,
+                                },
+                                controller: loginCubit.emailController,
+                                hintText: 'example@gmail.com',
+                                keyboardType: TextInputType.emailAddress,
+                              ),
                             ),
                           ),
-                          SizedBox(height: 24.h,),
-                          Text('Password',style: AppTextStyles.regular13(context).copyWith(color: Color(0xff32343E)),),
-                          SizedBox(height: 8.h,),
-                          Padding(
-                            padding:  EdgeInsetsDirectional.only(end: 24.w),
-                            child: CustomOutlineTextField(
-                              obscureText: loginCubit.isObsecureText,
-                              validator: (value)
-                              {
-                                if(value!.isEmpty)
-                                {
-                                  return 'You must enter your password';
-                                }
-                                else
-                                {
-                                  return null;
-                                }
-                              },
-                              onFieldSubmitted: (value)
-                              {
-                                if(loginCubit.loginFormKey.currentState!.validate())
-                                {
-                                  loginCubit.loginFun(email: loginCubit.emailController.text,
-                                      password: loginCubit.passwordController.text);
-                                }
-                              },
-                              controller: loginCubit.passwordController,
-                              hintText: '* * * * * * * * * *',
-                              keyboardType: TextInputType.text,
-                              suffixIcon: GestureDetector(
-                                onTap: ()
-                                  {
 
-                                    loginCubit.changeEyeShape();
+                          SizedBox(height: 24.h,),
+                          NameAndTextFieldWidget(
+                              title: 'Password',
+                              textField:  Padding(
+                                padding:  EdgeInsetsDirectional.only(end: 24.w),
+                                child: CustomOutlineTextField(
+                                  obscureText: loginCubit.isObsecureText,
+                                  validator: (value)
+                                  {
+                                    if(value!.isEmpty)
+                                    {
+                                      return 'You must enter your password';
+                                    }
+                                    else
+                                    {
+                                      return null;
+                                    }
                                   },
-                                  child: Icon(loginCubit.suffixIcon,color: AppColors.cB4B9CA,)),
-                            ),
-                          ),
+                                  onFieldSubmitted: (value)
+                                  {
+                                    if(loginCubit.loginFormKey.currentState!.validate())
+                                    {
+                                      loginCubit.loginFun(email: loginCubit.emailController.text,
+                                          password: loginCubit.passwordController.text);
+                                    }
+                                  },
+                                  controller: loginCubit.passwordController,
+                                  hintText: '* * * * * * * * * *',
+                                  keyboardType: TextInputType.text,
+                                  suffixIcon: GestureDetector(
+                                      onTap: ()
+                                      {
+
+                                        loginCubit.changeEyeShape();
+                                      },
+                                      child: Icon(loginCubit.suffixIcon,color: AppColors.cB4B9CA,)),
+                                ),
+                              ),),
+
                           SizedBox(height: 24.h,),
                           Padding(
                             padding:  EdgeInsetsDirectional.only(end: 24.w),
@@ -166,12 +172,6 @@ class LoginScreen extends StatelessWidget {
                             padding:  EdgeInsetsDirectional.only(start: 38.w),
                             child: DontHaveAccountWidget(),
                           )
-
-
-
-
-
-
 
 
                         ],

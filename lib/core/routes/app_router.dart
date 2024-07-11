@@ -2,6 +2,7 @@ import 'package:chef_app/core/database/api/dio_consumer.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
+import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,14 +28,19 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) =>
                 BlocProvider(
-                  create: (context) => LoginCubit(authRepoImplementation: AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+                  create: (context) =>
+                      LoginCubit(authRepoImplementation: AuthRepoImplementation(
+                          api: DioConsumer(dio: Dio()))),
                   child: LoginScreen(),
                 ), settings: routeSettings);
 
       case Routes.signUpScreen:
         return MaterialPageRoute(
             builder: (context) =>
-                SignupScreen(), settings: routeSettings);
+                BlocProvider(
+                  create: (context) => SignupCubit(authRepoImplementation: AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+                  child: SignupScreen(),
+                ), settings: routeSettings);
     }
   }
 

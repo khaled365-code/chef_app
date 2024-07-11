@@ -47,8 +47,8 @@ class LoginCubit extends Cubit<LoginState> {
        email: email,
        password: password);
 
-   response.fold((errorMessage) => LoginFailureState(errorMessage: errorMessage),
-         (successMessage) => LoginSuccessState(successLoginModel: successMessage),);
+   response.fold((errorMessage) => emit(LoginFailureState(errorMessage: errorMessage)),
+         (successMessage) => emit(LoginSuccessState(successLoginModel: successMessage)),);
 
  }
 

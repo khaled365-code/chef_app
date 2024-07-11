@@ -8,8 +8,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/widgets/space_widget.dart';
 
-class LoginHeader extends StatelessWidget {
-  const LoginHeader({super.key});
+class AuthHeaderWidget extends StatelessWidget {
+  const AuthHeaderWidget({super.key, required this.title, required this.subTitle});
+
+  final String title,subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,9 @@ class LoginHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: MediaQuery.of(context).size.height*(85/812),),
-              Text('Log In',style: AppTextStyles.bold30(context).copyWith(color: Color(0xffFFFFFF)),),
+              Text(title,style: AppTextStyles.bold30(context).copyWith(color: Color(0xffFFFFFF)),),
               SpaceWidget(height: 3,),
-              Text('Please sign in to your existing account',style: AppTextStyles.regular16(context).copyWith(color: Color(0xffFFFFFF)),),
+              Text(subTitle,style: AppTextStyles.regular16(context).copyWith(color: Color(0xffFFFFFF)),),
 
             ],
           ),

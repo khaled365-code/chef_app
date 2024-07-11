@@ -77,6 +77,12 @@ dependencies:
   #Flutter plugin for selecting images from the Android and iOS image library, and taking new pictures with the camera
   image_picker: ^1.1.2
 
+  #An SVG rendering and widget library for Flutter, which allows painting and displaying Scalable Vector Graphics 1.1 files.
+  flutter_svg: ^2.0.10+1
+
+  #Dotted line decoration is handly package to draw dotted divider, dotted border for rectangle, circle or rounded rectangle
+  dotted_decoration: ^2.0.0
+
 
 
 

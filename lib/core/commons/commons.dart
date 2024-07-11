@@ -1,6 +1,7 @@
 
 
 import 'package:chef_app/core/utilis/app_colors.dart';
+import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,5 +61,22 @@ Color getColor(ToastStates toastStates)
     case ToastStates.warning:
       return AppColors.primaryColor;
   }
+}
+
+buildScaffoldMessenger({required BuildContext context,required String msg})
+{
+
+   return ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+    content: Text(
+      msg,
+      style: AppTextStyles.bold14(context).copyWith(color: Color(0xffFFFFFF)),
+    ),
+    elevation: 0,
+    backgroundColor: AppColors.primaryColor,
+    behavior: SnackBarBehavior.floating,
+    duration: Duration(seconds: 5),
+  ));
+
 }
 

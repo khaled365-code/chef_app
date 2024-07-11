@@ -16,6 +16,8 @@ class ImageConstants
   static const String loginOtherElipsisImage = 'assets/images/login_other_elipsis_image.png';
 
 
+  static const String pencilEditIcon='assets/icons/pencil_edit_icon.svg';
+
 
 
 }

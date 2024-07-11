@@ -2,6 +2,7 @@
 import 'package:chef_app/core/utilis/fontweight_helper.dart';
 import 'package:chef_app/core/utilis/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class AppTextStyles
@@ -12,7 +13,7 @@ class AppTextStyles
   static TextStyle regular16 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 16),
+        fontSize: 16.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
     );
@@ -20,7 +21,7 @@ class AppTextStyles
   static TextStyle regular10 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 10),
+        fontSize: 10.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
     );
@@ -29,7 +30,7 @@ class AppTextStyles
   static  TextStyle regular14 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 14),
+        fontSize: 14.sp,
         fontWeight: FontweightHelper.regular,
       fontFamily: 'sen'
     );
@@ -39,7 +40,7 @@ class AppTextStyles
   static  TextStyle regular30 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 30),
+        fontSize: 30.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
     );
@@ -48,7 +49,7 @@ class AppTextStyles
   static  TextStyle regular15 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 15),
+        fontSize: 15.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
     );
@@ -57,7 +58,7 @@ class AppTextStyles
   static  TextStyle regular18 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 18),
+        fontSize: 18.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
     );
@@ -66,7 +67,7 @@ class AppTextStyles
   static  TextStyle regular25 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 25),
+        fontSize: 25.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
     );
@@ -75,7 +76,7 @@ class AppTextStyles
   static  TextStyle regular12 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 12),
+        fontSize: 12.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
     );
@@ -83,7 +84,7 @@ class AppTextStyles
   }
   static  TextStyle regular17 (BuildContext context) {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 17),
+        fontSize: 17.sp,
         fontWeight:FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -91,7 +92,7 @@ class AppTextStyles
   }
   static  TextStyle regular28 (BuildContext context) {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 28),
+        fontSize: 28.sp,
         fontWeight:FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -99,7 +100,7 @@ class AppTextStyles
   }
   static  TextStyle regular22_5(BuildContext context) {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 22.5),
+        fontSize: 22.5.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -108,7 +109,7 @@ class AppTextStyles
 
   static  TextStyle regular20(BuildContext context) {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 20),
+        fontSize: 20.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -116,7 +117,7 @@ class AppTextStyles
   }
   static  TextStyle regular11(BuildContext context) {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 11),
+        fontSize: 11.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -125,7 +126,7 @@ class AppTextStyles
 
   static  TextStyle regular13(BuildContext context) {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 13),
+        fontSize: 13.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -133,7 +134,7 @@ class AppTextStyles
   }
   static  TextStyle regular13_6(BuildContext context) {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 13.6),
+        fontSize: 13.6.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -142,7 +143,7 @@ class AppTextStyles
   static TextStyle regular9(BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 9),
+        fontSize: 9.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'sen'
 
@@ -151,7 +152,7 @@ class AppTextStyles
   static  TextStyle medium12(BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 12),
+        fontSize: 12.sp,
         fontWeight: FontweightHelper.medium);
   }
 
@@ -161,7 +162,7 @@ class AppTextStyles
     static  TextStyle bold14 (BuildContext context)
     {
       return TextStyle(
-          fontSize: getResponsiveFontSize(context: context,fontSize: 14),
+          fontSize: 14.sp,
           fontWeight: FontweightHelper.bold,
           fontFamily: 'sen'
 
@@ -170,7 +171,7 @@ class AppTextStyles
   static  TextStyle bold17 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 17),
+        fontSize: 17.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -179,7 +180,7 @@ class AppTextStyles
   static  TextStyle bold40 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 40),
+        fontSize: 40.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -188,7 +189,7 @@ class AppTextStyles
   static  TextStyle bold60 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 60),
+        fontSize: 60.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -197,7 +198,7 @@ class AppTextStyles
   static  TextStyle bold126 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 126),
+        fontSize: 126.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -206,7 +207,7 @@ class AppTextStyles
   static  TextStyle extraBold41 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 41),
+        fontSize: 41.sp,
         fontWeight: FontweightHelper.extraBold,
         fontFamily: 'sen'
 
@@ -215,7 +216,7 @@ class AppTextStyles
   static  TextStyle bold52 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 52),
+        fontSize: 52.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -224,7 +225,7 @@ class AppTextStyles
   static  TextStyle bold13 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 13),
+        fontSize: 13.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -233,7 +234,7 @@ class AppTextStyles
   static  TextStyle bold13_6 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 13.67),
+        fontSize: 13.67.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -242,7 +243,7 @@ class AppTextStyles
   static  TextStyle extraBold24 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 24),
+        fontSize: 24.sp,
         fontWeight: FontweightHelper.extraBold,
         fontFamily: 'sen'
 
@@ -251,7 +252,7 @@ class AppTextStyles
   static  TextStyle Bold24 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 24),
+        fontSize: 24.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -260,7 +261,7 @@ class AppTextStyles
   static  TextStyle extraBold30 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 30),
+        fontSize: 30.sp,
         fontWeight: FontweightHelper.extraBold,
         fontFamily: 'sen'
 
@@ -269,7 +270,7 @@ class AppTextStyles
   static  TextStyle bold30 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 30),
+        fontSize: 30.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -278,7 +279,7 @@ class AppTextStyles
   static  TextStyle bold18 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 18),
+        fontSize: 18.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -287,7 +288,7 @@ class AppTextStyles
   static  TextStyle bold10 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 10),
+        fontSize: 10.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -296,7 +297,7 @@ class AppTextStyles
   static  TextStyle bold16 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 16),
+        fontSize:16.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -305,7 +306,7 @@ class AppTextStyles
   static  TextStyle bold12 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 12),
+        fontSize: 12.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -314,7 +315,7 @@ class AppTextStyles
   static  TextStyle bold20 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 20),
+        fontSize: 20.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -323,7 +324,7 @@ class AppTextStyles
   static  TextStyle bold22 (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 22),
+        fontSize: 22.sp,
         fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 
@@ -332,7 +333,7 @@ class AppTextStyles
   static  TextStyle bold15 (BuildContext context)
   {
     return TextStyle(
-      fontSize: getResponsiveFontSize(context: context,fontSize: 15),
+      fontSize: 15.sp,
       fontWeight: FontweightHelper.bold,
         fontFamily: 'sen'
 

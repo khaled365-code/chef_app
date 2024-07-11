@@ -6,9 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
-void navigate({required context ,required String route, Object? arg})
+void navigate({required BuildContext context ,required String route, Object? arg,bool replacement=false})
 {
-  Navigator.pushNamed(context, route,arguments: arg);
+  if(replacement=true)
+    {
+      Navigator.pushReplacementNamed(context,route,arguments: arg);
+    }
+  else
+    {
+      Navigator.pushNamed(context, route,arguments: arg);
+
+    }
 }
 Future uploadImageToAPI(XFile image) async
 {

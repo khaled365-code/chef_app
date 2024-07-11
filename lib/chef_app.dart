@@ -13,7 +13,7 @@ class ChefsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(414, 896),
+      designSize: const Size(375, 812),
       builder: (context, child) =>
           MaterialApp(
             locale: Locale('en'),

@@ -1,4 +1,5 @@
 
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
@@ -7,6 +8,7 @@ import 'package:chef_app/features/splash_and_onbording/presentation/widgets/page
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/routes/routes.dart';
 import '../widgets/dot_container_item.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -83,9 +85,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             SizedBox(height: 69.h,),
-            SharedButton(btnText: currentIndex!=2?'Next':'Get Started'),
+            SharedButton(btnText: currentIndex!=2?'Next':'Get Started',
+              onPressessed: ()
+              {
+                if(currentIndex!=2)
+                  {
+                    pageController.nextPage(duration: Duration(seconds: 1), curve: Curves.easeInOut);
+                  }
+                else
+                  {
+                    navigate(context: context, route: Routes.loginScreen,replacement: true);
+                  }
+              },
+            ),
             currentIndex!=2?SizedBox(height: 16,):SizedBox.shrink(),
-            currentIndex!=2? Text('Skip',style: AppTextStyles.regular16(context).copyWith(color: Color(0xff646982)),):SizedBox.shrink(),
+            currentIndex!=2? GestureDetector(
+              onTap: ()
+                {
+                  navigate(context: context, route: Routes.loginScreen,replacement: true);
+                },
+                child: Text('Skip',style: AppTextStyles.regular16(context).copyWith(color: Color(0xff646982)),)):SizedBox.shrink(),
             currentIndex!=2? SizedBox(height: 40,):SizedBox(height: 75,),
 
 

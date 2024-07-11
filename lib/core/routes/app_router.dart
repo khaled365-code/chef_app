@@ -1,7 +1,12 @@
-
+import 'package:chef_app/core/database/api/dio_consumer.dart';
 import 'package:chef_app/core/routes/routes.dart';
+import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
+import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
+import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/splash_and_onbording/presentation/views/onbaording_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/splash2_screen.dart';
 
@@ -16,6 +21,14 @@ class AppRouter {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
             builder: (context) => OnboardingScreen(), settings: routeSettings);
+
+      case Routes.loginScreen:
+        return MaterialPageRoute(
+            builder: (context) =>
+                BlocProvider(
+                  create: (context) => LoginCubit(authRepoImplementation: AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+                  child: LoginScreen(),
+                ), settings: routeSettings);
     }
   }
 

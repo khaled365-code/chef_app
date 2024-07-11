@@ -7,13 +7,14 @@ import '../utilis/app_colors.dart';
 
 
 class SharedButton extends StatelessWidget {
-  const SharedButton({super.key, required this.btnText, this.btnTextStyle, this.borderRadiusValue, this.btnColor, this.btnSize,});
+  const SharedButton({super.key, required this.btnText, this.btnTextStyle, this.borderRadiusValue, this.btnColor, this.btnSize, this.onPressessed,});
 
   final String btnText;
   final TextStyle? btnTextStyle;
   final double? borderRadiusValue;
   final WidgetStateProperty<Color?>? btnColor;
   final WidgetStateProperty<Size?>? btnSize;
+  final void Function()? onPressessed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -28,7 +29,7 @@ class SharedButton extends StatelessWidget {
           ),
         )
       ),
-        onPressed: (){}, child: Text(btnText,style: btnTextStyle??AppTextStyles.bold14(context).copyWith(
+        onPressed: onPressessed, child: Text(btnText,style: btnTextStyle??AppTextStyles.bold14(context).copyWith(
       color: Color(0xffFFFFFF),
     ),));
   }

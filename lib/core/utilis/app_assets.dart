@@ -13,6 +13,10 @@ class ImageConstants
   static const String onboardingImage3 = 'assets/images/onboarding_image3.png';
 
 
+  static const String loginOtherElipsisImage = 'assets/images/login_other_elipsis_image.png';
+
+
+
 
 }
 

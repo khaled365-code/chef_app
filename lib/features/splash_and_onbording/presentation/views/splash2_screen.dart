@@ -48,7 +48,7 @@ class _Splash2ScreenState extends State<Splash2Screen> {
   {
     Future.delayed(Duration(milliseconds: 3000),()
     {
-      navigate(context: context, route: Routes.onBoardingScreen);
+      navigate(context: context, route: Routes.onBoardingScreen,replacement: true);
     },);
 
   }

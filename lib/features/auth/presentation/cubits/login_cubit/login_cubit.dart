@@ -17,16 +17,19 @@ class LoginCubit extends Cubit<LoginState> {
 
 
   IconData suffixIcon=Icons.visibility_off;
+  bool isObsecureText=false;
 
   changeEyeShape()
   {
     if(suffixIcon==Icons.visibility_off)
     {
       suffixIcon=Icons.visibility;
+      isObsecureText=true;
     }
     else
     {
       suffixIcon=Icons.visibility_off;
+      isObsecureText=false;
     }
 
     emit(ChangePasswordEyeShape());

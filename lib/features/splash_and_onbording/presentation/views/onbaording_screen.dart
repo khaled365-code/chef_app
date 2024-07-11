@@ -58,12 +58,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: MediaQuery.sizeOf(context).height*(114/812),),
             Expanded(
               child: PageView.builder(
-                clipBehavior: Clip.none,
                 controller: pageController,
                 scrollDirection: Axis.horizontal,
                   itemCount: onboardingDataModelList.length,
@@ -98,14 +96,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   }
               },
             ),
-            currentIndex!=2?SizedBox(height: 16,):SizedBox.shrink(),
+            SizedBox(height: 16,),
             currentIndex!=2? GestureDetector(
               onTap: ()
                 {
                   navigate(context: context, route: Routes.loginScreen,replacement: true);
                 },
                 child: Text('Skip',style: AppTextStyles.regular16(context).copyWith(color: Color(0xff646982)),)):SizedBox.shrink(),
-            currentIndex!=2? SizedBox(height: 40,):SizedBox(height: 75,),
+            currentIndex!=2? SizedBox(height: 40,):SizedBox(height: 59,),
 
 
           ],

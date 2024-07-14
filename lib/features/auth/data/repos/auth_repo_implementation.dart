@@ -9,6 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/src/multipart_file.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import '../../../../core/database/api/end_points.dart';
+import '../../../../core/database/errors/new_error_model.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImplementation implements AuthRepo
@@ -20,7 +21,7 @@ class AuthRepoImplementation implements AuthRepo
 
 
   @override
-  Future<Either<String, LoginModel>> login({required String email, required String password}) async
+  Future<Either<NewErrorModel, LoginModel>> login({required String email, required String password}) async
   {
 
     try
@@ -38,19 +39,19 @@ class AuthRepoImplementation implements AuthRepo
       return Right(loginModel);
     }on ServerException catch(e)
     {
-      return Left(e.errorModel.errorMessage);
+      return Left(e.errorModel);
     }
   }
 
   @override
-  Future<Either<String, String>> signup({
+  Future<Either<NewErrorModel, String>> signup({
     required String name, required String phone,
     required String email, required String password,
     required String passwordConfirmation, required String location,
     required String brandName, required double minimumCharge,
     required String description, required MultipartFile healthCertificate, 
     required MultipartFile frontId, required MultipartFile backId,
-    required MultipartFile profilePic}) async
+     MultipartFile? profilePic}) async
   {
     try
     {
@@ -76,7 +77,7 @@ class AuthRepoImplementation implements AuthRepo
       
     } on ServerException catch (e) 
     {
-      return Left(e.errorModel.errorMessage);
+      return Left(e.errorModel);
     }
   }
 

@@ -63,18 +63,18 @@ Color getColor(ToastStates toastStates)
   }
 }
 
-buildScaffoldMessenger({required BuildContext context,required String msg})
+buildScaffoldMessenger({required BuildContext context,required String msg,SnackBarBehavior? snackBarBehavior})
 {
 
    return ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
     content: Text(
       msg,
-      style: AppTextStyles.bold14(context).copyWith(color: Color(0xffFFFFFF)),
+      style: AppTextStyles.bold15(context).copyWith(color: AppColors.white),
     ),
     elevation: 0,
     backgroundColor: AppColors.primaryColor,
-    behavior: SnackBarBehavior.floating,
+    behavior: snackBarBehavior?? SnackBarBehavior.fixed,
     duration: Duration(seconds: 5),
   ));
 

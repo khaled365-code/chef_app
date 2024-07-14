@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:chef_app/core/commons/commons.dart';
-import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:chef_app/features/auth/presentation/widgets/custom_outline_text_field.dart';
@@ -27,11 +26,20 @@ class LoginScreen extends StatelessWidget {
   listener: (context, state) {
     if(state is LoginFailureState)
       {
-       buildScaffoldMessenger(context: context, msg: state.errorMessage);
+        if(state.theError.error!=null)
+          {
+            buildScaffoldMessenger(context: context, msg: state.theError.error!.toString().substring(1,state.theError.error!.toString().length-1));
+          }
+        else
+          {
+
+            buildScaffoldMessenger(context: context, msg: state.theError.errorMessage!);
+          }
       }
     if(state is LoginSuccessState)
       {
         buildScaffoldMessenger(context: context, msg: state.successLoginModel.message);
+        navigate(context: context, route: Routes.homeScreen);
 
       }
   },

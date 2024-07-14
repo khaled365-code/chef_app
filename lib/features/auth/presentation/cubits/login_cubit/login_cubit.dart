@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../core/database/errors/new_error_model.dart';
+
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -47,7 +49,7 @@ class LoginCubit extends Cubit<LoginState> {
        email: email,
        password: password);
 
-   response.fold((errorMessage) => emit(LoginFailureState(errorMessage: errorMessage)),
+   response.fold((errorModel) => emit(LoginFailureState(theError: errorModel)),
          (successMessage) => emit(LoginSuccessState(successLoginModel: successMessage)),);
 
  }

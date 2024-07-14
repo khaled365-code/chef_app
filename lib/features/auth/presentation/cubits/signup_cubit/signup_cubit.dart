@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../core/database/errors/new_error_model.dart';
+
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
@@ -69,10 +71,10 @@ class SignupCubit extends Cubit<SignupState> {
        brandName: brandName, minimumCharge: minimumCharge,
        description: description, healthCertificate: await uploadImageToAPI(healthCertificateImage!),
        frontId: await uploadImageToAPI(healthCertificateImage!), backId: await uploadImageToAPI(healthCertificateImage!),
-       profilePic: await uploadImageToAPI(signupImage!));
+       profilePic: signupImage!=null? await uploadImageToAPI(signupImage!): null);
 
 
-   response.fold((errorMessage) => emit(SignUpFailureState(message: errorMessage)),
+   response.fold((errorModel) => emit(SignUpFailureState(theError: errorModel)),
            (successMessage) => emit(SignUpSuccessState(message: successMessage)));
 
 

@@ -1,16 +1,13 @@
 import 'package:chef_app/core/commons/commons.dart';
-import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:chef_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:chef_app/features/auth/presentation/widgets/options_for_account_widget.dart';
-import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/image_picker_widget.dart';
@@ -34,7 +31,14 @@ class SignupScreen extends StatelessWidget {
           }
         if (state is SignUpFailureState)
           {
-            buildScaffoldMessenger(context: context, msg: state.message);
+            if(state.theError.error!=null)
+            {
+              buildScaffoldMessenger(context: context, msg: state.theError.error!.toString().substring(1,state.theError.error!.toString().length-1));
+            }
+            else
+            {
+              buildScaffoldMessenger(context: context, msg: state.theError.errorMessage!);
+            }
           }
       },
       builder: (context, state) {

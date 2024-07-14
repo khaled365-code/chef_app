@@ -22,8 +22,8 @@ final class SignUpSuccessState extends SignupState {
 
 final class SignUpFailureState extends SignupState {
 
-  final String message;
-  SignUpFailureState({required this.message});
+  final NewErrorModel theError;
+  SignUpFailureState({required this.theError});
 }
 
 

@@ -5,14 +5,14 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/database/errors/new_error_model.dart';
+import '../../../../core/database/errors/error_model.dart';
 import '../models/login_model/login_model.dart';
 
 abstract class AuthRepo
 {
 
-  Future<Either<NewErrorModel,LoginModel>>login({required String email,required String password});
-  Future<Either<NewErrorModel,String>>signup({
+  Future<Either<ErrorModel,LoginModel>>login({required String email,required String password});
+  Future<Either<ErrorModel,String>>signup({
     required String name,required String phone
     ,required String email, required String password,
     required String passwordConfirmation,required String location ,

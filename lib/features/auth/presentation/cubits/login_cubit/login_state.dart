@@ -21,7 +21,7 @@ final class LoginSuccessState extends LoginState {
 
 final class LoginFailureState extends LoginState {
 
-  final NewErrorModel theError;
+  final ErrorModel theError;
 
   LoginFailureState({required this.theError});
 }

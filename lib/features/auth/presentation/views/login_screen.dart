@@ -39,7 +39,6 @@ class LoginScreen extends StatelessWidget {
     if(state is LoginSuccessState)
       {
         buildScaffoldMessenger(context: context, msg: state.successLoginModel.message);
-        navigate(context: context, route: Routes.homeScreen);
 
       }
   },

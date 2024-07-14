@@ -6,6 +6,13 @@ sealed class SignupState {}
 final class SignupInitial extends SignupState {}
 
 
+final class changePasswordIconForPasswordTextField extends SignupState {}
+
+final class changeConfirmPasswordIcon extends SignupState {}
+
+
+
+
 final class UploadSignupImageState extends SignupState {}
 
 
@@ -22,7 +29,7 @@ final class SignUpSuccessState extends SignupState {
 
 final class SignUpFailureState extends SignupState {
 
-  final NewErrorModel theError;
+  final ErrorModel theError;
   SignUpFailureState({required this.theError});
 }
 

@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../core/database/errors/new_error_model.dart';
+import '../../../../../core/database/errors/error_model.dart';
 
 part 'login_state.dart';
 

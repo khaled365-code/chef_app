@@ -3,10 +3,11 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../core/database/errors/new_error_model.dart';
+import '../../../../../core/database/errors/error_model.dart';
 
 part 'signup_state.dart';
 
@@ -15,6 +16,51 @@ class SignupCubit extends Cubit<SignupState> {
 
 
   AuthRepoImplementation authRepoImplementation;
+
+
+  IconData passwordSuffixIcon=Icons.visibility_off;
+  IconData confirmPasswordSuffixIcon=Icons.visibility_off;
+
+  bool passwordSecureText=true;
+  bool confirmPasswordSecureText=true;
+
+
+
+  changeConfirmPasswordIconShape()
+  {
+
+    if(confirmPasswordSuffixIcon==Icons.visibility_off)
+    {
+      confirmPasswordSuffixIcon=Icons.visibility;
+      confirmPasswordSecureText=false;
+    }
+    else
+    {
+      confirmPasswordSuffixIcon=Icons.visibility_off;
+      confirmPasswordSecureText=true;
+
+    }
+    emit(changeConfirmPasswordIcon());
+
+  }
+  changePasswordIconShape()
+  {
+
+    if(passwordSuffixIcon==Icons.visibility_off)
+      {
+        passwordSuffixIcon=Icons.visibility;
+        passwordSecureText=false;
+      }
+    else
+      {
+        passwordSuffixIcon=Icons.visibility_off;
+        passwordSecureText=true;
+      }
+    emit(changePasswordIconForPasswordTextField());
+  }
+
+
+
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();

@@ -220,11 +220,21 @@ class SignupScreen extends StatelessWidget {
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
+                                        obscureText: signupCubit.passwordSecureText,
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            signupCubit
+                                                .changePasswordIconShape();
+                                          },
+                                          child: Icon(
+                                              signupCubit.passwordSuffixIcon,color: AppColors.cB4B9CA,),
+                                        ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return 'You must enter your password';
                                           }
-                                          else {
+                                          else
+                                          {
                                             return null;
                                           }
                                         },
@@ -253,6 +263,15 @@ class SignupScreen extends StatelessWidget {
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
+                                        obscureText: signupCubit.confirmPasswordSecureText,
+                                        suffixIcon: GestureDetector(
+                                          onTap: ()
+                                          {
+                                            signupCubit.changeConfirmPasswordIconShape();
+                                          },
+                                          child: Icon(
+                                              signupCubit.confirmPasswordSuffixIcon,color: AppColors.cB4B9CA,),
+                                        ),
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return 'You must confirm your password';

@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/src/multipart_file.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import '../../../../core/database/api/end_points.dart';
-import '../../../../core/database/errors/new_error_model.dart';
+import '../../../../core/database/errors/error_model.dart';
 import 'auth_repo.dart';
 
 class AuthRepoImplementation implements AuthRepo
@@ -21,7 +21,7 @@ class AuthRepoImplementation implements AuthRepo
 
 
   @override
-  Future<Either<NewErrorModel, LoginModel>> login({required String email, required String password}) async
+  Future<Either<ErrorModel, LoginModel>> login({required String email, required String password}) async
   {
 
     try
@@ -44,7 +44,7 @@ class AuthRepoImplementation implements AuthRepo
   }
 
   @override
-  Future<Either<NewErrorModel, String>> signup({
+  Future<Either<ErrorModel, String>> signup({
     required String name, required String phone,
     required String email, required String password,
     required String passwordConfirmation, required String location,

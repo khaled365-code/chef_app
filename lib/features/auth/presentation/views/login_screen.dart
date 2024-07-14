@@ -12,8 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
-import '../widgets/dont_have_account_widget.dart';
+import '../widgets/options_for_account_widget.dart';
 import '../widgets/auth_header.dart';
 import '../widgets/name_and_text_field_widget.dart';
 
@@ -168,9 +169,14 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 38.h,),
-                          Padding(
-                            padding:  EdgeInsetsDirectional.only(start: 38.w),
-                            child: DontHaveAccountWidget(),
+                          OptionsForAccountWidget(
+                            title1: 'Don\'t have an account?',
+                            title2: ' Sign up',
+                            onActionTapped: ()
+                            {
+                              navigate(context: context, route: Routes.signUpScreen);
+
+                            },
                           )
 
 

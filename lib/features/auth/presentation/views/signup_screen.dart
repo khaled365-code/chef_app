@@ -1,12 +1,17 @@
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:chef_app/features/auth/presentation/widgets/auth_header.dart';
+import 'package:chef_app/features/auth/presentation/widgets/options_for_account_widget.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/image_picker_widget.dart';
 import '../../../../core/widgets/shared_button.dart';
@@ -22,7 +27,15 @@ class SignupScreen extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state)
       {
-        // TODO: implement listener
+        if(state is SignUpSuccessState)
+          {
+            buildScaffoldMessenger(context: context, msg: state.message);
+           navigate(context: context, route: Routes.loginScreen);
+          }
+        if (state is SignUpFailureState)
+          {
+            buildScaffoldMessenger(context: context, msg: state.message);
+          }
       },
       builder: (context, state) {
         final signupCubit = BlocProvider.of<SignupCubit>(context);
@@ -37,6 +50,7 @@ class SignupScreen extends StatelessWidget {
                   subTitle: 'Please sign up to get started',
                 ),
                 Form(
+                  key: signupCubit.signupFormKey,
                     child: Align(
                         alignment: AlignmentDirectional.bottomCenter,
                         child: Container(
@@ -53,16 +67,43 @@ class SignupScreen extends StatelessWidget {
                               topLeft: Radius.circular(20.r),
                             ),
                           ),
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.only(start: 24.w),
-                              child: Column(
-                                children:
-                                [
-                                  SpaceWidget(height: 25,),
-                                  ImagePickerWidget(),
-                                  SpaceWidget(height: 25,),
-                                  NameAndTextFieldWidget(
+                          child: CustomScrollView(
+                            slivers: [
+                              SliverToBoxAdapter(child: SpaceWidget(height: 25,)),
+                              SliverToBoxAdapter(
+                                child: Center(child: signupCubit.signupImage == null ?
+                                GestureDetector(
+                                  child: ImagePickerWidget(
+                                    onCameraTap: ()
+                                    {
+                                      imagePick(imageSource: ImageSource.camera).then((value) {
+                                          signupCubit.uploadSignupImage(image: value!);
+                                        },);
+                                      Navigator.pop(context);
+                                    },
+                                    onGalleryTap: ()
+                                    {
+                                      imagePick(imageSource: ImageSource.gallery).then((value) {
+                                          signupCubit.uploadSignupImage(image: value!);
+                                        },);
+                                      Navigator.pop(context);
+
+                                    },
+
+                                  ),
+                                ):ImagePickerWidget(
+                                  onDeletePhotoTap: ()
+                                  {
+                                    signupCubit.deleteSignupImage();
+                                  },
+                                  imagePath: signupCubit.signupImage!.path,
+                                )),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 25,)),
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Name',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -72,23 +113,32 @@ class SignupScreen extends StatelessWidget {
                                           if (value!.isEmpty) {
                                             return 'You must enter your name';
                                           }
+                                          if(value.length > 20)
+                                            {
+                                              return 'name length must be less than or equal to 20';
+                                            }
                                           else {
                                             return null;
                                           }
                                         },
                                         onFieldSubmitted: (value)
                                         {
-
+                                          checkValidationForRegistration(signupCubit, context);
                                         },
                                         controller: signupCubit.nameController,
-                                        hintText: 'John doe',
+                                        hintText: 'example: John doe',
                                         keyboardType: TextInputType.text,
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24,),
+                                ),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24,)),
 
-                                  NameAndTextFieldWidget(
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Phone',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -98,6 +148,10 @@ class SignupScreen extends StatelessWidget {
                                           if (value!.isEmpty) {
                                             return 'You must enter your phone number';
                                           }
+                                          if(value.length < 10)
+                                            {
+                                              return 'phone length must be at least 10 characters long';
+                                            }
                                           else
                                           {
                                             return null;
@@ -105,17 +159,22 @@ class SignupScreen extends StatelessWidget {
                                         },
                                         onFieldSubmitted: (value)
                                         {
-
+                                          checkValidationForRegistration(signupCubit, context);
                                         },
                                         controller: signupCubit.phoneController,
-                                        hintText: '+201013328223',
+                                        hintText: 'example: +201013328223',
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24,),
+                                ),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24,)),
 
-                                  NameAndTextFieldWidget(
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Email',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -125,12 +184,17 @@ class SignupScreen extends StatelessWidget {
                                           if (value!.isEmpty) {
                                             return 'You must enter your email';
                                           }
+                                          if(EmailValidator.validate(value)==false)
+                                            {
+                                              return 'invalid email address';
+                                            }
                                           else {
                                             return null;
                                           }
                                         },
                                         onFieldSubmitted: (value)
                                         {
+                                          checkValidationForRegistration(signupCubit, context);
 
                                         },
                                         controller: signupCubit.emailController,
@@ -139,9 +203,14 @@ class SignupScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24,),
+                                ),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24,)),
 
-                                  NameAndTextFieldWidget(
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Password',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -157,6 +226,7 @@ class SignupScreen extends StatelessWidget {
                                         },
                                         onFieldSubmitted: (value)
                                         {
+                                          checkValidationForRegistration(signupCubit, context);
 
                                         },
                                         controller: signupCubit.passwordController,
@@ -165,10 +235,15 @@ class SignupScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24,),
+                                ),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24,)),
 
 
-                                  NameAndTextFieldWidget(
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Re-Type Password',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -176,14 +251,20 @@ class SignupScreen extends StatelessWidget {
                                       child: CustomOutlineTextField(
                                         validator: (value) {
                                           if (value!.isEmpty) {
-                                            return 'You must enter your password';
+                                            return 'You must confirm your password';
                                           }
-                                          else {
+                                          else if(signupCubit.passwordController.text != signupCubit.confirmPassController.text)
+                                            {
+                                              return 'Passwords does not match';
+                                            }
+                                          else
+                                          {
                                             return null;
                                           }
                                         },
                                         onFieldSubmitted: (value)
                                         {
+                                          checkValidationForRegistration(signupCubit, context);
 
                                         },
                                         controller: signupCubit.confirmPassController,
@@ -192,9 +273,14 @@ class SignupScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24,),
+                                ),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24,)),
 
-                                  NameAndTextFieldWidget(
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Brand Name',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -204,23 +290,37 @@ class SignupScreen extends StatelessWidget {
                                           if (value!.isEmpty) {
                                             return 'You must enter your brand name';
                                           }
+                                          if(value.length<3)
+                                            {
+                                              return 'brand name length must be at least 3 characters long';
+                                            }
+                                          if(value.length>20)
+                                            {
+                                              return 'brand name length must be less than or equal to 20 characters long';
+                                            }
                                           else {
                                             return null;
                                           }
                                         },
                                         onFieldSubmitted: (value)
                                         {
+                                          checkValidationForRegistration(signupCubit, context);
 
                                         },
                                         controller: signupCubit.brandNameController,
-                                        hintText: 'ChefLegacy',
+                                        hintText: 'example: ChefLegacy',
                                         keyboardType: TextInputType.text,
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24,),
+                                ),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24,)),
 
-                                  NameAndTextFieldWidget(
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Min Charge',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -236,17 +336,23 @@ class SignupScreen extends StatelessWidget {
                                         },
                                         onFieldSubmitted: (value)
                                         {
+                                          checkValidationForRegistration(signupCubit, context);
 
                                         },
                                         controller: signupCubit.minimumChargeController,
-                                        hintText: '1000',
+                                        hintText: 'example: 1000',
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24,),
+                                ),
+                              ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24,)),
 
-                                  NameAndTextFieldWidget(
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 24.w),
+                                  child: NameAndTextFieldWidget(
                                     title: 'Description',
                                     textField: Padding(
                                       padding: EdgeInsetsDirectional.only(
@@ -256,46 +362,108 @@ class SignupScreen extends StatelessWidget {
                                           if (value!.isEmpty) {
                                             return 'You must enter your brand description';
                                           }
+                                          if(value.length < 20)
+                                          {
+                                            return 'discription length must be at least 20 characters long';
+                                          }
                                           else {
                                             return null;
                                           }
                                         },
                                         onFieldSubmitted: (value)
                                         {
+                                          checkValidationForRegistration(signupCubit, context);
 
                                         },
                                         controller: signupCubit.descriptionController,
-                                        hintText: 'fast food brand',
+                                        hintText: 'example: fast food brand',
                                         keyboardType: TextInputType.text,
                                       ),
                                     ),
                                   ),
-                                  SpaceWidget(height: 24.h,),
-
-                                  HealthCertificateDotContainer(),
-
-
-                                  Padding(
-                                    padding:  EdgeInsetsDirectional.only(end: 24.w),
-                                    child: SharedButton(
-                                      btnText: 'Sign Up',
-                                      onPressessed: ()
-                                      {
-
-                                      },
-                                    ),
-                                  ),
-
-                                  SpaceWidget(height: 30),
-
-
-
-
-
-
-                                ],
+                                ),
                               ),
-                            ),
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24.h,)),
+
+                             
+                              SliverFillRemaining(
+                                hasScrollBody: false,
+                                child: Column(
+                                  children:
+                                  [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.only(start: 24.w),
+                                      child: signupCubit.healthCertificateImage==null?
+                                      HealthCertificateDotContainer(
+                                       onCameraTap: ()
+                                        {
+                                          imagePick(imageSource: ImageSource.camera).then((value) {
+                                            signupCubit.uploadHealthCertificateImage(image: value!);
+                                          },);
+                                          Navigator.pop(context);
+                                        },
+                                        onGalleryTap: ()
+                                        {
+                                          imagePick(imageSource: ImageSource.gallery).then((value) {
+                                            signupCubit.uploadHealthCertificateImage(image: value!);
+                                          },);
+                                          Navigator.pop(context);
+                                        },
+                                      ):
+                                      HealthCertificateDotContainer(
+                                        onDeletePhotoPressessed: ()
+                                        {
+                                          signupCubit.deleteHealthCertificateImage();
+                                        },
+                                        imagePath: signupCubit.healthCertificateImage!.path,
+                                      ),
+                                    ),
+                                    Expanded(child: SpaceWidget(height: 47,)),
+                                  ],
+                                ),
+                              ),
+                              state is SignUpLoadingState?
+                              SliverToBoxAdapter(
+                                child: Center(
+                                  child: SizedBox(
+                                      width: 30.w,
+                                      height: 30.w,
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.primaryColor,
+                                        strokeWidth: 2.w,
+
+                                      )),
+                                ),
+                              ):
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding:  EdgeInsetsDirectional.only(end: 24.w,start: 24.w),
+                                  child: SharedButton(
+                                    btnText: 'Sign Up',
+                                    onPressessed: ()
+                                    {
+                                      checkValidationForRegistration(signupCubit, context);
+                                    },
+                                  ),
+                                ),
+                              ),
+
+                              SliverToBoxAdapter(child: SpaceWidget(height: 24.h,)),
+
+                              SliverToBoxAdapter(
+                                child: OptionsForAccountWidget(
+                                  title1: 'Already have an account?',
+                                  title2: ' sign in',
+                                  onActionTapped: ()
+                                  {
+                                    navigate(context: context, route: Routes.loginScreen);
+                                  },
+                                ),
+                              ),
+
+
+                              SliverToBoxAdapter(child: SpaceWidget(height: 30)),
+                            ],
                           ),
 
                         )
@@ -309,5 +477,25 @@ class SignupScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  void checkValidationForRegistration(SignupCubit signupCubit, BuildContext context) {
+    if (signupCubit.signupFormKey.currentState!.validate())
+    {
+      if(signupCubit.healthCertificateImage==null)
+      {
+        buildScaffoldMessenger(context: context, msg: 'Please upload image of your certificate to register as chef with us');
+      }
+      else
+      {
+        signupCubit.signupFun(
+            name: signupCubit.nameController.text, phone: signupCubit.phoneController.text,
+            email: signupCubit.emailController.text, password: signupCubit.passwordController.text,
+            passwordConfirmation: signupCubit.confirmPassController.text,
+            brandName: signupCubit.brandNameController.text,
+            minimumCharge: double.parse(signupCubit.minimumChargeController.text),
+            description: signupCubit.descriptionController.text);
+      }
+    }
   }
 }

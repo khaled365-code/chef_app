@@ -8,21 +8,22 @@ import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 
-class DontHaveAccountWidget extends StatelessWidget {
-  const DontHaveAccountWidget({super.key});
+class OptionsForAccountWidget extends StatelessWidget {
+  const OptionsForAccountWidget({super.key, required this.title1, required this.title2, this.onActionTapped});
 
+  final String title1,title2;
+  final void Function()? onActionTapped;
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Don\'t have an account?',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c646982),),
+        Text(title1,style: AppTextStyles.regular16(context).copyWith(color: AppColors.c646982),),
         SizedBox(width: 5.w,),
         GestureDetector(
-            onTap: () {
-              navigate(context: context, route: Routes.signUpScreen);
-            },
+            onTap: onActionTapped,
             child: Text(
-              ' Sign up',
+              title2,
               style: AppTextStyles.bold14(context)
                   .copyWith(color: AppColors.primaryColor),
             )),

@@ -10,6 +10,7 @@ class ErrorModel
 {
   final int statusCode;
   final String errorMessage;
+  // final List<String> specificError;
 
   ErrorModel({required this.statusCode, required this.errorMessage});
 
@@ -17,6 +18,7 @@ class ErrorModel
   {
      return ErrorModel(
          statusCode: json[ApiKeys.status],
+         // specificError: json[ApiKeys.Error] != null ? json[ApiKeys.Error].cast<String>() : [],
          errorMessage: json[ApiKeys.ErrorMessage]);
 
   }

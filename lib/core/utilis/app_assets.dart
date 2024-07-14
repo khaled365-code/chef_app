@@ -12,11 +12,24 @@ class ImageConstants
   static const String onboardingImage2 = 'assets/images/onboarding_image2.png';
   static const String onboardingImage3 = 'assets/images/onboarding_image3.png';
 
+  static const String formalMeImage = 'assets/images/formal_me.jpeg';
+
+
+  static const String userDefaultImage = 'assets/images/user_default_image.png';
+
+  static const String cameraAndroidImage = 'assets/images/camera_image_android.png';
+  static const String galleryAndroidImage = 'assets/images/gallery_image_android.jpg';
+
+
+
+
 
   static const String loginOtherElipsisImage = 'assets/images/login_other_elipsis_image.png';
 
 
   static const String pencilEditIcon='assets/icons/pencil_edit_icon.svg';
+  static const String trashIcon='assets/icons/trash-xmark.svg';
+
 
 
 

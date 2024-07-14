@@ -4,6 +4,7 @@ import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart'
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
+import 'package:chef_app/features/home/presentation/views/home_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,10 @@ class AppRouter {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
             builder: (context) => OnboardingScreen(), settings: routeSettings);
+
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+            builder: (context) => HomeScreen(), settings: routeSettings);
 
       case Routes.loginScreen:
         return MaterialPageRoute(

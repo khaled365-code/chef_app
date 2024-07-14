@@ -12,6 +12,9 @@ class Routes
 
   static const String signUpScreen='/signup_screen';
 
+  static const String homeScreen='/home_screen';
+
+
 
 
 

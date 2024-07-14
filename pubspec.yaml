@@ -83,6 +83,9 @@ dependencies:
   #Dotted line decoration is handly package to draw dotted divider, dotted border for rectangle, circle or rounded rectangle
   dotted_decoration: ^2.0.0
 
+  #A simple (but correct) dart class for validating email addresses
+  email_validator: ^3.0.0
+
 
 
 

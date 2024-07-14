@@ -1,14 +1,24 @@
 
+import 'dart:io';
+
 import 'package:chef_app/chef_app.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../utilis/app_assets.dart';
 import '../utilis/app_colors.dart';
+import 'open_camera_or_gallery_container.dart';
 
 class ImagePickerWidget extends StatelessWidget {
-  const ImagePickerWidget({super.key});
+  const ImagePickerWidget({super.key, this.imagePath, this.onGalleryTap, this.onCameraTap, this.onDeletePhotoTap});
+
+  final String? imagePath;
+  final Function()? onGalleryTap;
+  final Function()? onCameraTap;
+  final Function()? onDeletePhotoTap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +31,50 @@ class ImagePickerWidget extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.cFFC6AE,
+            image: imagePath != null ? DecorationImage(image:FileImage(File(imagePath!)),fit: BoxFit.fill) : null,
           ),
         ),
         PositionedDirectional(
           bottom: -3.h,
           end: 3.w,
-            child: Container(
-              width: 41.w,
-              height: 41.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.primaryColor,
+            child: imagePath == null? GestureDetector(
+              onTap: ()
+              {
+                showDialog(context: context,
+
+                    builder: (context) => OpenCameraOrGalleryContainer(
+                      onCameraTap: onCameraTap,
+                      onGalleryTap: onGalleryTap,
+                    ),);
+              },
+              child: Container(
+                width: 41.w,
+                height: 41.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primaryColor,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    ImageConstants.pencilEditIcon,
+                  ),
+                ),
               ),
-              child: Center(
-                child: SvgPicture.asset(
-                  ImageConstants.pencilEditIcon,
+            ):
+            GestureDetector(
+              onTap: onDeletePhotoTap,
+              child: Container(
+                width: 41.w,
+                height: 41.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.primaryColor,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    ImageConstants.trashIcon,
+                    colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+                  ),
                 ),
               ),
             ))

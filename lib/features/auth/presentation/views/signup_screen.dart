@@ -61,14 +61,12 @@ class SignupScreen extends StatelessWidget {
                           width: MediaQuery
                               .sizeOf(context)
                               .width,
-                          height: MediaQuery
-                              .sizeOf(context)
-                              .height * 579 / 812,
+                          height: MediaQuery.sizeOf(context).height*550/812,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20.r),
-                              topLeft: Radius.circular(20.r),
+                              topRight: Radius.circular(25.r),
+                              topLeft: Radius.circular(25.r),
                             ),
                           ),
                           child: CustomScrollView(
@@ -109,7 +107,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Name',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
@@ -144,7 +142,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Phone',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
@@ -180,7 +178,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Email',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
@@ -216,7 +214,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Password',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
@@ -259,7 +257,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Re-Type Password',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
@@ -305,7 +303,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Brand Name',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
@@ -345,7 +343,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Min Charge',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(
@@ -377,7 +375,7 @@ class SignupScreen extends StatelessWidget {
                                   padding: EdgeInsetsDirectional.only(start: 24.w),
                                   child: NameAndTextFieldWidget(
                                     title: 'Description',
-                                    textField: Padding(
+                                    childWidget: Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           end: 24.w),
                                       child: CustomOutlineTextField(

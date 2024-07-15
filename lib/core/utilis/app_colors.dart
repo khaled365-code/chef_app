@@ -8,6 +8,9 @@ class AppColors
 
  static const primaryColor= Color(0xffFF7622);
 
+ static const transparent= Colors.transparent;
+
+
  static const black= Color(0xff000000);
 
  static const white= Color(0xffFFFFFF);

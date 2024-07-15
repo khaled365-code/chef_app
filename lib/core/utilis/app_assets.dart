@@ -26,9 +26,15 @@ class ImageConstants
 
   static const String loginOtherElipsisImage = 'assets/images/login_other_elipsis_image.png';
 
+  static const String topElipsisBigImage = 'assets/images/top_elipsis_big_image.png';
+
+
 
   static const String pencilEditIcon='assets/icons/pencil_edit_icon.svg';
   static const String trashIcon='assets/icons/trash-xmark.svg';
+
+  static const String arrowBackIcon='assets/icons/arrow_back_icon.svg';
+
 
 
 

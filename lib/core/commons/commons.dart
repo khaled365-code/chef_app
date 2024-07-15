@@ -10,7 +10,7 @@ import 'package:image_picker/image_picker.dart';
 
 void navigate({required BuildContext context ,required String route, Object? arg,bool replacement=false})
 {
-  if(replacement=true)
+  if(replacement==true)
     {
       Navigator.pushReplacementNamed(context,route,arguments: arg);
     }

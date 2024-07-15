@@ -32,14 +32,13 @@ class LoginScreen extends StatelessWidget {
           }
         else
           {
-
             buildScaffoldMessenger(context: context, msg: state.theError.errorMessage!);
           }
       }
     if(state is LoginSuccessState)
       {
         buildScaffoldMessenger(context: context, msg: state.successLoginModel.message);
-
+        navigate(context: context, route: Routes.homeScreen,replacement: true);
       }
   },
   builder: (context, state) {
@@ -58,12 +57,12 @@ class LoginScreen extends StatelessWidget {
                 alignment: AlignmentDirectional.bottomCenter,
                 child: Container(
                   width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height*579/812,
+                  height: MediaQuery.sizeOf(context).height*550/812,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20.r),
-                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(25.r),
+                      topLeft: Radius.circular(25.r),
                     ),
                   ),
                   child: SingleChildScrollView(
@@ -76,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(height: 24.h,),
                           NameAndTextFieldWidget(
                             title: 'Email',
-                            textField: Padding(
+                            childWidget: Padding(
                               padding:  EdgeInsetsDirectional.only(end: 24.w),
                               child: CustomOutlineTextField(
                                 validator: (value)
@@ -108,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(height: 24.h,),
                           NameAndTextFieldWidget(
                               title: 'Password',
-                              textField:  Padding(
+                              childWidget:  Padding(
                                 padding:  EdgeInsetsDirectional.only(end: 24.w),
                                 child: CustomOutlineTextField(
                                   obscureText: loginCubit.isObsecureText,
@@ -182,7 +181,6 @@ class LoginScreen extends StatelessWidget {
                             onActionTapped: ()
                             {
                               navigate(context: context, route: Routes.signUpScreen);
-
                             },
                           )
 

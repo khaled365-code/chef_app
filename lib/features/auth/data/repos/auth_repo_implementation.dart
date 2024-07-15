@@ -81,6 +81,41 @@ class AuthRepoImplementation implements AuthRepo
     }
   }
 
+  @override
+  Future<Either<ErrorModel, String>> forgetPasswordSendCode({required String email}) async
+  {
+    try
+    {
+      final response=await api.post(EndPoints.forgetPasswordSendCodeEndPoint,data:
+      {
+        ApiKeys.email:email
+      });
+      return Right(response[ApiKeys.message]);
+    } on ServerException catch (e)
+    {
+      return Left(e.errorModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, String>> forgetPassChangeWithCode({required String email, required String code, required String password, required String confirmPassword}) async
+  {
+    try
+    {
+      final response=await api.patch(EndPoints.forgetPassChangeWithCodeEndPoint,data:
+      {
+        ApiKeys.email:email,
+        ApiKeys.code:code,
+        ApiKeys.password:password,
+        ApiKeys.confirmPassword:confirmPassword
+      });
+      return Right(response[ApiKeys.message]);
+    }on ServerException catch(e)
+    {
+      return Left(e.errorModel);
+    }
+  }
+
 
 
 

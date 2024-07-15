@@ -1,8 +1,11 @@
 import 'package:chef_app/core/database/api/dio_consumer.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
+import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
+import 'package:chef_app/features/auth/presentation/views/forget_pass_send_code_screen.dart';
+import 'package:chef_app/features/auth/presentation/views/forget_password_screen.dart';
 import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
 import 'package:chef_app/features/home/presentation/views/home_screen.dart';
 import 'package:dio/dio.dart';
@@ -46,6 +49,26 @@ class AppRouter {
                   create: (context) => SignupCubit(authRepoImplementation: AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
                   child: SignupScreen(),
                 ), settings: routeSettings);
+
+      case Routes.forgetPassScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => ForgetPassCubit(
+                      authRepoImplementation:
+                          AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+                  child: ForgetPasswordScreen(),
+                ),
+            settings: routeSettings);
+
+      case Routes.forgetPassSendCodeScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (context) => ForgetPassCubit(
+                  authRepoImplementation:
+                  AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+              child: ForgetPassSendCodeScreen(),
+            ),
+            settings: routeSettings);
     }
   }
 

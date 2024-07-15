@@ -24,6 +24,8 @@ class ApiKeys
   static const String frontId='frontId';
   static const String backId='backId';
   static const String profilePic='profilePic';
+  static const String code='code';
+
 
 
 

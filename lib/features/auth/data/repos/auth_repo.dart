@@ -21,4 +21,12 @@ abstract class AuthRepo
     required MultipartFile frontId,required MultipartFile backId,
      MultipartFile? profilePic});
 
+
+  Future<Either<ErrorModel, String>>forgetPasswordSendCode({required String email});
+
+  Future<Either<ErrorModel,String>>forgetPassChangeWithCode({required String email,required String code,required String password,required String confirmPassword});
+
+
+
+
 }

@@ -14,6 +14,12 @@ class Routes
 
   static const String homeScreen='/home_screen';
 
+  static const String forgetPassScreen='/forget_pass_screen';
+
+  static const String forgetPassSendCodeScreen='/forget_pass_send_code_screen';
+
+
+
 
 
 

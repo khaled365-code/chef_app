@@ -18,6 +18,18 @@ class Routes
 
   static const String forgetPassSendCodeScreen='/forget_pass_send_code_screen';
 
+  static const String mealDetailsScreen='/meal_details_screen';
+
+  static const String allMealsScreen='/all_meals_screen';
+
+  static const String addMealScreen='/add_meal_screen';
+
+  static const String updateMealScreen='/update_meal_screen';
+
+
+
+
+
 
 
 

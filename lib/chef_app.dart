@@ -1,4 +1,6 @@
 
+import 'package:chef_app/core/database/api/api_keys.dart';
+import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +28,7 @@ class ChefsApp extends StatelessWidget {
               supportedLocales: S.delegate.supportedLocales,
                 theme: ThemeData.light(),
                 debugShowCheckedModeBanner: false,
-                initialRoute: Routes.splash2Screen,
+                initialRoute: CacheHelper().getData(key: ApiKeys.token)!=null?Routes.homeScreen:Routes.splash2Screen,
                 onGenerateRoute: AppRouter.generateRoutes,
               )
     );

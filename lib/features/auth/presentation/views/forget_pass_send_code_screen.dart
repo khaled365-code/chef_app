@@ -80,6 +80,13 @@ class ForgetPassSendCodeScreen extends StatelessWidget {
                             NameAndTextFieldWidget(
                                 title: 'New Password',
                                 childWidget: CustomOutlineTextField(
+                                  obscureText: forgetPassCubit.newPasswordObscure,
+                                  suffixIcon: GestureDetector(
+                                    onTap: ()
+                                      {
+                                        forgetPassCubit.changeNewPasswordShape();
+                                      },
+                                      child: Icon(forgetPassCubit.newPasswordIcon,color: AppColors.cB4B9CA,)),
                                   controller: forgetPassCubit.newPasswordController,
                                   hintText: 'example@gmail.com',
                                   hintStyle: AppTextStyles.regular13(
@@ -114,6 +121,13 @@ class ForgetPassSendCodeScreen extends StatelessWidget {
                             NameAndTextFieldWidget(
                                 title: 'Confirm Password',
                                 childWidget: CustomOutlineTextField(
+                                  suffixIcon: GestureDetector(
+                                      onTap: ()
+                                      {
+                                        forgetPassCubit.changeConfirmNewPasswordShape();
+                                      },
+                                      child: Icon(forgetPassCubit.confirmNewPasswordIcon,color: AppColors.cB4B9CA,)),
+                                  obscureText: forgetPassCubit.confirmNewPasswordObscure,
                                   controller: forgetPassCubit.confirmNewPasswordController,
                                   hintText: 'example@gmail.com',
                                   hintStyle: AppTextStyles.regular13(

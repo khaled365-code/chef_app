@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 part 'forget_pass_state.dart';
@@ -30,6 +31,41 @@ class ForgetPassCubit extends Cubit<ForgetPassState> {
 
   TextEditingController newPasswordController=TextEditingController();
   TextEditingController confirmNewPasswordController=TextEditingController();
+
+
+  IconData newPasswordIcon=Icons.visibility_off;
+  IconData confirmNewPasswordIcon=Icons.visibility_off;
+  bool newPasswordObscure=true;
+  bool confirmNewPasswordObscure=true;
+
+  changeNewPasswordShape()
+  {
+    if(newPasswordIcon==Icons.visibility_off)
+      {
+        newPasswordObscure=false;
+        newPasswordIcon=Icons.visibility;
+      }
+    else
+      {
+        newPasswordObscure=true;
+        newPasswordIcon=Icons.visibility_off;
+      }
+    emit(ChangeNewPasswordSuffixIconState());
+  }
+  changeConfirmNewPasswordShape()
+  {
+    if(confirmNewPasswordIcon==Icons.visibility_off)
+    {
+      confirmNewPasswordObscure=false;
+      confirmNewPasswordIcon=Icons.visibility;
+    }
+    else
+    {
+      confirmNewPasswordObscure=true;
+      confirmNewPasswordIcon=Icons.visibility_off;
+    }
+    emit(ChangeConfirmNewPasswordSuffixIconState());
+  }
 
 
 

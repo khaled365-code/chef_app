@@ -10,6 +10,24 @@ class EndPoints
 
   static const String forgetPassChangeWithCodeEndPoint='$baseUrl/chef/change-forgotten-password';
 
+  static const String getAllChefsMealsEndPoint='$baseUrl/meal/get-meals';
+
+
+  static const String addNewMealEndPoint='$baseUrl/meal/add-to-menu';
+
+
+  static String updateMealEndPoint({required String mealId})
+  {
+    return '$baseUrl/meal/update-meal/$mealId';
+  }
+
+  static String deleteMealEndPoint({required String mealId})
+  {
+    return '$baseUrl/meal/delete-meal/$mealId';
+  }
+
+
+
 
 
 

@@ -87,6 +87,19 @@ dependencies:
   email_validator: ^3.0.0
 
 
+  #A carousel slider widget, support infinite scroll and custom child widget
+  carousel_slider_plus: ^6.0.0
+
+
+  #Provides a collection of Flutter grids layouts (staggered, masonry, quilted, woven, etc.)
+  flutter_staggered_grid_view: ^0.7.0
+
+  #Flutter plugin for getting commonly used locations on host platform file systems, such as the temp and app data directories
+  path_provider: ^2.1.3
+
+
+
+
 
 
 

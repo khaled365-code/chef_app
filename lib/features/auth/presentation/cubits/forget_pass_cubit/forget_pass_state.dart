@@ -39,5 +39,15 @@ final class ForgetPassChangeWithCodeFailureState extends ForgetPassState {
 }
 
 
+final class ChangeNewPasswordSuffixIconState extends ForgetPassState {}
+
+
+final class ChangeConfirmNewPasswordSuffixIconState extends ForgetPassState {}
+
+
+
+
+
+
 
 

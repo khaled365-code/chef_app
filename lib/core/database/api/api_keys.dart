@@ -25,6 +25,16 @@ class ApiKeys
   static const String backId='backId';
   static const String profilePic='profilePic';
   static const String code='code';
+  static const String description='description';
+  static const String price='price';
+  static const String category='category';
+  static const String mealImages='mealImages';
+  static const String howToSell='howToSell';
+
+
+
+
+
 
 
 

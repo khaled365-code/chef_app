@@ -22,6 +22,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginCubit=BlocProvider.of<LoginCubit>(context);
     return BlocConsumer<LoginCubit, LoginState>(
   listener: (context, state) {
     if(state is LoginFailureState)
@@ -42,7 +43,6 @@ class LoginScreen extends StatelessWidget {
       }
   },
   builder: (context, state) {
-    final loginCubit=BlocProvider.of<LoginCubit>(context);
     return Scaffold(
       body: SafeArea(
         child: Stack(

@@ -80,3 +80,26 @@ buildScaffoldMessenger({required BuildContext context,required String msg,SnackB
 
 }
 
+String formatDate(DateTime dateTime) {
+  int year = dateTime.year;
+  int month = dateTime.month;
+  int day = dateTime.day;
+  return '$day/$month/$year';
+}
+String formatClock(DateTime dateTime)
+{
+  int hour = dateTime.hour;
+  int minute = dateTime.minute;
+  return '$hour:$minute';
+}
+
+getAmorPm(DateTime dateTime)
+{
+  int hour = dateTime.hour;
+  if (hour > 12) {
+    return 'PM';
+  } else {
+    return 'AM';
+  }
+}
+

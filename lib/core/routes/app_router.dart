@@ -7,12 +7,20 @@ import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_c
 import 'package:chef_app/features/auth/presentation/views/forget_pass_send_code_screen.dart';
 import 'package:chef_app/features/auth/presentation/views/forget_password_screen.dart';
 import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
+import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
+import 'package:chef_app/features/home/presentation/cubits/add_meal_cubit/add_meal_cubit.dart';
+import 'package:chef_app/features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
+import 'package:chef_app/features/home/presentation/views/add_meal_screen.dart';
 import 'package:chef_app/features/home/presentation/views/home_screen.dart';
+import 'package:chef_app/features/home/presentation/views/meal_details_screen.dart';
+import 'package:chef_app/features/home/presentation/views/update_meal_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
+import '../../features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
+import '../../features/home/presentation/views/all_meals_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/onbaording_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/splash2_screen.dart';
 
@@ -24,13 +32,50 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
 
+      case Routes.updateMealScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => UpdateMealCubit(
+                      homeRepoImplementation:
+                          HomeRepoImplementation(api: DioConsumer(dio: Dio()))),
+                  child: UpdateMealScreen(),
+                ),
+            settings: routeSettings);
+
+      case Routes.allMealsScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => HomeScreenCubit(
+                      homeRepoImplementation:
+                          HomeRepoImplementation(api: DioConsumer(dio: Dio())))..getAllMealsFun(),
+                  child: AllMealsScreen(),
+                ),
+            settings: routeSettings);
+
+      case Routes.addMealScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (context) => AddMealCubit(
+                  homeRepoImplementation:
+                  HomeRepoImplementation(api: DioConsumer(dio: Dio()))),
+              child: AddMealScreen(),
+            ),
+            settings: routeSettings);
+      case Routes.mealDetailsScreen:
+        return MaterialPageRoute(
+            builder: (context) => MealDetailsScreen(), settings: routeSettings);
+
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
             builder: (context) => OnboardingScreen(), settings: routeSettings);
 
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (context) => HomeScreen(), settings: routeSettings);
+            builder: (context) => BlocProvider(
+                  create: (context) => HomeScreenCubit(homeRepoImplementation: HomeRepoImplementation(api: DioConsumer(dio: Dio())))..getAllMealsFun(),
+                  child: HomeScreen(),
+                ),
+            settings: routeSettings);
 
       case Routes.loginScreen:
         return MaterialPageRoute(

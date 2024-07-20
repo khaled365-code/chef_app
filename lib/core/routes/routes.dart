@@ -30,6 +30,8 @@ class Routes
 
   static const String certificationScreen='/certification_screen';
 
+  static const String editProfileScreen='/edit_profile_screen';
+
 
 
 

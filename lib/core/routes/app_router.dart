@@ -17,8 +17,10 @@ import 'package:chef_app/features/home/presentation/views/home_screen.dart';
 import 'package:chef_app/features/home/presentation/views/meal_details_screen.dart';
 import 'package:chef_app/features/home/presentation/views/update_meal_screen.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
+import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
 import 'package:chef_app/features/profile/presentation/views/certification_screen.dart';
+import 'package:chef_app/features/profile/presentation/views/edit_profile_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/personal_info_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,6 +39,17 @@ class AppRouter {
       case Routes.splash2Screen:
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
+
+
+      case Routes.editProfileScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => EditProfileCubit(
+                      profileRepoImplementation: ProfileRepoImplementation(
+                          api: DioConsumer(dio: Dio()))),
+                  child: EditProfileScreen(),
+                ),
+            settings: routeSettings);
 
       case Routes.certificationScreen:
         return MaterialPageRoute(

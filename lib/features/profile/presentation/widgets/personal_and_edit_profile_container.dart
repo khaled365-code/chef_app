@@ -45,20 +45,26 @@ class PersonalAndEditProfileBodyContainer extends StatelessWidget {
             ),
           ),
           SpaceWidget(height: 16,),
-          ListTile(
-            leading: Container(
-              width: 40.w,
-              height: 40.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
+          GestureDetector(
+            onTap: ()
+            {
+              navigate(context: context, route: Routes.editProfileScreen);
+            },
+            child: ListTile(
+              leading: Container(
+                width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding:  EdgeInsets.all(11.w),
+                  child: SvgPicture.asset(ImageConstants.userProfileIcon,colorFilter: ColorFilter.mode(AppColors.c413DFB, BlendMode.srcIn),),
+                ),
               ),
-              child: Padding(
-                padding:  EdgeInsets.all(11.w),
-                child: SvgPicture.asset(ImageConstants.userProfileIcon,colorFilter: ColorFilter.mode(AppColors.c413DFB, BlendMode.srcIn),),
-              ),
+              title: Text('Edit Profile',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
+              trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
             ),
-            title: Text('Edit Profile',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
-            trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
           ),
 
         ],

@@ -1,12 +1,13 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 
 class CustomOutlineTextField extends StatelessWidget {
-  const CustomOutlineTextField({super.key, this.contentPadding, this.hintText, this.hintStyle, this.suffixIcon, this.obscureText, this.keyboardType, this.filledTextStyle, this.crusorColor, required this.controller, this.validator, this.onFieldSubmitted});
+  const CustomOutlineTextField({super.key, this.contentPadding, this.hintText, this.hintStyle, this.suffixIcon, this.obscureText, this.keyboardType, this.filledTextStyle, this.crusorColor, required this.controller, this.validator, this.onFieldSubmitted, this.inputFormatters});
 
   final EdgeInsetsGeometry? contentPadding;
   final String? hintText;
@@ -19,6 +20,7 @@ class CustomOutlineTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final void Function(String)? onFieldSubmitted;
+  final List<TextInputFormatter>? inputFormatters;
 
 
   @override
@@ -30,6 +32,7 @@ class CustomOutlineTextField extends StatelessWidget {
         keyboardType: keyboardType??TextInputType.text,
         validator: validator,
         onFieldSubmitted: onFieldSubmitted,
+        inputFormatters: inputFormatters,
         style: filledTextStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.c32343E),
         decoration: InputDecoration(
         hintText: hintText??'',

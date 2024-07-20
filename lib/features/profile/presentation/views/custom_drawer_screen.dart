@@ -81,9 +81,7 @@ class CustomDrawerScreen extends StatelessWidget {
                         SpaceWidget(height: 24,),
                         DrawerHeaderWidget(),
                         SpaceWidget(height: 32,),
-                        PersonalAndEditProfileBodyContainer(
-
-                        ),
+                        PersonalAndEditProfileBodyContainer(),
                         SpaceWidget(height: 20,),
                         MealsAndNotificationsContainer(),
                         SpaceWidget(height: 20,),

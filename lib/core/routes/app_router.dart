@@ -1,4 +1,6 @@
+import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/api/dio_consumer.dart';
+import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
 import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
@@ -14,6 +16,10 @@ import 'package:chef_app/features/home/presentation/views/add_meal_screen.dart';
 import 'package:chef_app/features/home/presentation/views/home_screen.dart';
 import 'package:chef_app/features/home/presentation/views/meal_details_screen.dart';
 import 'package:chef_app/features/home/presentation/views/update_meal_screen.dart';
+import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
+import 'package:chef_app/features/profile/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
+import 'package:chef_app/features/profile/presentation/views/certification_screen.dart';
+import 'package:chef_app/features/profile/presentation/views/personal_info_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +37,14 @@ class AppRouter {
       case Routes.splash2Screen:
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
+
+      case Routes.certificationScreen:
+        return MaterialPageRoute(
+            builder: (context) => CertificationScreen(), settings: routeSettings);
+
+      case Routes.personalInfoScreen:
+        return MaterialPageRoute(
+            builder: (context) => PersonalInfoScreen(), settings: routeSettings);
 
       case Routes.updateMealScreen:
         return MaterialPageRoute(
@@ -71,8 +85,20 @@ class AppRouter {
 
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => HomeScreenCubit(homeRepoImplementation: HomeRepoImplementation(api: DioConsumer(dio: Dio())))..getAllMealsFun(),
+            builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => HomeScreenCubit(
+                          homeRepoImplementation: HomeRepoImplementation(
+                              api: DioConsumer(dio: Dio())))
+                        ..getAllMealsFun(),
+                    ),
+                    BlocProvider(
+                      create: (context) => GetChefDataCubit(
+                          profileRepoImplementation: ProfileRepoImplementation(
+                              api: DioConsumer(dio: Dio())))..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),
+                    ),
+                  ],
                   child: HomeScreen(),
                 ),
             settings: routeSettings);

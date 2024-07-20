@@ -94,6 +94,12 @@ class ImageConstants
 
 
   static const String timeIcon='assets/icons/time_icon.svg';
+  static const String points3Icon='assets/icons/points_3_icon.svg';
+  static const String personProfileIcon='assets/icons/person_profile_icon.svg';
+  static const String arrowNextProfileIcon='assets/icons/arrow_next_profile_icon.svg';
+
+
+
 
   static const String underArrowIcon='assets/icons/Under Arrow.svg';
 
@@ -103,6 +109,7 @@ class ImageConstants
 
 
   static const String menuIcon='assets/icons/menu_icon.svg';
+  static const String userProfileIcon='assets/icons/user-pen (2).svg';
 
   static const String cartMealsIcon='assets/icons/cart_meals_icon.svg';
 
@@ -112,8 +119,22 @@ class ImageConstants
 
   static const String pencilEditIcon='assets/icons/pencil_edit_icon.svg';
   static const String trashIcon='assets/icons/trash-xmark.svg';
+  static const String certificateIcon='assets/icons/diploma.svg';
 
   static const String arrowBackIcon='assets/icons/arrow_back_icon.svg';
+  static const String mealsProfileIcon='assets/icons/sandwich.svg';
+  static const String deleteAccountIcon='assets/icons/users (1).svg';
+  static const String notificationsProfileIcon='assets/icons/notifications_icon.svg';
+  static const String faqIcon='assets/icons/faq_profile_icon.svg';
+  static const String settingsIcon='assets/icons/settings_profile_icon.svg';
+  static const String logoutIcon='assets/icons/logout_profile_icon.svg';
+  static const String emailProfileIcon='assets/icons/email_profile_icon.svg';
+  static const String phoneProfileIcon='assets/icons/phone_profile_icon.svg';
+  static const String brandNameIcon='assets/icons/brand.svg';
+  static const String minimumChargeIcon='assets/icons/payroll-calendar.svg';
+  static const String descIcon='assets/icons/information.svg';
+
+
 
 
 

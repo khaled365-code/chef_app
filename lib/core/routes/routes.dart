@@ -26,6 +26,11 @@ class Routes
 
   static const String updateMealScreen='/update_meal_screen';
 
+  static const String personalInfoScreen='/personal_info_screen';
+
+  static const String certificationScreen='/certification_screen';
+
+
 
 
 

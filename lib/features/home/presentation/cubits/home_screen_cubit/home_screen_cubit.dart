@@ -3,6 +3,8 @@ import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/features/home/data/models/all_categories_model/all_categories_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/utilis/app_assets.dart';
@@ -22,8 +24,11 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     CarouselSliderModel(textTitle: 'Craft Your Culinary Identity: Edit and update your chef profile whenever you like. Add a captivating photo, write a compelling bio, and highlight your culinary expertise to impress the app\'s foodie community.', btnText: 'See your profile'),
   ];
 
+  GlobalKey<RefreshIndicatorState>refreshIndicatorKey=GlobalKey();
 
-    List<AllCategoriesModel> allCategoriesList=[
+
+
+  List<AllCategoriesModel> allCategoriesList=[
     AllCategoriesModel(name: 'Beef', image: ImageConstants.beefImage),
       AllCategoriesModel(name: 'Chicken', image: ImageConstants.chickenImage),
       AllCategoriesModel(name: 'Fish', image: ImageConstants.fishImage),
@@ -80,6 +85,8 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     {
       final response = await homeRepoImplementation.deleteMeal(mealId: mealId);
     }
+
+
 
 
 

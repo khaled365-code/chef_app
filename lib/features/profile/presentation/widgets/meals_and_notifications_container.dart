@@ -1,9 +1,11 @@
 
 
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
@@ -24,20 +26,26 @@ class MealsAndNotificationsContainer extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ListTile(
-            leading: Container(
-              width: 40.w,
-              height: 40.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
+          GestureDetector(
+            onTap: ()
+            {
+              navigate(context: context, route: Routes.specificChefMealsScreen);
+            },
+            child: ListTile(
+              leading: Container(
+                width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(11),
+                  child: SvgPicture.asset(ImageConstants.mealsProfileIcon,colorFilter: ColorFilter.mode(AppColors.c369BFF, BlendMode.srcIn),),
+                ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(11),
-                child: SvgPicture.asset(ImageConstants.mealsProfileIcon,colorFilter: ColorFilter.mode(AppColors.c369BFF, BlendMode.srcIn),),
-              ),
+              title: Text('Get Chef Meals',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
+              trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
             ),
-            title: Text('Get Chef Meals',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
-            trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
           ),
           SpaceWidget(height: 16,),
           ListTile(

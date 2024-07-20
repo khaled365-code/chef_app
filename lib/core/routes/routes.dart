@@ -32,6 +32,8 @@ class Routes
 
   static const String editProfileScreen='/edit_profile_screen';
 
+  static const String specificChefMealsScreen='/specific_chef_meals_screen';
+
 
 
 

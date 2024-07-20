@@ -22,6 +22,7 @@ import 'package:chef_app/features/profile/presentation/cubits/get_chef_data_cubi
 import 'package:chef_app/features/profile/presentation/views/certification_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/edit_profile_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/personal_info_screen.dart';
+import 'package:chef_app/features/profile/presentation/views/specific_chef_meals_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ import '../../features/home/presentation/cubits/home_screen_cubit/home_screen_cu
 import '../../features/home/presentation/views/all_meals_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/onbaording_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/splash2_screen.dart';
+import '../injection/injector.dart';
 
 class AppRouter {
 
@@ -40,13 +42,17 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
 
+      case Routes.specificChefMealsScreen:
+        return MaterialPageRoute(
+            builder: (context) => SpecificChefMealsScreen(), settings: routeSettings);
+
 
       case Routes.editProfileScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => EditProfileCubit(
-                      profileRepoImplementation: ProfileRepoImplementation(
-                          api: DioConsumer(dio: Dio()))),
+                      profileRepoImplementation: locator.get<ProfileRepoImplementation>()
+                  ),
                   child: EditProfileScreen(),
                 ),
             settings: routeSettings);
@@ -63,8 +69,8 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => UpdateMealCubit(
-                      homeRepoImplementation:
-                          HomeRepoImplementation(api: DioConsumer(dio: Dio()))),
+                    homeRepoImplementation: locator.get<HomeRepoImplementation>()
+                  ),
                   child: UpdateMealScreen(),
                 ),
             settings: routeSettings);
@@ -73,8 +79,8 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => HomeScreenCubit(
-                      homeRepoImplementation:
-                          HomeRepoImplementation(api: DioConsumer(dio: Dio())))..getAllMealsFun(),
+                    homeRepoImplementation: locator.get<HomeRepoImplementation>(),
+                      )..getAllMealsFun(),
                   child: AllMealsScreen(),
                 ),
             settings: routeSettings);
@@ -83,8 +89,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (context) => AddMealCubit(
-                  homeRepoImplementation:
-                  HomeRepoImplementation(api: DioConsumer(dio: Dio()))),
+                 homeRepoImplementation: locator.get<HomeRepoImplementation>()),
               child: AddMealScreen(),
             ),
             settings: routeSettings);
@@ -102,14 +107,13 @@ class AppRouter {
                   providers: [
                     BlocProvider(
                       create: (context) => HomeScreenCubit(
-                          homeRepoImplementation: HomeRepoImplementation(
-                              api: DioConsumer(dio: Dio())))
-                        ..getAllMealsFun(),
+                        homeRepoImplementation: locator.get<HomeRepoImplementation>(),
+                      )..getAllMealsFun(),
                     ),
                     BlocProvider(
                       create: (context) => GetChefDataCubit(
-                          profileRepoImplementation: ProfileRepoImplementation(
-                              api: DioConsumer(dio: Dio())))..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),
+                        profileRepoImplementation: locator.get<ProfileRepoImplementation>(),
+                      )..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),
                     ),
                   ],
                   child: HomeScreen(),
@@ -121,8 +125,9 @@ class AppRouter {
             builder: (context) =>
                 BlocProvider(
                   create: (context) =>
-                      LoginCubit(authRepoImplementation: AuthRepoImplementation(
-                          api: DioConsumer(dio: Dio()))),
+                      LoginCubit(
+                        authRepoImplementation: locator.get<AuthRepoImplementation>()
+                      ),
                   child: LoginScreen(),
                 ), settings: routeSettings);
 
@@ -130,7 +135,9 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) =>
                 BlocProvider(
-                  create: (context) => SignupCubit(authRepoImplementation: AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+                  create: (context) => SignupCubit(
+                      authRepoImplementation: locator.get<AuthRepoImplementation>()
+                  ),
                   child: SignupScreen(),
                 ), settings: routeSettings);
 
@@ -138,8 +145,9 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => ForgetPassCubit(
-                      authRepoImplementation:
-                          AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+                      authRepoImplementation: locator.get<AuthRepoImplementation>()
+
+                  ),
                   child: ForgetPasswordScreen(),
                 ),
             settings: routeSettings);
@@ -148,8 +156,8 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (context) => ForgetPassCubit(
-                  authRepoImplementation:
-                  AuthRepoImplementation(api: DioConsumer(dio: Dio()))),
+                  authRepoImplementation: locator.get<AuthRepoImplementation>()
+              ),
               child: ForgetPassSendCodeScreen(),
             ),
             settings: routeSettings);

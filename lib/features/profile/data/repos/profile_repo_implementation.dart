@@ -12,6 +12,8 @@ import 'package:chef_app/features/profile/data/models/chef_info_model/chef_info_
 import 'package:chef_app/features/profile/data/repos/profile_repo.dart';
 import 'package:dartz/dartz.dart';
 
+import '../models/specific_chef_meals_model/chef_meals_model.dart';
+
 class ProfileRepoImplementation implements ProfileRepo
 {
 
@@ -43,6 +45,20 @@ class ProfileRepoImplementation implements ProfileRepo
     }
 
 
+  }
+
+  @override
+  Future<Either<ErrorModel, SpecificChefMealsModel>> getChefMeals({required String chefIId}) async
+  {
+    try
+    {
+      final response=await api.get(EndPoints.getSingleChefMealsEndPoint(chefIId: chefIId));
+      SpecificChefMealsModel specificChefMealsModel=SpecificChefMealsModel.fromJson(response);
+      return Right(specificChefMealsModel);
+    } on ServerException catch(e)
+    {
+      return Left(e.errorModel);
+    }
   }
 
 

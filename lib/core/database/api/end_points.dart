@@ -31,6 +31,11 @@ class EndPoints
     return '$baseUrl/chef/get-chef/$chefIId';
   }
 
+  static String getSingleChefMealsEndPoint({required String chefIId})
+  {
+    return '$baseUrl/chef/get-chef/$chefIId/meals';
+  }
+
 
 
 

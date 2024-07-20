@@ -106,6 +106,10 @@ dependencies:
   get_it: ^7.7.0
 
 
+  #Render After Effects animations natively on Flutter. This package is a pure Dart implementation of a Lottie player.
+  lottie: ^3.1.2
+
+
 
 
 

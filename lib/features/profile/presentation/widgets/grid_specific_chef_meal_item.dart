@@ -1,24 +1,25 @@
+
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
-import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
-import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
+import 'package:chef_app/features/profile/presentation/cubits/get_specific_chef_meals_cubit/get_specific_chef_meals_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
+import '../../data/models/specific_chef_meals_model/meals.dart';
 
-class GridMealItem extends StatelessWidget {
-  const GridMealItem({super.key, required this.meal});
+class GridSpecificChefMealsItem extends StatelessWidget {
+  const GridSpecificChefMealsItem({super.key, required this.meal});
 
-  final Meals meal;
+  final SpecificChefMeals meal;
 
 
   @override
   Widget build(BuildContext context) {
-    print(meal.id);
-    var homeScreenCubit = BlocProvider.of<HomeScreenCubit>(context);
-    return BlocConsumer<HomeScreenCubit, HomeScreenState>(
+
+    return BlocConsumer<GetSpecificChefMealsCubit, GetSpecificChefMealsState>(
       listener: (context, state) {
         // TODO: implement listener
       },

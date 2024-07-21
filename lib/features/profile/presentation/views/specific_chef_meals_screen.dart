@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/commons/commons.dart';
 import '../../../../core/routes/routes.dart';
@@ -76,26 +77,8 @@ class SpecificChefMealsScreen extends StatelessWidget {
                 ),
               ),
               state is GetSpecificChefMealsLoadingState?
-              SliverFillRemaining(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
-                        child: MasonryGridView.count(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 21.h,
-                          crossAxisSpacing: 21.w,
-                          clipBehavior: Clip.none,
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            return GridShimmerMealItem();
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              SliverToBoxAdapter(
+                child: Center(child: Lottie.asset(ImageConstants.foodLottie)),
               ):
               state is GetSpecificChefMealsSuccessState?
               state.specificChefMealsModel.meals!.isNotEmpty?

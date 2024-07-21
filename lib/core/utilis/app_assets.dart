@@ -61,6 +61,17 @@ class ImageConstants
 
 
 
+  static const String  deleteAccountGif= 'assets/gif/delete_account_gif.gif';
+
+
+
+
+  //lotties
+  static const String  foodLottie= 'assets/lotties/food_lottie.json';
+
+
+
+
 
 
 
@@ -90,6 +101,7 @@ class ImageConstants
   static const String userChefIcon='assets/icons/user-chef.svg';
   static const String addIcon='assets/icons/add (1).svg';
   static const String cartIcon='assets/icons/shopping-cart-buyer.svg';
+  static const String closeIcon='assets/icons/close_icon.svg';
 
 
 

@@ -1,5 +1,6 @@
 
 
+import 'package:chef_app/features/profile/presentation/widgets/delete_account_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,20 +25,30 @@ class LogoutAndDeleteAccountContainer extends StatelessWidget {
       ),
       child: Column(
         children: [
-          ListTile(
-            leading: Container(
-              width: 40.w,
-              height: 40.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
+          GestureDetector(
+            onTap: ()
+            {
+              showModalBottomSheet(
+                backgroundColor: AppColors.transparent,
+                context: context, builder: (context) => DeleteAccountBottomSheet(
+                bottomSheetTitle: 'Delete Account',
+              ),);
+            },
+            child: ListTile(
+              leading: Container(
+                width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(11),
+                  child: SvgPicture.asset(ImageConstants.deleteAccountIcon,colorFilter: ColorFilter.mode(AppColors.c2AE1E1, BlendMode.srcIn),),
+                ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(11),
-                child: SvgPicture.asset(ImageConstants.deleteAccountIcon,colorFilter: ColorFilter.mode(AppColors.c2AE1E1, BlendMode.srcIn),),
-              ),
+              title: Text('Delete Account',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
+              trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
             ),
-            title: Text('Delete Account',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
-            trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
           ),
           SpaceWidget(height: 16,),
           ListTile(

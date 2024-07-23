@@ -87,6 +87,29 @@ class ProfileRepoImplementation implements ProfileRepo
     }
   }
 
+  @override
+  Future<Either<ErrorModel, String>> changePasswordForAccount({required String oldPassword, required String newPassword, required String confirmPassword}) async
+  {
+    try
+    {
+
+      final response=await api.patch(EndPoints.changePasswordForAccountEndPoint,
+      data: {
+        ApiKeys.oldPass:oldPassword,
+        ApiKeys.newPass:newPassword,
+        ApiKeys.confirmPassword:confirmPassword
+      });
+
+      return Right(response[ApiKeys.message]);
+
+    }on ServerException catch(e)
+    {
+      return Left(e.errorModel);
+    }
+
+
+  }
+
 
 
 

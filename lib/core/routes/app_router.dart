@@ -26,7 +26,6 @@ import 'package:chef_app/features/profile/presentation/views/edit_profile_screen
 import 'package:chef_app/features/profile/presentation/views/main_settings_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/personal_info_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/specific_chef_meals_screen.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +43,9 @@ class AppRouter {
       case Routes.splash2Screen:
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
+
+
+
 
       case Routes.mainSettingsScreen:
         return MaterialPageRoute(

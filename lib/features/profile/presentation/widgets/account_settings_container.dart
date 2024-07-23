@@ -1,13 +1,16 @@
 
 
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/commons/global_cubits/change_language_cubit/change_language_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/settings_cubit/settings_cubit.dart';
+import 'package:chef_app/features/profile/presentation/widgets/change_password_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/database/api/api_keys.dart';
 import '../../../../core/database/cache/cache_helper.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
@@ -60,14 +63,24 @@ class AccountSettingsContainer extends StatelessWidget {
             color: AppColors.cF3F3F3,
             height: 3,
           ),
-          ListTile(
-            title: Text('Change Password',style: AppTextStyles.bold15(context).copyWith(
-                color: AppColors.c32343E
-            ),),
-            subtitle: Text('Allows to change your current password whenever you want',style: AppTextStyles.regular13(context).copyWith(
-                color: AppColors.cA0A5BA
-            ),),
-            contentPadding: EdgeInsetsDirectional.zero,
+          GestureDetector(
+            onTap: ()
+            {
+              showModalBottomSheet(
+                backgroundColor: AppColors.transparent,
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => ChangePasswordBottomSheet(),);
+            },
+            child: ListTile(
+              title: Text('Change Password',style: AppTextStyles.bold15(context).copyWith(
+                  color: AppColors.c32343E
+              ),),
+              subtitle: Text('Allows to change your current password whenever you want',style: AppTextStyles.regular13(context).copyWith(
+                  color: AppColors.cA0A5BA
+              ),),
+              contentPadding: EdgeInsetsDirectional.zero,
+            ),
           ),
           SpaceWidget(height: 10,),
           LineWidget(

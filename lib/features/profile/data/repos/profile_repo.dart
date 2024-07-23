@@ -17,6 +17,8 @@ abstract class ProfileRepo
 
  Future<Either<ErrorModel,String>>logOut();
 
+ Future<Either<ErrorModel,String>>changePasswordForAccount({required String oldPassword,required String newPassword,required String confirmPassword});
+
 
 
 

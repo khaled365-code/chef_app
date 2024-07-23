@@ -61,6 +61,32 @@ class ProfileRepoImplementation implements ProfileRepo
     }
   }
 
+  @override
+  Future<Either<ErrorModel, String>> deleteMyAccount({required String chefId}) async
+  {
+    try
+    {
+      final response=await api.delete(EndPoints.deleteAccountEndPoint(chefIId: chefId));
+      return Right(response[ApiKeys.message]);
+    }on ServerException catch(e)
+    {
+      return Left(e.errorModel);
+    }
+  }
+
+  @override
+  Future<Either<ErrorModel, String>> logOut() async {
+
+    try{
+      final response=await api.get(EndPoints.chefLogoutEndPoint);
+      return Right(response[ApiKeys.message]);
+    }
+    on ServerException catch(e)
+    {
+       return Left(e.errorModel);
+    }
+  }
+
 
 
 

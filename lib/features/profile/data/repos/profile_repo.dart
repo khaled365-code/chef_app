@@ -13,6 +13,11 @@ abstract class ProfileRepo
 
  Future<Either<ErrorModel,SpecificChefMealsModel>>getChefMeals({required String chefIId});
 
+ Future<Either<ErrorModel,String>>deleteMyAccount({required String chefId});
+
+ Future<Either<ErrorModel,String>>logOut();
+
+
 
 
 

@@ -20,8 +20,10 @@ import 'package:chef_app/features/profile/data/repos/profile_repo_implementation
 import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/get_specific_chef_meals_cubit/get_specific_chef_meals_cubit.dart';
+import 'package:chef_app/features/profile/presentation/cubits/settings_cubit/settings_cubit.dart';
 import 'package:chef_app/features/profile/presentation/views/certification_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/edit_profile_screen.dart';
+import 'package:chef_app/features/profile/presentation/views/main_settings_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/personal_info_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/specific_chef_meals_screen.dart';
 import 'package:dio/dio.dart';
@@ -42,6 +44,14 @@ class AppRouter {
       case Routes.splash2Screen:
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
+
+      case Routes.mainSettingsScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => SettingsCubit(),
+                  child: MainSettingsScreen(),
+                ),
+            settings: routeSettings);
 
       case Routes.specificChefMealsScreen:
         return MaterialPageRoute(

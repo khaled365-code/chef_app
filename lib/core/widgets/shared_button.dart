@@ -24,7 +24,7 @@ class SharedButton extends StatelessWidget {
         backgroundColor: btnColor??WidgetStatePropertyAll(AppColors.primaryColor),
         shape: WidgetStatePropertyAll(
            RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadiusValue??12),
+            borderRadius: BorderRadius.circular(borderRadiusValue??12).r,
 
           ),
         )

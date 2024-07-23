@@ -16,6 +16,9 @@ class EndPoints
   static const String addNewMealEndPoint='$baseUrl/meal/add-to-menu';
 
 
+  static const String chefLogoutEndPoint='$baseUrl/chef/logout';
+
+
   static String updateMealEndPoint({required String mealId})
   {
     return '$baseUrl/meal/update-meal/$mealId';
@@ -34,6 +37,10 @@ class EndPoints
   static String getSingleChefMealsEndPoint({required String chefIId})
   {
     return '$baseUrl/chef/get-chef/$chefIId/meals';
+  }
+  static String deleteAccountEndPoint({required String chefIId})
+  {
+    return '$baseUrl/chef/delete?id=$chefIId';
   }
 
 

@@ -31,6 +31,12 @@ class ApiKeys
   static const String mealImages='mealImages';
   static const String howToSell='howToSell';
 
+  static const String locationIsActive='locationIsActive';
+  static const String appCurrentLanguage='appCurrentLanguage';
+  static const String darkModeIsActive='darkModeIsActive';
+  static const String notificationIsActive='notificationIsActive';
+
+
 
 
 

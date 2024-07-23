@@ -1,6 +1,7 @@
 
 
 import 'package:chef_app/features/profile/presentation/widgets/delete_account_bottom_sheet.dart';
+import 'package:chef_app/features/profile/presentation/widgets/logout_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,9 +31,7 @@ class LogoutAndDeleteAccountContainer extends StatelessWidget {
             {
               showModalBottomSheet(
                 backgroundColor: AppColors.transparent,
-                context: context, builder: (context) => DeleteAccountBottomSheet(
-                bottomSheetTitle: 'Delete Account',
-              ),);
+                context: context, builder: (context) => DeleteAccountBottomSheet(),);
             },
             child: ListTile(
               leading: Container(
@@ -51,20 +50,28 @@ class LogoutAndDeleteAccountContainer extends StatelessWidget {
             ),
           ),
           SpaceWidget(height: 16,),
-          ListTile(
-            leading: Container(
-              width: 40.w,
-              height: 40.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
+          GestureDetector(
+            onTap: ()
+            {
+              showModalBottomSheet(
+                backgroundColor: AppColors.transparent,
+                context: context, builder: (context) => LogoutBottomSheet(),);
+            },
+            child: ListTile(
+              leading: Container(
+                width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(11),
+                  child: SvgPicture.asset(ImageConstants.logoutIcon,),
+                ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(11),
-                child: SvgPicture.asset(ImageConstants.logoutIcon,),
-              ),
+              title: Text('Log Out',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
+              trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
             ),
-            title: Text('Log Out',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
-            trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
           ),
 
         ],

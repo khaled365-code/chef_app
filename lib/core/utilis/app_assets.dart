@@ -68,6 +68,8 @@ class ImageConstants
 
   //lotties
   static const String  foodLottie= 'assets/lotties/food_lottie.json';
+  static const String  logoutLottie= 'assets/lotties/logout_lottie.json';
+  static const String  deleteAccountLottie= 'assets/lotties/delete_acc_lottie.json';
 
 
 

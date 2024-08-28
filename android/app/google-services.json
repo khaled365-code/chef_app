@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "221766774797",
+    "project_id": "your-meals-1858f",
+    "storage_bucket": "your-meals-1858f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221766774797:android:30e90010d4b31a0d4fa544",
+        "android_client_info": {
+          "package_name": "com.example.chef_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxa0hB-kNbxj43sRuWcIsSUDPU3M5Otc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

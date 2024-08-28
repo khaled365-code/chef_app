@@ -1,5 +1,4 @@
 import 'package:chef_app/core/database/api/api_keys.dart';
-import 'package:chef_app/core/database/api/dio_consumer.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
@@ -43,6 +42,7 @@ class AppRouter {
       case Routes.splash2Screen:
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
+
 
 
 

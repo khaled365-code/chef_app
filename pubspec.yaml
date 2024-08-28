@@ -109,6 +109,24 @@ dependencies:
   #Render After Effects animations natively on Flutter. This package is a pure Dart implementation of a Lottie player.
   lottie: ^3.1.2
 
+  #A cross platform plugin for displaying and scheduling local notifications for Flutter applications with the ability to customise for each platform.
+  flutter_local_notifications: ^17.2.2
+
+  #Flutter plugin for Firebase Cloud Messaging, a cross-platform messaging solution that lets you reliably deliver messages on Android and iOS.
+  firebase_messaging: ^15.1.0
+
+  #Flutter plugin for Firebase Core, enabling connecting to multiple Firebase apps.
+  firebase_core: ^3.4.0
+
+  #A composable, multi-platform, Future-based API for HTTP requests.#http#network#protocols
+  http: ^1.2.2
+
+  #A flutter plugin for getting the local timezone of the device.
+  flutter_timezone: ^3.0.0
+
+  #Time zone database and time zone aware DateTime.
+  timezone: ^0.9.4
+
 
 
 

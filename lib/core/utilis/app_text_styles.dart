@@ -168,6 +168,16 @@ class AppTextStyles
 
       );
     }
+
+  static  TextStyle semiBold25 (BuildContext context)
+  {
+    return TextStyle(
+        fontSize: 25.sp,
+        fontWeight: FontweightHelper.semiBold,
+        fontFamily: 'sen'
+
+    );
+  }
   static  TextStyle bold17 (BuildContext context)
   {
     return TextStyle(

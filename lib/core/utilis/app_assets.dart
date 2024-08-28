@@ -58,6 +58,8 @@ class ImageConstants
   static const String  vegetarianImage= 'assets/images/Vegetarian-modified.png';
   static const String  loadingImage= 'assets/images/loading_image.jpg';
   static const String  noImage= 'assets/images/no_image.jpg';
+  static const String  appLogoImage= 'assets/images/splash_chef_app_logo.png';
+  static const String  adminLoginImage= 'assets/images/admin_login_image.png';
 
 
 

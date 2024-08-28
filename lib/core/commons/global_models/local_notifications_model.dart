@@ -9,6 +9,6 @@ class LocalNotificationsModel
   final String? payload;
   final String? sound;
 
-  LocalNotificationsModel(this.payload, this.sound, {required this.id, required this.title, required this.body,this.image});
+  LocalNotificationsModel({this.payload,this.sound,required this.id, required this.title, required this.body,this.image});
 
 }

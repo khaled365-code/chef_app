@@ -1,4 +1,5 @@
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import '../../commons/global_models/local_notifications_model.dart';
@@ -15,7 +16,7 @@ class LocalNotificationsService
 
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin=FlutterLocalNotificationsPlugin();
 
-  static init() async
+  static Future<void> init() async
   {
    await flutterLocalNotificationsPlugin.initialize(
       InitializationSettings(
@@ -38,7 +39,6 @@ class LocalNotificationsService
            playSound: true,
         priority: Priority.max,
         importance: Importance.high,
-        sound: RawResourceAndroidNotificationSound(localNotificationsModel.sound),
       ),
       iOS: DarwinNotificationDetails()
     );
@@ -46,8 +46,9 @@ class LocalNotificationsService
         localNotificationsModel.id,
         localNotificationsModel.title,
         localNotificationsModel.body,
-        payload: localNotificationsModel.payload,
+        payload: localNotificationsModel.payload??null,
         notificationDetails);
+
   }
 
 
@@ -60,7 +61,6 @@ class LocalNotificationsService
           playSound: true,
           priority: Priority.max,
           importance: Importance.high,
-          sound: RawResourceAndroidNotificationSound(localNotificationsModel.sound),
         ),
         iOS: DarwinNotificationDetails()
     );
@@ -83,7 +83,6 @@ class LocalNotificationsService
           playSound: true,
           priority: Priority.max,
           importance: Importance.high,
-          sound: RawResourceAndroidNotificationSound(localNotificationsModel.sound),
         ),
         iOS: DarwinNotificationDetails()
     );

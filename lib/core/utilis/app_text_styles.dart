@@ -405,13 +405,16 @@ double getResponsiveFontSize({required BuildContext context,required double font
 double getScaleFactor({required BuildContext context})
 {
   double width=MediaQuery.of(context).size.width;
-
   if(width<SizeConfig.tabletWidth)
   {
     return width/400;
   }
+  else if(width<SizeConfig.desktopWidth)
+  {
+    return width/700;
+  }
   else
   {
-    return width/800;
+      return width/1000;
   }
 }

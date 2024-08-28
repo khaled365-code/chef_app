@@ -3,8 +3,10 @@ import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/features/home/data/models/all_categories_model/all_categories_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/utilis/app_assets.dart';
@@ -15,7 +17,7 @@ part 'home_screen_state.dart';
 class HomeScreenCubit extends Cubit<HomeScreenState> {
   HomeScreenCubit({required this.homeRepoImplementation}) : super(HomeScreenInitial());
 
-
+  static HomeScreenCubit get(context)=>BlocProvider.of(context);
   final HomeRepoImplementation homeRepoImplementation;
 
 
@@ -29,7 +31,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
   List<AllCategoriesModel> allCategoriesList=[
-    AllCategoriesModel(name: 'Beef', image: ImageConstants.beefImage),
+      AllCategoriesModel(name: 'Beef', image: ImageConstants.beefImage),
       AllCategoriesModel(name: 'Chicken', image: ImageConstants.chickenImage),
       AllCategoriesModel(name: 'Fish', image: ImageConstants.fishImage),
       AllCategoriesModel(name: 'Seafood', image: ImageConstants.seafoodImage),
@@ -58,7 +60,6 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     ];
 
     int currentSelectedCategoryIndex=0;
-
     changeCurrentSelectedCategoryPosition({required int index})
     {
       currentSelectedCategoryIndex=index;
@@ -67,24 +68,32 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
 
+    // get meals fun
     getAllMealsFun() async
     {
       emit(GetAllMealsLoadingState());
       final response=await homeRepoImplementation.getAllMeals();
-
-      response.fold((errorModel) {
-        emit(GetAllMealsFailureState(errorModel: errorModel));
-      }, (getAllMealsModel)
-      {
-        emit(GetAllMealsSuccessState(getAllMealsModel: getAllMealsModel));
-      });
-
+      emit(getStateAfterRequest(response));
     }
 
-    deleteMealFun({required String mealId}) async
+
+  GetAllMealsModel? allMealsModel;
+
+  HomeScreenState getStateAfterRequest(Either<ErrorModel, GetAllMealsModel> response)
+  {
+    return response.fold((errorModel)
     {
-      final response = await homeRepoImplementation.deleteMeal(mealId: mealId);
-    }
+      return GetAllMealsFailureState(errorModel: errorModel);
+    }, (getAllMealsModel)
+    {
+      allMealsModel=getAllMealsModel;
+      return GetAllMealsSuccessState(getAllMealsModel: getAllMealsModel);
+    });
+
+
+  }
+
+
 
 
 

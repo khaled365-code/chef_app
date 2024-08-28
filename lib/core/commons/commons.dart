@@ -102,4 +102,16 @@ getAmorPm(DateTime dateTime)
     return 'AM';
   }
 }
-
+getCurrentTime()
+{
+  if (DateTime.now().hour < 12) {
+    return 'Good Morning';
+  }
+  else if (DateTime.now().hour < 17) {
+    return 'Good Afternoon';
+  }
+  else
+  {
+    return 'Good Evening';
+  }
+}

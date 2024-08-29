@@ -3,6 +3,7 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
@@ -13,6 +14,7 @@ part 'update_meal_state.dart';
 class UpdateMealCubit extends Cubit<UpdateMealState> {
   UpdateMealCubit({required this.homeRepoImplementation}) : super(UpdateMealInitial());
 
+  static UpdateMealCubit get(context) => BlocProvider.of(context);
 
   final HomeRepoImplementation homeRepoImplementation;
 
@@ -43,8 +45,8 @@ class UpdateMealCubit extends Cubit<UpdateMealState> {
     'Baked goods',
     'Snacks'
   ];
-  String selectedCategory='Beef';
 
+  String selectedCategory='Beef';
   changeCategoryValue({required String value}){
     selectedCategory=value;
     emit(ChangeUpdatedCategoryValue());
@@ -77,6 +79,7 @@ class UpdateMealCubit extends Cubit<UpdateMealState> {
     String? description,
     double? price,
     String? category,
+    required XFile? newMealImage
   }) async
   {
     emit(UpdateMealLoadingState());
@@ -86,7 +89,7 @@ class UpdateMealCubit extends Cubit<UpdateMealState> {
             description: description,
             price: price,
             category: category,
-            mealImage: await uploadImageToAPI(updatedMealImage!));
+            mealImage: await uploadImageToAPI(newMealImage!));
 
     response.fold((errorModel)
     {

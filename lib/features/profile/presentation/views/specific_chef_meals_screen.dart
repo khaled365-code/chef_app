@@ -17,7 +17,7 @@ import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../../../home/presentation/widgets/grid_shimmer_meal_item.dart';
+import '../../../home/presentation/widgets/all_available_meals/grid_shimmer_meal_item.dart';
 import '../widgets/grid_specific_chef_meal_item.dart';
 
 class SpecificChefMealsScreen extends StatelessWidget {

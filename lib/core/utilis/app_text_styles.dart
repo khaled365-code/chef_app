@@ -374,6 +374,15 @@ class AppTextStyles
     );
 
   }
+  static  TextStyle medium_28_Poppins (BuildContext context)
+  {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context: context,fontSize: 28),
+        fontWeight: FontweightHelper.medium,
+        fontFamily: 'poppins'
+    );
+
+  }
   static  TextStyle medium_14_Poppins (BuildContext context)
   {
     return TextStyle(
@@ -386,6 +395,13 @@ class AppTextStyles
   static  TextStyle medium_12_Poppins(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveFontSize(context: context,fontSize: 12),
+      fontWeight: FontweightHelper.medium,
+      fontFamily: 'poppins',
+    );
+  }
+  static  TextStyle medium_34_Poppins(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveFontSize(context: context,fontSize: 34),
       fontWeight: FontweightHelper.medium,
       fontFamily: 'poppins',
     );

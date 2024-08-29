@@ -128,6 +128,9 @@ dependencies:
   timezone: ^0.9.4
 
 
+  flutter_cache_manager: ^3.4.1
+
+
 
 
 

@@ -6,7 +6,7 @@ import 'package:chef_app/features/home/data/models/all_categories_model/all_cate
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_colors.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.allCategoriesModel, required this.isItemSelected});

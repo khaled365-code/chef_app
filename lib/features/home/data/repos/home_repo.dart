@@ -29,7 +29,6 @@ abstract class HomeRepo
   });
 
 
-  Future<Either<ErrorModel, String>> deleteMeal({required String mealId});
 
 
 }

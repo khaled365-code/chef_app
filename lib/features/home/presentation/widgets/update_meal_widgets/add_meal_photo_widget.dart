@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/utilis/app_colors.dart';
-import '../../../../core/utilis/app_text_styles.dart';
-import '../../../../core/widgets/open_camera_or_gallery_container.dart';
-import '../../../../core/widgets/space_widget.dart';
+import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/widgets/open_camera_or_gallery_container.dart';
+import '../../../../../core/widgets/space_widget.dart';
 
 class AddMealPhotoWidget extends StatelessWidget {
   const AddMealPhotoWidget({super.key, this.onGalleryTap, this.onCameraTap,this.imagePath, this.onDeletePhotoPressed, this.specificUpdateText});

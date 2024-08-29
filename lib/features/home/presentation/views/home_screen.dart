@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
-import '../widgets/home_meal_container.dart';
+import '../widgets/home_widgets/home_meal_container.dart';
 import '../../../profile/presentation/views/custom_drawer_screen.dart';
 import '../widgets/home_widgets/all_categories_row.dart';
 import '../widgets/home_widgets/all_meals_row.dart';
@@ -18,8 +18,6 @@ import '../widgets/home_widgets/welcome_text_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-
   @override
   Widget build(BuildContext context) {
        return Scaffold(

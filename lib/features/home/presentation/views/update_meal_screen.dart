@@ -1,11 +1,10 @@
 import 'package:chef_app/features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../../core/commons/commons.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_assets.dart';
@@ -13,10 +12,13 @@ import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../../../auth/presentation/widgets/custom_outline_text_field.dart';
 import '../../../auth/presentation/widgets/name_and_text_field_widget.dart';
 import '../../data/models/get_meals_model/meals.dart';
-import '../widgets/add_meal_photo_widget.dart';
+import '../widgets/update_meal_widgets/add_meal_photo_widget.dart';
+import '../widgets/update_meal_widgets/app_bar_update_screen.dart';
+import '../widgets/update_meal_widgets/update_description_field_widget.dart';
+import '../widgets/update_meal_widgets/update_meal_name_widget.dart';
+import '../widgets/update_meal_widgets/update_price_field_widget.dart';
 
 
 class UpdateMealScreen extends StatelessWidget {
@@ -24,152 +26,99 @@ class UpdateMealScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var updateMealCubit = BlocProvider.of<UpdateMealCubit>(context);
     var receivedMeal=ModalRoute.of(context)!.settings.arguments as Meals;
-    return BlocConsumer<UpdateMealCubit, UpdateMealState>(
-      listener: (context, state) {
-       if(state is UpdateMealSuccessState)
-         {
-           buildScaffoldMessenger(context: context, msg: 'Meal updated successfully');
-           navigate(context: context, route: Routes.homeScreen);
-         }
-       if(state is UpdateMealFailureState)
-         {
-           if(state.errorModel.error!=null)
-           {
-             buildScaffoldMessenger(context: context, msg: state.errorModel.error!.toString().substring(1,state.errorModel.error!.toString().length-1));
-           }
-           else
-           {
-             buildScaffoldMessenger(context: context, msg: state.errorModel.errorMessage!);
-           }
-         }
-      },
-      builder: (context, state) {
-        return Scaffold(
+        return BlocListener<UpdateMealCubit,UpdateMealState>(
+          listener: (context, state)
+          {
+            handleUpdateMealFailureFun(state, context);
+          },
+  child: Scaffold(
           body: SafeArea(
               child: CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.only(
-                          start: 24.w, end: 24.w), child: Column(
+                    child: Padding(padding: EdgeInsetsDirectional.only(
+                          start: 24.w, end: 24.w),
+                      child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SpaceWidget(height: 24,),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: 45.w,
-                            height: 45.h,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.cECF0F4
-                            ),
-                            child: Center(child: SvgPicture.asset(
-                                ImageConstants.arrowBackIcon)),
-                          ),
-                        ),
+                        UpdateScreenAppBar(),
                         SpaceWidget(height: 24,),
-                        AddMealPhotoWidget(
-                           specificUpdateText: 'Update',
-                          onDeletePhotoPressed: () {
-                            updateMealCubit.deleteUpdatedMealImageFun();
-                          },
-                          imagePath: updateMealCubit.updatedMealImage?.path,
-                          onCameraTap: () {
-                            imagePick(imageSource: ImageSource.camera).then(
-                                  (value) =>
-                                  updateMealCubit.updateMealImageFun(image: value!),
-                            );
-                            Navigator.pop(context);
-                          },
-                          onGalleryTap: () {
-                            imagePick(imageSource: ImageSource.gallery).then(
-                                  (value) =>
-                                      updateMealCubit.updateMealImageFun(image: value!),
-                            );
-                            Navigator.pop(context);
-                          },
-                        ),
-                        SpaceWidget(
-                          height: updateMealCubit.updatedMealImage == null ? 24 : 5,),
-                         NameAndTextFieldWidget(
-                            title: 'New Name',
-                            childWidget: CustomOutlineTextField(
-                              controller: updateMealCubit.updateMealNameController,
-                              hintText: 'write new meal name here',
-                              onFieldSubmitted: (value)
-                              {
-
-                              },
-                              keyboardType: TextInputType.text,
-                            )),
+                        BlocBuilder<UpdateMealCubit, UpdateMealState>
+                          (builder: (context, state){
+                            return AddMealPhotoWidget(
+                            specificUpdateText: 'Update',
+                            onDeletePhotoPressed: () {
+                              UpdateMealCubit.get(context).deleteUpdatedMealImageFun();
+                            },
+                            imagePath: UpdateMealCubit.get(context).updatedMealImage?.path,
+                            onCameraTap: () {
+                              imagePick(imageSource: ImageSource.camera).then(
+                                    (value) =>
+                                        UpdateMealCubit.get(context).updateMealImageFun(image: value!),
+                              );
+                              Navigator.pop(context);
+                            },
+                            onGalleryTap: () {
+                              imagePick(imageSource: ImageSource.gallery).then(
+                                    (value) =>
+                                        UpdateMealCubit.get(context).updateMealImageFun(image: value!),
+                              );
+                              Navigator.pop(context);
+                            },
+                          );
+                        }),
+                         SpaceWidget(height: UpdateMealCubit.get(context).updatedMealImage == null ? 24 : 10,),
+                         UpdateMealNameFieldWidget(updateMealCubit: UpdateMealCubit.get(context)),
                         SpaceWidget(height: 24,),
-                        NameAndTextFieldWidget(
-                            title: 'New Price',
-                            childWidget: CustomOutlineTextField(
-                              controller: updateMealCubit.updateMealPriceController,
-                              hintText: 'write new meal price here',
-                              onFieldSubmitted: (value) {
-
-                              },
-                              keyboardType: TextInputType.number,
-                            )),
+                        UpdatePriceFieldWidget(updateMealCubit: UpdateMealCubit.get(context)),
                         SpaceWidget(height: 24,),
-                        NameAndTextFieldWidget(
-                            title: 'New Description',
-                            childWidget: CustomOutlineTextField(
-                              controller: updateMealCubit.updateMealDescriptionController,
-                              hintText: 'write new meal description here',
-                              onFieldSubmitted: (value) {
-
-                              },
-                              keyboardType: TextInputType.text,
-                            )),
+                        UpdateDescriptionFieldWidget(updateMealCubit: UpdateMealCubit.get(context)),
                         SpaceWidget(height: 24,),
-                        NameAndTextFieldWidget(
-                            title: 'New category',
-                            childWidget: Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.cF0F5FA,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: DropdownButton(
-                                      items: updateMealCubit.categoriesList.map(
-                                            (e) =>
-                                            DropdownMenuItem(
-                                                value: e, child: Text(e,
-                                              style: AppTextStyles.regular14(
-                                                  context).copyWith(
-                                                  color: AppColors.cA0A5BA
-                                              ),)),
-                                      ).toList(),
-                                      onChanged: (value)
-                                      {
-                                        updateMealCubit.changeCategoryValue(value: value.toString());
-                                      },
-                                      icon: SvgPicture.asset(
-                                          ImageConstants.underArrowIcon),
-                                      value: updateMealCubit.selectedCategory,
-                                      isExpanded: true,
-                                      dropdownColor: AppColors.cF0F5FA,
-                                      elevation: 0,
-                                      underline: SizedBox.shrink(),
-                                      padding: EdgeInsetsDirectional.only(
-                                          start: 19.w,
-                                          end: 16.w
-                                      ),),
+                        BlocBuilder<UpdateMealCubit, UpdateMealState>(
+                            builder: (context,state){
+                              return NameAndTextFieldWidget(
+                                  title: 'New category',
+                                  childWidget: Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.cF0F5FA,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: DropdownButton(
+                                            items: UpdateMealCubit.get(context).categoriesList.map(
+                                                  (e) =>
+                                                  DropdownMenuItem(
+                                                      value: e, child: Text(e,
+                                                    style: AppTextStyles.regular14(
+                                                        context).copyWith(
+                                                        color: AppColors.cA0A5BA
+                                                    ),)),
+                                            ).toList(),
+                                            onChanged: (value)
+                                            {
+                                              UpdateMealCubit.get(context).changeCategoryValue(value: value.toString());
+                                            },
+                                            icon: SvgPicture.asset(
+                                                ImageConstants.underArrowIcon),
+                                            value: UpdateMealCubit.get(context).selectedCategory,
+                                            isExpanded: true,
+                                            dropdownColor: AppColors.cF0F5FA,
+                                            elevation: 0,
+                                            underline: SizedBox.shrink(),
+                                            padding: EdgeInsetsDirectional.only(
+                                                start: 19.w,
+                                                end: 16.w
+                                            ),),
 
-                                  ),
-                                ],
-                              ),
-                            )),
+                                        ),
+                                      ],
+                                    ),
+                                  ));
+                            }),
                         SpaceWidget(height: 24,),
                       ],
                     ),
@@ -179,54 +128,36 @@ class UpdateMealScreen extends StatelessWidget {
                     hasScrollBody: false,
                     child: Column(
                       children: [
-                        Expanded(child: SizedBox(
+                        Expanded(
+                            child: SizedBox(
                           height: 121.h,
-                        )),
-                        state is UpdateMealLoadingState ?
-                        Center(
-                          child: SizedBox(
-                              width: 30.w,
-                              height: 30.w,
-                              child: CircularProgressIndicator(
-                                color: AppColors.primaryColor,
-                                strokeWidth: 2.w,
+                        ),),
+                        BlocBuilder<UpdateMealCubit, UpdateMealState>(
+                            builder: (context,state){
+                              if(state is UpdateMealLoadingState)
+                                {
+                                  return Center(
+                                    child: SizedBox(
+                                        width: 30.w,
+                                        height: 30.w,
+                                        child: CircularProgressIndicator(
+                                          color: AppColors.primaryColor,
+                                          strokeWidth: 2.w,
 
-                              )),
-                        ) :
-                        SharedButton(btnText: 'Update This Meal',
-                          btnTextStyle: AppTextStyles.bold16(context)
-                              .copyWith(
-                              color: AppColors.white
-                          ),
-                          onPressessed: () async
-                          {
-                            if( updateMealCubit.updatedMealImage == null &&
-                                updateMealCubit.updateMealNameController.text == ''
-                                && updateMealCubit.updateMealDescriptionController.text == ''
-                                && updateMealCubit.updateMealPriceController.text == ''
-                                && updateMealCubit.selectedCategory == 'Beef')
-                              {
-                                showToast(msg: 'Nothing to update', toastStates: ToastStates.error);
-                              }
-                            else
-                              {
-                                if(updateMealCubit.updatedMealImage == null)
-                                  {
-                                    showToast(msg: 'You must provide an image', toastStates: ToastStates.error);
-                                  }
-                                else
-                                  {
-                                    updateMealCubit.updateMealFun(
-                                        mealId: receivedMeal.id!,
-                                        name: updateMealCubit.updateMealNameController.text==''?receivedMeal.name: updateMealCubit.updateMealNameController.text,
-                                        price: updateMealCubit.updateMealPriceController.text!=''?double.parse(updateMealCubit.updateMealPriceController.text):double.parse(receivedMeal.price.toString()),
-                                        description: updateMealCubit.updateMealDescriptionController.text==''?receivedMeal.description: updateMealCubit.updateMealDescriptionController.text,
-                                        category: updateMealCubit.selectedCategory);
-
-                                  }
-
-                              }
-                          },),
+                                        ),),);
+                                }
+                              else
+                                {
+                                  return SharedButton(btnText: 'Update This Meal',
+                                    btnTextStyle: AppTextStyles.bold16(context)
+                                        .copyWith(
+                                        color: AppColors.white
+                                    ),
+                                    onPressessed: () async
+                                    {
+                                      await updateMealFun(context, receivedMeal);
+                                    },);}
+                            },),
                         SpaceWidget(height: 30,)
 
                       ],
@@ -235,8 +166,58 @@ class UpdateMealScreen extends StatelessWidget {
 
                 ],
               )),
+        ),
+);
+  }
+
+  void handleUpdateMealFailureFun(UpdateMealState state, BuildContext context) {
+     if (state is UpdateMealSuccessState)
+    {
+      buildScaffoldMessenger(
+          context: context, msg: 'Meal updated successfully');
+      navigate(context: context, route: Routes.homeScreen);
+    }
+    if (state is UpdateMealFailureState)
+    {
+      if (state.errorModel.error != null) {
+        buildScaffoldMessenger(context: context,
+            msg: state.errorModel.error!.toString().substring(
+                1, state.errorModel.error!.toString().length - 1));
+      }
+      else {
+        buildScaffoldMessenger(
+            context: context, msg: state.errorModel.errorMessage!);
+      }
+    }
+  }
+
+
+  Future<void> updateMealFun(BuildContext context, Meals receivedMeal) async {
+     if( UpdateMealCubit.get(context).updatedMealImage == null &&
+        UpdateMealCubit.get(context).updateMealNameController.text == ''
+        && UpdateMealCubit.get(context).updateMealDescriptionController.text == ''
+        && UpdateMealCubit.get(context).updateMealPriceController.text == ''
+        && UpdateMealCubit.get(context).selectedCategory == 'Beef')
+    {
+      showToast(msg: 'Nothing to update', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
+    }
+    else
+    {
+        XFile mealImage = await getImageXFileByUrl(receivedMeal.images![0]);
+        UpdateMealCubit.get(context).updateMealFun(
+            mealId: receivedMeal.id!,
+            name: UpdateMealCubit.get(context).updateMealNameController.text==''?receivedMeal.name: UpdateMealCubit.get(context).updateMealNameController.text,
+            price: UpdateMealCubit.get(context).updateMealPriceController.text!=''?double.parse(UpdateMealCubit.get(context).updateMealPriceController.text):double.parse(receivedMeal.price.toString()),
+            description: UpdateMealCubit.get(context).updateMealDescriptionController.text==''?receivedMeal.description: UpdateMealCubit.get(context).updateMealDescriptionController.text,
+            category: UpdateMealCubit.get(context).selectedCategory,
+            newMealImage:  UpdateMealCubit.get(context).updatedMealImage==null? mealImage : UpdateMealCubit.get(context).updatedMealImage
         );
-      },
-    );
+
+
+
+    }
   }
 }
+
+
+

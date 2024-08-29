@@ -89,17 +89,4 @@ class HomeRepoImplementation implements HomeRepo
     }
   }
 
-  @override
-  Future<Either<ErrorModel, String>> deleteMeal({required String mealId}) async
-  {
-    try
-    {
-      final response=await api.delete(EndPoints.deleteMealEndPoint(mealId: mealId));
-      return Right(response[ApiKeys.message]);
-
-    } on ServerException catch (e)
-    {
-      return Left(e.errorModel);
-    }
-  }
 }

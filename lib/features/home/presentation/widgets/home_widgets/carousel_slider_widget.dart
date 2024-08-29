@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../cubits/home_screen_cubit/home_screen_cubit.dart';
-import '../carousel_container_item.dart';
+import 'carousel_container_item.dart';
 
 class CarouselSliderWidget extends StatelessWidget {
   const CarouselSliderWidget({

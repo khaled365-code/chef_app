@@ -6,8 +6,8 @@ import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utilis/app_colors.dart';
-import '../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
+import '../../../../../core/utilis/app_colors.dart';
+import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
 
 class CarouselContainerItem extends StatelessWidget {
   const CarouselContainerItem({super.key, required this.carouselSliderModel});

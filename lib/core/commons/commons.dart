@@ -1,12 +1,16 @@
 
 
+
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:cross_file/cross_file.dart';
+
 
 void navigate({required BuildContext context ,required String route, Object? arg,bool replacement=false})
 {
@@ -27,12 +31,12 @@ Future uploadImageToAPI(XFile image) async
 }
 
 
-void showToast({required String msg,required ToastStates toastStates}) async
+void showToast({required String msg,required ToastStates toastStates,ToastGravity? gravity }) async
 {
  await Fluttertoast.showToast(
       msg: msg,
       toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
+      gravity: gravity??ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       backgroundColor: getColor(toastStates),
       textColor: Colors.white,
@@ -55,11 +59,11 @@ Color getColor(ToastStates toastStates)
   switch (toastStates)
   {
     case ToastStates.success:
-      return AppColors.primaryColor;
+      return Colors.green;
     case ToastStates.error:
-      return AppColors.primaryColor;
+      return Colors.redAccent;
     case ToastStates.warning:
-      return AppColors.primaryColor;
+      return Colors.redAccent;
   }
 }
 
@@ -114,4 +118,11 @@ getCurrentTime()
   {
     return 'Good Evening';
   }
+}
+
+ Future<XFile> getImageXFileByUrl(String url) async
+ {
+var file = await DefaultCacheManager().getSingleFile(url);
+XFile result = await XFile(file.path);
+return result;
 }

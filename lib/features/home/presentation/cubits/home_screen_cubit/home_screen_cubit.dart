@@ -90,9 +90,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       return GetAllMealsSuccessState(getAllMealsModel: getAllMealsModel);
     });
 
-
   }
-
 
 
 

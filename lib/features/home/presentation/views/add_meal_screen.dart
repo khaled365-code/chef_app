@@ -14,7 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../widgets/add_meal_photo_widget.dart';
+import '../widgets/update_meal_widgets/add_meal_photo_widget.dart';
 import '../widgets/radio_button_with_text_widget.dart';
 
 class AddMealScreen extends StatelessWidget {

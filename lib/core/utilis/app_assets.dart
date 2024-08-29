@@ -60,6 +60,7 @@ class ImageConstants
   static const String  noImage= 'assets/images/no_image.jpg';
   static const String  appLogoImage= 'assets/images/splash_chef_app_logo.png';
   static const String  adminLoginImage= 'assets/images/admin_login_image.png';
+  static const String chefCokesImage='assets/images/chef_cooking_image.png';
 
 
 

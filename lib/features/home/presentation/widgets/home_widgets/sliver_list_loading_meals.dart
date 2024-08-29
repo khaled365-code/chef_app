@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../home_shimmer_container.dart';
+import 'home_shimmer_container.dart';
 
 class SliverListLoadingMeals extends StatelessWidget {
   const SliverListLoadingMeals({

@@ -3,6 +3,7 @@
 
 
 
+import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
+import '../widgets/favourites_widgets/favourite_meal_widget.dart';
 
 class FavouritesScreen extends StatelessWidget {
   const FavouritesScreen({super.key});
@@ -19,6 +21,7 @@ class FavouritesScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: AppColors.white,
         appBar: AppBar(
           leading: Padding(
             padding:  EdgeInsetsDirectional.only(start: 10.w),
@@ -65,11 +68,38 @@ class FavouritesScreen extends StatelessWidget {
               ]),
         ),
         body: Container(
-          child: TabBarView(
+          child:  TabBarView(
               children:
               [
-                Center(child:Text('Ongoing')),
-                Center(child:Text('History')),
+                ListView(
+                  children: [
+                    SpaceWidget(height: 32,),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                      itemBuilder:  (context, index) => FavouriteMealWidget(),
+                      separatorBuilder: (context, index) => SpaceWidget(height: 24,),
+                      itemCount: 10,
+                    ),
+                    SpaceWidget(height: 67,),
+                  ],
+                ),
+                ListView(
+                  children: [
+                    SpaceWidget(height: 32,),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                      itemBuilder:  (context, index) => FavouriteMealWidget(),
+                      separatorBuilder: (context, index) => SpaceWidget(height: 24,),
+                      itemCount: 10,
+                    ),
+                    SpaceWidget(height: 67,),
+
+                  ],
+                ),
               ]),
         ),
       ),

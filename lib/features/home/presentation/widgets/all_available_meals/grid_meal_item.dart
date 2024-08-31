@@ -1,23 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chef_app/core/database/api/api_keys.dart';
-import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
-import 'package:chef_app/features/home/presentation/widgets/all_available_meals/add_favourite_meal_widget.dart';
+import 'package:chef_app/features/home/presentation/widgets/all_available_meals/favourite_meal_container_shape.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/injection/injector.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
-import '../../../data/repos/home_repo_implementation.dart';
-import 'add_favourite_meal_alert_dialog.dart';
 
 class GridMealItem extends StatelessWidget {
-  const GridMealItem({super.key, required this.meal});
+  const GridMealItem({super.key, required this.meal, required this.mealsList, required this.index,});
 
   final Meals meal;
+  final List<Meals> mealsList;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +67,15 @@ class GridMealItem extends StatelessWidget {
                         Padding(
                           padding: EdgeInsetsDirectional.only(end: 10.w),
                           child: GestureDetector(
-                            onTap: () async
-                            {
-                              showDialog(context: context, builder: (context) => AddMealToFavouritesAlertDialog(meal: meal),);
-                            },
-                            child: AddMealToFavourites(),
-                          ),
+                                onTap: () async
+                                {
+                                  HomeScreenCubit.get(context).changeMealFavouriteShape(index: index,mealList: mealsList);
+                                  // showDialog(context: context, builder: (context) => AddMealToFavouritesAlertDialog(meal: meal),);
+                                },
+                                child: AddMealContainerShapeToFavourites(
+                                  isActivated: meal.itemIsSelected,
+                                ),
+                              )
                         )
                       ],
                     ),
@@ -85,6 +84,7 @@ class GridMealItem extends StatelessWidget {
                   ],
                 ),
               ),
+
 
             ],
           ),

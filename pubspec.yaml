@@ -127,8 +127,16 @@ dependencies:
   #Time zone database and time zone aware DateTime.
   timezone: ^0.9.4
 
-
+  #Generic cache manager for flutter. Saves web files on the storages of the device and saves the cache info using sqflite.
   flutter_cache_manager: ^3.4.1
+
+  #Lightweight and blazing fast key-value database written in pure Dart. Strongly encrypted using AES-256.
+  hive: ^2.2.3
+
+  #A Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.
+  equatable: ^2.0.5
+
+
 
 
 

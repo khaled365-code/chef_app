@@ -28,7 +28,7 @@ class Meals {
       this.updatedAt, 
       this.v,});
 
-  Meals.fromJson(dynamic json) {
+  Meals.fromJson( json) {
     id = json['_id'];
     name = json['name'];
     description = json['description'];
@@ -54,23 +54,27 @@ class Meals {
   String? createdAt;
   String? updatedAt;
   num? v;
+  bool itemIsSelected=false;
 
-  Map<String, dynamic> toJson() {
+
+
+  toJson(Meals meal)
+  {
     final map = <String, dynamic>{};
-    map['_id'] = id;
-    map['name'] = name;
-    map['description'] = description;
-    map['price'] = price;
-    map['howToSell'] = howToSell;
-    map['images'] = images;
-    map['category'] = category;
+    map['_id'] = meal.id;
+    map['name'] = meal.name;
+    map['description'] = meal.description;
+    map['price'] = meal.price;
+    map['howToSell'] = meal.howToSell;
+    map['images'] = meal.images;
+    map['category'] = meal.category;
     if (chefId != null) {
-      map['chefId'] = chefId?.toJson();
+      map['chefId'] = meal.chefId?.toJson();
     }
-    map['status'] = status;
-    map['createdAt'] = createdAt;
-    map['updatedAt'] = updatedAt;
-    map['__v'] = v;
+    map['status'] = meal.status;
+    map['createdAt'] = meal.createdAt;
+    map['updatedAt'] = meal.updatedAt;
+    map['__v'] = meal.v;
     return map;
   }
 

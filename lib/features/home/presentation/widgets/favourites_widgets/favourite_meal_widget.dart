@@ -1,5 +1,6 @@
 
 
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
+import '../../../data/models/get_meals_model/meals.dart';
+import '../../cubits/home_screen_cubit/home_screen_cubit.dart';
 
 class FavouriteMealWidget extends StatelessWidget {
-  const FavouriteMealWidget({super.key});
+  const FavouriteMealWidget({super.key, required this.meal, required this.ongoingMeal,});
 
+  final Meals meal;
+  final bool ongoingMeal;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +23,7 @@ class FavouriteMealWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:
         [
-         Text('category',style: AppTextStyles.regular14(context).copyWith(
+         Text(meal.category!,style: AppTextStyles.regular14(context).copyWith(
            color: AppColors.c181C2E
          ),),
          SpaceWidget(height: 32,),
@@ -42,20 +47,64 @@ class FavouriteMealWidget extends StatelessWidget {
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children:
                    [
-                     Text('beef',style: AppTextStyles.bold14(context).copyWith(
+                     Text(meal.name!,style: AppTextStyles.bold14(context).copyWith(
                          color: AppColors.c181C2E
                      ),),
                      SpaceWidget(height: 3.h,),
-                     Text('\$40.15',style: AppTextStyles.bold14(context).copyWith(
-                         color: AppColors.c181C2E
-                     ),),
+                     IntrinsicHeight(
+                       child: Row(
+                         children: [
+                           Text('\$${meal.price}',style: AppTextStyles.bold14(context).copyWith(
+                               color: AppColors.c181C2E
+                           ),),
+                           ongoingMeal==false?
+                           Row(
+                             children: [
+                               SpaceWidget(width: 50,),
+                               VerticalDivider(
+                                 color: AppColors.cCACCDA,
+                                 width: 16.w,
+                               ),
+                               SpaceWidget(width: 14,),
+                               RichText(
+                                   text:
+                               TextSpan(
+                                   children: [
+                                     TextSpan(text: '${formatDate(DateTime.now())},',style: AppTextStyles.regular12(context).copyWith(
+                                         color: AppColors.c6B6E82
+                                     )),
+                                     TextSpan(text: ' ${formatClock(DateTime.now())}',style: AppTextStyles.regular12(context).copyWith(
+                                         color: AppColors.c6B6E82
+                                     )),
+                                   ]
+                               )),
+                               SpaceWidget(width: 8),
+                               Container(
+                                 width: 4.w,
+                                 height: 4.h,
+                                 decoration: BoxDecoration(
+                                     color: AppColors.c6B6E82,
+                                     shape: BoxShape.circle
+                                 ),
+                               )
+                             ],
+                           ): SizedBox.shrink()
+                         ],
+                       ),
+                     ),
+
                    ],
                  ),
-               )
+               ),
+
+
+
+
              ],
            ),
          ),
           SpaceWidget(height: 24,),
+          ongoingMeal==true?
           Row(
             children:
             [
@@ -68,7 +117,10 @@ class FavouriteMealWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.r)
                   )
                 ),
-                  onPressed: (){},
+                  onPressed: ()
+                  {
+
+                  },
                   child: Text('Add to history',style: AppTextStyles.bold12(context).copyWith(
                     color: AppColors.white
                   ),))),
@@ -83,13 +135,16 @@ class FavouriteMealWidget extends StatelessWidget {
                             side: BorderSide(color: AppColors.primaryColor)
                           )
                       ),
-                      onPressed: (){},
+                      onPressed: ()
+                      {
+
+                      },
                       child: Text('Remove',style: AppTextStyles.bold12(context).copyWith(
                           color: AppColors.cFF7622
                       ),)))
 
             ],
-          )
+          ):SizedBox.shrink()
         ],
       ),
     );

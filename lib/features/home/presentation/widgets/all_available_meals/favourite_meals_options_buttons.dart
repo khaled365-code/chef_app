@@ -1,19 +1,20 @@
-import 'package:chef_app/core/commons/commons.dart';
-import 'package:chef_app/core/injection/injector.dart';
-import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:convert';
+import 'dart:developer';
 
+import 'package:chef_app/core/commons/commons.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/utilis/services/local_database_service.dart';
 import '../../../../../core/widgets/space_widget.dart';
+import '../../../../../main.dart';
 import '../../../data/models/get_meals_model/meals.dart';
 import '../../cubits/home_screen_cubit/home_screen_cubit.dart';
 
 class AddMealToFavouritesOptionsButtons extends StatelessWidget {
-  const AddMealToFavouritesOptionsButtons({
+   const AddMealToFavouritesOptionsButtons({
     super.key,
     required this.meal,
   });
@@ -55,6 +56,7 @@ class AddMealToFavouritesOptionsButtons extends StatelessWidget {
               onPressed: () async
               {
                 Navigator.pop(context);
+                await addNewFavouriteMeal();
                 navigate(context: context, route: Routes.favouritesScreen);
               },
               child: Text(
@@ -66,5 +68,11 @@ class AddMealToFavouritesOptionsButtons extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> addNewFavouriteMeal() async {
+     await LocalDatabaseService.appFavouritesMeals!.put('meals',meal.toJson(meal));
+    var data = await LocalDatabaseService.appFavouritesMeals!.get('meals');
+    ongoingFavouriteMeals.add(Meals.fromJson(data));
   }
 }

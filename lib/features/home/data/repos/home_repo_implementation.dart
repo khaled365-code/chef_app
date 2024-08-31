@@ -1,5 +1,6 @@
 
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:chef_app/core/database/api/api_consumer.dart';
@@ -7,7 +8,9 @@ import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/api/end_points.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/core/database/errors/server_exception.dart';
+import 'package:chef_app/core/utilis/services/local_database_service.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
+import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
 import 'package:chef_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -88,5 +91,47 @@ class HomeRepoImplementation implements HomeRepo
       return Left(e.errorModel);
     }
   }
+
+  @override
+
+  Future<Either<Exception,List<Meals>>> getCachedFavouriteMeals() async
+  {
+    var jsonData=await LocalDatabaseService.appFavouritesMeals!.get('meals');
+    if(jsonData!=null)
+      {
+        var data=json.decode(jsonData);
+        List<Meals> meal=data.map<Meals>((json) => Meals.fromJson(json)).toList();
+        return Right(meal);
+      }
+    else
+      {
+        return Left(Exception('No Data Found'));
+      }
+  }
+
+  @override
+  Future <void> saveCachedFavouriteMeals({required List<Meals> meals}) async
+  {
+   var  jsonStorage=meals.map<Map<String,dynamic>>((meals) => Meals().toJson(meals)).toList();
+   var data=json.encode(jsonStorage);
+   await LocalDatabaseService.appFavouritesMeals!.put('meals', data);
+
+  }
+
+
+  @override
+  Future<List<Meals>> getCachedMeals() {
+    // TODO: implement getCachedMeals
+    throw UnimplementedError();
+  }
+
+
+  @override
+  Future saveCachedMeals({required List<Meals> mealList}) {
+    // TODO: implement saveCachedMeals
+    throw UnimplementedError();
+  }
+
+
 
 }

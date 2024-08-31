@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
+import 'package:chef_app/core/utilis/services/local_database_service.dart';
 import 'package:chef_app/features/home/data/models/all_categories_model/all_categories_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
@@ -10,7 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/utilis/app_assets.dart';
+import '../../../../../main.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
+import '../../../data/models/get_meals_model/meals.dart';
 
 part 'home_screen_state.dart';
 
@@ -95,6 +100,41 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
 
+  // removeOngoingFavouriteMeal({required Meals meal})
+  // {
+  //   ongoingFavouriteMeals.remove(meal);
+  //   emit(RemoveMealFromFavouritesState());
+  // }
+  //
+  // addHistoryFavouriteMeal({required Meals meal})
+  // {
+  //   removeOngoingFavouriteMeal(meal: meal);
+  //   historyMeals.add(meal);
+  //   emit(AddFavouriteMealToHistoryState());
+  // }
 
+  changeMealFavouriteShape({required List<Meals> mealList,required int index}) async
+  {
+    mealList[index].itemIsSelected=!mealList[index].itemIsSelected;
+    if(mealList[index].itemIsSelected==true)
+      {
+        await homeRepoImplementation.saveCachedFavouriteMeals(meals: [mealList[index]]);
+      }
+    emit(ChangeMealFavouriteActiveShapeState());
+
+  }
+
+  getCachedFavouriteMeals() async
+  {
+    final response=await homeRepoImplementation.getCachedFavouriteMeals();
+    response.fold((exception)
+    {
+      emit(GetCachedFavouriteMealsFailureState(errorMessage: exception.toString()));
+    } , (success)
+    {
+      emit(GetCachedFavouriteMealsSuccessState(meal: success));
+    },);
+  }
 
 }
+

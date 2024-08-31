@@ -36,6 +36,7 @@ class ApiKeys
   static const String appCurrentLanguage='appCurrentLanguage';
   static const String darkModeIsActive='darkModeIsActive';
   static const String notificationIsActive='notificationIsActive';
+  static const String favouriteMeals='favourite_meals';
 
 
 

@@ -10,14 +10,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-
-import '../../../../core/commons/commons.dart';
-import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../../../home/presentation/widgets/all_available_meals/grid_shimmer_meal_item.dart';
 import '../widgets/grid_specific_chef_meal_item.dart';
 
 class SpecificChefMealsScreen extends StatelessWidget {

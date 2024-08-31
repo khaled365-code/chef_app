@@ -29,7 +29,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
-import '../../features/home/presentation/cubits/favourites_cubit/favourites_cubit.dart';
 import '../../features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import '../../features/home/presentation/views/all_meals_screen.dart';
 import '../../features/home/presentation/views/favourites_screen.dart';
@@ -48,8 +47,8 @@ class AppRouter {
       case Routes.favouritesScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => FavouritesCubit(),
-                  child: FavouritesScreen(),
+                  create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getCachedFavouriteMeals()
+                  ,child: FavouritesScreen(),
                 ),
             settings: routeSettings);
 

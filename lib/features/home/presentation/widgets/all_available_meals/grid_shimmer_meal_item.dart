@@ -16,7 +16,7 @@ class GridShimmerMealItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(24.r),
         color: AppColors.white,
       ),
       child: Column(
@@ -100,7 +100,7 @@ class GridShimmerMealItem extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                           child: Center(
-                            child: Icon(Icons.remove,color: AppColors.white,),
+                            child: Icon(Icons.favorite_outline,color: AppColors.white,),
                           ),
                         ),
                       ),

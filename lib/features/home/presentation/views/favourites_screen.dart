@@ -3,14 +3,19 @@
 
 
 
+import 'dart:convert';
+
 import 'package:chef_app/core/widgets/space_widget.dart';
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
+import '../../../../main.dart';
 import '../widgets/favourites_widgets/favourite_meal_widget.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -56,7 +61,6 @@ class FavouritesScreen extends StatelessWidget {
                indicatorSize: TabBarIndicatorSize.tab,
               indicatorPadding: EdgeInsetsDirectional.only(start: 24.w,),
               dividerColor: AppColors.cCED7DF,
-
               tabs:
               [
                 Tab(
@@ -67,44 +71,96 @@ class FavouritesScreen extends StatelessWidget {
                 )
               ]),
         ),
-        body: Container(
-          child:  TabBarView(
-              children:
-              [
-                ListView(
+        body: TabBarView(
+            children:
+            [
+             ListView(
                   children: [
                     SpaceWidget(height: 32,),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
-                      itemBuilder:  (context, index) => FavouriteMealWidget(),
-                      separatorBuilder: (context, index) => SpaceWidget(height: 24,),
-                      itemCount: 10,
+                    BlocBuilder<HomeScreenCubit, HomeScreenState>(
+                      builder: (context, state) {
+                        if(state is GetCachedFavouriteMealsSuccessState)
+                        {
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                            itemBuilder:  (context, index) => FavouriteMealWidget(
+                              ongoingMeal: true,
+                              meal: state.meal[index],
+                            ),
+                            separatorBuilder: (context, index) => SpaceWidget(height: 24,),
+                            itemCount: state.meal.length,
+                          );
+                        }
+                        else if(state is GetCachedFavouriteMealsFailureState)
+                        {
+                          return Text(state.errorMessage);
+                        }
+                        else
+                        {
+                          return Center(
+                            child: Container(
+                              width: 30.w,
+                              height: 30.h,
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                            ),);
+                        }
+                      },
                     ),
                     SpaceWidget(height: 67,),
                   ],
                 ),
-                ListView(
-                  children: [
-                    SpaceWidget(height: 32,),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
-                      itemBuilder:  (context, index) => FavouriteMealWidget(),
-                      separatorBuilder: (context, index) => SpaceWidget(height: 24,),
-                      itemCount: 10,
-                    ),
-                    SpaceWidget(height: 67,),
+              ListView(
+                children: [
+                  SpaceWidget(height: 32,),
+                  BlocBuilder<HomeScreenCubit, HomeScreenState>(
+                  builder: (context, state) {
+                   if(state is GetCachedFavouriteMealsSuccessState)
+                     {
+                       return ListView.separated(
+                         shrinkWrap: true,
+                         physics: NeverScrollableScrollPhysics(),
+                         padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                         itemBuilder:  (context, index) => FavouriteMealWidget(
+                           ongoingMeal: false,
+                           meal: state.meal[index],
+                         ),
+                         separatorBuilder: (context, index) => SpaceWidget(height: 24,),
+                         itemCount: state.meal.length,
+                       );
+                     }
+                   else if(state is GetCachedFavouriteMealsFailureState)
+                     {
+                       return Text(state.errorMessage);
+                     }
+                   else
+                     {
+                       return Center(
+                         child: Container(
+                           width: 30.w,
+                           height: 30.h,
+                           child: CircularProgressIndicator(
+                             color: AppColors.primaryColor,
+                           ),
+                         ),);
+                     }
+  },
+),
+                  SpaceWidget(height: 67,),
 
-                  ],
-                ),
-              ]),
-        ),
+                ],
+              ),
+            ]),
       ),
     );
   }
+
+
+
+
 }
 
 

@@ -43,7 +43,7 @@ class AllMealsAppBar extends StatelessWidget {
             child: GestureDetector(
               onTap: ()
               {
-                navigate(context: context, route: Routes.addMealScreen);
+                navigate(context: context, route: Routes.favouritesScreen);
               },
               child: Container(
                 width: 45.w,
@@ -53,7 +53,7 @@ class AllMealsAppBar extends StatelessWidget {
                     color: AppColors.c181C2E
                 ),
                 child: Center(child: Icon(
-                  Icons.add, color: AppColors.white,)),
+                  Icons.favorite_outline_rounded, color: AppColors.white,)),
               ),
             ),
           )

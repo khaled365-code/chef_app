@@ -20,13 +20,13 @@ class GetAllMealsModel {
   String? message;
   List<Meals>? meals;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['message'] = message;
-    if (meals != null) {
-      map['meals'] = meals?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final map = <String, dynamic>{};
+  //   map['message'] = message;
+  //   if (meals != null) {
+  //     map['meals'] = meals?.map((v) => v.toJson()).toList();
+  //   }
+  //   return map;
+  // }
 
 }

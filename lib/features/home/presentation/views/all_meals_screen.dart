@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/database/api/api_keys.dart';
+import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,8 +73,11 @@ class AllMealsScreen extends StatelessWidget {
                                       navigate(context: context,
                                           route: Routes.mealDetailsScreen,
                                           arg: HomeScreenCubit.get(context).allMealsModel!.meals![index]);
+
                                     },
                                     child: GridMealItem(
+                                      index: index,
+                                      mealsList: HomeScreenCubit.get(context).allMealsModel!.meals!,
                                       meal:HomeScreenCubit.get(context).allMealsModel!.meals![index],
                                     ),
                                   );
@@ -84,8 +90,7 @@ class AllMealsScreen extends StatelessWidget {
                     );
 
                   }
-                   if (state is GetAllMealsSuccessState &&
-                      state.getAllMealsModel.meals!.isEmpty) {
+                   if (HomeScreenCubit.get(context).allMealsModel!.meals!.isEmpty) {
                     return SliverFillRemaining(
                         hasScrollBody: false,
                         child: NoMealsYetWidget());
@@ -100,7 +105,28 @@ class AllMealsScreen extends StatelessWidget {
 
               ],
             )),
+        floatingActionButton: _buildFloatingButton(context),
       ),
+    );
+  }
+
+  _buildFloatingButton(BuildContext context)
+  {
+    return FloatingActionButton(
+      elevation: 0, onPressed: ()
+    {
+      navigate(context: context, route: Routes.addMealScreen);
+    },
+    child:Container(
+      width: 45.w,
+      height: 49.h,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: AppColors.c181C2E
+      ),
+      child: Center(child: Icon(
+        Icons.add, color: AppColors.white,)),
+    )
     );
   }
 

@@ -1,6 +1,5 @@
 
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,8 +11,8 @@ import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../../data/models/get_meals_model/meals.dart';
-import '../widgets/meal_details_widget/details_screen_app_bar.dart';
-import '../widgets/meal_details_widget/meal_details_image.dart';
+import '../widgets/meal_details/details_screen_app_bar.dart';
+import '../widgets/meal_details/meal_details_image.dart';
 
 class MealDetailsScreen extends StatelessWidget {
   const MealDetailsScreen({super.key});

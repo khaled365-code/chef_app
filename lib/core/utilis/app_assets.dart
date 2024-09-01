@@ -151,6 +151,7 @@ class ImageConstants
   static const String brandNameIcon='assets/icons/brand.svg';
   static const String minimumChargeIcon='assets/icons/payroll-calendar.svg';
   static const String descIcon='assets/icons/information.svg';
+  static const String allMealsIcon='assets/icons/all_meals_icon.svg';
 
 
 

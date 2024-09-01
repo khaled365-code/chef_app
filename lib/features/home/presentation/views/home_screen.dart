@@ -4,30 +4,27 @@ import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/hom
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/database/api/api_keys.dart';
-import '../../../../core/database/cache/cache_helper.dart';
-import '../../../../core/injection/injector.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
-import '../../../profile/data/repos/profile_repo_implementation.dart';
-import '../../../profile/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
-import '../../data/repos/home_repo_implementation.dart';
-import '../widgets/home_widgets/home_meal_container.dart';
 import '../../../profile/presentation/views/custom_drawer_screen.dart';
-import '../widgets/home_widgets/all_categories_row.dart';
-import '../widgets/home_widgets/all_meals_row.dart';
-import '../widgets/home_widgets/carousel_slider_widget.dart';
-import '../widgets/home_widgets/categories_list_view.dart';
-import '../widgets/home_widgets/home_app_bar.dart';
-import '../widgets/home_widgets/sliver_list_loading_meals.dart';
-import '../widgets/home_widgets/welcome_text_widget.dart';
+import '../widgets/home/all_categories_row.dart';
+import '../widgets/home/all_meals_row.dart';
+import '../widgets/home/carousel_slider_widget.dart';
+import '../widgets/home/categories_list_view.dart';
+import '../widgets/home/home_app_bar.dart';
+import '../widgets/home/home_meal_container.dart';
+import '../widgets/home/sliver_list_loading_meals.dart';
+import '../widgets/home/welcome_text_widget.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
       {
-        return Scaffold(
+        return
+          Scaffold(
+            backgroundColor: AppColors.cF3F3F3,
                   drawer: CustomDrawerScreen(homeContext: context,),
                    body: SafeArea(
                        child: RefreshIndicator(

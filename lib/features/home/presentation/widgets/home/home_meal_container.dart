@@ -25,8 +25,8 @@ class HomeMealContainer extends StatelessWidget {
           Container(
             height: 137.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.r),
-              image: meal.images!.isNotEmpty?
+              borderRadius: BorderRadius.circular(6.r),
+              image: meal.images!.first.isNotEmpty?
               DecorationImage(
                   image: CachedNetworkImageProvider(
                     meal.images!.first,
@@ -43,20 +43,20 @@ class HomeMealContainer extends StatelessWidget {
           SpaceWidget(height: 14,),
           Row(
             children: [
-              SvgPicture.asset(ImageConstants.priceIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-              SpaceWidget(width: 4,),
+              SvgPicture.asset(ImageConstants.priceIcon,colorFilter: ColorFilter.mode(AppColors.cFF7622, BlendMode.srcIn),),
+              SpaceWidget(width: 9,),
               Text(meal.price.toString(),style: AppTextStyles.bold16(context).copyWith(
                   color: AppColors.c181C2E
               ),),
               SpaceWidget(width: 24,),
-              SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-              SpaceWidget(width: 4,),
+              SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.cFF7622, BlendMode.srcIn),),
+              SpaceWidget(width: 9,),
               Text(meal.category!,style: AppTextStyles.regular14(context).copyWith(
                   color: AppColors.c181C2E
               ),),
               SpaceWidget(width: 24,),
-              SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-              SpaceWidget(width: 4,),
+              SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.cFF7622, BlendMode.srcIn),),
+              SpaceWidget(width: 9,),
               Text(meal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
                   color: AppColors.c181C2E
               ),),

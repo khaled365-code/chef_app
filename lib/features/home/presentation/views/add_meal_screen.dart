@@ -10,48 +10,46 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../widgets/update_meal_widgets/add_meal_photo_widget.dart';
 import '../widgets/radio_button_with_text_widget.dart';
+import '../widgets/update_meal/add_meal_photo_widget.dart';
 
 class AddMealScreen extends StatelessWidget {
   const AddMealScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var addMealCubit = BlocProvider.of<AddMealCubit>(context);
-    return BlocConsumer<AddMealCubit, AddMealState>(
-      listener: (context, state) {
-        if(state is AddMealSuccessState)
-          {
-            buildScaffoldMessenger(context: context, msg: state.addMealModel.message!);
-            addMealCubit.mealImage=null;
-            addMealCubit.mealNameController.clear();
-            addMealCubit.mealDescriptionController.clear();
-            addMealCubit.mealPriceController.clear();
-            navigate(context: context, route: Routes.homeScreen);
-          }
-        if(state is AddMealFailureState)
-          {
+        return BlocListener<AddMealCubit, AddMealState>(
+        listener: (context, state) {
+       {
+         if(state is AddMealSuccessState)
+        {
+        buildScaffoldMessenger(context: context, msg: state.addMealModel.message!);
+        AddMealCubit.get(context).mealImage=null;
+        AddMealCubit.get(context).mealNameController.clear();
+        AddMealCubit.get(context).mealDescriptionController.clear();
+        AddMealCubit.get(context).mealPriceController.clear();
+        navigate(context: context, route: Routes.homeScreen);
+        }
+      if(state is AddMealFailureState)
+      {
 
-            if(state.errorModel.error!=null)
-              {
-                buildScaffoldMessenger(context: context, msg: state.errorModel.error!.toString().substring(1,state.errorModel.error!.toString().length-1));
-              }
-            else
-              {
-                buildScaffoldMessenger(context: context, msg: state.errorModel.errorMessage!);
-              }
-          }
-      },
-      builder: (context, state) {
-        return Scaffold(
+        if(state.errorModel.error!=null)
+        {
+          buildScaffoldMessenger(context: context, msg: state.errorModel.error!.toString().substring(1,state.errorModel.error!.toString().length-1));
+        }
+        else
+        {
+          buildScaffoldMessenger(context: context, msg: state.errorModel.errorMessage!);
+        }
+      }
+    }
+  }, child: Scaffold(
           body: SafeArea(
               child: Form(
-                key: addMealCubit.addMealFormKey,
+                key: AddMealCubit.get(context).addMealFormKey,
                 child: CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
@@ -77,33 +75,35 @@ class AddMealScreen extends StatelessWidget {
                               ),
                             ),
                             SpaceWidget(height: 24,),
-                            AddMealPhotoWidget(
-                              onDeletePhotoPressed: ()
-                              {
-                                addMealCubit.deleteMealPhoto();
-                              },
-                              imagePath: addMealCubit.mealImage?.path,
-                              onCameraTap: ()
-                              {
-                                imagePick(imageSource: ImageSource.camera).then(
-                                  (value) => addMealCubit.addMealPhoto(image: value!),
-                                );
-                                Navigator.pop(context);
-                              },
-                              onGalleryTap: ()
-                              {
-                                imagePick(imageSource: ImageSource.gallery).then(
-                                      (value) => addMealCubit.addMealPhoto(image: value!),
-                                );
-                                Navigator.pop(context);
+                            BlocBuilder<AddMealCubit,AddMealState>(
+                              builder: (context, state) => AddMealPhotoWidget(
+                                onDeletePhotoPressed: ()
+                                {
+                                  AddMealCubit.get(context).deleteMealPhoto();
+                                },
+                                imagePath: AddMealCubit.get(context).mealImage?.path,
+                                onCameraTap: ()
+                                {
+                                  imagePick(imageSource: ImageSource.camera).then(
+                                        (value) => AddMealCubit.get(context).addMealPhoto(image: value!),
+                                  );
+                                  Navigator.pop(context);
+                                },
+                                onGalleryTap: ()
+                                {
+                                  imagePick(imageSource: ImageSource.gallery).then(
+                                        (value) => AddMealCubit.get(context).addMealPhoto(image: value!),
+                                  );
+                                  Navigator.pop(context);
 
-                              },
+                                },
+                              ),
                             ),
-                            SpaceWidget(height: addMealCubit.mealImage == null ? 24 : 5,),
+                            SpaceWidget(height: AddMealCubit.get(context).mealImage == null ? 24 : 5,),
                             NameAndTextFieldWidget(
                                 title: 'Meal Name',
                                 childWidget: CustomOutlineTextField(
-                                  controller: addMealCubit.mealNameController,
+                                  controller: AddMealCubit.get(context).mealNameController,
                                   hintText: 'write meal name here',
                                   onFieldSubmitted: (value) {
 
@@ -125,7 +125,7 @@ class AddMealScreen extends StatelessWidget {
                             NameAndTextFieldWidget(
                                 title: 'Meal Price',
                                 childWidget: CustomOutlineTextField(
-                                  controller: addMealCubit.mealPriceController,
+                                  controller: AddMealCubit.get(context).mealPriceController,
                                   hintText: 'write meal price here',
                                   onFieldSubmitted: (value) {
 
@@ -146,7 +146,7 @@ class AddMealScreen extends StatelessWidget {
                             NameAndTextFieldWidget(
                                 title: 'Meal Description',
                                 childWidget: CustomOutlineTextField(
-                                  controller: addMealCubit.mealDescriptionController,
+                                  controller: AddMealCubit.get(context).mealDescriptionController,
                                   hintText: 'write meal description here',
                                   onFieldSubmitted: (value) {
 
@@ -175,7 +175,7 @@ class AddMealScreen extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: DropdownButton(
-                                            items: addMealCubit.categoriesList.map(
+                                            items: AddMealCubit.get(context).categoriesList.map(
                                               (e) => DropdownMenuItem(
                                                   value: e, child: Text(e,
                                               style: AppTextStyles.regular14(context).copyWith(
@@ -183,10 +183,10 @@ class AddMealScreen extends StatelessWidget {
                                               ),)),
                                             ).toList(),
                                           onChanged: (value) {
-                                            addMealCubit.changeCategoryValue(value: value!);
+                                            AddMealCubit.get(context).changeCategoryValue(value: value!);
                                           },
                                           icon: SvgPicture.asset(ImageConstants.underArrowIcon),
-                                          value: addMealCubit.selectedCategory,
+                                          value: AddMealCubit.get(context).selectedCategory,
                                           isExpanded: true,
                                           dropdownColor: AppColors.cF0F5FA,
                                           elevation: 0,
@@ -201,32 +201,34 @@ class AddMealScreen extends StatelessWidget {
                                   ),
                                 )),
                             SpaceWidget(height: 24,),
-                            Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: ()
-                                  {
-                                    addMealCubit.changeNumberRadioValue();
-                                  },
-                                  child: RadioButtonWithTextWidget(
-                                    text: 'Number',
-                                    containerIsSelected: addMealCubit.numberRadioIsSelected,
+                            BlocBuilder<AddMealCubit,AddMealState>(
+                              builder: (context, state) => Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: ()
+                                    {
+                                      AddMealCubit.get(context).changeNumberRadioValue();
+                                    },
+                                    child: RadioButtonWithTextWidget(
+                                      text: 'Number',
+                                      containerIsSelected: AddMealCubit.get(context).numberRadioIsSelected,
+                                    ),
                                   ),
-                                ),
-                                Spacer(),
-                                GestureDetector(
-                                  onTap: ()
-                                  {
-                                    addMealCubit.changeQuantityRadioValue();
-                                  },
-                                  child: RadioButtonWithTextWidget(
-                                    text: 'Quantity',
-                                    containerIsSelected: addMealCubit.quantityRadioIsSelected,
-                                  ),
-                                )
+                                  Spacer(),
+                                  GestureDetector(
+                                    onTap: ()
+                                    {
+                                      AddMealCubit.get(context).changeQuantityRadioValue();
+                                    },
+                                    child: RadioButtonWithTextWidget(
+                                      text: 'Quantity',
+                                      containerIsSelected: AddMealCubit.get(context).quantityRadioIsSelected,
+                                    ),
+                                  )
 
-                              ],
-                            )
+                                ],
+                              ),
+                            ),
 
                           ],
                         ),
@@ -236,37 +238,48 @@ class AddMealScreen extends StatelessWidget {
                       hasScrollBody: false,
                       child: Column(
                         children: [
-                          Expanded(child: SizedBox(
+                          Expanded(
+                              child: SizedBox(
                             height: 121.h,
                           )),
-                          state is AddMealLoadingState?
-                          Center(
-                            child: SizedBox(
-                                width: 30.w,
-                                height: 30.w,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.primaryColor,
-                                  strokeWidth: 2.w,
+                          BlocBuilder<AddMealCubit,AddMealState>(
+                            builder: (context, state) {
+                              if(state is AddMealLoadingState )
+                                {
+                                  return Center(
+                                    child: SizedBox(
+                                        width: 30.w,
+                                        height: 30.w,
+                                        child: CircularProgressIndicator(
+                                          color: AppColors.primaryColor,
+                                          strokeWidth: 2.w,
 
-                                )),
-                          ):
-                          SharedButton(btnText: 'Add Meal',
-                          btnTextStyle: AppTextStyles.bold16(context).copyWith(
-                            color: AppColors.white
+                                        )),
+                                  );
+                                }
+                              else
+                                {
+                                  return SharedButton(
+                                    btnText: 'Add Meal',
+                                    btnTextStyle: AppTextStyles.bold16(context).copyWith(
+                                        color: AppColors.white
+                                    ),
+                                    onPressessed: ()
+                                    {
+                                      if (AddMealCubit.get(context).addMealFormKey.currentState!.validate())
+                                      {
+                                        AddMealCubit.get(context).addMealFun(
+                                          name: AddMealCubit.get(context).mealNameController.text,
+                                          description: AddMealCubit.get(context).mealDescriptionController.text,
+                                          price: double.parse(AddMealCubit.get(context).mealPriceController.text),
+                                          category: AddMealCubit.get(context).selectedCategory,
+                                          howToSell: getHowToSellValue(numberValue: AddMealCubit.get(context).numberRadioIsSelected,quantityValue: AddMealCubit.get(context).quantityRadioIsSelected),);
+                                      }
+
+                                    },);
+                                }
+                            },
                           ),
-                          onPressessed: ()
-                          {
-                           if (addMealCubit.addMealFormKey.currentState!.validate())
-                             {
-                               addMealCubit.addMealFun(
-                                   name: addMealCubit.mealNameController.text,
-                                   description: addMealCubit.mealDescriptionController.text,
-                                   price: double.parse(addMealCubit.mealPriceController.text),
-                                   category: addMealCubit.selectedCategory,
-                                   howToSell: getHowToSellValue(numberValue: addMealCubit.numberRadioIsSelected,quantityValue: addMealCubit.quantityRadioIsSelected),);
-                             }
-
-                          },),
                           SpaceWidget(height: 30,)
 
                         ],
@@ -276,9 +289,8 @@ class AddMealScreen extends StatelessWidget {
                   ],
                 ),
               )),
-        );
-      },
-    );
+        ),
+);
   }
 
   getHowToSellValue({required bool numberValue,required bool quantityValue})

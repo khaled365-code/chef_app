@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
-import 'package:chef_app/features/home/presentation/widgets/all_available_meals/favourite_meal_container_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
+import 'favourite_meal_container_shape.dart';
 
 class GridMealItem extends StatelessWidget {
   const GridMealItem({super.key, required this.meal, required this.mealsList, required this.index,});

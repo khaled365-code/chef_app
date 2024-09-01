@@ -7,11 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../widgets/all_available_meals/all_available_meals_row.dart';
-import '../widgets/all_available_meals/all_meal_app_bar.dart';
-import '../widgets/all_available_meals/available_meals_loading_widget.dart';
-import '../widgets/all_available_meals/grid_meal_item.dart';
-import '../widgets/all_available_meals/no_meals_yet_widget.dart';
+import '../widgets/available_meals/all_available_meals_row.dart';
+import '../widgets/available_meals/all_meal_app_bar.dart';
+import '../widgets/available_meals/available_meals_loading_widget.dart';
+import '../widgets/available_meals/grid_meal_item.dart';
+import '../widgets/available_meals/no_meals_yet_widget.dart';
 
 class AllMealsScreen extends StatelessWidget {
   const AllMealsScreen({super.key});

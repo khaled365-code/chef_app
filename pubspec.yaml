@@ -136,6 +136,9 @@ dependencies:
   #A Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.
   equatable: ^2.0.5
 
+  #A package for creating badges. Badges can be used for an additional marker for any widget, e.g. show a number of items in a shopping cart.
+  badges: ^3.1.2
+
 
 
 

@@ -4,7 +4,6 @@
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'carousel_container_item.dart';
 
@@ -34,6 +33,7 @@ class CarouselSliderWidget extends StatelessWidget {
           return Builder(
             builder: (BuildContext context) {
               return CarouselContainerItem(
+                index: i,
                 carouselSliderModel:  HomeScreenCubit.get(context).carouselSliderList[i - 1],
               );
             },

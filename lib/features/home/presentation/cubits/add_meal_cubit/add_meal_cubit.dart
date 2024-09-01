@@ -4,6 +4,7 @@ import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/features/home/data/models/add_meal_model/add_meal_model.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
@@ -11,6 +12,9 @@ part 'add_meal_state.dart';
 
 class AddMealCubit extends Cubit<AddMealState> {
   AddMealCubit({required this.homeRepoImplementation}) : super(AddMealInitial());
+
+
+  static AddMealCubit get(context)=>BlocProvider.of(context);
 
   final HomeRepoImplementation homeRepoImplementation;
 

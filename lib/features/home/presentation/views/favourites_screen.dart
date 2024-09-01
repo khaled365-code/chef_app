@@ -15,7 +15,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
-import '../../../../main.dart';
 import '../widgets/favourites_widgets/favourite_meal_widget.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -79,7 +78,8 @@ class FavouritesScreen extends StatelessWidget {
                     SpaceWidget(height: 32,),
                     BlocBuilder<HomeScreenCubit, HomeScreenState>(
                       builder: (context, state) {
-                        if(state is GetCachedFavouriteMealsSuccessState)
+                        if( state is GetCachedFavouriteMealsSuccessState &&
+                            HomeScreenCubit.get(context).cachedMeal!=null )
                         {
                           return ListView.separated(
                             shrinkWrap: true,
@@ -87,17 +87,22 @@ class FavouritesScreen extends StatelessWidget {
                             padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
                             itemBuilder:  (context, index) => FavouriteMealWidget(
                               ongoingMeal: true,
-                              meal: state.meal[index],
+                              meal: HomeScreenCubit.get(context).favouriteMealsList[index],
                             ),
                             separatorBuilder: (context, index) => SpaceWidget(height: 24,),
-                            itemCount: state.meal.length,
+                            itemCount: HomeScreenCubit.get(context).favouriteMealsList.length,
                           );
                         }
-                        else if(state is GetCachedFavouriteMealsFailureState)
+                        if(state is GetCachedFavouriteMealsSuccessState &&
+                            HomeScreenCubit.get(context).cachedMeal==null )
+                        {
+                          return SizedBox.shrink();
+                        }
+                         if(state is GetCachedFavouriteMealsFailureState)
                         {
                           return Text(state.errorMessage);
                         }
-                        else
+                        if (state is GetCachedFavouriteMealsLoadingState )
                         {
                           return Center(
                             child: Container(
@@ -107,6 +112,17 @@ class FavouritesScreen extends StatelessWidget {
                                 color: AppColors.primaryColor,
                               ),
                             ),);
+                        }
+                        else
+                        {
+                            return Center(
+                              child: Container(
+                                width: 30.w,
+                                height: 30.h,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),);
                         }
                       },
                     ),
@@ -118,7 +134,8 @@ class FavouritesScreen extends StatelessWidget {
                   SpaceWidget(height: 32,),
                   BlocBuilder<HomeScreenCubit, HomeScreenState>(
                   builder: (context, state) {
-                   if(state is GetCachedFavouriteMealsSuccessState)
+                   if(state is GetCachedFavouriteMealsSuccessState &&
+                       HomeScreenCubit.get(context).cachedMeal!=null)
                      {
                        return ListView.separated(
                          shrinkWrap: true,
@@ -126,29 +143,46 @@ class FavouritesScreen extends StatelessWidget {
                          padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
                          itemBuilder:  (context, index) => FavouriteMealWidget(
                            ongoingMeal: false,
-                           meal: state.meal[index],
+                           meal: HomeScreenCubit.get(context).historyMealsList[index],
                          ),
                          separatorBuilder: (context, index) => SpaceWidget(height: 24,),
-                         itemCount: state.meal.length,
+                         itemCount: HomeScreenCubit.get(context).historyMealsList.length,
                        );
                      }
-                   else if(state is GetCachedFavouriteMealsFailureState)
+                   if(state is GetCachedFavouriteMealsSuccessState &&
+                       HomeScreenCubit.get(context).cachedMeal==null )
+                   {
+                     return SizedBox.shrink();
+                   }
+                    if(state is GetCachedFavouriteMealsFailureState)
                      {
                        return Text(state.errorMessage);
                      }
+                   if (state is GetCachedFavouriteMealsLoadingState )
+                   {
+                     return Center(
+                       child: Container(
+                         width: 30.w,
+                         height: 30.h,
+                         child: CircularProgressIndicator(
+                           color: AppColors.primaryColor,
+                         ),
+                       ),);
+                   }
                    else
                      {
                        return Center(
-                         child: Container(
-                           width: 30.w,
-                           height: 30.h,
-                           child: CircularProgressIndicator(
-                             color: AppColors.primaryColor,
-                           ),
-                         ),);
+                           child: Container(
+                             width: 30.w,
+                             height: 30.h,
+                             child: CircularProgressIndicator(
+                               color: AppColors.primaryColor,
+                             ),
+                           ),);
+
                      }
-  },
-),
+                   },
+                  ),
                   SpaceWidget(height: 67,),
 
                 ],

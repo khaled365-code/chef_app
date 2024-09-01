@@ -33,9 +33,9 @@ abstract class HomeRepo
 
   Future<List<Meals>> getCachedMeals();
 
-  Future saveCachedFavouriteMeals({required List<Meals> meals});
+  Future saveCachedFavouriteMeals({required Meals meals});
 
-  Future<Either<Exception,List<Meals>>> getCachedFavouriteMeals();
+  Future<Either<Exception,Meals>> getCachedFavouriteMeals();
 
 
 

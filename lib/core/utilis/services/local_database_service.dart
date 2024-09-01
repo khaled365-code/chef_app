@@ -5,8 +5,9 @@ import 'package:path_provider/path_provider.dart';
 
 class LocalDatabaseService
 {
-  static BoxCollection? appBoxCollection;
-  static CollectionBox? appFavouritesMeals;
+  // static BoxCollection? appBoxCollection;
+  // static CollectionBox? appFavouritesMeals;
+  static Box? favouriteMealsBox;
 
   // This function to open only a single box in the app not a collection
   static Future<Box>  openHiveBox(String boxName) async

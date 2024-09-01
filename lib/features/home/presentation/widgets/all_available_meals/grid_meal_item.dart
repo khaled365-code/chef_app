@@ -70,7 +70,6 @@ class GridMealItem extends StatelessWidget {
                                 onTap: () async
                                 {
                                   HomeScreenCubit.get(context).changeMealFavouriteShape(index: index,mealList: mealsList);
-                                  // showDialog(context: context, builder: (context) => AddMealToFavouritesAlertDialog(meal: meal),);
                                 },
                                 child: AddMealContainerShapeToFavourites(
                                   isActivated: meal.itemIsSelected,

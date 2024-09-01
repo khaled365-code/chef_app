@@ -5,6 +5,10 @@ sealed class HomeScreenState {}
 
 final class HomeScreenInitial extends HomeScreenState {}
 
+final class RemoveMealFromFavouritesState extends HomeScreenState {}
+
+final class AddFavouriteMealToHistoryState extends HomeScreenState {}
+
 
 final class ChangeMealFavouriteActiveShapeState extends HomeScreenState {}
 
@@ -30,9 +34,8 @@ final class GetAllMealsFailureState extends HomeScreenState {
 final class GetCachedFavouriteMealsLoadingState extends HomeScreenState {}
 
 final class GetCachedFavouriteMealsSuccessState extends HomeScreenState {
-  final List<Meals> meal;
 
-  GetCachedFavouriteMealsSuccessState({required this.meal});
+  GetCachedFavouriteMealsSuccessState();
 
 }
 

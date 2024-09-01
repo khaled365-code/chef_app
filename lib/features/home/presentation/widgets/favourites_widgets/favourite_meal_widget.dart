@@ -3,13 +3,12 @@
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../data/models/get_meals_model/meals.dart';
-import '../../cubits/home_screen_cubit/home_screen_cubit.dart';
 
 class FavouriteMealWidget extends StatelessWidget {
   const FavouriteMealWidget({super.key, required this.meal, required this.ongoingMeal,});
@@ -119,7 +118,7 @@ class FavouriteMealWidget extends StatelessWidget {
                 ),
                   onPressed: ()
                   {
-
+                       HomeScreenCubit.get(context).addToHistoryFavouriteMeal(meal: meal);
                   },
                   child: Text('Add to history',style: AppTextStyles.bold12(context).copyWith(
                     color: AppColors.white
@@ -137,7 +136,7 @@ class FavouriteMealWidget extends StatelessWidget {
                       ),
                       onPressed: ()
                       {
-
+                                    HomeScreenCubit.get(context).removeOngoingFavouriteMeal(meal: meal);
                       },
                       child: Text('Remove',style: AppTextStyles.bold12(context).copyWith(
                           color: AppColors.cFF7622

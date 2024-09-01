@@ -1,5 +1,6 @@
 
 
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,6 +46,8 @@ class HomeAppBar extends StatelessWidget {
               onTap: ()
               {
                 Navigator.pushNamed(context, Routes.allMealsScreen);
+
+                HomeScreenCubit.get(context).getAllMealsFun();
               },
               child: Container(
                 width: 45.w,

@@ -93,14 +93,14 @@ class HomeRepoImplementation implements HomeRepo
   }
 
   @override
-
-  Future<Either<Exception,List<Meals>>> getCachedFavouriteMeals() async
+  Future<Either<Exception,Meals>> getCachedFavouriteMeals() async
   {
-    var jsonData=await LocalDatabaseService.appFavouritesMeals!.get('meals');
+    var jsonData=await LocalDatabaseService.favouriteMealsBox!.get('meals');
     if(jsonData!=null)
       {
         var data=json.decode(jsonData);
-        List<Meals> meal=data.map<Meals>((json) => Meals.fromJson(json)).toList();
+        // data.map<Meals>((json) => Meals.fromJson(json)).toList();
+        Meals meal=Meals.fromJson(data);
         return Right(meal);
       }
     else
@@ -110,11 +110,15 @@ class HomeRepoImplementation implements HomeRepo
   }
 
   @override
-  Future <void> saveCachedFavouriteMeals({required List<Meals> meals}) async
+  Future <void> saveCachedFavouriteMeals({required Meals meals}) async
   {
-   var  jsonStorage=meals.map<Map<String,dynamic>>((meals) => Meals().toJson(meals)).toList();
-   var data=json.encode(jsonStorage);
-   await LocalDatabaseService.appFavouritesMeals!.put('meals', data);
+    //meals.map<Map<String,dynamic>>((meals) => Meals().toJson(meals)).toList();
+    var  jsonStorage=Meals().toJson(meals);
+        var data=json.encode(jsonStorage);
+        await LocalDatabaseService.favouriteMealsBox!.put('meals', data);
+
+
+
 
   }
 

@@ -46,10 +46,7 @@ class AppRouter {
 
       case Routes.favouritesScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getCachedFavouriteMeals()
-                  ,child: FavouritesScreen(),
-                ),
+            builder: (context) => FavouritesScreen(),
             settings: routeSettings);
 
       case Routes.mainSettingsScreen:
@@ -98,12 +95,7 @@ class AppRouter {
 
       case Routes.allMealsScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => HomeScreenCubit(
-                    homeRepoImplementation: locator.get<HomeRepoImplementation>(),
-                      )..getAllMealsFun(),
-                  child: AllMealsScreen(),
-                ),
+            builder: (context) => AllMealsScreen(),
             settings: routeSettings);
 
       case Routes.addMealScreen:
@@ -124,21 +116,11 @@ class AppRouter {
 
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (context) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) => HomeScreenCubit(
-                        homeRepoImplementation: locator.get<HomeRepoImplementation>(),
-                      )..getAllMealsFun(),
-                    ),
-                    BlocProvider(
-                      create: (context) => GetChefDataCubit(
-                        profileRepoImplementation: locator.get<ProfileRepoImplementation>(),
-                      )..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),
-                    ),
-                  ],
-                  child: HomeScreen(),
-                ),
+            builder: (context) => BlocProvider(
+           create:  (context) => GetChefDataCubit(
+           profileRepoImplementation: locator.get<ProfileRepoImplementation>(),
+           )..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),
+                child: HomeScreen()),
             settings: routeSettings);
 
       case Routes.loginScreen:

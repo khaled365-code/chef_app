@@ -5,7 +5,6 @@ import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/space_widget.dart';
 import '../../../data/models/get_meals_model/meals.dart';
-import 'favourite_meals_options_buttons.dart';
 
 class AddMealToFavouritesAlertDialog extends StatelessWidget {
   const AddMealToFavouritesAlertDialog({
@@ -41,8 +40,6 @@ class AddMealToFavouritesAlertDialog extends StatelessWidget {
                   color: AppColors.c646982
               )),
           SpaceWidget(height: 20,),
-          AddMealToFavouritesOptionsButtons(
-              meal: meal)
         ],
       ),
     );

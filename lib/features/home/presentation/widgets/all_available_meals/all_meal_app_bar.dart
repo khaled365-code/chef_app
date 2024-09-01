@@ -1,5 +1,6 @@
 
 
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -41,9 +42,11 @@ class AllMealsAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(end: 24.w),
             child: GestureDetector(
-              onTap: ()
+              onTap: () async
               {
+               await HomeScreenCubit.get(context).getCachedFavouriteMeals();
                 navigate(context: context, route: Routes.favouritesScreen);
+
               },
               child: Container(
                 width: 45.w,
@@ -56,7 +59,7 @@ class AllMealsAppBar extends StatelessWidget {
                   Icons.favorite_outline_rounded, color: AppColors.white,)),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

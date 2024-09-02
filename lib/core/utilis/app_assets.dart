@@ -61,6 +61,7 @@ class ImageConstants
   static const String  appLogoImage= 'assets/images/splash_chef_app_logo.png';
   static const String  adminLoginImage= 'assets/images/admin_login_image.png';
   static const String chefCokesImage='assets/images/chef_cooking_image.png';
+  static const String editedNoMealsImage='assets/images/edited_no_meals_image.png';
 
 
 
@@ -152,6 +153,8 @@ class ImageConstants
   static const String minimumChargeIcon='assets/icons/payroll-calendar.svg';
   static const String descIcon='assets/icons/information.svg';
   static const String allMealsIcon='assets/icons/all_meals_icon.svg';
+  static const String fontAwesomeHeartIcon='assets/icons/font_awesome_heart.svg';
+  static const String heartRegularIcon='assets/icons/heart-regular.svg';
 
 
 

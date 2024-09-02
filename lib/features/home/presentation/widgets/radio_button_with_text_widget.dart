@@ -18,7 +18,6 @@ class RadioButtonWithTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-
         Container(
           width: 24.w,
           height: 24.h,

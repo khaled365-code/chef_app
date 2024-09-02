@@ -71,7 +71,6 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     }
 
 
-
     // get meals fun
     Future<void> getAllMealsFun() async
     {

@@ -1,10 +1,9 @@
-
-
 import 'package:badges/badges.dart';
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/routes/routes.dart';
@@ -27,8 +26,7 @@ class HomeAppBar extends StatelessWidget {
           Builder(
               builder: (context) {
                 return GestureDetector(
-                  onTap: ()
-                  {
+                  onTap: () {
                     Scaffold.of(context).openDrawer();
                   },
                   child: Container(
@@ -48,8 +46,7 @@ class HomeAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(end: 24.w),
             child: GestureDetector(
-              onTap: ()
-              {
+              onTap: () {
                 navigate(context: context, route: Routes.allMealsScreen);
                 HomeScreenCubit.get(context).getAllMealsFun();
               },
@@ -63,10 +60,15 @@ class HomeAppBar extends StatelessWidget {
                 child: Center(
                     child: badges.Badge(
                       ignorePointer: true,
-                      position: BadgePosition.topEnd(top:-28, end: -18),
-                      badgeContent: Text('${HomeScreenCubit.get(context).allMealsModel?.meals?.length??0}',style: AppTextStyles.bold16(context).copyWith(
-                        color: AppColors.white
-                      ),),
+                      position: BadgePosition.topEnd(top: -28, end: -18),
+                      badgeContent: BlocBuilder<HomeScreenCubit,HomeScreenState>(
+                        builder: (context, state) {
+                          return Text('${HomeScreenCubit.get(context).allMealsModel?.meals?.length ?? 0}',
+                            style: AppTextStyles.bold16(context).copyWith(
+                              color: AppColors.white
+                          ),);
+                        },
+                      ),
                       badgeAnimation: BadgeAnimation.scale(
                         animationDuration: Duration(seconds: 1),
                         colorChangeAnimationDuration: Duration(seconds: 1),
@@ -75,15 +77,17 @@ class HomeAppBar extends StatelessWidget {
                         colorChangeAnimationCurve: Curves.easeInCubic,
                       ),
                       badgeStyle: BadgeStyle(
-                        badgeColor: AppColors.primaryColor,
-                         shape: BadgeShape.circle,
-                        elevation: 0,
-                        padding: EdgeInsetsDirectional.all(10)
+                          badgeColor: AppColors.primaryColor,
+                          shape: BadgeShape.circle,
+                          elevation: 0,
+                          padding: EdgeInsetsDirectional.all(10)
 
                       ),
 
                       child: SvgPicture.asset(
-                        ImageConstants.allMealsIcon,colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),),
+                        ImageConstants.allMealsIcon,
+                        colorFilter: ColorFilter.mode(
+                            AppColors.white, BlendMode.srcIn),),
                     )),
               ),
             ),

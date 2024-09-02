@@ -12,7 +12,7 @@ import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/image_picker_widget.dart';
 import '../../../../core/widgets/shared_button.dart';
-import '../widgets/custom_outline_text_field.dart';
+import '../../../../core/widgets/custom_outline_text_field.dart';
 import '../widgets/health_certificate_dot_container.dart';
 import '../widgets/name_and_text_field_widget.dart';
 

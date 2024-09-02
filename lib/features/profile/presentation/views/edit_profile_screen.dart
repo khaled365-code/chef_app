@@ -2,7 +2,7 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
-import 'package:chef_app/features/auth/presentation/widgets/custom_outline_text_field.dart';
+import 'package:chef_app/core/widgets/custom_outline_text_field.dart';
 import 'package:chef_app/features/auth/presentation/widgets/name_and_text_field_widget.dart';
 import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';

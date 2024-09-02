@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../core/utilis/app_colors.dart';
-import '../../../../../core/utilis/app_text_styles.dart';
-import '../../../../../core/widgets/open_camera_or_gallery_container.dart';
-import '../../../../../core/widgets/space_widget.dart';
+import '../../../../core/utilis/app_colors.dart';
+import '../../../../core/utilis/app_text_styles.dart';
+import '../../../../core/widgets/open_camera_or_gallery_container.dart';
+import '../../../../core/widgets/space_widget.dart';
 
 class AddMealPhotoWidget extends StatelessWidget {
   const AddMealPhotoWidget({super.key, this.onGalleryTap, this.onCameraTap,this.imagePath, this.onDeletePhotoPressed, this.specificUpdateText});
@@ -30,7 +30,7 @@ class AddMealPhotoWidget extends StatelessWidget {
       height: 200.h,
       decoration: DottedDecoration(
           shape: Shape.box,
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(16.r),
       ),
       child:  GestureDetector(
         onTap: ()
@@ -85,7 +85,7 @@ class AddMealPhotoWidget extends StatelessWidget {
         Container(
           height: 200.h,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(16.r),
             image: DecorationImage(
                 image: FileImage(File(imagePath!)),fit: BoxFit.fill)
           ),
@@ -105,6 +105,7 @@ class AddMealPhotoWidget extends StatelessWidget {
               child: Center(
                 child: SvgPicture.asset(
                   ImageConstants.trashIcon,
+                  width: 25.w,
                   colorFilter: ColorFilter.mode(
                       AppColors.white,
                       BlendMode.srcIn),

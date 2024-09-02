@@ -3,7 +3,7 @@ import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
-import 'package:chef_app/features/auth/presentation/widgets/custom_outline_text_field.dart';
+import 'package:chef_app/core/widgets/custom_outline_text_field.dart';
 import 'package:chef_app/features/auth/presentation/widgets/name_and_text_field_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';

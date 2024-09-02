@@ -40,7 +40,7 @@ void showToast({required String msg,required ToastStates toastStates,ToastGravit
       timeInSecForIosWeb: 1,
       backgroundColor: getColor(toastStates),
       textColor: Colors.white,
-      fontSize: 16.0.sp
+      fontSize: 16.0.sp,
   );
 
 }

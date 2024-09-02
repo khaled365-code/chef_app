@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
-import 'package:chef_app/features/auth/presentation/widgets/custom_outline_text_field.dart';
+import 'package:chef_app/core/widgets/custom_outline_text_field.dart';
 import 'package:chef_app/features/auth/presentation/widgets/remember_me_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

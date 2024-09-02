@@ -33,9 +33,9 @@ class AllMealsAppBar extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: AppColors.cECF0F4
               ),
-              child: Center(child: SvgPicture.asset(
-                width: 10,
-                  ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.black, BlendMode.srcIn)),
+              child: Center(
+                child: SvgPicture.asset(
+                width: 10, ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.c181C2E, BlendMode.srcIn)),
             ),
           )),
           Spacer(),

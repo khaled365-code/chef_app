@@ -20,7 +20,7 @@ class GridMealItem extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24.r),
-            color: AppColors.white,
+            color: AppColors.cF6F6F6,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +45,8 @@ class GridMealItem extends StatelessWidget {
                   children: [
                     SpaceWidget(height: 15,),
                     Text(meal.name!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.bold15(context).copyWith(
                             color: AppColors.c32343E
                         )),

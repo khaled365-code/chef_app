@@ -12,7 +12,7 @@ import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../widgets/custom_outline_text_field.dart';
+import '../../../../core/widgets/custom_outline_text_field.dart';
 import '../widgets/name_and_text_field_widget.dart';
 import '../widgets/otp_code_container.dart';
 

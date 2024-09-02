@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../auth/presentation/widgets/custom_outline_text_field.dart';
+import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../auth/presentation/widgets/name_and_text_field_widget.dart';
 import '../../cubits/update_meal_cubit/update_meal_cubit.dart';
 

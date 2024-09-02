@@ -139,6 +139,9 @@ dependencies:
   #A package for creating badges. Badges can be used for an additional marker for any widget, e.g. show a number of items in a shopping cart.
   badges: ^3.1.2
 
+  #The Font Awesome Icon pack available as Flutter Icons. Provides 2000 additional icons to use in your apps.
+  font_awesome_flutter: ^10.7.0
+
 
 
 

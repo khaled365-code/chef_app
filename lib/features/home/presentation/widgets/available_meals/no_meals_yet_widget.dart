@@ -17,7 +17,7 @@ class NoMealsYetWidget extends StatelessWidget {
        crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Spacer(),
-        Image.asset(ImageConstants.chefCokesImage),
+        Image.asset(ImageConstants.editedNoMealsImage,),
         SpaceWidget(height: 38,),
         Text('ohh sorry ! No meals yet',style: AppTextStyles.medium_28_Poppins(context).copyWith(
           color: AppColors.black

@@ -23,7 +23,7 @@ class AllMealsScreen extends StatelessWidget {
 
       },
       child: Scaffold(
-        backgroundColor: AppColors.cF3F3F3,
+        backgroundColor: AppColors.white,
         body: SafeArea(
             child: CustomScrollView(
               slivers: [
@@ -109,7 +109,8 @@ class AllMealsScreen extends StatelessWidget {
   _buildFloatingButton(BuildContext context)
   {
     return FloatingActionButton(
-      elevation: 0, onPressed: ()
+      elevation: 0,
+        onPressed: ()
     {
       navigate(context: context, route: Routes.addMealScreen);
     },

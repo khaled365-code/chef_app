@@ -3,7 +3,7 @@
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utilis/app_text_styles.dart';
+import '../utilis/app_text_styles.dart';
 
 class NameAndTextFieldWidget extends StatelessWidget {
   const NameAndTextFieldWidget({super.key, required this.title, required this.childWidget});

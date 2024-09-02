@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
@@ -94,7 +95,12 @@ class AddMealScreen extends StatelessWidget {
                             SpaceWidget(height: 24,),
                             AddMealDiscTextField(),
                             SpaceWidget(height: 24,),
-                            AddMealCategoryWidget(),
+                            BlocBuilder<AddMealCubit, AddMealState>(
+                            builder: (context, state)
+                              {
+                              return AddMealCategoryWidget();
+                              },
+                            ),
                             SpaceWidget(height: 24,),
                             BlocBuilder<AddMealCubit,AddMealState>(
                               builder: (context, state) => Row(
@@ -161,7 +167,7 @@ class AddMealScreen extends StatelessWidget {
     {
      if(AddMealCubit.get(context).mealImage==null)
        {
-         showToast(msg: 'You must provide image to add meal !', toastStates: ToastStates.error);
+         showToast(msg: 'You must provide image to add meal !', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
        }
      else
      {

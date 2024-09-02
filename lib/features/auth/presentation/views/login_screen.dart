@@ -15,7 +15,7 @@ import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../widgets/options_for_account_widget.dart';
 import '../widgets/auth_header.dart';
-import '../widgets/name_and_text_field_widget.dart';
+import '../../../../core/widgets/name_and_text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

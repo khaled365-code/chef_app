@@ -44,7 +44,8 @@ class GridMealItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SpaceWidget(height: 15,),
-                    Text(meal.name!,
+                    Text(
+                        meal.name!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.bold15(context).copyWith(

@@ -22,8 +22,8 @@ class MealDetailsImage extends StatelessWidget {
         aspectRatio: 327/184,
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25.r),
-              image: receivedMeal.images!.isEmpty? null:
+              borderRadius: BorderRadius.circular(32.r),
+              image: receivedMeal.images!.first.isEmpty? null:
               DecorationImage(
                   image: CachedNetworkImageProvider(
                       receivedMeal.images!.first

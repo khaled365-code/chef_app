@@ -12,7 +12,7 @@ import '../../../../core/injection/injector.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/custom_outline_text_field.dart';
-import '../../../auth/presentation/widgets/name_and_text_field_widget.dart';
+import '../../../../core/widgets/name_and_text_field_widget.dart';
 
 class ChangePasswordBottomSheet extends StatelessWidget {
   const ChangePasswordBottomSheet({super.key});

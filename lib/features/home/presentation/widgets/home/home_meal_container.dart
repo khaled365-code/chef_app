@@ -57,9 +57,15 @@ class HomeMealContainer extends StatelessWidget {
               SpaceWidget(width: 24,),
               SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.cFF7622, BlendMode.srcIn),),
               SpaceWidget(width: 9,),
-              Text(meal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
-                  color: AppColors.c181C2E
-              ),),
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    meal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
+                      color: AppColors.c181C2E
+                  ),),
+                ),
+              ),
             ],
           )
 

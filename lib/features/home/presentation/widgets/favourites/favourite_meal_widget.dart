@@ -1,5 +1,6 @@
 
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
@@ -36,7 +37,10 @@ class FavouriteMealWidget extends StatelessWidget {
                  decoration: BoxDecoration(
                      color: AppColors.primaryColor,
                      borderRadius: BorderRadius.circular(8.r),
-                     image: DecorationImage(image: AssetImage(ImageConstants.fishImage),fit: BoxFit.fill)
+                     image: meal.images!.first.isNotEmpty?
+                     DecorationImage(
+                         image: CachedNetworkImageProvider(meal.images!.first),
+                         fit: BoxFit.fill):null
                  ),
                ),
                SpaceWidget(width: 14,),
@@ -49,7 +53,7 @@ class FavouriteMealWidget extends StatelessWidget {
                      Text(meal.name!,style: AppTextStyles.bold14(context).copyWith(
                          color: AppColors.c181C2E
                      ),),
-                     SpaceWidget(height: 3.h,),
+                     SpaceWidget(height: 5.h,),
                      IntrinsicHeight(
                        child: Row(
                          children: [
@@ -59,20 +63,21 @@ class FavouriteMealWidget extends StatelessWidget {
                            ongoingMeal==false?
                            Row(
                              children: [
-                               SpaceWidget(width: 50,),
+                               SpaceWidget(width: 10,),
                                VerticalDivider(
                                  color: AppColors.cCACCDA,
                                  width: 16.w,
+                                 thickness: 2,
                                ),
                                SpaceWidget(width: 14,),
                                RichText(
                                    text:
                                TextSpan(
                                    children: [
-                                     TextSpan(text: '${formatDate(DateTime.now())},',style: AppTextStyles.regular12(context).copyWith(
+                                     TextSpan(text: '${formatDate(dateTime: DateTime.now(),monthName: true)},',style: AppTextStyles.regular14(context).copyWith(
                                          color: AppColors.c6B6E82
                                      )),
-                                     TextSpan(text: ' ${formatClock(DateTime.now())}',style: AppTextStyles.regular12(context).copyWith(
+                                     TextSpan(text: ' ${formatClock(DateTime.now())}',style: AppTextStyles.regular14(context).copyWith(
                                          color: AppColors.c6B6E82
                                      )),
                                    ]
@@ -136,14 +141,15 @@ class FavouriteMealWidget extends StatelessWidget {
                       ),
                       onPressed: ()
                       {
-                                    HomeScreenCubit.get(context).removeOngoingFavouriteMeal(meal: meal);
+                        HomeScreenCubit.get(context).removeOngoingFavouriteMeal(meal: meal);
                       },
                       child: Text('Remove',style: AppTextStyles.bold12(context).copyWith(
                           color: AppColors.cFF7622
                       ),)))
 
             ],
-          ):SizedBox.shrink()
+          ):
+          SizedBox.shrink()
         ],
       ),
     );

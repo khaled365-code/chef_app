@@ -36,8 +36,10 @@ class HomeAppBar extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: AppColors.cECF0F4
                     ),
-                    child: Center(child: SvgPicture.asset(
-                        ImageConstants.menuIcon)),
+                    child: Center(
+                      child: SvgPicture.asset(
+                          ImageConstants.menuIcon,colorFilter: ColorFilter.mode(AppColors.c181C2E, BlendMode.srcIn)),
+                    ),
                   ),
                 );
               }

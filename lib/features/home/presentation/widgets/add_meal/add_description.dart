@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/custom_outline_text_field.dart';
-import '../../../../auth/presentation/widgets/name_and_text_field_widget.dart';
+import '../../../../../core/widgets/name_and_text_field_widget.dart';
 import '../../cubits/add_meal_cubit/add_meal_cubit.dart';
 
 class AddMealDiscTextField extends StatelessWidget {

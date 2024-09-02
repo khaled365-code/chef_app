@@ -84,11 +84,50 @@ buildScaffoldMessenger({required BuildContext context,required String msg,SnackB
 
 }
 
-String formatDate(DateTime dateTime) {
+String formatDate({required DateTime dateTime,bool? monthName=false}) {
   int year = dateTime.year;
   int month = dateTime.month;
   int day = dateTime.day;
-  return '$day/$month/$year';
+  if(monthName==true)
+    {
+      return '$day ${getMonthName(month)} $year';
+    }
+  else
+    {
+      return '$day/$month/$year';
+
+    }
+}
+
+String getMonthName(int month)
+{
+  switch(month)
+  {
+    case 1:
+      return 'January';
+    case 2:
+      return 'February';
+    case 3:
+      return 'March';
+    case 4:
+      return 'April';
+    case 5:
+      return 'May';
+    case 6:
+      return 'June';
+    case 7:
+      return 'July';
+    case 8:
+      return 'August';
+    case 9:
+      return 'September';
+    case 10:
+      return 'October';
+    case 11:
+      return 'November';
+    default:
+      return 'December';
+  }
 }
 String formatClock(DateTime dateTime)
 {

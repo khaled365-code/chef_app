@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
-import '../../../../auth/presentation/widgets/name_and_text_field_widget.dart';
+import '../../../../../core/widgets/name_and_text_field_widget.dart';
 import '../../cubits/add_meal_cubit/add_meal_cubit.dart';
 
 class AddMealCategoryWidget extends StatelessWidget {

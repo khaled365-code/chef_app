@@ -15,7 +15,8 @@ class UpdateScreenAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: ()
+      {
         Navigator.pop(context);
       },
       child: Container(
@@ -25,8 +26,10 @@ class UpdateScreenAppBar extends StatelessWidget {
             shape: BoxShape.circle,
             color: AppColors.cECF0F4
         ),
-        child: Center(child: SvgPicture.asset(
-            ImageConstants.arrowBackIcon)),
+        child: Center(
+          child: SvgPicture.asset(
+              width: 10, ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.c181C2E, BlendMode.srcIn)),
+        ),
       ),
     );
   }

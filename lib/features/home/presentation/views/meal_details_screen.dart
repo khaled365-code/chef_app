@@ -40,30 +40,30 @@ class MealDetailsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(receivedMeal.name!,style: AppTextStyles.regular20(context).copyWith(
+                          Text(receivedMeal.name!,style: AppTextStyles.bold20(context).copyWith(
                               color: AppColors.c181C2E
                           ),),
-                          SpaceWidget(height: 5,),
+                          SpaceWidget(height: 7,),
                           Text(receivedMeal.description!,style: AppTextStyles.regular14(context).copyWith(
                               color: AppColors.cA0A5BA
                           ),),
-                          SpaceWidget(height: 14,),
+                          SpaceWidget(height: 20,),
                           Row(
                             children: [
                               SvgPicture.asset(ImageConstants.priceIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-                              SpaceWidget(width: 4,),
+                              SpaceWidget(width: 10,),
                               Text(receivedMeal.price.toString(),style: AppTextStyles.bold16(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
                               SpaceWidget(width: 24,),
                               SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-                              SpaceWidget(width: 4,),
+                              SpaceWidget(width: 10,),
                               Text(receivedMeal.category!,style: AppTextStyles.regular14(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
                               SpaceWidget(width: 24,),
                               SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-                              SpaceWidget(width: 4,),
+                              SpaceWidget(width: 10,),
                               Text(receivedMeal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
@@ -73,17 +73,17 @@ class MealDetailsScreen extends StatelessWidget {
                           Row(
                             children: [
                               SvgPicture.asset(ImageConstants.timeIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-                              SpaceWidget(width: 5,),
+                              SpaceWidget(width: 10,),
                               RichText(
                                   text: TextSpan(
                                       children: [
                                         TextSpan(
                                           text: 'created at:',
-                                          style: AppTextStyles.regular13(context)
+                                          style: AppTextStyles.regular14(context)
                                               .copyWith(color: AppColors.c32343E),
                                         ),
                                         TextSpan(
-                                          text: ' ${formatDate(DateTime.parse(receivedMeal.createdAt!))}',
+                                          text: ' ${formatDate(dateTime: DateTime.parse(receivedMeal.createdAt!))}',
                                           style: AppTextStyles.regular16(context).copyWith(
                                               color: AppColors.c121223),
                                         ),
@@ -105,17 +105,17 @@ class MealDetailsScreen extends StatelessWidget {
                           Row(
                             children: [
                               SvgPicture.asset(ImageConstants.timeIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
-                              SpaceWidget(width: 5,),
+                              SpaceWidget(width: 10,),
                               RichText(
                                   text: TextSpan(
                                       children: [
                                         TextSpan(
                                           text: 'updated at:',
-                                          style: AppTextStyles.regular13(context)
+                                          style: AppTextStyles.regular14(context)
                                               .copyWith(color: AppColors.c32343E),
                                         ),
                                         TextSpan(
-                                          text: ' ${formatDate(DateTime.parse(receivedMeal.updatedAt!))}',
+                                          text: ' ${formatDate(dateTime: DateTime.parse(receivedMeal.updatedAt!))}',
                                           style: AppTextStyles.regular16(context).copyWith(
                                               color: AppColors.c121223),
                                         ),
@@ -151,6 +151,9 @@ class MealDetailsScreen extends StatelessWidget {
                     children: [
                       Spacer(),
                       SharedButton(btnText: 'Update This Meal',
+                        btnTextStyle: AppTextStyles.bold16(context).copyWith(
+                            color: AppColors.white
+                        ),
                       onPressessed: ()
                         {
                            navigate(context: context, route: Routes.updateMealScreen,arg: receivedMeal);

@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                   drawer: CustomDrawerScreen(homeContext: context,),
                    body: SafeArea(
                        child: RefreshIndicator(
-                         key: HomeScreenCubit.get(context).refreshIndicatorKey,
+                        //  key: HomeScreenCubit.get(context).refreshIndicatorKey,
                          onRefresh: () async
                          {
                            HomeScreenCubit.get(context).getAllMealsFun();

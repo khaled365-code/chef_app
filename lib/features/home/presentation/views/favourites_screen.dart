@@ -8,7 +8,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
-import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../widgets/favourites/favourite_meal_widget.dart';
 
 

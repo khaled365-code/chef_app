@@ -1,6 +1,7 @@
 
 
 import 'package:chef_app/core/utilis/app_text_styles.dart';
+import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,9 +24,9 @@ class PageViewContent extends StatelessWidget {
             image: DecorationImage(image: AssetImage(onboardingDataModel.image),fit: BoxFit.contain),
           ),
         ),
-        Flexible(child: SizedBox(height: 63,)),
+        Flexible(child: SpaceWidget(height: 63,)),
         Text(onboardingDataModel.title,style: AppTextStyles.extraBold24(context).copyWith(color: Color(0xff32343E)),),
-        Flexible(child: SizedBox(height: 18,)),
+        Flexible(child: SpaceWidget(height: 18,)),
         Text(onboardingDataModel.subtitle,style: AppTextStyles.regular16(context).copyWith(color: Color(0xff646982)),)
 
 

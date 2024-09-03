@@ -12,6 +12,8 @@ import 'package:http/http.dart' as http;
 class PushNotificationsService
 {
 
+
+
   static FirebaseMessaging fireMessaging=FirebaseMessaging.instance;
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin=FlutterLocalNotificationsPlugin();
 

@@ -3,6 +3,7 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
+import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/splash_and_onbording/data/models/onboarding_data_model.dart';
 import 'package:chef_app/features/splash_and_onbording/presentation/widgets/page_view_content.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,9 +24,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   List<OnboardingDataModel>onboardingDataModelList =
   [
-    OnboardingDataModel(image: ImageConstants.onboardingImage1, title: 'All your favorites', subtitle: 'Get all your loved foods in one once place,\nyou just place the orer we do the rest'),
-    OnboardingDataModel(image: ImageConstants.onboardingImage2, title: 'Order from choosen chef', subtitle: 'Get all your loved foods in one once place,\nyou just place the orer we do the rest'),
-    OnboardingDataModel(image: ImageConstants.onboardingImage3, title: 'Free delivery offers', subtitle: 'Get all your loved foods in one once place,\nyou just place the orer we do the rest'),
+    OnboardingDataModel(image: ImageConstants.onboardingImage1, title: 'All your favorites', subtitle: 'Get all your loved foods in one once place,\nyou just place the meal we do the rest'),
+    OnboardingDataModel(image: ImageConstants.onboardingImage2, title: 'Meal from choosen chef', subtitle: 'Get all your loved foods in one once place,\nyou just place the meal we do the rest'),
+    OnboardingDataModel(image: ImageConstants.onboardingImage3, title: 'Free delivery offers', subtitle: 'Get all your loved foods in one once place,\nyou just place the meal we do the rest'),
 
   ];
 
@@ -69,7 +70,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     onboardingDataModel: onboardingDataModelList[index],
                   ),),
             ),
-            SizedBox(height: 32.h,),
+            SpaceWidget(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -82,7 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 69.h,),
+            SpaceWidget(height: 69.h,),
             SharedButton(btnText: currentIndex!=2?'Next':'Get Started',
               onPressessed: ()
               {

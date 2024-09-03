@@ -12,10 +12,11 @@ import '../../../../../core/utilis/app_colors.dart';
 import '../../../data/models/get_meals_model/meals.dart';
 
 class FavouriteMealWidget extends StatelessWidget {
-  const FavouriteMealWidget({super.key, required this.meal, required this.ongoingMeal,});
+  const FavouriteMealWidget({super.key, required this.meal, required this.ongoingMeal, required this.index,});
 
   final Meals meal;
   final bool ongoingMeal;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +24,7 @@ class FavouriteMealWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:
         [
-         Text(meal.category!,style: AppTextStyles.regular14(context).copyWith(
+         Text(meal.category??'',style: AppTextStyles.regular14(context).copyWith(
            color: AppColors.c181C2E
          ),),
          SpaceWidget(height: 32,),
@@ -123,7 +124,7 @@ class FavouriteMealWidget extends StatelessWidget {
                 ),
                   onPressed: ()
                   {
-                       HomeScreenCubit.get(context).addToHistoryFavouriteMeal(meal: meal);
+                      HomeScreenCubit.get(context).addToHistoryFavouriteMeal(meal: meal,index: index);
                   },
                   child: Text('Add to history',style: AppTextStyles.bold12(context).copyWith(
                     color: AppColors.white
@@ -141,7 +142,7 @@ class FavouriteMealWidget extends StatelessWidget {
                       ),
                       onPressed: ()
                       {
-                        HomeScreenCubit.get(context).removeOngoingFavouriteMeal(meal: meal);
+                        HomeScreenCubit.get(context).removeOngoingFavouriteMeal(meal: meal,index: index);
                       },
                       child: Text('Remove',style: AppTextStyles.bold12(context).copyWith(
                           color: AppColors.cFF7622

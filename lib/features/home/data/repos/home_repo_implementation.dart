@@ -8,14 +8,13 @@ import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/api/end_points.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/core/database/errors/server_exception.dart';
-import 'package:chef_app/core/utilis/services/local_database_service.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
 import 'package:chef_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/src/multipart_file.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:hive/hive.dart';
 
 import '../models/add_meal_model/add_meal_model.dart';
 
@@ -92,48 +91,87 @@ class HomeRepoImplementation implements HomeRepo
     }
   }
 
-  @override
-  Future<Either<Exception,Meals>> getCachedFavouriteMeals() async
-  {
-    var jsonData=await LocalDatabaseService.favouriteMealsBox!.get('meals');
-    if(jsonData!=null)
-      {
-        var data=json.decode(jsonData);
-        // data.map<Meals>((json) => Meals.fromJson(json)).toList();
-        Meals meal=Meals.fromJson(data);
-        return Right(meal);
-      }
-    else
-      {
-        return Left(Exception('No Data Found'));
-      }
-  }
-
-  @override
-  Future <void> saveCachedFavouriteMeals({required Meals meals}) async
-  {
-    //meals.map<Map<String,dynamic>>((meals) => Meals().toJson(meals)).toList();
-    var  jsonStorage=Meals().toJson(meals);
-        var data=json.encode(jsonStorage);
-        await LocalDatabaseService.favouriteMealsBox!.put('meals', data);
 
 
 
 
-  }
 
 
   @override
-  Future<List<Meals>> getCachedMeals() {
+  List<Meals> getCachedMeals() {
     // TODO: implement getCachedMeals
     throw UnimplementedError();
   }
 
 
   @override
-  Future saveCachedMeals({required List<Meals> mealList}) {
+  Future <Unit> saveCachedMeals({required List<Meals> mealList}) {
     // TODO: implement saveCachedMeals
     throw UnimplementedError();
+  }
+
+
+  // favourite meals:-
+
+  @override
+  Either<Exception,List<Meals>> getCachedFavouriteMeals()
+  {
+    var favouriteMealsBox=Hive.box<Meals>('favourite_meals');
+
+    if(favouriteMealsBox.values.isNotEmpty)
+    {
+      return Right(favouriteMealsBox.values.toList());
+    }
+    else
+    {
+      return Left(Exception('No Data Found'));
+    }
+  }
+
+  @override
+  Future <Unit> saveCachedFavouriteMeals({required Meals meal}) async
+  {
+    var favouriteMealsBox=Hive.box<Meals>('favourite_meals');
+    await  favouriteMealsBox.add(meal);
+    return Future.value(unit);
+
+  }
+
+
+
+  // history meals:-
+
+  @override
+  Either<Exception,List<Meals>> getCachedHistoryMeals()
+  {
+    var historyMealsBox=Hive.box<Meals>('history_meals');
+    if(historyMealsBox.values.isNotEmpty)
+      {
+        return Right(historyMealsBox.values.toList());
+      }
+    else
+      {
+        return Left(Exception('No Data Found'));
+      }
+
+  }
+
+
+
+  @override
+  Future <Unit> saveCachedHistoryMeals({required Meals meal}) async
+  {
+    var historyMealsBox=Hive.box<Meals>('history_meals');
+    await historyMealsBox.add(meal);
+    return Future.value(unit);
+  }
+
+  @override
+  Future<Unit> removeOngoingFavouriteMeal({required int index})  async
+  {
+    var favouriteMealsBox=Hive.box<Meals>('favourite_meals');
+    await favouriteMealsBox.deleteAt(index);
+    return Future.value(unit);
   }
 
 

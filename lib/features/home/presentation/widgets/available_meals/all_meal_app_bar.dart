@@ -42,9 +42,9 @@ class AllMealsAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(end: 24.w),
             child: GestureDetector(
-              onTap: () async
+              onTap: ()
               {
-               await HomeScreenCubit.get(context).getCachedFavouriteMeals();
+                HomeScreenCubit.get(context).getCachedFavouriteMeals();
                 navigate(context: context, route: Routes.favouritesScreen);
 
               },

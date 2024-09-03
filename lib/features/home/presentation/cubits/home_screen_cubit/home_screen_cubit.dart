@@ -10,6 +10,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../main.dart';
@@ -98,50 +99,67 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
 
-  removeOngoingFavouriteMeal({required Meals meal})
-  {
-    favouriteMealsList.remove(meal);
-    emit(GetCachedFavouriteMealsSuccessState());
-  }
 
-  addToHistoryFavouriteMeal({required Meals meal})
-  {
-    removeOngoingFavouriteMeal(meal: meal);
-    historyMealsList.add(meal);
-    emit(GetCachedFavouriteMealsSuccessState());
-  }
 
+
+
+  List<Meals> favouriteMealsList=[];
+  List<Meals> historyMealsList=[];
 
   changeMealFavouriteShape({required List<Meals> mealList,required int index}) async
   {
     mealList[index].itemIsSelected=!mealList[index].itemIsSelected;
     if(mealList[index].itemIsSelected==true)
-      {
-        await homeRepoImplementation.saveCachedFavouriteMeals(meals: mealList[index]);
+    {
+      await homeRepoImplementation.saveCachedFavouriteMeals(meal: mealList[index]);
 
-      }
+    }
     emit(ChangeMealFavouriteActiveShapeState());
 
   }
 
-  List<Meals> favouriteMealsList=[];
-  List<Meals> historyMealsList=[];
 
-  Meals? cachedMeal;
-
-  Future<void> getCachedFavouriteMeals() async
+  void getCachedFavouriteMeals()
   {
-    final response=await homeRepoImplementation.getCachedFavouriteMeals( );
+    final response= homeRepoImplementation.getCachedFavouriteMeals( );
     response.fold((exception)
     {
       emit(GetCachedFavouriteMealsFailureState(errorMessage: exception.toString()));
     } , (success)
     {
-      cachedMeal=success;
-      favouriteMealsList.add(success);
+      favouriteMealsList=success;
       emit(GetCachedFavouriteMealsSuccessState());
     },);
 
+  }
+
+
+  void getCachedHistoryMeals()
+  {
+    final response= homeRepoImplementation.getCachedHistoryMeals();
+    response.fold((exception)
+    {
+      emit(GetCachedHistoryMealsFailureState(errorMessage: exception.toString()));
+    } , (success)
+    {
+      historyMealsList=success;
+      emit(GetCachedHistoryMealsSuccessState(historyMealsList: success));
+    },);
+
+  }
+
+  removeOngoingFavouriteMeal({required Meals meal,required int index}) async
+  {
+    homeRepoImplementation.removeOngoingFavouriteMeal(index: index);
+    favouriteMealsList.remove(meal);
+    emit(GetCachedFavouriteMealsSuccessState());
+  }
+
+  addToHistoryFavouriteMeal({required Meals meal,required int index}) async
+  {
+    removeOngoingFavouriteMeal(meal: meal,index:index);
+    await homeRepoImplementation.saveCachedHistoryMeals(meal: meal);
+    emit(GetCachedFavouriteMealsSuccessState());
   }
 
 }

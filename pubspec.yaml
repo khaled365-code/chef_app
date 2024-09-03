@@ -142,6 +142,9 @@ dependencies:
   #The Font Awesome Icon pack available as Flutter Icons. Provides 2000 additional icons to use in your apps.
   font_awesome_flutter: ^10.7.0
 
+  #Extension for Hive. Makes it easier to use Hive in Flutter apps.
+  hive_flutter: ^1.1.0
+
 
 
 
@@ -169,7 +172,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.12
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

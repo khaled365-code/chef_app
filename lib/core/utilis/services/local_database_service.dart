@@ -1,34 +1,37 @@
 
 
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+
+
+import 'package:hive_flutter/adapters.dart';
+
+import '../../../features/home/data/models/get_meals_model/meals.dart';
 
 class LocalDatabaseService
 {
-  // static BoxCollection? appBoxCollection;
-  // static CollectionBox? appFavouritesMeals;
-  static Box? favouriteMealsBox;
+  static Box<Meals>? favouriteMealsBox=Hive.box<Meals>('favourite_meals');
 
-  // This function to open only a single box in the app not a collection
-  static Future<Box>  openHiveBox(String boxName) async
+
+  static Future<void> creatingFavouritesBox()  async
   {
-    if(!Hive.isBoxOpen(boxName))
-      {
-        Hive.init((await getApplicationCacheDirectory()).path);
-      }
-    return await Hive.openBox(boxName);
-
+      await Hive.openBox<Meals>('favourite_meals');
   }
 
-  // This function to open a collection of many boxes in the app
-  static Future<BoxCollection> openCollections(Set<String> collections) async
+  static Future<void> closeFavouritesBox() async
   {
-    return await BoxCollection.open(
-      'mealTimeAppLocalDataBase', // Name of your database
-      collections, // Names of your boxes
-      path: (await getApplicationCacheDirectory()).path
-    );
+    await favouriteMealsBox!.close();
   }
+
+  static Future<void> clearFavouritesBox() async
+  {
+    await favouriteMealsBox!.clear();
+  }
+
+
+
+
+
+
+
 
 
 

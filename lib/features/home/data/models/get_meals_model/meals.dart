@@ -1,4 +1,9 @@
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'chef_data.dart';
+
+part 'meals.g.dart';
+
 
 /// _id : "65de3dbe012b561fc7e8edb8"
 /// name : "TEst Meal"
@@ -12,8 +17,10 @@ import 'chef_data.dart';
 /// createdAt : "2024-02-27T19:53:34.363Z"
 /// updatedAt : "2024-02-27T20:08:29.928Z"
 /// __v : 0
-
-class Meals {
+///
+///
+@HiveType(typeId: 0)
+class Meals extends HiveObject {
   Meals({
       this.id, 
       this.name, 
@@ -42,18 +49,30 @@ class Meals {
     updatedAt = json['updatedAt'];
     v = json['__v'];
   }
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? name;
+  @HiveField(2)
   String? description;
+  @HiveField(3)
   num? price;
+  @HiveField(4)
   String? howToSell;
+  @HiveField(5)
   List<String>? images;
   String? category;
+  @HiveField(6)
   ChefData? chefId;
+  @HiveField(7)
   String? status;
+  @HiveField(8)
   String? createdAt;
+  @HiveField(9)
   String? updatedAt;
+  @HiveField(10)
   num? v;
+  @HiveField(11)
   bool itemIsSelected=false;
 
 

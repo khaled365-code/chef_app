@@ -1,9 +1,14 @@
+import 'package:hive/hive.dart';
+
 /// _id : "653aa89d6fa960fe1ac59208"
 /// name : "Ammar"
 /// phone : "01021570316"
 /// brandName : "Ammar Chef"
+///
+part 'chef_data.g.dart';
 
-class ChefData {
+@HiveType(typeId: 1)
+class ChefData extends HiveObject {
   ChefData({
       this.id, 
       this.name, 
@@ -16,9 +21,13 @@ class ChefData {
     phone = json['phone'];
     brandName = json['brandName'];
   }
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? name;
+  @HiveField(2)
   String? phone;
+  @HiveField(3)
   String? brandName;
 
   Map<String, dynamic> toJson() {

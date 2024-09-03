@@ -29,13 +29,26 @@ abstract class HomeRepo
     String? category,
   });
 
-  Future saveCachedMeals({required List<Meals> mealList});
+  Future <Unit> saveCachedMeals({required List<Meals> mealList});
 
-  Future<List<Meals>> getCachedMeals();
+  Future <Unit> saveCachedHistoryMeals({required Meals meal});
 
-  Future saveCachedFavouriteMeals({required Meals meals});
+  Future <Unit> saveCachedFavouriteMeals({required Meals meal});
 
-  Future<Either<Exception,Meals>> getCachedFavouriteMeals();
+  Future<Unit> removeOngoingFavouriteMeal({required int index});
+
+
+
+  List<Meals> getCachedMeals();
+
+  Either<Exception,List<Meals>> getCachedFavouriteMeals();
+
+
+  Either<Exception,List<Meals>> getCachedHistoryMeals();
+
+
+
+
 
 
 

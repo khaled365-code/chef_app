@@ -31,14 +31,14 @@ class FavouritesScreen extends StatelessWidget {
                     SpaceWidget(height: 32,),
                     BlocBuilder<HomeScreenCubit, HomeScreenState>(
                       builder: (context, state) {
-                        if( state is GetCachedFavouriteMealsSuccessState &&
-                            HomeScreenCubit.get(context).cachedMeal!=null )
+                        if( state is GetCachedFavouriteMealsSuccessState)
                         {
                           return ListView.separated(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
                             itemBuilder:  (context, index) => FavouriteMealWidget(
+                              index: index,
                               ongoingMeal: true,
                               meal: HomeScreenCubit.get(context).favouriteMealsList[index],
                             ),
@@ -46,24 +46,24 @@ class FavouritesScreen extends StatelessWidget {
                             itemCount: HomeScreenCubit.get(context).favouriteMealsList.length,
                           );
                         }
-                        if(state is GetCachedFavouriteMealsSuccessState &&
-                            HomeScreenCubit.get(context).cachedMeal==null )
+                         if(state is GetCachedFavouriteMealsFailureState)
                         {
                           return SizedBox.shrink();
                         }
-                         if(state is GetCachedFavouriteMealsFailureState)
-                        {
-                          return Text(state.errorMessage);
-                        }
-                        if (state is GetCachedFavouriteMealsLoadingState )
-                        {
-                          return Center(
-                            child: SharedLoadingIndicator(),);
-                        }
                         else
                         {
-                            return Center(
-                              child: SharedLoadingIndicator(),);
+                            return ListView.separated(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                              itemBuilder:  (context, index) => FavouriteMealWidget(
+                                index: index,
+                                ongoingMeal: true,
+                                meal: HomeScreenCubit.get(context).favouriteMealsList[index],
+                              ),
+                              separatorBuilder: (context, index) => SpaceWidget(height: 24,),
+                              itemCount: HomeScreenCubit.get(context).favouriteMealsList.length,
+                            );
                         }
                       },
                     ),
@@ -75,14 +75,14 @@ class FavouritesScreen extends StatelessWidget {
                   SpaceWidget(height: 32,),
                   BlocBuilder<HomeScreenCubit, HomeScreenState>(
                   builder: (context, state) {
-                   if(state is GetCachedFavouriteMealsSuccessState &&
-                       HomeScreenCubit.get(context).cachedMeal!=null)
+                   if(HomeScreenCubit.get(context).historyMealsList.isNotEmpty)
                      {
                        return ListView.separated(
                          shrinkWrap: true,
                          physics: NeverScrollableScrollPhysics(),
                          padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
                          itemBuilder:  (context, index) => FavouriteMealWidget(
+                           index: index,
                            ongoingMeal: false,
                            meal: HomeScreenCubit.get(context).historyMealsList[index],
                          ),
@@ -90,28 +90,12 @@ class FavouritesScreen extends StatelessWidget {
                          itemCount: HomeScreenCubit.get(context).historyMealsList.length,
                        );
                      }
-                   if(state is GetCachedFavouriteMealsSuccessState &&
-                       HomeScreenCubit.get(context).cachedMeal==null )
+                   if(HomeScreenCubit.get(context).historyMealsList.isEmpty )
                    {
                      return SizedBox.shrink();
                    }
-                    if(state is GetCachedFavouriteMealsFailureState)
-                     {
-                       return Text(state.errorMessage);
-                     }
-                   if (state is GetCachedFavouriteMealsLoadingState )
-                   {
-                     return Center(
-                       child: Container(
-                         width: 30.w,
-                         height: 30.h,
-                         child: CircularProgressIndicator(
-                           color: AppColors.primaryColor,
-                         ),
-                       ),);
-                   }
                    else
-                     {
+                   {
                        return Center(
                            child: Container(
                              width: 30.w,
@@ -121,7 +105,7 @@ class FavouritesScreen extends StatelessWidget {
                              ),
                            ),);
 
-                     }
+                   }
                    },
                   ),
                   SpaceWidget(height: 67,),
@@ -158,6 +142,14 @@ class FavouritesScreen extends StatelessWidget {
             color: AppColors.c181C2E
         ),),
         bottom: TabBar(
+          onTap: (index)
+          {
+            if(index==1)
+              {
+                HomeScreenCubit.get(context).getCachedHistoryMeals();
+
+              }
+            },
           unselectedLabelStyle: AppTextStyles.regular14(context).copyWith(
             color: AppColors.cA5A7B9
           ),

@@ -31,7 +31,6 @@ final class GetAllMealsFailureState extends HomeScreenState {
   GetAllMealsFailureState({required this.errorModel});
 }
 
-final class GetCachedFavouriteMealsLoadingState extends HomeScreenState {}
 
 final class GetCachedFavouriteMealsSuccessState extends HomeScreenState {
 
@@ -44,6 +43,21 @@ final class GetCachedFavouriteMealsFailureState extends HomeScreenState {
   GetCachedFavouriteMealsFailureState({required this.errorMessage});
 }
 
+
+
+
+final class GetCachedHistoryMealsSuccessState extends HomeScreenState {
+
+  final List<Meals> historyMealsList;
+  GetCachedHistoryMealsSuccessState({required this.historyMealsList});
+
+}
+
+final class GetCachedHistoryMealsFailureState extends HomeScreenState {
+
+  final String errorMessage;
+  GetCachedHistoryMealsFailureState({required this.errorMessage});
+}
 
 
 

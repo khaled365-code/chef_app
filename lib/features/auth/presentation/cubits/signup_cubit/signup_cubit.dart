@@ -1,22 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
-
 import '../../../../../core/database/errors/error_model.dart';
-
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   SignupCubit({required this.authRepoImplementation}) : super(SignupInitial());
 
 
-  AuthRepoImplementation authRepoImplementation;
+  static SignupCubit get(context)=>BlocProvider.of(context);
 
+
+  AuthRepoImplementation authRepoImplementation;
 
   IconData passwordSuffixIcon=Icons.visibility_off;
   IconData confirmPasswordSuffixIcon=Icons.visibility_off;
@@ -60,7 +60,13 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
 
+  AutovalidateMode signUpAutoValidateMode=AutovalidateMode.disabled;
 
+  activateSignUpValidateMode()
+  {
+    signUpAutoValidateMode=AutovalidateMode.always;
+    emit(ActivateSignUpValidateModeState());
+  }
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -103,6 +109,8 @@ class SignupCubit extends Cubit<SignupState> {
     healthCertificateImage=null;
     emit(DeleteHealthCertificateImageState());
   }
+
+
   signupFun({
     required String name, required String phone,
     required String email, required String password,
@@ -115,8 +123,10 @@ class SignupCubit extends Cubit<SignupState> {
        email: email, password: password,
        passwordConfirmation: passwordConfirmation, location: '{"name":"Mansoura","address":"Dakahlia Egypt","coordinates":[31.04352521315619, 31.38737220898334]}',
        brandName: brandName, minimumCharge: minimumCharge,
-       description: description, healthCertificate: await uploadImageToAPI(healthCertificateImage!),
-       frontId: await uploadImageToAPI(healthCertificateImage!), backId: await uploadImageToAPI(healthCertificateImage!),
+       description: description,
+       healthCertificate: await uploadImageToAPI(healthCertificateImage!),
+       frontId: await uploadImageToAPI(healthCertificateImage!),
+       backId: await uploadImageToAPI(healthCertificateImage!),
        profilePic: signupImage!=null? await uploadImageToAPI(signupImage!): null);
 
 

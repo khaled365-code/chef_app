@@ -5,6 +5,8 @@ sealed class SignupState {}
 
 final class SignupInitial extends SignupState {}
 
+final class ActivateSignUpValidateModeState extends SignupState {}
+
 
 final class changePasswordIconForPasswordTextField extends SignupState {}
 

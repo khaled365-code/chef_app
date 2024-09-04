@@ -7,17 +7,17 @@ import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utilis/app_colors.dart';
-import '../../../../core/utilis/app_text_styles.dart';
-import '../../../../core/widgets/space_widget.dart';
+import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/widgets/space_widget.dart';
 
 class HealthCertificateDotContainer extends StatelessWidget {
-  const HealthCertificateDotContainer({super.key, this.onGalleryTap, this.onCameraTap, this.imagePath, this.onDeletePhotoPressessed, });
+  const HealthCertificateDotContainer({super.key, this.onGalleryTap, this.onCameraTap, this.imagePath, this.onDeletePhotoPressed, });
 
   final void Function()? onGalleryTap;
   final void Function()? onCameraTap;
   final String? imagePath;
-  final void Function()? onDeletePhotoPressessed;
+  final void Function()? onDeletePhotoPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,13 +33,14 @@ class HealthCertificateDotContainer extends StatelessWidget {
         SpaceWidget(height: 24.h,),
         SharedButton(
             btnText: 'Remove This Photo',
-          onPressessed: onDeletePhotoPressessed
+          onPressessed: onDeletePhotoPressed,
         )
       ],
     ) :
     Container(
         height: 200.h,
         decoration: DottedDecoration(
+          strokeWidth: 1.2.w,
             shape: Shape.box,
             borderRadius: BorderRadius.circular(10.r)
         ),

@@ -34,6 +34,7 @@ class LoginScreen extends StatelessWidget {
         child: Stack(
           children: [
             AuthHeaderWidget(
+              hasBackButton: false,
               title: 'Log In',
               subTitle: 'Please sign in to your existing account',
             ),
@@ -45,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                 alignment: AlignmentDirectional.bottomCenter,
                 child: Container(
                   width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height*(550/812),
+                  height: MediaQuery.sizeOf(context).height*(580/812),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(

@@ -31,18 +31,19 @@ class ImagePickerWidget extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.cFFC6AE,
-            image: imagePath != null ? DecorationImage(image:FileImage(File(imagePath!)),fit: BoxFit.fill) : null,
+            image: imagePath != null ?
+            DecorationImage(image:FileImage(File(imagePath!)),fit: BoxFit.fill) : null,
           ),
         ),
         PositionedDirectional(
           bottom: -3.h,
           end: 3.w,
-            child: imagePath == null? GestureDetector(
+            child: imagePath == null?
+            GestureDetector(
               onTap: ()
               {
                 showDialog(context: context,
-
-                    builder: (context) => OpenCameraOrGalleryContainer(
+                  builder: (context) => OpenCameraOrGalleryContainer(
                       onCameraTap: onCameraTap,
                       onGalleryTap: onGalleryTap,
                     ),);
@@ -71,10 +72,13 @@ class ImagePickerWidget extends StatelessWidget {
                   color: AppColors.primaryColor,
                 ),
                 child: Center(
-                  child: SvgPicture.asset(
-                    ImageConstants.trashIcon,
-                    colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-                  ),
+                    child: SvgPicture.asset(
+                      ImageConstants.trashIcon,
+                      width: 22.w,
+                      colorFilter: ColorFilter.mode(
+                          AppColors.white,
+                          BlendMode.srcIn),
+                    )
                 ),
               ),
             ))

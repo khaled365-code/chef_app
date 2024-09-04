@@ -18,7 +18,6 @@ class SharedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-
       style: ButtonStyle(
         fixedSize: btnSize??WidgetStatePropertyAll(Size(327.w, 62.h)),
         backgroundColor: btnColor??WidgetStatePropertyAll(AppColors.primaryColor),

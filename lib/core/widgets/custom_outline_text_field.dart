@@ -35,11 +35,11 @@ class CustomOutlineTextField extends StatelessWidget {
         onFieldSubmitted: onFieldSubmitted,
         inputFormatters: inputFormatters,
         focusNode: fieldFocusNode,
-        style: filledTextStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.c32343E),
+        style: filledTextStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.cA0A5BA),
         decoration: InputDecoration(
         hintText: hintText??'',
         hintStyle: hintStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.cA0A5BA),
-        contentPadding: contentPadding??EdgeInsetsDirectional.only(start: 19,top: 23),
+        contentPadding: contentPadding??EdgeInsetsDirectional.only(start: 20.w,top: 23.h),
         filled: true,
         fillColor: AppColors.cF0F5FA,
         suffixIcon: suffixIcon??null,

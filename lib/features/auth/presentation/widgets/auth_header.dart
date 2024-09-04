@@ -30,7 +30,7 @@ final BuildContext? incomingContext;
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SpaceWidget(height: MediaQuery.of(context).size.height*(90/812),),
+              SpaceWidget(height: MediaQuery.of(context).size.height*(70/812),),
               Text(title,style: AppTextStyles.bold30(context).copyWith(color: AppColors.white),),
               SpaceWidget(height: 3,),
               Text(subTitle,style: AppTextStyles.regular16(context).copyWith(color: AppColors.white),),
@@ -38,14 +38,14 @@ final BuildContext? incomingContext;
             ],
           ),
         ),
-        PositionedDirectional(
-          top: 5.h,
+        Align(
+           alignment: AlignmentDirectional.topStart,
             child: Transform.rotate(
               angle: -.1,
                 child: Image.asset(ImageConstants.splashTopElipsisImage,color:Colors.white,))),
-        Align(
-            alignment: AlignmentDirectional.topEnd,
-            child: Image.asset(ImageConstants.loginOtherElipsisImage,color:Colors.grey.withOpacity(.2),)),
+         Align(
+           alignment: AlignmentDirectional.topEnd,
+            child: Image.asset(ImageConstants.loginOtherElipsisImage,color:hasBackButton==false?Colors.grey.withOpacity(.2):AppColors.cFF7622.withOpacity(.2),)),
 
         hasBackButton==true?
         PositionedDirectional(
@@ -54,7 +54,7 @@ final BuildContext? incomingContext;
           child: GestureDetector(
             onTap: ()
             {
-              Navigator.pop(incomingContext!);
+              Navigator.pop(context);
             },
             child: Container(
             width: 45.w,
@@ -63,10 +63,9 @@ final BuildContext? incomingContext;
               shape: BoxShape.circle,
               color: AppColors.white,
             ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(start: 15.w,end: 18.w),
-                child: SvgPicture.asset(ImageConstants.arrowBackIcon,),
-              ),
+              child: Center(
+                child: SvgPicture.asset(
+                    width: 10, ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.c5E616F, BlendMode.srcIn)),),
                       ),
           ),
         ):

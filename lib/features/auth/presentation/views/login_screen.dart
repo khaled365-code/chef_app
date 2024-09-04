@@ -1,49 +1,35 @@
 
 
-import 'dart:io';
 
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
+import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
-import 'package:chef_app/core/widgets/custom_outline_text_field.dart';
-import 'package:chef_app/features/auth/presentation/widgets/remember_me_widget.dart';
+import 'package:chef_app/features/auth/presentation/widgets/login/remember_me_widget.dart';
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
-import '../widgets/options_for_account_widget.dart';
+import '../../../../core/widgets/shared_loading_indicator.dart';
+import '../widgets/login/email_login_field.dart';
+import '../widgets/login/password_login_field.dart';
+import '../widgets/login/options_for_account_widget.dart';
 import '../widgets/auth_header.dart';
-import '../../../../core/widgets/name_and_text_field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final loginCubit=BlocProvider.of<LoginCubit>(context);
-    return BlocConsumer<LoginCubit, LoginState>(
-  listener: (context, state) {
-    if(state is LoginFailureState)
-      {
-        if(state.theError.error!=null)
-          {
-            buildScaffoldMessenger(context: context, msg: state.theError.error!.toString().substring(1,state.theError.error!.toString().length-1));
-          }
-        else
-          {
-            buildScaffoldMessenger(context: context, msg: state.theError.errorMessage!);
-          }
-      }
-    if(state is LoginSuccessState)
-      {
-        buildScaffoldMessenger(context: context, msg: state.successLoginModel.message);
-        navigate(context: context, route: Routes.homeScreen,replacement: true);
-      }
+    
+    return BlocListener<LoginCubit,LoginState>(
+  listener: (context, state)
+  {
+    handleLoginListener(state, context);
   },
-  builder: (context, state) {
-    return Scaffold(
+  child: Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
@@ -51,13 +37,15 @@ class LoginScreen extends StatelessWidget {
               title: 'Log In',
               subTitle: 'Please sign in to your existing account',
             ),
+            // 579/812
             Form(
-              key: loginCubit.loginFormKey,
+              key: LoginCubit.get(context).loginFormKey,
+              autovalidateMode: LoginCubit.get(context).loginAutoValidateMode,
               child: Align(
                 alignment: AlignmentDirectional.bottomCenter,
                 child: Container(
                   width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height*550/812,
+                  height: MediaQuery.sizeOf(context).height*(550/812),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -72,109 +60,64 @@ class LoginScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:
                         [
-                          SizedBox(height: 24.h,),
-                          NameAndTextFieldWidget(
-                            title: 'Email',
-                            childWidget: Padding(
-                              padding:  EdgeInsetsDirectional.only(end: 24.w),
-                              child: CustomOutlineTextField(
-                                validator: (value)
-                                {
-                                  if(value!.isEmpty)
-                                  {
-                                    return 'You must enter your email';
-                                  }
-                                  else
-                                  {
-                                    return null;
-                                  }
-                                },
-                                onFieldSubmitted: (value)
-                                {
-                                  if(loginCubit.loginFormKey.currentState!.validate())
-                                  {
-                                    loginCubit.loginFun(email: loginCubit.emailController.text,
-                                        password: loginCubit.passwordController.text);
-                                  }
-                                },
-                                controller: loginCubit.emailController,
-                                hintText: 'example@gmail.com',
-                                keyboardType: TextInputType.emailAddress,
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(height: 24.h,),
-                          NameAndTextFieldWidget(
-                              title: 'Password',
-                              childWidget:  Padding(
-                                padding:  EdgeInsetsDirectional.only(end: 24.w),
-                                child: CustomOutlineTextField(
-                                  obscureText: loginCubit.isObsecureText,
-                                  validator: (value)
-                                  {
-                                    if(value!.isEmpty)
-                                    {
-                                      return 'You must enter your password';
-                                    }
-                                    else
-                                    {
-                                      return null;
-                                    }
-                                  },
-                                  onFieldSubmitted: (value)
-                                  {
-                                    if(loginCubit.loginFormKey.currentState!.validate())
-                                    {
-                                      loginCubit.loginFun(email: loginCubit.emailController.text,
-                                          password: loginCubit.passwordController.text);
-                                    }
-                                  },
-                                  controller: loginCubit.passwordController,
-                                  hintText: '* * * * * * * * * *',
-                                  keyboardType: TextInputType.text,
-                                  suffixIcon: GestureDetector(
-                                      onTap: ()
-                                      {
-
-                                        loginCubit.changeEyeShape();
-                                      },
-                                      child: Icon(loginCubit.suffixIcon,color: AppColors.cB4B9CA,)),
-                                ),
-                              ),),
-
-                          SizedBox(height: 24.h,),
-                          Padding(
-                            padding:  EdgeInsetsDirectional.only(end: 24.w),
-                            child: RememberMeWidget(),
-                          ),
-                          SizedBox(height: 31.h,),
-                          state is LoginLoadingState?
-                          Center(
-                            child: SizedBox(
-                              width: 30.w,
-                                height: 30.w,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.primaryColor,
-                                  strokeWidth: 2.w,
-                            
-                                )),
-                          ):
-                          Padding(
-                            padding:  EdgeInsetsDirectional.only(end: 24.w),
-                            child: SharedButton(
-                              btnText: 'Log In',
-                              onPressessed: ()
-                              {
-                                if(loginCubit.loginFormKey.currentState!.validate())
-                                {
-                                  loginCubit.loginFun(email: loginCubit.emailController.text,
-                                      password: loginCubit.passwordController.text);
-                                }
+                          SpaceWidget(height: 24,),
+                          BlocBuilder<LoginCubit, LoginState>(
+                              builder: (context, state) {
+                                return EmailLoginField();
                               },
                             ),
+                          SpaceWidget(height: 24,),
+                          BlocBuilder<LoginCubit, LoginState>(
+                              builder: (context, state) {
+                                return LoginPasswordField();
+                              },
+                            ),
+                          SpaceWidget(height: 24.h,),
+                          Padding(
+                            padding:  EdgeInsetsDirectional.only(end: 24.w),
+                              child: BlocBuilder<LoginCubit, LoginState>(
+                                builder: (context, state) {
+                                  return RememberMeWidget(
+                                    isRemembered: LoginCubit.get(context).isAccountRemembered,
+                                  );
+                                },
+                              ),
+                            ),
+                          SpaceWidget(height: 31.h,),
+                          BlocBuilder<LoginCubit,LoginState>(
+                            builder: (context,state){
+                              if(state is LoginLoadingState )
+                                {
+                                  return  Center(
+                                    child: SharedLoadingIndicator(),
+                                  );
+                                }
+                              else
+                                {
+                                  return Padding(
+                                    padding:  EdgeInsetsDirectional.only(end: 24.w),
+                                    child: SharedButton(
+                                      btnText: 'Log In',
+                                      onPressessed: ()
+                                      {
+                                        if(LoginCubit.get(context).loginFormKey.currentState!.validate())
+                                        {
+                                          LoginCubit.get(context).loginFormKey.currentState!.save();
+                                          LoginCubit.get(context).loginFun(
+                                              email: LoginCubit.get(context).emailController.text,
+                                              password: LoginCubit.get(context).passwordController.text);
+                                        }
+                                        else
+                                          {
+                                            LoginCubit.get(context).changeValidateMode();
+                                          }
+                                      },
+                                    ),
+                                  );
+                                }
+                            },
                           ),
-                          SizedBox(height: 38.h,),
+                          SpaceWidget(height: 38,),
                           OptionsForAccountWidget(
                             title1: 'Don\'t have an account?',
                             title2: ' Sign up',
@@ -195,8 +138,33 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  },
+    ),
 );
   }
+
+  void handleLoginListener(LoginState state, BuildContext context) async
+  {
+    if(state is LoginFailureState)
+      {
+        if(state.theError.error!=null)
+          {
+            buildScaffoldMessenger(context: context, msg: state.theError.error!.toString().substring(1,state.theError.error!.toString().length-1));
+          }
+        else
+          {
+            buildScaffoldMessenger(context: context, msg: state.theError.errorMessage!);
+          }
+      }
+    if(state is LoginSuccessState)
+      {
+        buildScaffoldMessenger(context: context, msg: state.successLoginModel.message);
+        await LoginCubit.get(context).rememberMeFun(
+            email: LoginCubit.get(context).emailController.text,
+            password: LoginCubit.get(context).passwordController.text);
+        navigate(context: context, route: Routes.homeScreen,replacement: true);
+      }
+
+  }
 }
+
+

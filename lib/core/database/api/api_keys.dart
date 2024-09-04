@@ -37,6 +37,9 @@ class ApiKeys
   static const String darkModeIsActive='darkModeIsActive';
   static const String notificationIsActive='notificationIsActive';
   static const String favouriteMeals='favourite_meals';
+  static const String savedEmail='savedEmail';
+  static const String savedPassword='savedPassword';
+
 
 
 

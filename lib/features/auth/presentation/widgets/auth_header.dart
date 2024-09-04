@@ -25,23 +25,23 @@ final BuildContext? incomingContext;
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           decoration:  BoxDecoration(
-              color: Color(0xff1E1E2E),
+              color: AppColors.c121223,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height*(118/812).h,),
-              Text(title,style: AppTextStyles.bold30(context).copyWith(color: Color(0xffFFFFFF)),),
+              SpaceWidget(height: MediaQuery.of(context).size.height*(90/812),),
+              Text(title,style: AppTextStyles.bold30(context).copyWith(color: AppColors.white),),
               SpaceWidget(height: 3,),
-              Text(subTitle,style: AppTextStyles.regular16(context).copyWith(color: Color(0xffFFFFFF)),),
+              Text(subTitle,style: AppTextStyles.regular16(context).copyWith(color: AppColors.white),),
 
             ],
           ),
         ),
-        Align(
-          alignment: AlignmentDirectional.topStart,
+        PositionedDirectional(
+          top: 5.h,
             child: Transform.rotate(
-              angle: -.2,
+              angle: -.1,
                 child: Image.asset(ImageConstants.splashTopElipsisImage,color:Colors.white,))),
         Align(
             alignment: AlignmentDirectional.topEnd,
@@ -69,7 +69,8 @@ final BuildContext? incomingContext;
               ),
                       ),
           ),
-        ):SizedBox.shrink()
+        ):
+        SizedBox.shrink()
 
       ],
     );

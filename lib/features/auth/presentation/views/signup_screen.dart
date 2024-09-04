@@ -2,7 +2,7 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:chef_app/features/auth/presentation/widgets/auth_header.dart';
-import 'package:chef_app/features/auth/presentation/widgets/options_for_account_widget.dart';
+import 'package:chef_app/features/auth/presentation/widgets/login/options_for_account_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

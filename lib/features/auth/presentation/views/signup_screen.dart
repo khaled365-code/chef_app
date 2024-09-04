@@ -137,7 +137,7 @@ class SignupScreen extends StatelessWidget {
                               
                                     DescriptionField(),
                               
-                                    SpaceWidget(height: 24.h,),
+                                    SpaceWidget(height: 24),
                               
                                     BlocBuilder<SignupCubit, SignupState>(
                                       builder: (context, state) {
@@ -160,14 +160,14 @@ class SignupScreen extends StatelessWidget {
                                               padding: EdgeInsetsDirectional.only(end: 24.w),
                                               child: SharedButton(
                                                 btnText: 'Sign Up',
-                                                onPressessed: () {
+                                                onPressed: () {
                                                   performRegistrationProcess(SignupCubit.get(context), context);
                                                 },
                                               ),
                                             );
                                           }
                                         }),
-                                    SpaceWidget(height: 24.h,),
+                                    SpaceWidget(height: 24),
                                     OptionsForAccountWidget(
                                       title1: 'Already have an account?',
                                       title2: ' sign in',

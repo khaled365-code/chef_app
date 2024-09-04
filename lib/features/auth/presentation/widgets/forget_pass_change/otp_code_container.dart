@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_colors.dart';
 
 class OtpCodeContainer extends StatelessWidget {
   const OtpCodeContainer({super.key, required this.singleContainerController});
@@ -31,7 +31,7 @@ class OtpCodeContainer extends StatelessWidget {
         {
           if(value!.isEmpty)
             {
-              return 'send digit!';
+              return 'empty!';
             }
           else
             {
@@ -45,8 +45,6 @@ class OtpCodeContainer extends StatelessWidget {
         ],
         textAlign: TextAlign.center,
         decoration: InputDecoration(
-          // hintStyle: AppTextStyles.regular14(context).copyWith(color: AppColors.cA0A5BA),
-          // hintText: '0',
           filled: true,
             fillColor:  AppColors.cF0F5FA ,
             enabledBorder: OutlineInputBorder(

@@ -75,7 +75,7 @@ class ChangeLanguageBottomSheet extends StatelessWidget {
           SpaceWidget(height: 10,),
           SharedButton(
             btnText: 'Cancel',
-            onPressessed: ()
+            onPressed: ()
             {
               Navigator.pop(context);
             },

@@ -5,6 +5,10 @@ sealed class ForgetPassState {}
 
 final class ForgetPassInitial extends ForgetPassState {}
 
+final class ActivateSendCodeAutoValidateModeState extends ForgetPassState {}
+
+final class ActivateVerifyCodeAutoValidateModeState extends ForgetPassState {}
+
 final class ForgetPassSendCodeLoadingState extends ForgetPassState {}
 
 

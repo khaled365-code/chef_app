@@ -154,7 +154,7 @@ class MealDetailsScreen extends StatelessWidget {
                         btnTextStyle: AppTextStyles.bold16(context).copyWith(
                             color: AppColors.white
                         ),
-                      onPressessed: ()
+                      onPressed: ()
                         {
                            navigate(context: context, route: Routes.updateMealScreen,arg: receivedMeal);
                         },),

@@ -44,7 +44,7 @@ class RememberMeWidget extends StatelessWidget {
         GestureDetector(
           onTap: ()
           {
-            navigate(context: context, route: Routes.forgetPassScreen);
+            navigate(context: context, route: Routes.forgetPassSendCodeScreen);
           },child: Text('Forgot Password',style: AppTextStyles.regular14(context).copyWith(color: AppColors.primaryColor),)),
       ],
     );

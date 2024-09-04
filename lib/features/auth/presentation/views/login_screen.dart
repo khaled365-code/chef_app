@@ -73,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                                 return LoginPasswordField();
                               },
                             ),
-                          SpaceWidget(height: 24.h,),
+                          SpaceWidget(height: 24,),
                           Padding(
                             padding:  EdgeInsetsDirectional.only(end: 24.w),
                               child: BlocBuilder<LoginCubit, LoginState>(
@@ -84,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-                          SpaceWidget(height: 31.h,),
+                          SpaceWidget(height: 31,),
                           BlocBuilder<LoginCubit,LoginState>(
                             builder: (context,state){
                               if(state is LoginLoadingState )
@@ -99,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                                     padding:  EdgeInsetsDirectional.only(end: 24.w),
                                     child: SharedButton(
                                       btnText: 'Log In',
-                                      onPressessed: ()
+                                      onPressed: ()
                                       {
                                         if(LoginCubit.get(context).loginFormKey.currentState!.validate())
                                         {

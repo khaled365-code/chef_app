@@ -85,7 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             SpaceWidget(height: 69.h,),
             SharedButton(btnText: currentIndex!=2?'Next':'Get Started',
-              onPressessed: ()
+              onPressed: ()
               {
                 if(currentIndex!=2)
                   {

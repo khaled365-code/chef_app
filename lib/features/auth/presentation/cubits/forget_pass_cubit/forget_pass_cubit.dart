@@ -3,12 +3,16 @@ import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'forget_pass_state.dart';
 
 class ForgetPassCubit extends Cubit<ForgetPassState> {
   ForgetPassCubit({required this.authRepoImplementation}) : super(ForgetPassInitial());
+
+
+  static ForgetPassCubit get(context)=>BlocProvider.of(context);
 
   final AuthRepoImplementation authRepoImplementation;
 
@@ -26,6 +30,14 @@ class ForgetPassCubit extends Cubit<ForgetPassState> {
   TextEditingController fifthCodeController=TextEditingController();
   TextEditingController sixthCodeController=TextEditingController();
 
+
+  AutovalidateMode sendCodeAutoValidateMode=AutovalidateMode.disabled;
+
+  activateSendCodeAutoValidateMode()
+  {
+    sendCodeAutoValidateMode=AutovalidateMode.always;
+    emit(ActivateSendCodeAutoValidateModeState());
+  }
 
 
 
@@ -81,7 +93,13 @@ class ForgetPassCubit extends Cubit<ForgetPassState> {
 
   }
 
+   AutovalidateMode verifyCodeAutoValidateMode=AutovalidateMode.disabled;
 
+  activateVerifyCodeAutoValidateMode()
+  {
+    verifyCodeAutoValidateMode=AutovalidateMode.always;
+    emit(ActivateVerifyCodeAutoValidateModeState());
+  }
   forgetPassChangeWithCodeFun({required String email,required String code,required String password,required String confirmPassword}) async
   {
     emit(ForgetPassChangeWithCodeLoadingState());

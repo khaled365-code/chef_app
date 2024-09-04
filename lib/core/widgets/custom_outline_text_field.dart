@@ -35,7 +35,7 @@ class CustomOutlineTextField extends StatelessWidget {
         onFieldSubmitted: onFieldSubmitted,
         inputFormatters: inputFormatters,
         focusNode: fieldFocusNode,
-        style: filledTextStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.cA0A5BA),
+        style: filledTextStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.c32343E),
         decoration: InputDecoration(
         hintText: hintText??'',
         hintStyle: hintStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.cA0A5BA),

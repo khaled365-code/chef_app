@@ -113,7 +113,7 @@ class DeleteAccountBottomSheet extends StatelessWidget {
                   fontSize: 19,
                   color: AppColors.white,
                 ),
-                  onPressessed: ()
+                  onPressed: ()
                 {
                   deleteAccountCubit.deleteMyAccountFun(chefId: CacheHelper().getData(key: ApiKeys.id));
                 },

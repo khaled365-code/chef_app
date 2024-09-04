@@ -174,7 +174,7 @@ class EditProfileScreen extends StatelessWidget {
                           btnTextStyle: AppTextStyles.bold16(context).copyWith(
                             color: AppColors.white
                           ),
-                          onPressessed: ()
+                          onPressed: ()
                           {
 
                           },

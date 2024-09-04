@@ -33,7 +33,7 @@ class HealthCertificateDotContainer extends StatelessWidget {
         SpaceWidget(height: 24.h,),
         SharedButton(
             btnText: 'Remove This Photo',
-          onPressessed: onDeletePhotoPressed,
+          onPressed: onDeletePhotoPressed,
         )
       ],
     ) :

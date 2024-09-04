@@ -140,7 +140,7 @@ class AddMealScreen extends StatelessWidget {
                                     btnTextStyle: AppTextStyles.bold16(context).copyWith(
                                         color: AppColors.white
                                     ),
-                                    onPressessed: ()
+                                    onPressed: ()
                                     {
                                       handleAddMealPress(context);
 

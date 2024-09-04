@@ -156,7 +156,7 @@ class UpdateMealScreen extends StatelessWidget {
                                         .copyWith(
                                         color: AppColors.white
                                     ),
-                                    onPressessed: () async
+                                    onPressed: () async
                                     {
                                       await updateMealFun(context, receivedMeal);
                                     },);}

@@ -5,8 +5,8 @@ import 'package:chef_app/features/auth/data/repos/auth_repo_implementation.dart'
 import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
-import 'package:chef_app/features/auth/presentation/views/forget_pass_send_code_screen.dart';
-import 'package:chef_app/features/auth/presentation/views/forget_password_screen.dart';
+import 'package:chef_app/features/auth/presentation/views/forget_pass_change_screen.dart';
+import 'package:chef_app/features/auth/presentation/views/send_code_screen.dart';
 import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/cubits/add_meal_cubit/add_meal_cubit.dart';
@@ -29,7 +29,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
-import '../../features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import '../../features/home/presentation/views/all_meals_screen.dart';
 import '../../features/home/presentation/views/favourites_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/onbaording_screen.dart';
@@ -144,24 +143,24 @@ class AppRouter {
                   child: SignupScreen(),
                 ), settings: routeSettings);
 
-      case Routes.forgetPassScreen:
+      case Routes.forgetPassSendCodeScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => ForgetPassCubit(
                       authRepoImplementation: locator.get<AuthRepoImplementation>()
 
                   ),
-                  child: ForgetPasswordScreen(),
+                  child: ForgetPasswordSendCodeScreen(),
                 ),
             settings: routeSettings);
 
-      case Routes.forgetPassSendCodeScreen:
+      case Routes.forgetPassChangeScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
               create: (context) => ForgetPassCubit(
                   authRepoImplementation: locator.get<AuthRepoImplementation>()
               ),
-              child: ForgetPassSendCodeScreen(),
+              child: ForgetPassChangeScreen(),
             ),
             settings: routeSettings);
     }

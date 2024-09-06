@@ -2,21 +2,24 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
-import 'package:chef_app/core/widgets/custom_outline_text_field.dart';
-import 'package:chef_app/core/widgets/name_and_text_field_widget.dart';
+import 'package:chef_app/core/widgets/shared_loading_indicator.dart';
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/image_picker_widget.dart';
 import '../../../../core/widgets/space_widget.dart';
+import '../widgets/edit_profile/brand_name_field.dart';
+import '../widgets/edit_profile/description_field.dart';
+import '../widgets/edit_profile/edit_profile_bar.dart';
+import '../widgets/edit_profile/min_cahrge_field.dart';
+import '../widgets/edit_profile/name_field.dart';
+import '../widgets/edit_profile/phone_field.dart';
 
 
 class EditProfileScreen extends StatelessWidget {
@@ -24,170 +27,138 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var editProfileCubit = BlocProvider.of<EditProfileCubit>(context);
-    return BlocConsumer<EditProfileCubit, EditProfileState>(
-      listener: (context, state) {
-        // TODO: implement listener
+    return BlocListener<EditProfileCubit,EditProfileState>(
+      listener: (context, state)
+      {
+        handleEditProfileListener(state, context);
       },
-      builder: (context, state) {
-        return Scaffold(
-          body: SafeArea(
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
+      child: Scaffold(
+        body: SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Form(
+                    key: EditProfileCubit.get(context).editProfileFormKey,
+                    autovalidateMode: EditProfileCubit.get(context).editProfileValidateMode,
                     child: Padding(
                       padding: EdgeInsetsDirectional.only(
                           start: 24.w, end: 24.w),
-                      child: Column(
+                      child: BlocBuilder<EditProfileCubit, EditProfileState>(
+                      builder: (context, state) {
+                      return Column(
                         children: [
                           SpaceWidget(height: 24,),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  width: 45.w,
-                                  height: 45.h,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.cECF0F4
-                                  ),
-                                  child: Center(child: SvgPicture.asset(
-                                      ImageConstants.arrowBackIcon)),
-                                ),
-                              ),
-                              SpaceWidget(width: 16,),
-                              Text(
-                                'Edit Profile', style: AppTextStyles.regular17(
-                                  context).copyWith(color: AppColors.c181C2E),),
-                            ],
-                          ),
+                          EditProfileAppBar(),
                           SpaceWidget(height: 25,),
                           ImagePickerWidget(
-                          imagePath: editProfileCubit.newProfilePhoto?.path,
-                          onGalleryTap: ()
+                            imagePath: EditProfileCubit.get(context).newProfilePhoto?.path,
+                            onGalleryTap: ()
                             {
-                              imagePick(imageSource: ImageSource.gallery).then(
-                                (value) {
-                                  editProfileCubit.updateProfilePhoto(image: value!);
+                              imagePick(imageSource: ImageSource.gallery).then((value)
+                                {
+                                  EditProfileCubit.get(context).updateProfilePhoto(image: value!);
                                 },
                               );
                               Navigator.pop(context);
                             },
-                            onCameraTap: ()
-                            {
+                            onCameraTap: () {
                               imagePick(imageSource: ImageSource.camera).then((value)
-                                {
-                                  editProfileCubit.updateProfilePhoto(image: value!);
+                               {
+                                  EditProfileCubit.get(context).updateProfilePhoto(image: value!);
                                 },
                               );
                               Navigator.pop(context);
                             },
                             onDeletePhotoTap: ()
                             {
-                              editProfileCubit.deleteProfilePhoto();
+                              EditProfileCubit.get(context).deleteProfilePhoto();
                             },
                           ),
                           SpaceWidget(height: 30,),
-                          NameAndTextFieldWidget(
-                              title: 'Full Name',
-                              childWidget: CustomOutlineTextField(
-                                  controller: editProfileCubit.nameController,
-                                   keyboardType: TextInputType.name,
-                                onFieldSubmitted: (value)
-                                {
-
-                                },
-
-                              )),
+                          EditProfileNameField(),
                           SpaceWidget(height: 24,),
-                          NameAndTextFieldWidget(
-                              title: 'Phone Number',
-                              childWidget: CustomOutlineTextField(
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  editProfileCubit.phoneMaskFormatter,
-                                ],
-                                controller: editProfileCubit.phoneController,
-                                keyboardType: TextInputType.number,
-                                onFieldSubmitted: (value)
-                                {
-
-                                },
-
-                              )),
+                          EditProfilePhoneField(),
                           SpaceWidget(height: 24,),
-                          NameAndTextFieldWidget(
-                              title: 'Brand Name',
-                              childWidget: CustomOutlineTextField(
-                                controller: editProfileCubit.brandNameController,
-                                keyboardType: TextInputType.text,
-                                onFieldSubmitted: (value)
-                                {
-
-                                },
-
-                              )),
+                          EditProfileBrandNameField(),
                           SpaceWidget(height: 24,),
-                          NameAndTextFieldWidget(
-                              title: 'Min Charge',
-                              childWidget: CustomOutlineTextField(
-                                controller: editProfileCubit.minChargeController,
-                                keyboardType: TextInputType.number,
-                                onFieldSubmitted: (value)
-                                {
-
-                                },
-
-                              )),
+                          EditProfileMinChargeField(),
                           SpaceWidget(height: 24,),
-                          NameAndTextFieldWidget(
-                              title: 'Description',
-                              childWidget: CustomOutlineTextField(
-                                controller: editProfileCubit.discController,
-                                keyboardType: TextInputType.text,
-                                onFieldSubmitted: (value)
-                                {
-
-                                },
-
-                              )),
-
-
-
-
-
-
+                          EditProfileDescriptionField(),
+                          Expanded(child: SpaceWidget(height: 32,)),
+                          state is EditProfileLoadingState? Center(
+                            child: SharedLoadingIndicator(),
+                          ):SharedButton(
+                            btnText: 'SAVE',
+                            btnTextStyle: AppTextStyles.bold16(context)
+                                .copyWith(color: AppColors.white),
+                            onPressed: ()
+                            {
+                              if(EditProfileCubit.get(context).editProfileFormKey.currentState!.validate())
+                              {
+                                EditProfileCubit.get(context).editProfileFormKey.currentState!.save();
+                                EditProfileCubit.get(context).editProfileFun(
+                                  name: EditProfileCubit.get(context).nameController.text,
+                                  phone: EditProfileCubit.get(context).phoneController.text,
+                                  brandName: EditProfileCubit.get(context).brandNameController.text,
+                                  minCharge: EditProfileCubit.get(context).minChargeController.text.isNotEmpty? double.parse(EditProfileCubit.get(context).minChargeController.text):null,
+                                  disc: EditProfileCubit.get(context).discController.text,
+                                );
+                              }
+                              else
+                              {
+                                EditProfileCubit.get(context).activateEditProfileValidateMode();
+                              }
+                            },
+                          ),
+                          Spacer(),
                         ],
-                      ),
+                      );
+  },
+),
                     ),
                   ),
-                  SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Column(
-                      children: [
-                       Expanded(child: SpaceWidget(height: 32,)),
-                        SharedButton(
-                            btnText: 'SAVE',
-                          btnTextStyle: AppTextStyles.bold16(context).copyWith(
-                            color: AppColors.white
-                          ),
-                          onPressed: ()
-                          {
+                ),
+                // SliverFillRemaining(
+                //   hasScrollBody: false,
+                //   child: Column(
+                //     children: [
+                //
+                //     ],
+                //   ),
+                // )
 
-                          },
-                        ),
-                        SpaceWidget(height: 30,),
-                      ],
-                    ),
-                  )
-
-                ],
-              )),
-        );
-      },
+              ],
+            )),
+      ),
     );
   }
+
+  void handleEditProfileListener(EditProfileState state, BuildContext context)
+  {
+     if(state is EditProfileSuccessState)
+      {
+        buildScaffoldMessenger(context: context, msg: state.message);
+        HomeScreenCubit.get(context).getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id));
+      }
+    if(state is EditProfileFailureState)
+      {
+        if(state.errorModel.error!=null)
+          {
+            buildScaffoldMessenger(
+                context: context,
+                msg: state.errorModel.error.toString().substring(1,state.errorModel.error.toString().length-1));
+          }
+        else
+          {
+            buildScaffoldMessenger(context: context, msg: state.errorModel.errorMessage!);
+          }
+      }
+  }
 }
+
+
+
+
+
+

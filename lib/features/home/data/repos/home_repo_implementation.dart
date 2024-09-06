@@ -1,7 +1,5 @@
 
 
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:chef_app/core/database/api/api_consumer.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
@@ -16,7 +14,9 @@ import 'package:dio/dio.dart';
 import 'package:dio/src/multipart_file.dart';
 import 'package:hive/hive.dart';
 
+import '../../../../core/database/cache/cache_helper.dart';
 import '../models/add_meal_model/add_meal_model.dart';
+import '../models/chef_info_model/chef_info_model.dart';
 
 class HomeRepoImplementation implements HomeRepo
 {
@@ -172,6 +172,30 @@ class HomeRepoImplementation implements HomeRepo
     var favouriteMealsBox=Hive.box<Meals>('favourite_meals');
     await favouriteMealsBox.deleteAt(index);
     return Future.value(unit);
+  }
+
+  @override
+  Future<Either<ErrorModel, ChefInfoModel>> getChefData({required String chefIId}) async
+  {
+    try
+    {
+      final response=await api.get(EndPoints.getChefDataEndPoint(chefIId: chefIId));
+      ChefInfoModel chefInfoModel=ChefInfoModel.fromJson(response);
+      await Future.wait([
+        CacheHelper().saveData(key: ApiKeys.profilePic, value: chefInfoModel.chef!.profilePic),
+        CacheHelper().saveData(key: ApiKeys.phone, value: chefInfoModel.chef!.phone),
+        CacheHelper().saveData(key: ApiKeys.brandName, value: chefInfoModel.chef!.brandName),
+        CacheHelper().saveData(key: ApiKeys.minCharge, value: chefInfoModel.chef!.minCharge),
+        CacheHelper().saveData(key: ApiKeys.description, value: chefInfoModel.chef!.disc),
+        CacheHelper().saveData(key: ApiKeys.healthCertificate, value: chefInfoModel.chef!.healthCertificate,),
+      ]);
+
+      return Right(chefInfoModel);
+    }
+    on ServerException catch(e)
+    {
+      return Left(e.errorModel);
+    }
   }
 
 

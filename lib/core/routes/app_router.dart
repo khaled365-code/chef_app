@@ -17,7 +17,6 @@ import 'package:chef_app/features/home/presentation/views/meal_details_screen.da
 import 'package:chef_app/features/home/presentation/views/update_meal_screen.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
 import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
-import 'package:chef_app/features/profile/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/get_specific_chef_meals_cubit/get_specific_chef_meals_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/settings_cubit/settings_cubit.dart';
 import 'package:chef_app/features/profile/presentation/views/certification_screen.dart';
@@ -115,11 +114,7 @@ class AppRouter {
 
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-           create:  (context) => GetChefDataCubit(
-           profileRepoImplementation: locator.get<ProfileRepoImplementation>(),
-           )..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),
-                child: HomeScreen()),
+            builder: (context) => HomeScreen(),
             settings: routeSettings);
 
       case Routes.loginScreen:

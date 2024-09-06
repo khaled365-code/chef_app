@@ -18,22 +18,26 @@ class WelcomeTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(start: 24.w),
-      child: RichText(
-          text: TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Hey ${CacheHelper().getData(
-                      key: ApiKeys.name)},',
-                  style: AppTextStyles.regular16(context)
-                      .copyWith(color: AppColors.c1E1D1D),
-                ),
-                TextSpan(
-                  text: ' ${getCurrentTime()}!',
-                  style: AppTextStyles.bold16(context).copyWith(
-                      color: AppColors.c1E1D1D),
-                )
-              ]
-          )),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: AlignmentDirectional.centerStart,
+        child: RichText(
+            text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Hey ${CacheHelper().getData(
+                        key: ApiKeys.name)},',
+                    style: AppTextStyles.regular16(context)
+                        .copyWith(color: AppColors.c1E1D1D),
+                  ),
+                  TextSpan(
+                    text: ' ${getCurrentTime()}!',
+                    style: AppTextStyles.bold16(context).copyWith(
+                        color: AppColors.c1E1D1D),
+                  )
+                ]
+            )),
+      ),
     );
   }
 }

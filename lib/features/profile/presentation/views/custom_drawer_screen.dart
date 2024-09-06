@@ -1,17 +1,13 @@
-import 'package:chef_app/core/database/api/api_keys.dart';
-import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
-import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
+import '../widgets/drawer/drawer_app_bar.dart';
 import '../widgets/drawer_header_widget.dart';
-import '../widgets/logout_and_delete_account_container.dart';
-import '../widgets/meals_and_notifications_container.dart';
-import '../widgets/personal_and_edit_profile_container.dart';
-import '../widgets/settings_and_faq_container.dart';
+import '../widgets/drawer/logout_and_delete_account_container.dart';
+import '../widgets/drawer/meals_and_notifications_container.dart';
+import '../widgets/drawer/personal_and_edit_profile_container.dart';
+import '../widgets/drawer/settings_and_faq_container.dart';
 
 
 class CustomDrawerScreen extends StatelessWidget {
@@ -25,7 +21,8 @@ class CustomDrawerScreen extends StatelessWidget {
         backgroundColor: AppColors.cF3F3F3,
         body: SafeArea(
               child:
-              CustomScrollView(slivers:
+              CustomScrollView(
+                  slivers:
               [
                 SliverToBoxAdapter(
                   child: Padding(
@@ -35,45 +32,7 @@ class CustomDrawerScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SpaceWidget(height: 24,),
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                width: 45.w,
-                                height: 45.h,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.cECF0F4
-                                ),
-                                child: Center(child: SvgPicture.asset(
-                                    ImageConstants.arrowBackIcon)),
-                              ),
-                            ),
-                            SpaceWidget(width: 16,),
-                            Text('Profile', style: AppTextStyles.regular17(
-                                context).copyWith(color: Color(0xff181C2E)),),
-                            Spacer(),
-                            GestureDetector(
-                              onTap: ()
-                              {
-                                print(CacheHelper().getData(key: ApiKeys.phone));
-                              },
-                              child: Container(
-                                width: 45.w,
-                                height: 45.h,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.cECF0F4
-                                ),
-                                child: Center(child: SvgPicture.asset(
-                                    ImageConstants.points3Icon)),
-                              ),
-                            ),
-                          ],
-                        ),
+                        DrawerAppBar(),
                         SpaceWidget(height: 24,),
                         DrawerHeaderWidget(),
                         SpaceWidget(height: 32,),
@@ -84,7 +43,7 @@ class CustomDrawerScreen extends StatelessWidget {
                         SettingsAndFaqContainer(),
                         SpaceWidget(height: 20,),
                         LogoutAndDeleteAccountContainer(),
-                        SpaceWidget(height: 24,),
+                        SpaceWidget(height: 29,),
 
                       ],
                     ),
@@ -96,6 +55,7 @@ class CustomDrawerScreen extends StatelessWidget {
         );
   }
 }
+
 
 
 

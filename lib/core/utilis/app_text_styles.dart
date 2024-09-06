@@ -187,6 +187,15 @@ class AppTextStyles
 
     );
   }
+  static  TextStyle bold19 (BuildContext context)
+  {
+    return TextStyle(
+        fontSize: 19.sp,
+        fontWeight: FontweightHelper.bold,
+        fontFamily: 'sen'
+
+    );
+  }
   static  TextStyle bold40 (BuildContext context)
   {
     return TextStyle(

@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/routes/routes.dart';
-import '../../../../core/utilis/app_assets.dart';
-import '../../../../core/utilis/app_colors.dart';
-import '../../../../core/utilis/app_text_styles.dart';
-import '../../../../core/widgets/space_widget.dart';
+import '../../../../../core/routes/routes.dart';
+import '../../../../../core/utilis/app_assets.dart';
+import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/widgets/space_widget.dart';
 
 class SettingsAndFaqContainer extends StatelessWidget {
   const SettingsAndFaqContainer({
@@ -31,6 +31,7 @@ class SettingsAndFaqContainer extends StatelessWidget {
               width: 40.w,
               height: 40.h,
               decoration: BoxDecoration(
+                color: AppColors.white,
                 shape: BoxShape.circle,
               ),
               child: Padding(
@@ -42,26 +43,25 @@ class SettingsAndFaqContainer extends StatelessWidget {
             trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
           ),
           SpaceWidget(height: 16,),
-          GestureDetector(
+          ListTile(
             onTap: ()
             {
               navigate(context: context, route: Routes.mainSettingsScreen);
             },
-            child: ListTile(
-              leading: Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(11),
-                  child: SvgPicture.asset(ImageConstants.settingsIcon,),
-                ),
+            leading: Container(
+              width: 40.w,
+              height: 40.h,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                shape: BoxShape.circle,
               ),
-              title: Text('Settings',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
-              trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
+              child: Padding(
+                padding: const EdgeInsets.all(11),
+                child: SvgPicture.asset(ImageConstants.settingsIcon,),
+              ),
             ),
+            title: Text('Settings',style: AppTextStyles.regular16(context).copyWith(color: AppColors.c32343E,)),
+            trailing: SvgPicture.asset(ImageConstants.arrowNextProfileIcon),
           ),
 
         ],

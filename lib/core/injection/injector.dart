@@ -9,9 +9,9 @@ import 'package:get_it/get_it.dart';
 GetIt locator=GetIt.instance;
 
 
-void setUpLocator()
+Future<void> setUpLocator() async
 {
-  locator.registerSingleton<DioConsumer>(DioConsumer(dio: Dio()));
+   locator.registerSingleton<DioConsumer>(DioConsumer(dio: Dio()));
 
   locator.registerSingleton<HomeRepoImplementation>(HomeRepoImplementation(api: locator.get<DioConsumer>()));
 

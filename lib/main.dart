@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'chef_app.dart';
+import 'core/database/api/api_keys.dart';
 import 'core/utilis/services/local_notifications_service.dart';
 import 'core/utilis/services/push_notifications_service.dart';
 import 'features/home/data/models/get_meals_model/chef_data.dart';
@@ -35,11 +36,11 @@ void main() async
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PushNotificationsService.init();
 
-  setUpLocator();
+  await setUpLocator();
   runApp(MultiBlocProvider(
     providers: 
     [
-      BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun(),)
+      BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),),
     ],
       child: const ChefsApp()));
   Bloc.observer = MyBlocObserver();

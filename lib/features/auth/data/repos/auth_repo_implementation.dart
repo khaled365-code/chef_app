@@ -32,10 +32,10 @@ class AuthRepoImplementation implements AuthRepo
         ApiKeys.password:password
       });
       LoginModel loginModel=LoginModel.fromJson(response);
-       CacheHelper().saveData(key: ApiKeys.id, value: '${JwtDecoder.decode(loginModel.token)['id']}');
-      CacheHelper().saveData(key: ApiKeys.email, value: '${JwtDecoder.decode(loginModel.token)['email']}');
-      CacheHelper().saveData(key: ApiKeys.name, value: '${JwtDecoder.decode(loginModel.token)['name']}');
-      CacheHelper().saveData(key: ApiKeys.token, value: loginModel.token);
+      await CacheHelper().saveData(key: ApiKeys.id, value: '${JwtDecoder.decode(loginModel.token)['id']}');
+     await CacheHelper().saveData(key: ApiKeys.email, value: '${JwtDecoder.decode(loginModel.token)['email']}');
+     await CacheHelper().saveData(key: ApiKeys.name, value: '${JwtDecoder.decode(loginModel.token)['name']}');
+      await CacheHelper().saveData(key: ApiKeys.token, value: loginModel.token);
       return Right(loginModel);
     }on ServerException catch(e)
     {

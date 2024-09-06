@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
@@ -10,11 +8,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/utilis/app_assets.dart';
-import '../../../../../main.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
+import '../../../data/models/chef_info_model/chef_info_model.dart';
 import '../../../data/models/get_meals_model/meals.dart';
 
 part 'home_screen_state.dart';
@@ -25,8 +22,20 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   static HomeScreenCubit get(context)=>BlocProvider.of(context);
   final HomeRepoImplementation homeRepoImplementation;
 
+  getChefDataFun({required String chefIId}) async
+  {
+    emit(GetChefDataLoadingState());
+    final response=await homeRepoImplementation.getChefData(chefIId: chefIId);
 
-    List<CarouselSliderModel> carouselSliderList=[
+    response.fold(
+            (errorModel) => emit(GetChefDataErrorState(errorModel: errorModel)),
+            (chefInfoModel) => emit(GetChefDataSuccessState(chefInfoModel: chefInfoModel )));
+
+  }
+
+
+
+  List<CarouselSliderModel> carouselSliderList=[
     CarouselSliderModel(textTitle: 'Become a Culinary Mastermind,Create and share your signature dishes with the app\'s community! Add mouthwatering meals with detailed descriptions, so users can discover your culinary creations.', btnText: 'See meals'),
     CarouselSliderModel(textTitle: 'Craft Your Culinary Identity: Edit and update your chef profile whenever you like. Add a captivating photo, write a compelling bio, and highlight your culinary expertise to impress the app\'s foodie community.', btnText: 'See your profile'),
   ];

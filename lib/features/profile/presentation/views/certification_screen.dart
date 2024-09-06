@@ -12,6 +12,7 @@ import '../../../../core/database/api/api_keys.dart';
 import '../../../../core/database/cache/cache_helper.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
+import '../widgets/certification/certification_app_bar.dart';
 
 class CertificationScreen extends StatelessWidget {
   const CertificationScreen({super.key});
@@ -19,7 +20,7 @@ class CertificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+     backgroundColor: AppColors.white,
       body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,23 +28,9 @@ class CertificationScreen extends StatelessWidget {
               SpaceWidget(height: 24,),
               Padding(
                 padding:  EdgeInsetsDirectional.only(start: 24.w),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    width: 45.w,
-                    height: 45.h,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.cECF0F4
-                    ),
-                    child: Center(child: SvgPicture.asset(
-                        ImageConstants.arrowBackIcon)),
-                  ),
-                ),
+                child: CertificationAppBar(),
               ),
-              Spacer(),
+              Spacer(flex: 2),
               Padding(
                 padding:  EdgeInsetsDirectional.only(start: 10.w,end: 10.w),
                 child: Center(
@@ -63,25 +50,26 @@ class CertificationScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SpaceWidget(height: 32.15,),
+              Spacer(),
               Center(
-                child: Text('certification!',style: AppTextStyles.extraBold24(context).copyWith(
-                  color: AppColors.c111A2C,
+                child: Text('Certification!',style: AppTextStyles.extraBold24(context).copyWith(
+                  color: AppColors.c00243C,
                   fontWeight: FontweightHelper.bold
                 ),),
               ),
-              SpaceWidget(height: 16,),
+              SpaceWidget(height: 10,),
               Center(
-                child: Text('Here is your health certificate',style: AppTextStyles.regular14(context).copyWith(
-                    color: AppColors.c111A2C,
+                child: Text('Here is your health certificate',style: AppTextStyles.regular17(context).copyWith(
+                    color: AppColors.cA4ACAD,
                 ),),
               ),
+              SpaceWidget(height: 5,),
               Center(
-                child: Text('enjoy our service!',style: AppTextStyles.regular14(context).copyWith(
-                    color: AppColors.c525C67,
+                child: Text('enjoy our service!',style: AppTextStyles.regular17(context).copyWith(
+                    color: AppColors.cA4ACAD,
                 ),),
               ),
-              Spacer(),
+              Spacer(flex: 2,),
 
 
             ],
@@ -89,3 +77,4 @@ class CertificationScreen extends StatelessWidget {
     );
   }
 }
+

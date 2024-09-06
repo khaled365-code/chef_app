@@ -20,6 +20,8 @@ class EndPoints
 
   static const String changePasswordForAccountEndPoint='$baseUrl/chef/change-password';
 
+  static const String updateProfileEndPoint='$baseUrl/chef/update';
+
 
   static String updateMealEndPoint({required String mealId})
   {

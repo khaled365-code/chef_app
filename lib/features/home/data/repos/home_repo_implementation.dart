@@ -1,19 +1,23 @@
 
 
 
+import 'package:chef_app/core/commons/global_models/app_notification_response.dart';
 import 'package:chef_app/core/database/api/api_consumer.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/api/end_points.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/core/database/errors/server_exception.dart';
+import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
 import 'package:chef_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/src/multipart_file.dart';
+import 'package:flutter_local_notifications_platform_interface/src/types.dart';
 import 'package:hive/hive.dart';
 
+import '../../../../core/commons/global_models/local_notifications_model.dart';
 import '../../../../core/database/cache/cache_helper.dart';
 import '../models/add_meal_model/add_meal_model.dart';
 import '../models/chef_info_model/chef_info_model.dart';
@@ -196,6 +200,49 @@ class HomeRepoImplementation implements HomeRepo
     {
       return Left(e.errorModel);
     }
+  }
+
+  @override
+  Either<Exception, List<LocalNotificationsModel>> getCachedLocalNotifications()
+  {
+    var notificationBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
+    if(notificationBox.values.isNotEmpty)
+      {
+        return Right(notificationBox.values.toList());
+      }
+    else
+      {
+        return Left(Exception('No Notifications Found'));
+      }
+
+  }
+
+  @override
+  Future<Unit> saveLocalNotification({required LocalNotificationsModel localNotification}) async
+  {
+    var notificationBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
+    await notificationBox.add(localNotification);
+    return Future.value(unit);
+  }
+
+  @override
+  Future<Unit> clearAllNotifications() async
+  {
+    var notificationBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
+    await notificationBox.clear();
+    await LocalNotificationsService.cancelAllNotifications();
+    return Future.value(unit);
+
+  }
+
+  @override
+  Future<Unit> deleteNotification({required  int localNotificationId,required int index}) async
+  {
+    var notificationBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
+     await notificationBox.deleteAt(index);
+     await LocalNotificationsService.cancelSpecificNotification(id: localNotificationId);
+
+    return Future.value(unit);
   }
 
 

@@ -1,0 +1,93 @@
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chef_app/core/utilis/app_assets.dart';
+import 'package:chef_app/core/widgets/space_widget.dart';
+import 'package:chef_app/features/profile/presentation/cubits/get_specific_chef_meals_cubit/get_specific_chef_meals_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+import '../../../../../core/utilis/app_colors.dart';
+
+class GridShimmerChefMealItem extends StatelessWidget {
+  const GridShimmerChefMealItem({super.key});
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return BlocConsumer<GetSpecificChefMealsCubit, GetSpecificChefMealsState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              width: 156.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.r),
+                color: AppColors.white,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Spacer(flex: 5,),
+                  Shimmer.fromColors(
+                    baseColor: AppColors.white,
+                    highlightColor: AppColors.cD1D8E0,
+                    child: Container(
+                      height: 25.h,
+                      width: 45.w,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(image: AssetImage(ImageConstants.loadingImage,),fit: BoxFit.fill)
+                      ),
+                    ),
+                  ),
+                  SpaceWidget(height: 18,),
+                  Shimmer.fromColors(
+                    baseColor: AppColors.white,
+                    highlightColor: AppColors.cD1D8E0,
+                    child: Container(
+                      height: 25.h,
+                      width: 45.w,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage(ImageConstants.loadingImage),fit: BoxFit.fill)
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+
+                ],
+              ),
+            ),
+            PositionedDirectional(
+              top: -50.5.h,
+              start: 12.w,
+              end: 14.w,
+              child: Shimmer.fromColors(
+                baseColor: AppColors.white,
+                highlightColor: AppColors.cD1D8E0,
+                child: Container(
+                    width: 129.w,
+                    height: 129.h,
+                    decoration:
+                    BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage(
+                                ImageConstants.userDefaultImage
+                            ), fit: BoxFit.fill)
+                    )
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

@@ -3,8 +3,6 @@
 import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 

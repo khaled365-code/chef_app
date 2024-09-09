@@ -22,6 +22,7 @@ import 'package:chef_app/features/profile/presentation/cubits/settings_cubit/set
 import 'package:chef_app/features/profile/presentation/views/certification_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/edit_profile_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/main_settings_screen.dart';
+import 'package:chef_app/features/profile/presentation/views/notifications_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/personal_info_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/specific_chef_meals_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,6 +42,11 @@ class AppRouter {
       case Routes.splash2Screen:
         return MaterialPageRoute(
             builder: (context) => Splash2Screen(), settings: routeSettings);
+
+      case Routes.notificationsScreen:
+        return MaterialPageRoute(
+            builder: (context) => NotificationsScreen(), settings: routeSettings);
+
 
       case Routes.favouritesScreen:
         return MaterialPageRoute(

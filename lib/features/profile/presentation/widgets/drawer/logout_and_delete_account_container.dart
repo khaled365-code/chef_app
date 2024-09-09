@@ -26,6 +26,7 @@ class LogoutAndDeleteAccountContainer extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
+            contentPadding: EdgeInsetsDirectional.zero,
             onTap: ()
             {
               showModalBottomSheet(
@@ -49,6 +50,7 @@ class LogoutAndDeleteAccountContainer extends StatelessWidget {
           ),
           SpaceWidget(height: 16,),
           ListTile(
+            contentPadding: EdgeInsetsDirectional.zero,
             onTap: ()
             {
               showModalBottomSheet(

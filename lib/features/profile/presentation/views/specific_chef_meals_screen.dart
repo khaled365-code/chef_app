@@ -1,120 +1,135 @@
-
-
-
-import 'package:chef_app/core/database/api/api_keys.dart';
-import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/features/profile/presentation/cubits/get_specific_chef_meals_cubit/get_specific_chef_meals_cubit.dart';
+import 'package:chef_app/features/profile/presentation/widgets/specific_chef_meals/grid_shimmer_chef_meal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lottie/lottie.dart';
-import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../widgets/grid_specific_chef_meal_item.dart';
+import '../widgets/specific_chef_meals/grid_specific_chef_meal_item.dart';
+import '../widgets/specific_chef_meals/specific_chef_meals_bar.dart';
 
 class SpecificChefMealsScreen extends StatelessWidget {
   const SpecificChefMealsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<GetSpecificChefMealsCubit, GetSpecificChefMealsState>(
-  listener: (context, state) {
-    // TODO: implement listener
-  },
-  builder: (context, state) {
     return Scaffold(
-      backgroundColor: AppColors.cFEFEFE,
+      backgroundColor: AppColors.cF3F3F3,
       body: SafeArea(
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SpaceWidget(height: 24,),
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(start: 24.w),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              width: 45.w,
-                              height: 45.h,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.cECF0F4
-                              ),
-                              child: Center(child: SvgPicture.asset(
-                                  ImageConstants.arrowBackIcon)),
-                            ),
-                          ),
-
-                        ],
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SpaceWidget(height: 24,),
+                      SpecificChefMealsAppBar(),
+                      SpaceWidget(height: 24,),
+                      BlocBuilder<GetSpecificChefMealsCubit,GetSpecificChefMealsState>(
+                        builder: (context, state) {
+                          return Center(
+                            child: Text('Found ${GetSpecificChefMealsCubit
+                                .get(context)
+                                .chefMeals
+                                ?.length ?? 0} results ',
+                                style: AppTextStyles.bold28(context).copyWith(
+                                    color: AppColors.c32343E
+                                )),
+                          );
+                        },
                       ),
-                    ),
-                    SpaceWidget(height: 24,),
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(start: 24.w),
-                      child: Text('All ${CacheHelper().getData(key: ApiKeys.name)} Meals',
-                          style: AppTextStyles.regular20(context).copyWith(
-                              color: AppColors.c32343E
-                          )),
-                    ),
-                    SpaceWidget(height: 24,),
+                      SpaceWidget(height: 70,),
 
-                  ],
+
+                    ],
+                  ),
                 ),
               ),
-              state is GetSpecificChefMealsLoadingState?
-              SliverToBoxAdapter(
-                child: Center(child: Lottie.asset(ImageConstants.foodLottie)),
-              ):
-              state is GetSpecificChefMealsSuccessState?
-              state.specificChefMealsModel.meals!.isNotEmpty?
-              SliverFillRemaining(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
-                        child: MasonryGridView.count(
+              BlocBuilder<GetSpecificChefMealsCubit, GetSpecificChefMealsState>(
+                builder: (context, state) {
+                  if (state is GetSpecificChefMealsLoadingState)
+                  {
+                    return  SliverToBoxAdapter(
+                      child: GridView.custom(
+                        padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        childrenDelegate: SliverChildBuilderDelegate(
+                              (context, index) => GridShimmerChefMealItem(),
+                          childCount: 10,
+                        ),
+                        gridDelegate: SliverWovenGridDelegate.count(
                           crossAxisCount: 2,
-                          mainAxisSpacing: 21.h,
-                          crossAxisSpacing: 21.w,
-                          clipBehavior: Clip.none,
-                          itemCount: state.specificChefMealsModel.meals!.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: ()
-                              {
-                                // navigate(context: context, route: Routes.mealDetailsScreen,arg: state.specificChefMealsModel.meals![index]);
-                              },
-                              child: GridSpecificChefMealsItem(
-                                meal: state.specificChefMealsModel.meals![index],
-                              ),
-                            );
-                          },
+                          mainAxisSpacing: 70,
+                          crossAxisSpacing: 30,
+                          pattern: [
+                            WovenGridTile(.67),
+                            WovenGridTile(
+                                220 / 252,
+                                alignment: AlignmentDirectional.bottomCenter
+                            ),
+                          ],
+
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-                  : SliverToBoxAdapter(child: SizedBox.shrink(),) :SliverToBoxAdapter(child: Text('Error'),),
-              SliverToBoxAdapter(child: SpaceWidget(height: 32,)),
+                    );
+
+                  }
+                  else if (state is GetSpecificChefMealsSuccessState &&
+                      GetSpecificChefMealsCubit.get(context).chefMeals!.isNotEmpty)
+                  {
+
+                    return  SliverToBoxAdapter(
+                      child: GridView.custom(
+                        padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        childrenDelegate: SliverChildBuilderDelegate(
+                          (context, index) => GridSpecificChefMealsItem(
+                            meal: GetSpecificChefMealsCubit.get(context).chefMeals![index],
+                          ),
+                          childCount: GetSpecificChefMealsCubit.get(context).chefMeals!.length,
+                        ),
+                        gridDelegate: SliverWovenGridDelegate.count(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 70,
+                          crossAxisSpacing: 30,
+                          pattern: [
+                            WovenGridTile(.67),
+                            WovenGridTile(
+                              220 / 252,
+                              alignment: AlignmentDirectional.bottomCenter
+                            ),
+                          ],
+                      
+                        ),
+                      ),
+                    );
+
+                  }
+                  else if (GetSpecificChefMealsCubit.get(context).chefMeals!.isEmpty)
+                  {
+                    return SliverToBoxAdapter(
+                      child: SizedBox.shrink(),
+                    );
+                  }
+                  else
+                  {
+                    return SliverToBoxAdapter(
+                      child: Text('Error'),
+                    );
+                  }
+                },),
+              SliverToBoxAdapter(child: SpaceWidget(height: 39,)),
 
 
             ],
           )),
     );
-  },
-);
   }
 }
+

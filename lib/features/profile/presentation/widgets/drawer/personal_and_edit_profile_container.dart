@@ -26,6 +26,7 @@ class PersonalAndEditProfileBodyContainer extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
+            contentPadding: EdgeInsetsDirectional.zero,
             onTap: ()
             {
               navigate(context: context, route: Routes.personalInfoScreen);
@@ -44,6 +45,7 @@ class PersonalAndEditProfileBodyContainer extends StatelessWidget {
           ),
           SpaceWidget(height: 16,),
           ListTile(
+            contentPadding: EdgeInsetsDirectional.zero,
             onTap: ()
             {
               navigate(context: context, route: Routes.editProfileScreen);

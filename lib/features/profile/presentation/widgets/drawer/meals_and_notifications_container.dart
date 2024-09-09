@@ -1,6 +1,9 @@
 
 
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
+import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,6 +30,7 @@ class MealsAndNotificationsContainer extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
+            contentPadding: EdgeInsetsDirectional.zero,
             onTap: ()
             {
               navigate(context: context, route: Routes.specificChefMealsScreen);
@@ -48,6 +52,13 @@ class MealsAndNotificationsContainer extends StatelessWidget {
           ),
           SpaceWidget(height: 16,),
           ListTile(
+            onTap: () async
+            {
+
+              HomeScreenCubit.get(context).getAllCachedNotificationsFun();
+              navigate(context: context, route: Routes.notificationsScreen);
+            },
+            contentPadding: EdgeInsetsDirectional.zero,
             leading: Container(
               width: 40.w,
               height: 40.h,

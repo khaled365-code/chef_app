@@ -1,7 +1,10 @@
 
 
+import 'package:chef_app/core/commons/global_models/app_notification_response.dart';
+import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../../../../core/database/errors/error_model.dart';
 import '../models/add_meal_model/add_meal_model.dart';
 import '../models/chef_info_model/chef_info_model.dart';
@@ -47,6 +50,15 @@ abstract class HomeRepo
 
 
   Either<Exception,List<Meals>> getCachedHistoryMeals();
+
+
+  Future<Unit> saveLocalNotification({required LocalNotificationsModel localNotification});
+
+  Either<Exception,List<LocalNotificationsModel>> getCachedLocalNotifications();
+
+  Future<Unit> deleteNotification({required int localNotificationId,required int index});
+
+  Future<Unit> clearAllNotifications();
 
 
 

@@ -3,11 +3,13 @@
 
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+
+import '../../commons/global_models/local_notifications_model.dart';
 
 class PushNotificationsService
 {
@@ -26,8 +28,9 @@ class PushNotificationsService
     await fireMessaging.subscribeToTopic('Your_Meals');
   }
 
-  static void onForegroundMessage(RemoteMessage message)
+  static void onForegroundMessage(RemoteMessage message) async
   {
+
     showForegroundNotification(remoteMessage: message);
   }
   static  Future<void> handler(RemoteMessage message) async

@@ -71,6 +71,18 @@ final class GetCachedHistoryMealsFailureState extends HomeScreenState {
 }
 
 
+final class GetLocalNotificationsFailureState extends HomeScreenState {
+
+  final String errorMessage;
+
+  GetLocalNotificationsFailureState({required this.errorMessage});
+}
+final class GetLocalNotificationsSuccessState extends HomeScreenState {
+
+
+}
+
+
 
 
 

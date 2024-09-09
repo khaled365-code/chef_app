@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'chef_app.dart';
+import 'core/commons/global_models/local_notifications_model.dart';
 import 'core/database/api/api_keys.dart';
 import 'core/utilis/services/local_notifications_service.dart';
 import 'core/utilis/services/push_notifications_service.dart';
@@ -31,12 +32,15 @@ void main() async
   await Hive.initFlutter();
   Hive.registerAdapter(MealsAdapter());
   Hive.registerAdapter(ChefDataAdapter());
+  Hive.registerAdapter(LocalNotificationsModelAdapter());
   await Hive.openBox<Meals>('favourite_meals');
   await Hive.openBox<Meals>('history_meals');
+  await Hive.openBox<LocalNotificationsModel>('cached_local_notifications');
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PushNotificationsService.init();
 
   await setUpLocator();
+
   runApp(MultiBlocProvider(
     providers: 
     [

@@ -27,6 +27,7 @@ class SettingsAndFaqContainer extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
+            contentPadding: EdgeInsetsDirectional.zero,
             leading: Container(
               width: 40.w,
               height: 40.h,
@@ -44,6 +45,7 @@ class SettingsAndFaqContainer extends StatelessWidget {
           ),
           SpaceWidget(height: 16,),
           ListTile(
+            contentPadding: EdgeInsetsDirectional.zero,
             onTap: ()
             {
               navigate(context: context, route: Routes.mainSettingsScreen);

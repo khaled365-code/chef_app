@@ -1,5 +1,7 @@
 
 import 'package:bloc/bloc.dart';
+import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/commons/global_models/app_notification_response.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/features/home/data/models/all_categories_model/all_categories_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
@@ -8,8 +10,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:meta/meta.dart';
+import '../../../../../core/commons/global_models/local_notifications_model.dart';
+import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_assets.dart';
+import '../../../../../core/utilis/services/local_notifications_service.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
 import '../../../data/models/chef_info_model/chef_info_model.dart';
 import '../../../data/models/get_meals_model/meals.dart';
@@ -169,6 +175,43 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     removeOngoingFavouriteMeal(meal: meal,index:index);
     await homeRepoImplementation.saveCachedHistoryMeals(meal: meal);
     emit(GetCachedFavouriteMealsSuccessState());
+  }
+
+
+  saveLocalNotificationsFun({required LocalNotificationsModel localNotification}) async
+  {
+    await homeRepoImplementation.saveLocalNotification(localNotification: localNotification);
+  }
+
+  List<LocalNotificationsModel> localNotificationsList=[];
+  getAllCachedNotificationsFun()
+  {
+    final response= homeRepoImplementation.getCachedLocalNotifications();
+
+    response.fold((exception)
+    {
+      emit(GetLocalNotificationsFailureState(errorMessage: exception.toString()));
+    } , (success)
+    {
+      localNotificationsList=success;
+      emit(GetLocalNotificationsSuccessState());
+    },);
+  }
+
+  deleteSpecificNotification({required int localNotificationId,required int index}) async
+  {
+    homeRepoImplementation.deleteNotification(localNotificationId: localNotificationId, index: index);
+    localNotificationsList.removeAt(index);
+    emit(GetLocalNotificationsSuccessState());
+
+  }
+
+  clearAllLocalNotifications() async
+  {
+    await homeRepoImplementation.clearAllNotifications();
+    localNotificationsList.clear();
+    emit(GetLocalNotificationsSuccessState());
+
   }
 
 }

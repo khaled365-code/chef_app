@@ -11,9 +11,8 @@ import '../widgets/drawer/settings_and_faq_container.dart';
 
 
 class CustomDrawerScreen extends StatelessWidget {
-  const CustomDrawerScreen({super.key, required this.homeContext});
+  const CustomDrawerScreen({super.key});
 
-  final BuildContext homeContext;
 
   @override
   Widget build(BuildContext context) {

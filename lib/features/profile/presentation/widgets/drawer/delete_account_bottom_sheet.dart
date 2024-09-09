@@ -68,7 +68,7 @@ class DeleteAccountBottomSheet extends StatelessWidget {
               SizedBox(
                 width: 130.w,
                   height: 100.h,
-                  child: Image.asset(ImageConstants.deleteAccountGif)),
+                  child: Image.asset(ImageConstants.trashSuitableGif)),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Text('Are you sure you want to delete your account ?',style: AppTextStyles.bold18(context).copyWith(color: AppColors.c32343E,),),

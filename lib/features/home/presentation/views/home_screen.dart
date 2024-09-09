@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
         return
           Scaffold(
             backgroundColor: AppColors.cF3F3F3,
-                  drawer: CustomDrawerScreen(homeContext: context,),
+                  drawer: CustomDrawerScreen(),
                    body: SafeArea(
                        child: RefreshIndicator(
                         //  key: HomeScreenCubit.get(context).refreshIndicatorKey,

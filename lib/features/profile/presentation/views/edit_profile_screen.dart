@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/image_picker_widget.dart';
@@ -134,12 +135,14 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 
-  void handleEditProfileListener(EditProfileState state, BuildContext context)
+  void handleEditProfileListener(EditProfileState state, BuildContext context) async
   {
      if(state is EditProfileSuccessState)
       {
         buildScaffoldMessenger(context: context, msg: state.message);
-        HomeScreenCubit.get(context).getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id));
+        await HomeScreenCubit.get(context).getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id));
+        Navigator.pushNamedAndRemoveUntil(context, Routes.homeScreen, (route) => true,);
+
       }
     if(state is EditProfileFailureState)
       {

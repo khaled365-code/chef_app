@@ -27,6 +27,9 @@ class SettingsAndFaqContainer extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
+            onTap: (){
+              navigate(context: context, route: Routes.faqScreen);
+            },
             contentPadding: EdgeInsetsDirectional.zero,
             leading: Container(
               width: 40.w,

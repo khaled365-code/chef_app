@@ -39,6 +39,8 @@ class Routes
   static const String changePasswordScreen='/change_password_screen';
   static const String favouritesScreen='/favourites_screen';
   static const String notificationsScreen='/notifications_screen';
+  static const String customDrawerScreen='/custom_drawer_screen';
+  static const String faqScreen='/faq_screen';
 
 
 

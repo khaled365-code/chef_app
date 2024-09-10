@@ -3,6 +3,7 @@ import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'change_password_state.dart';
@@ -10,7 +11,7 @@ part 'change_password_state.dart';
 class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   ChangePasswordCubit({required this.profileRepoImplementation}) : super(ChangePasswordInitial());
 
-
+  static ChangePasswordCubit get(context) => BlocProvider.of(context);
   final ProfileRepoImplementation profileRepoImplementation;
 
 
@@ -20,6 +21,14 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   TextEditingController confirmPasswordController = TextEditingController();
 
   GlobalKey<FormState> changePasswordFormKey = GlobalKey();
+
+  AutovalidateMode changePasswordAutoValidateMode = AutovalidateMode.disabled;
+
+  activateChangePasswordAutoValidateMode()
+  {
+    changePasswordAutoValidateMode=AutovalidateMode.always;
+    emit(ActivateChangePasswordValidateModeState());
+  }
 
   IconData oldPasswordIcon = Icons.visibility_off;
   IconData newPasswordIcon = Icons.visibility_off;

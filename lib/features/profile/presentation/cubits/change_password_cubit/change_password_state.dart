@@ -4,6 +4,9 @@ part of 'change_password_cubit.dart';
 sealed class ChangePasswordState {}
 
 final class ChangePasswordInitial extends ChangePasswordState {}
+
+final class ActivateChangePasswordValidateModeState extends ChangePasswordState {}
+
 final class ChangePasswordLoadingState extends ChangePasswordState {}
 final class ChangePasswordFailureState extends ChangePasswordState {
 

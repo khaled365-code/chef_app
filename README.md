@@ -1,4 +1,4 @@
-# chef_app
+# meal_time_app
 
 A new Flutter project.
 

@@ -24,7 +24,7 @@ import 'package:chef_app/features/profile/presentation/views/certification_scree
 import 'package:chef_app/features/profile/presentation/views/custom_drawer_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/edit_profile_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/faq_screen.dart';
-import 'package:chef_app/features/profile/presentation/views/main_settings_screen.dart';
+import 'package:chef_app/features/profile/presentation/views/settings_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/notifications_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/personal_info_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/specific_chef_meals_screen.dart';

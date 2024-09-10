@@ -6,8 +6,12 @@ import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../data/models/faq_screen_models/questions_and_answers_model.dart';
+
 class OpenedContainer extends StatefulWidget {
-  const OpenedContainer({super.key});
+  const OpenedContainer({super.key, required this.questionsAndAnswersModel});
+
+  final QuestionsAndAnswersModel questionsAndAnswersModel;
 
   @override
   State<OpenedContainer> createState() => _OpenedContainerState();
@@ -39,7 +43,7 @@ class _OpenedContainerState extends State<OpenedContainer> {
           children: [
             Row(
               children: [
-                Text('How to create a account?',
+                Text(widget.questionsAndAnswersModel.question,
                   style: AppTextStyles.bold14(context).copyWith(
                     color: AppColors.black
                   ),),
@@ -51,7 +55,7 @@ class _OpenedContainerState extends State<OpenedContainer> {
              Column(
                children: [
                  SpaceWidget(height: 8,),
-                 Text('Open the Tradebase app to get started and follow the steps. Tradebase doesn’t charge a fee to create or maintain your Tradebase account.',
+                 Text(widget.questionsAndAnswersModel.answer,
                  style: AppTextStyles.regular14(context).copyWith(color: AppColors.c757575),)
                ],
              ):SizedBox.shrink()

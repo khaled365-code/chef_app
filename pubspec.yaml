@@ -149,6 +149,10 @@ dependencies:
   flutter_slidable: ^3.1.1
 
 
+  #Easy and Fast internationalizing and localization your Flutter Apps, this package simplify the internationalizing process .
+  easy_localization: ^3.0.7
+
+
 
 
 
@@ -194,6 +198,7 @@ flutter:
      - assets/icons/
      - assets/gif/
      - assets/lotties/
+     - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -15,11 +15,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   bool isDarkModeActive=false;
 
-
-
-
-
-  onDarkModeSwitched({required bool value})
+  Future<void> onDarkModeSwitched({required bool value}) async
   {
     if(isDarkModeActive==value)
       {
@@ -28,7 +24,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     else
       {
         isDarkModeActive=value;
-        CacheHelper().saveData(key: ApiKeys.darkModeIsActive, value: value);
+        await CacheHelper().saveData(key: ApiKeys.darkModeIsActive, value: value);
         emit(DarkModeSwitchedState());
       }
 
@@ -38,10 +34,10 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   bool locationIsActive=false;
 
-  void onLocationSwitched({required bool value})
+  Future<void> onLocationSwitched({required bool value}) async
   {
       locationIsActive=value;
-      CacheHelper().saveData(key: ApiKeys.locationIsActive, value: value);
+      await CacheHelper().saveData(key: ApiKeys.locationIsActive, value: value);
       emit(LocationSwitchedState());
 
 
@@ -50,13 +46,11 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   bool notificationIsActive=true;
 
-  void onNotificationSwitched({required bool value})
+  Future<void> onNotificationSwitched({required bool value}) async
   {
         notificationIsActive=value;
-        CacheHelper().saveData(key: ApiKeys.notificationIsActive, value: value);
+        await CacheHelper().saveData(key: ApiKeys.notificationIsActive, value: value);
         emit(NotificationSwitchedState());
-
-
   }
 
 

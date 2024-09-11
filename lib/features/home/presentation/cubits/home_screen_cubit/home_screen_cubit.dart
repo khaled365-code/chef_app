@@ -1,8 +1,11 @@
 
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
-import 'package:chef_app/core/commons/commons.dart';
-import 'package:chef_app/core/commons/global_models/app_notification_response.dart';
+import 'package:chef_app/core/commons/global_models/adress_model/AddressComponents.dart';
+import 'package:chef_app/core/commons/global_models/adress_model/AddressModel.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
+import 'package:chef_app/core/utilis/services/get_device_address_service.dart';
 import 'package:chef_app/features/home/data/models/all_categories_model/all_categories_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
@@ -10,12 +13,11 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/commons/global_models/local_notifications_model.dart';
-import '../../../../../core/routes/routes.dart';
+import '../../../../../core/database/api/api_keys.dart';
+import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/utilis/app_assets.dart';
-import '../../../../../core/utilis/services/local_notifications_service.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
 import '../../../data/models/chef_info_model/chef_info_model.dart';
 import '../../../data/models/get_meals_model/meals.dart';
@@ -213,6 +215,38 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     emit(GetLocalNotificationsSuccessState());
 
   }
+
+  // bool locationIsActive=false;
+  // Future<void> onLocationSwitched({required bool value}) async
+  // {
+  //   locationIsActive=value;
+  //   await CacheHelper().saveData(key: ApiKeys.locationIsActive, value: value);
+  //   emit(LocationSwitchedState());
+  //
+  //   if(locationIsActive==false)
+  //   {
+  //     userAddress='';
+  //   }
+  //   else
+  //     {
+  //       getUserAddressFun();
+  //     }
+  // }
+
+  String userAddress='';
+
+  getUserAddressFun() async
+  {
+    AddressModel addressModel = await DeviceAddressService.getAppAddress();
+      List<AddressComponents> addressComponentsList=addressModel.results![0].addressComponents!;
+      for(var item in addressComponentsList)
+      {
+        userAddress+="${item.longName},";
+      }
+  }
+
+
+
 
 }
 

@@ -64,15 +64,16 @@ class PushNotificationsService
  static  Future<void> showForegroundNotification({required RemoteMessage remoteMessage}) async
   {
     var bigPictureStyleInformation = await handleImageForForegroundNotification(remoteMessage);
+
     NotificationDetails notificationDetails=NotificationDetails(
         android: AndroidNotificationDetails(
-          '1000',
+          '5',
           'foreground pushed notification',
           playSound: true,
           priority: Priority.max,
           importance: Importance.high,
           sound: RawResourceAndroidNotificationSound('meal_time_app_notification'),
-          styleInformation: bigPictureStyleInformation!=''?bigPictureStyleInformation:null
+          styleInformation: bigPictureStyleInformation
         ),
         iOS: DarwinNotificationDetails()
     );
@@ -86,17 +87,19 @@ class PushNotificationsService
 
  static Future<dynamic> handleImageForForegroundNotification(RemoteMessage remoteMessage) async
  {
-   if(remoteMessage.data['image']!=null)
-   {
-     final http.Response image = await http.get(Uri.parse(remoteMessage.notification?.android?.imageUrl??''));
-     var bigPictureStyleInformation = BigPictureStyleInformation(
-       ByteArrayAndroidBitmap.fromBase64String(
-         base64Encode(image.bodyBytes),
-       ),
-     );
-     return bigPictureStyleInformation;
-   }
-   return '';
+   if(remoteMessage.notification?.android?.imageUrl==null)
+     return null;
+   else
+     {
+       final http.Response image = await http.get(Uri.parse(remoteMessage.notification!.android!.imageUrl!));
+       var bigPictureStyleInformation = BigPictureStyleInformation(
+         ByteArrayAndroidBitmap.fromBase64String(
+           base64Encode(image.bodyBytes),
+         ),
+       );
+       return bigPictureStyleInformation;
+     }
+
  }
 
 

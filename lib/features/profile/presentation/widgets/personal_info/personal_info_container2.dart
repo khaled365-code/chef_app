@@ -4,7 +4,10 @@
 
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_assets.dart';
+import 'package:chef_app/core/utilis/services/get_device_address_service.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
+import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
+import 'package:chef_app/features/profile/presentation/cubits/settings_cubit/settings_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,7 +88,26 @@ class PersonalInfoContainer2 extends StatelessWidget {
                 fit: BoxFit.scaleDown,
                 child: Text(CacheHelper().getData(key: ApiKeys.description),style: AppTextStyles.regular14(context).copyWith(color: AppColors.c6B6E82,))),
           ),
-
+          HomeScreenCubit.get(context).userAddress!=''?
+          Column(
+            children: [
+              SpaceWidget(height: 16,),
+              ListTile(
+                contentPadding: EdgeInsetsDirectional.zero,
+                leading: Container(
+                  width: 40.w,
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                  ),
+                  child: Padding(
+                      padding: EdgeInsetsDirectional.all(11.w),
+                      child: SvgPicture.asset(ImageConstants.descIcon,colorFilter: ColorFilter.mode(AppColors.cFB4A59, BlendMode.srcIn),)),),
+                title: Text('Address'.toUpperCase(),style: AppTextStyles.regular14(context).copyWith(color: AppColors.c32343E,)),
+                subtitle: Text(
+                    HomeScreenCubit.get(context).userAddress,style: AppTextStyles.regular14(context).copyWith(color: AppColors.c6B6E82,)),),
+            ],
+          ):SizedBox.shrink(),
           SpaceWidget(height: 16,),
           ListTile(
             onTap: ()

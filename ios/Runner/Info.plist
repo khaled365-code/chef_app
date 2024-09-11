@@ -7,6 +7,7 @@
     	<string>en</string>
     	<string>nb</string>
         </array>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>

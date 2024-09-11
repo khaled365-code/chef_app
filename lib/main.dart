@@ -49,7 +49,7 @@ void main() async
     providers: 
     [
       BlocProvider(create: (context) => ChangeThemeCubit(),),
-      BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),),
+      BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
     ],
       child: EasyLocalization(
           supportedLocales: [ Locale('en'), Locale('ar')],

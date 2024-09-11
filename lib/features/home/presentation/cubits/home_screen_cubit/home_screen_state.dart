@@ -4,6 +4,9 @@ part of 'home_screen_cubit.dart';
 sealed class HomeScreenState {}
 
 final class HomeScreenInitial extends HomeScreenState {}
+
+final class LocationSwitchedState extends HomeScreenState {}
+
 final class GetChefDataLoadingState extends HomeScreenState {}
 final class GetChefDataErrorState extends HomeScreenState {
   final ErrorModel errorModel;

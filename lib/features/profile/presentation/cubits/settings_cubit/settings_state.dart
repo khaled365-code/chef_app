@@ -5,7 +5,6 @@ sealed class SettingsState {}
 
 final class SettingsInitial extends SettingsState {}
 
-final class LocationSwitchedState extends SettingsState {}
 
 
 final class NotificationSwitchedState extends SettingsState {}

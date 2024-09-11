@@ -152,6 +152,9 @@ dependencies:
   #Easy and Fast internationalizing and localization your Flutter Apps, this package simplify the internationalizing process .
   easy_localization: ^3.0.7
 
+  #Cross-platform plugin for easy access to device's location in real-time
+  location: ^7.0.0
+
 
 
 

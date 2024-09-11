@@ -48,11 +48,12 @@ class LocalNotificationsService
 
     NotificationDetails notificationDetails=NotificationDetails(
       android: AndroidNotificationDetails(
-          '1',
-          'basic notification',
+          '20',
+          'other basic notification',
            playSound: true,
         priority: Priority.max,
         importance: Importance.high,
+        sound: RawResourceAndroidNotificationSound('meal_time_app_notification'),
         styleInformation: imageData,
 
       ),
@@ -109,7 +110,8 @@ class LocalNotificationsService
           playSound: true,
           priority: Priority.max,
           importance: Importance.high,
-          styleInformation: imageData
+            sound: RawResourceAndroidNotificationSound('meal_time_app_notification'),
+            styleInformation: imageData
         ),
         iOS: DarwinNotificationDetails()
     );
@@ -134,6 +136,7 @@ class LocalNotificationsService
           playSound: true,
           priority: Priority.max,
           importance: Importance.high,
+          sound: RawResourceAndroidNotificationSound('meal_time_app_notification'),
           styleInformation: imageData,
         ),
         iOS: DarwinNotificationDetails()

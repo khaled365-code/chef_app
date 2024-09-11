@@ -19,11 +19,30 @@ class PushNotificationsService
 
   static Future<void> init() async
   {
-    await fireMessaging.requestPermission();
+    await requestPushNotificationsPermission();
     await getDeviceToken();
     FirebaseMessaging.onBackgroundMessage(handler);
     FirebaseMessaging.onMessage.listen(onForegroundMessage);
+    await subscribeToTopicFun();
+  }
+
+  static Future<void> disablePushNotifications() async
+  {
+    await fireMessaging.deleteToken();
+  }
+
+  static Future<void> requestPushNotificationsPermission() async
+  {
+    await fireMessaging.requestPermission();
+  }
+
+  static Future<void> subscribeToTopicFun() async
+  {
     await fireMessaging.subscribeToTopic('Your_Meals');
+  }
+  static Future<void> unSubscribeToTopicFun() async
+  {
+    await fireMessaging.unsubscribeFromTopic('Your_Meals');
   }
 
   static void onForegroundMessage(RemoteMessage message) async
@@ -47,11 +66,12 @@ class PushNotificationsService
     var bigPictureStyleInformation = await handleImageForForegroundNotification(remoteMessage);
     NotificationDetails notificationDetails=NotificationDetails(
         android: AndroidNotificationDetails(
-          '4',
-          'basic foreground pushed notification',
+          '1000',
+          'foreground pushed notification',
           playSound: true,
           priority: Priority.max,
           importance: Importance.high,
+          sound: RawResourceAndroidNotificationSound('meal_time_app_notification'),
           styleInformation: bigPictureStyleInformation!=''?bigPictureStyleInformation:null
         ),
         iOS: DarwinNotificationDetails()
@@ -78,6 +98,8 @@ class PushNotificationsService
    }
    return '';
  }
+
+
 
 
 

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
+import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
+import 'package:chef_app/core/utilis/services/push_notifications_service.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/database/api/api_keys.dart';
@@ -49,6 +51,22 @@ class SettingsCubit extends Cubit<SettingsState> {
   Future<void> onNotificationSwitched({required bool value}) async
   {
         notificationIsActive=value;
+        if(notificationIsActive==false)
+          {
+            await Future.wait([
+             LocalNotificationsService.cancelAllNotifications(),
+             PushNotificationsService.disablePushNotifications(),
+             PushNotificationsService.unSubscribeToTopicFun(),
+            ]);
+          }
+        else
+          {
+            await Future.wait([
+             PushNotificationsService.subscribeToTopicFun(),
+              PushNotificationsService.getDeviceToken()
+            ]);
+
+          }
         await CacheHelper().saveData(key: ApiKeys.notificationIsActive, value: value);
         emit(NotificationSwitchedState());
   }

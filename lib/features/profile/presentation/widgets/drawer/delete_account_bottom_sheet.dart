@@ -1,5 +1,6 @@
 
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
@@ -123,7 +124,7 @@ class DeleteAccountBottomSheet extends StatelessWidget {
       {
         var favouriteMealsBox=Hive.box<Meals>('favourite_meals');
         var historyMealsBox=Hive.box<Meals>('history_meals');
-        var localNotificationsBox=Hive.box<Meals>('cached_local_notifications');
+        var localNotificationsBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
         await Future.wait([
           favouriteMealsBox.clear(),
           historyMealsBox.clear(),

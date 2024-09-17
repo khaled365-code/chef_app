@@ -1,6 +1,5 @@
 
 
-import 'package:chef_app/core/commons/global_cubits/change_language_cubit/change_theme_cubit.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
@@ -8,7 +7,6 @@ import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/core/widgets/line_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utilis/app_colors.dart';

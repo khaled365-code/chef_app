@@ -1,6 +1,5 @@
 
 import 'package:chef_app/core/bloc_observer/bloc_observer.dart';
-import 'package:chef_app/core/commons/global_cubits/change_language_cubit/change_theme_cubit.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/injection/injector.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
@@ -29,26 +28,27 @@ void main() async
   WidgetsFlutterBinding.ensureInitialized();
   await Future.wait([
    EasyLocalization.ensureInitialized(),
-  CacheHelper().init(),
+   CacheHelper().init(),
    LocalNotificationsService.init(),
+   Hive.initFlutter(),
+
   ]);
-  await Hive.initFlutter();
   Hive.registerAdapter(MealsAdapter());
   Hive.registerAdapter(ChefDataAdapter());
   Hive.registerAdapter(LocalNotificationsModelAdapter());
-  await Hive.openBox<Meals>('favourite_meals');
-  await Hive.openBox<Meals>('history_meals');
-  await Hive.openBox<LocalNotificationsModel>('cached_local_notifications');
+  await Future.wait([
+   Hive.openBox<Meals>('favourite_meals'),
+   Hive.openBox<Meals>('history_meals'),
+   Hive.openBox<LocalNotificationsModel>('cached_local_notifications'),
+  ]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PushNotificationsService.init();
 
-
-  await setUpLocator();
+  setUpLocator();
 
   runApp(MultiBlocProvider(
     providers: 
     [
-      BlocProvider(create: (context) => ChangeThemeCubit(),),
       BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
     ],
       child: EasyLocalization(

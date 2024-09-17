@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'core/commons/global_cubits/change_theme_cubit/change_theme_cubit.dart';
 import 'meal_time.dart';
 import 'core/commons/global_models/local_notifications_model.dart';
 import 'core/database/api/api_keys.dart';
@@ -49,6 +50,7 @@ void main() async
   runApp(MultiBlocProvider(
     providers: 
     [
+      BlocProvider(create: (context) => ChangeThemeCubit(),),
       BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
     ],
       child: EasyLocalization(

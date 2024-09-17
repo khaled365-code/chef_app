@@ -15,6 +15,23 @@ class SettingsCubit extends Cubit<SettingsState> {
 
 
    static SettingsCubit get(context)=>BlocProvider.of(context);
+  bool isDarkModeActive=false;
+
+  Future<void> onDarkModeSwitched({required bool value}) async
+  {
+    if(isDarkModeActive==value)
+      {
+        return;
+      }
+    else
+      {
+        isDarkModeActive=value;
+        await CacheHelper().saveData(key: ApiKeys.darkModeIsActive, value: value);
+        emit(DarkModeSwitchedState());
+      }
+
+  }
+
 
 
 

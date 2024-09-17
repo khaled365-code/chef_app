@@ -4,11 +4,7 @@ import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/core/utilis/services/push_notifications_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
-import '../../../../../core/commons/global_models/adress_model/AddressComponents.dart';
-import '../../../../../core/commons/global_models/adress_model/AddressModel.dart';
 import '../../../../../core/database/api/api_keys.dart';
-import '../../../../../core/utilis/services/get_device_address_service.dart';
 
 part 'settings_state.dart';
 
@@ -57,8 +53,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         else
           {
             await Future.wait([
-             PushNotificationsService.subscribeToTopicFun(),
-              PushNotificationsService.getDeviceToken()
+              PushNotificationsService.init(),
             ]);
 
           }

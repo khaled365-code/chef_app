@@ -6,9 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/space_widget.dart';
-import '../../../../home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'edit_profile_settings_row.dart';
-import 'location_settings_list_tile.dart';
 import 'notifications_settings_list_tile.dart';
 
 class GeneralSettingsContainer extends StatelessWidget {

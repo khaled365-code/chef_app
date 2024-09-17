@@ -19,7 +19,6 @@ class LocationService
            {
              return false;
            }
-         return true;
         }
       return true;
 
@@ -51,7 +50,7 @@ class LocationService
    {
      var bool1=await checkAndRequestLocationService();
      var bool2=await checkAndRequestLocationPermission();
-     if(bool1==true&&bool2==true)
+     if(bool1==true && bool2==true)
        {
          LocationData myLocationData=await myLocation.getLocation();
          return myLocationData;

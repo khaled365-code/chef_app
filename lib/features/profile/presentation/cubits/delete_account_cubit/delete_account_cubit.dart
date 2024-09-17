@@ -19,7 +19,8 @@ class DeleteAccountCubit extends Cubit<DeleteAccountState> {
     emit(DeleteMyAccountLoadingState());
 
     final response=await profileRepoImplementation.deleteMyAccount(chefId: chefId);
-    response.fold((errorModel) {
+    response.fold((errorModel)
+    {
       emit(DeleteMyAccountFailureState(errorModel: errorModel));
     }, (message) {
       emit(DeleteMyAccountSuccessState(successMessage: message));

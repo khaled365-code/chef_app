@@ -216,22 +216,6 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   }
 
-  // bool locationIsActive=false;
-  // Future<void> onLocationSwitched({required bool value}) async
-  // {
-  //   locationIsActive=value;
-  //   await CacheHelper().saveData(key: ApiKeys.locationIsActive, value: value);
-  //   emit(LocationSwitchedState());
-  //
-  //   if(locationIsActive==false)
-  //   {
-  //     userAddress='';
-  //   }
-  //   else
-  //     {
-  //       getUserAddressFun();
-  //     }
-  // }
 
   String userAddress='';
 

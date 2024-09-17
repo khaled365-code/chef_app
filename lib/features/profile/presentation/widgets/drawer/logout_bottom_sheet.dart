@@ -26,8 +26,7 @@ class LogoutBottomSheet extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           LogoutCubit(
-              profileRepoImplementation: locator.get<
-                  ProfileRepoImplementation>()),
+              profileRepoImplementation: locator.get<ProfileRepoImplementation>()),
       child: BlocListener<LogoutCubit,LogoutState>(
         listener: (context, state)
         {
@@ -123,11 +122,11 @@ class LogoutBottomSheet extends StatelessWidget {
       ),);
   }
 
-  void handleLogoutListener(LogoutState state, BuildContext context) {
+  void handleLogoutListener(LogoutState state, BuildContext context) async
+  {
     if (state is LogoutSuccessState) {
-      CacheHelper().removeData(key: ApiKeys.token);
-      Future.delayed(Duration(seconds: 2));
-      navigate(context: context, route: Routes.loginScreen);
+      await CacheHelper().removeData(key: ApiKeys.token);
+      navigate(context: context, route: Routes.loginScreen,replacement: true);
     }
     if (state is LogoutFailureState) {
       if (state.errorModel.error != null) {

@@ -63,7 +63,7 @@ class LocalNotificationsService
         localNotificationsModel.id,
         localNotificationsModel.title,
         localNotificationsModel.body,
-        payload: localNotificationsModel.payload??null,
+        payload: localNotificationsModel.payload,
         notificationDetails);
 
   }

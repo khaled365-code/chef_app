@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import '../../../../../core/injection/injector.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_assets.dart';
@@ -15,6 +16,7 @@ import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../../core/widgets/space_widget.dart';
+import '../../../../home/data/models/get_meals_model/meals.dart';
 import '../../cubits/delete_account_cubit/delete_account_cubit.dart';
 
 class DeleteAccountBottomSheet extends StatelessWidget {
@@ -119,7 +121,15 @@ class DeleteAccountBottomSheet extends StatelessWidget {
   {
     if(state is DeleteMyAccountSuccessState)
       {
-         await CacheHelper().clearData();
+        var favouriteMealsBox=Hive.box<Meals>('favourite_meals');
+        var historyMealsBox=Hive.box<Meals>('history_meals');
+        var localNotificationsBox=Hive.box<Meals>('cached_local_notifications');
+        await Future.wait([
+          favouriteMealsBox.clear(),
+          historyMealsBox.clear(),
+          localNotificationsBox.clear(),
+          CacheHelper().clearData(),
+        ]);
         navigate(context: context, route: Routes.loginScreen,replacement: true);
       }
     if(state is DeleteMyAccountFailureState)

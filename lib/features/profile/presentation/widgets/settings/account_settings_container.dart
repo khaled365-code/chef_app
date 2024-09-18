@@ -6,13 +6,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/commons/global_cubits/change_theme_cubit/change_theme_cubit.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/space_widget.dart';
 import 'change_languge_bottom_sheet.dart';
 import 'change_password_list_tile.dart';
-import 'dark_mode_list_tile.dart';
+import 'bill_reminder_list_tile.dart';
 import 'language_list_tile.dart';
 
 class AccountSettingsContainer extends StatelessWidget {
@@ -21,8 +20,6 @@ class AccountSettingsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsState>(
-  builder: (context, state) {
-    return BlocBuilder<ChangeThemeCubit, ChangeThemeState>(
   builder: (context, state) {
     return Container(
       padding: EdgeInsetsDirectional.all(20.w),
@@ -67,14 +64,12 @@ class AccountSettingsContainer extends StatelessWidget {
             thickness: 3,
             height: 10,
           ),
-          DarkModeListTile(settingsCubit: SettingsCubit.get(context), changeThemeCubit: ChangeThemeCubit.get(context),),
+          BillReminderListTile(settingsCubit: SettingsCubit.get(context),),
 
 
         ],
       ),
     );
-  },
-);
   },
 );
   }

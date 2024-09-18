@@ -48,8 +48,8 @@ class LocalNotificationsService
 
     NotificationDetails notificationDetails=NotificationDetails(
       android: AndroidNotificationDetails(
-          '20',
-          'other basic notification',
+          '1',
+          'basic notification',
            playSound: true,
         priority: Priority.max,
         importance: Importance.high,
@@ -127,6 +127,7 @@ class LocalNotificationsService
 
   static Future<void> showScheduledNotification({required LocalNotificationsModel localNotificationsModel,required ScheduledNotificationModel scheduledNotificationModel})async
   {
+
     var imageData = await getNotificationImage(localNotificationsModel);
 
     NotificationDetails notificationDetails=NotificationDetails(
@@ -149,8 +150,7 @@ class LocalNotificationsService
         localNotificationsModel.id,
         localNotificationsModel.title,
         localNotificationsModel.body,
-        payload: localNotificationsModel.payload,
-        tz.TZDateTime(
+       tz.TZDateTime(
         tz.local,
           scheduledNotificationModel.year,
           scheduledNotificationModel.month,
@@ -160,11 +160,16 @@ class LocalNotificationsService
           scheduledNotificationModel.second??0,
    ),
         notificationDetails,
-        uiLocalNotificationDateInterpretation: uiLocalNotificationDateInterpretation);
+        uiLocalNotificationDateInterpretation: uiLocalNotificationDateInterpretation,
+     payload: localNotificationsModel.payload,
+     // matchDateTimeComponents: DateTimeComponents.time,  // Ensures it fires daily at the same time
+   );
 
   }
 
-  static Future<void> setCurrentDeviceLocation() async {
+
+  static Future<void> setCurrentDeviceLocation() async
+  {
     tz.initializeTimeZones();
     final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(currentTimeZone));

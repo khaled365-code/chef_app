@@ -9,7 +9,7 @@ class ScheduledNotificationModel
   final int minute;
   final int? second;
 
-  const ScheduledNotificationModel({required this.year, required this.month, required this.day, required this.hour, required this.minute, required this.second});
+  const ScheduledNotificationModel({required this.year, required this.month, required this.day, required this.hour, required this.minute, this.second});
 
 
 }

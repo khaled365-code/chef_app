@@ -1,12 +1,12 @@
 import 'package:badges/badges.dart';
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
+import 'package:chef_app/core/commons/global_models/scheduled_notification_model.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/routes/routes.dart';
@@ -31,6 +31,7 @@ class HomeAppBar extends StatelessWidget {
                 return GestureDetector(
                   onTap: () async
                   {
+
                     Scaffold.of(context).openDrawer();
                   },
                   child: Container(

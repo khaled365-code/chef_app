@@ -2,6 +2,7 @@
 import 'package:chef_app/core/bloc_observer/bloc_observer.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/injection/injector.dart';
+import 'package:chef_app/core/utilis/services/work_manager_service.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
@@ -11,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'core/commons/global_cubits/change_theme_cubit/change_theme_cubit.dart';
 import 'meal_time.dart';
 import 'core/commons/global_models/local_notifications_model.dart';
 import 'core/database/api/api_keys.dart';
@@ -50,7 +50,6 @@ void main() async
   runApp(MultiBlocProvider(
     providers: 
     [
-      BlocProvider(create: (context) => ChangeThemeCubit(),),
       BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
     ],
       child: EasyLocalization(

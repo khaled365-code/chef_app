@@ -156,6 +156,11 @@ dependencies:
   location: ^7.0.0
 
 
+  #Flutter Workmanager. This plugin allows you to schedule background work on Android and iOS.
+  workmanager: ^0.5.2
+
+
+
 
 
 

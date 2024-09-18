@@ -34,7 +34,7 @@ class ApiKeys
   static const String newPass='newPass';
   static const String locationIsActive='locationIsActive';
   static const String appCurrentLanguage='appCurrentLanguage';
-  static const String darkModeIsActive='darkModeIsActive';
+  static const String billReminderIsActive='darkModeIsActive';
   static const String notificationIsActive='notificationIsActive';
   static const String favouriteMeals='favourite_meals';
   static const String savedEmail='savedEmail';

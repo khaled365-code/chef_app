@@ -10,4 +10,4 @@ final class SettingsInitial extends SettingsState {}
 final class NotificationSwitchedState extends SettingsState {}
 
 
-final class DarkModeSwitchedState extends SettingsState {}
+final class BillReminderSwitchedState extends SettingsState {}

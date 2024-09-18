@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/core/utilis/services/push_notifications_service.dart';
+import 'package:chef_app/core/utilis/services/work_manager_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/database/api/api_keys.dart';
@@ -15,21 +16,26 @@ class SettingsCubit extends Cubit<SettingsState> {
 
 
    static SettingsCubit get(context)=>BlocProvider.of(context);
-  bool isDarkModeActive=false;
+  bool isBillReminderActive=false;
 
-  Future<void> onDarkModeSwitched({required bool value}) async
+  Future<void> onBillReminderSwitched({required bool value}) async
   {
-    if(isDarkModeActive==value)
+        isBillReminderActive=value;
+        await CacheHelper().saveData(key: ApiKeys.billReminderIsActive, value: value);
+        emit(BillReminderSwitchedState());
+
+  }
+
+  billReminderFunction({required bool value})
+  {
+    if(value==true)
       {
-        return;
+        WorkManagerService.init();
       }
     else
-      {
-        isDarkModeActive=value;
-        await CacheHelper().saveData(key: ApiKeys.darkModeIsActive, value: value);
-        emit(DarkModeSwitchedState());
-      }
-
+    {
+        WorkManagerService.cancelTask(uniqueName: 'periodic scheduled notification id 10');
+    }
   }
 
 

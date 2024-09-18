@@ -109,21 +109,17 @@ class AllMealsScreen extends StatelessWidget {
   _buildFloatingButton(BuildContext context)
   {
     return FloatingActionButton(
+      backgroundColor: AppColors.c181C2E,
       elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100.r),
+        ),
         onPressed: ()
     {
       navigate(context: context, route: Routes.addMealScreen);
     },
-    child:Container(
-      width: 45.w,
-      height: 49.h,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.c181C2E
-      ),
-      child: Center(child: Icon(
-        Icons.add, color: AppColors.white,)),
-    )
+    child:Center(child: Icon(
+      Icons.add, color: AppColors.white,))
     );
   }
 

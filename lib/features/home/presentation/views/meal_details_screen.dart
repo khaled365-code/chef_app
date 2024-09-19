@@ -26,18 +26,18 @@ class MealDetailsScreen extends StatelessWidget {
             slivers:
             [
               SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:
-                  [
-                    SpaceWidget(height: 24,),
-                    DetailsScreenAppBar(),
-                    SpaceWidget(height: 44,),
-                    MealDetailsImage(receivedMeal: receivedMeal),
-                    SpaceWidget(height: 24,),
-                    Padding(
-                      padding:  EdgeInsetsDirectional.only(start: 24.w),
-                      child: Column(
+                child: Padding(
+                  padding:  EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:
+                    [
+                      SpaceWidget(height: 24,),
+                      DetailsScreenAppBar(),
+                      SpaceWidget(height: 44,),
+                      MealDetailsImage(receivedMeal: receivedMeal),
+                      SpaceWidget(height: 24,),
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(receivedMeal.name!,style: AppTextStyles.bold20(context).copyWith(
@@ -55,18 +55,22 @@ class MealDetailsScreen extends StatelessWidget {
                               Text(receivedMeal.price.toString(),style: AppTextStyles.bold16(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
-                              SpaceWidget(width: 24,),
+                              Spacer(),
                               SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
                               SpaceWidget(width: 10,),
                               Text(receivedMeal.category!,style: AppTextStyles.regular14(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
-                              SpaceWidget(width: 24,),
+                              Spacer(),
                               SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
                               SpaceWidget(width: 10,),
-                              Text(receivedMeal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
-                                  color: AppColors.c181C2E
-                              ),),
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(receivedMeal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
+                                    color: AppColors.c181C2E
+                                ),),
+                              ),
                             ],
                           ),
                           SpaceWidget(height: 26.2,),
@@ -137,10 +141,10 @@ class MealDetailsScreen extends StatelessWidget {
 
                         ],
                       ),
-                    ),
-                    SpaceWidget(height: 24,)
+                      SpaceWidget(height: 24,)
 
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SliverFillRemaining(

@@ -9,9 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/space_widget.dart';
-import 'change_languge_bottom_sheet.dart';
 import 'change_password_list_tile.dart';
-import 'bill_reminder_list_tile.dart';
 import 'language_list_tile.dart';
 
 class AccountSettingsContainer extends StatelessWidget {
@@ -19,8 +17,6 @@ class AccountSettingsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsCubit, SettingsState>(
-  builder: (context, state) {
     return Container(
       padding: EdgeInsetsDirectional.all(20.w),
       decoration: BoxDecoration(
@@ -33,45 +29,16 @@ class AccountSettingsContainer extends StatelessWidget {
           Text(
             context.tr('account_settings'),style: AppTextStyles.bold20(context).copyWith(color: AppColors.c181C2E),),
           SpaceWidget(height: 5,),
-          GestureDetector(
-            onTap: ()
-            {
-              showModalBottomSheet(
-                backgroundColor: AppColors.transparent,
-                context: context,
-                builder: (context) => ChangeLanguageBottomSheet(),);
-            },
-            child: LanguageListTile(),
-          ),
+          LanguageListTile(),
           Divider(
             color: AppColors.cEEF2F6,
             thickness: 3,
             height: 10,
           ),
-          GestureDetector(
-            onTap: ()
-            {
-              showModalBottomSheet(
-                backgroundColor: AppColors.transparent,
-                context: context,
-                isScrollControlled: true,
-                builder: (context) => ChangePasswordBottomSheet(),);
-            },
-            child: ChangePasswordListTile(),
-          ),
-          Divider(
-            color: AppColors.cEEF2F6,
-            thickness: 3,
-            height: 10,
-          ),
-          BillReminderListTile(settingsCubit: SettingsCubit.get(context),),
-
-
+          ChangePasswordListTile(),
         ],
       ),
     );
-  },
-);
   }
 }
 

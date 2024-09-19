@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
-import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/core/utilis/services/push_notifications_service.dart';
 import 'package:chef_app/core/utilis/services/work_manager_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,11 +11,11 @@ part 'settings_state.dart';
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit() : super(SettingsInitial());
 
+  static SettingsCubit get(context)=>BlocProvider.of(context);
 
 
 
-   static SettingsCubit get(context)=>BlocProvider.of(context);
-  bool isBillReminderActive=false;
+  bool isBillReminderActive=true;
 
   Future<void> onBillReminderSwitched({required bool value}) async
   {
@@ -51,7 +50,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         if(notificationIsActive==false)
           {
             await Future.wait([
-             LocalNotificationsService.cancelAllNotifications(),
+            // LocalNotificationsService.cancelAllNotifications(),
              PushNotificationsService.disablePushNotifications(),
              PushNotificationsService.unSubscribeToTopicFun(),
             ]);
@@ -66,7 +65,22 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   }
 
+  bool appUpdateIsActive=true;
 
+  switchOnAppUpdatesFun({required bool value}) async
+  {
+    if(appUpdateIsActive==value)
+      {
+        return ;
+      }
+    else
+      {
+        appUpdateIsActive=value;
+        await CacheHelper().saveData(key: ApiKeys.appUpdateIsActive, value: value);
+        emit(SoundSwitchedState());
+      }
+
+  }
 
 
 }

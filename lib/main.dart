@@ -38,6 +38,7 @@ void main() async
   Hive.registerAdapter(ChefDataAdapter());
   Hive.registerAdapter(LocalNotificationsModelAdapter());
   await Future.wait([
+    WorkManagerService.init(),
    Hive.openBox<Meals>('favourite_meals'),
    Hive.openBox<Meals>('history_meals'),
    Hive.openBox<LocalNotificationsModel>('cached_local_notifications'),
@@ -50,7 +51,7 @@ void main() async
   runApp(MultiBlocProvider(
     providers: 
     [
-      BlocProvider(create: (context) => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>())..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
+      BlocProvider(create: (context) => locator<HomeScreenCubit>()..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
     ],
       child: EasyLocalization(
           supportedLocales: [ Locale('en'), Locale('ar')],

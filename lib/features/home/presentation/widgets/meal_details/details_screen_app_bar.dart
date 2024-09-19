@@ -16,34 +16,31 @@ class DetailsScreenAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.only(start: 24.w),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: ()
-            {
-              Navigator.pop(context);
-            },
-            child: Container(
-              width: 45.w,
-              height: 45.h,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.cECF0F4
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                    width: 10, ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.c181C2E, BlendMode.srcIn)),
-              ),
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: ()
+          {
+            Navigator.pop(context);
+          },
+          child: Container(
+            width: 45.w,
+            height: 45.h,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.cECF0F4
+            ),
+            child: Center(
+              child: SvgPicture.asset(
+                  width: 10, ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.c181C2E, BlendMode.srcIn)),
             ),
           ),
-          SpaceWidget(width: 16,),
-          Text('Details',style: AppTextStyles.regular17(context).copyWith(
-              color: AppColors.c181C2E
-          ))
-        ],
-      ),
+        ),
+        SpaceWidget(width: 16,),
+        Text('Details',style: AppTextStyles.regular17(context).copyWith(
+            color: AppColors.c181C2E
+        ))
+      ],
     );
   }
 }

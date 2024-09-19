@@ -35,7 +35,9 @@ class ChangePasswordBottomSheet extends StatelessWidget {
             extendBodyBehindAppBar: true,
             body: Builder(
               builder: (context) {
-                return Column(
+                return BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
+                 builder: (context, state) {
+                 return Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Form(
@@ -51,65 +53,52 @@ class ChangePasswordBottomSheet extends StatelessWidget {
                             children: [
                               SpaceWidget(height: 15,),
                               ChangePasswordWhiteContainer(),
-                              BlocBuilder<ChangePasswordCubit,ChangePasswordState>
-                                (builder: (context, state)
-                                {
-                                   if(state is ChangePasswordLoadingState )
-                                     {
-                                       return  Column(
-                                         children:
-                                         [
-                                           SpaceWidget(height: 20,),
-                                           Center(child: Lottie.asset(ImageConstants.loadingLottie)),
-                                           SpaceWidget(height: 20,),
-                                         ],
-                                       );
-                                     }
-                                   else
-                                     {
-                                       return Column(
-                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                         children: [
-                                           Container(
-                                             decoration: BoxDecoration(
-                                                 color: AppColors.white,
-                                                 border: Border.all(
-                                                     color: AppColors.cEBEBEB,
-                                                     width: 2.w
-                                                 )
-                                             ),
-                                             child: Padding(
-                                               padding: EdgeInsets.symmetric(horizontal: 15.w),
-                                               child: Column(
-                                                 children: [
-                                                   SpaceWidget(height: 20,),
-                                                   ChangeOldPasswordField(),
-                                                   SpaceWidget(height: 14,),
-                                                   ChangeNewPasswordField(),
-                                                   SpaceWidget(height: 14,),
-                                                   ChangeConfirmPasswordField(),
-                                                   SpaceWidget(height: 10,),
-                                                   Text(
-                                                     'Your password must be at least 6 characters long',
-                                                     style: AppTextStyles.regular14(context).copyWith(
-                                                         color: AppColors.cA0A5BA
-                                                     ),),
-                                                   SpaceWidget(height: 20,),
+                              state is ChangePasswordLoadingState? Column(
+                                children:
+                                [
+                                  SpaceWidget(height: 20,),
+                                  Center(child: Lottie.asset(ImageConstants.loadingLottie)),
+                                  SpaceWidget(height: 20,),
+                                ],
+                              ):Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        border: Border.all(
+                                            color: AppColors.cEBEBEB,
+                                            width: 2.w
+                                        )
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                      child: Column(
+                                        children: [
+                                          SpaceWidget(height: 20,),
+                                          ChangeOldPasswordField(),
+                                          SpaceWidget(height: 14,),
+                                          ChangeNewPasswordField(),
+                                          SpaceWidget(height: 14,),
+                                          ChangeConfirmPasswordField(),
+                                          SpaceWidget(height: 10,),
+                                          Text(
+                                            'Your password must be at least 6 characters long',
+                                            style: AppTextStyles.regular14(context).copyWith(
+                                                color: AppColors.cA0A5BA
+                                            ),),
+                                          SpaceWidget(height: 20,),
 
 
-                                                 ],
-                                               ),
-                                             ),
-                                           ),
-                                           SpaceWidget(height: 10,),
-                                           ChangePasswordButtonsRow(),
-                                           SpaceWidget(height: 20,),
-                                         ],
-                                       );
-                                     }
-                                },)
-
-
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SpaceWidget(height: 10,),
+                                  ChangePasswordButtonsRow(),
+                                  SpaceWidget(height: 20,),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -117,6 +106,8 @@ class ChangePasswordBottomSheet extends StatelessWidget {
                     ),
                   ],
                 );
+  },
+);
               }
             ),
           ),

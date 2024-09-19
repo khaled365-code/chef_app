@@ -45,7 +45,7 @@ class GridShimmerMealItem extends StatelessWidget {
                   baseColor: AppColors.white,
                   highlightColor: AppColors.cD1D8E0,
                   child: Container(
-                    height: 25.h,
+                    height: 15.h,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(
@@ -59,7 +59,7 @@ class GridShimmerMealItem extends StatelessWidget {
                   baseColor: AppColors.white,
                   highlightColor: AppColors.cD1D8E0,
                   child: Container(
-                    height: 25.h,
+                    height: 15.h,
                     width: 100.w,
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -77,7 +77,7 @@ class GridShimmerMealItem extends StatelessWidget {
                         baseColor: AppColors.white,
                         highlightColor: AppColors.cD1D8E0,
                         child: Container(
-                          height: 25.h,
+                          height: 20.h,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage(
@@ -95,7 +95,7 @@ class GridShimmerMealItem extends StatelessWidget {
                         padding:  EdgeInsetsDirectional.only(end: 10.w),
                         child: Container(
                           width: 30.w,
-                          height: 30.h,
+                          height: 20.h,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),

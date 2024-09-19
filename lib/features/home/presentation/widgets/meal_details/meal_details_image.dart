@@ -16,19 +16,16 @@ class MealDetailsImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 24),
-      child: AspectRatio(
-        aspectRatio: 327/184,
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32.r),
-              image: receivedMeal.images!.first.isEmpty? null:
-              DecorationImage(
-                  image: CachedNetworkImageProvider(
-                      receivedMeal.images!.first
-                  ),fit: BoxFit.fill)
-          ),
+    return AspectRatio(
+      aspectRatio: 327/184,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32.r),
+            image: receivedMeal.images!.first.isEmpty? null:
+            DecorationImage(
+                image: CachedNetworkImageProvider(
+                    receivedMeal.images!.first
+                ),fit: BoxFit.fill)
         ),
       ),
     );

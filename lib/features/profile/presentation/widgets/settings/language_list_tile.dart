@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
+import 'change_languge_bottom_sheet.dart';
 
 class LanguageListTile extends StatelessWidget {
   const LanguageListTile({
@@ -13,6 +14,12 @@ class LanguageListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: (){
+        showModalBottomSheet(
+          backgroundColor: AppColors.transparent,
+          context: context,
+          builder: (context) => ChangeLanguageBottomSheet(),);
+      },
       title: Text('Language',style: AppTextStyles.bold15(context).copyWith(
           color: AppColors.c32343E
       ),),

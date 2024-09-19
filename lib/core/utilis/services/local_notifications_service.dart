@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -125,14 +126,15 @@ class LocalNotificationsService
   }
 
 
-  static Future<void> showScheduledNotification({required LocalNotificationsModel localNotificationsModel,required ScheduledNotificationModel scheduledNotificationModel})async
+  static Future<void> showScheduledNotification({
+    required LocalNotificationsModel localNotificationsModel,
+    required ScheduledNotificationModel scheduledNotificationModel}) async
   {
-
     var imageData = await getNotificationImage(localNotificationsModel);
 
     NotificationDetails notificationDetails=NotificationDetails(
         android: AndroidNotificationDetails(
-          '3',
+          '100',
           'scheduled notification',
           playSound: true,
           priority: Priority.max,
@@ -172,6 +174,7 @@ class LocalNotificationsService
   {
     tz.initializeTimeZones();
     final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
+    log(currentTimeZone);
     tz.setLocalLocation(tz.getLocation(currentTimeZone));
   }
 

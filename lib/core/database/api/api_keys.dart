@@ -39,6 +39,7 @@ class ApiKeys
   static const String favouriteMeals='favourite_meals';
   static const String savedEmail='savedEmail';
   static const String savedPassword='savedPassword';
+  static const String appUpdateIsActive='savedPassword';
 
 
 

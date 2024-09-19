@@ -29,9 +29,8 @@ class HomeAppBar extends StatelessWidget {
           Builder(
               builder: (context) {
                 return GestureDetector(
-                  onTap: () async
+                  onTap: ()
                   {
-
                     Scaffold.of(context).openDrawer();
                   },
                   child: Container(

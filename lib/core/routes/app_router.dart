@@ -40,15 +40,20 @@ import '../injection/injector.dart';
 
 class AppRouter {
 
-  static Route? generateRoutes(RouteSettings routeSettings) {
-    switch (routeSettings.name) {
+  static Route? generateRoutes(RouteSettings routeSettings)
+  {
+
+    switch (routeSettings.name)
+    {
       case Routes.splash2Screen:
         return MaterialPageRoute(
-            builder: (context) => Splash2Screen(), settings: routeSettings);
+            builder: (context) => Splash2Screen(),
+            settings: routeSettings);
 
       case Routes.customDrawerScreen:
         return MaterialPageRoute(
-            builder: (context) => CustomDrawerScreen(), settings: routeSettings);
+            builder: (context) => CustomDrawerScreen(),
+            settings: routeSettings);
 
       case Routes.faqScreen:
         return MaterialPageRoute(
@@ -60,7 +65,8 @@ class AppRouter {
 
       case Routes.notificationsScreen:
         return MaterialPageRoute(
-            builder: (context) => NotificationsScreen(), settings: routeSettings);
+            builder: (context) => NotificationsScreen(),
+            settings: routeSettings);
 
 
       case Routes.favouritesScreen:
@@ -79,35 +85,35 @@ class AppRouter {
       case Routes.specificChefMealsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-  create: (context) => GetSpecificChefMealsCubit(profileRepoImplementation: locator.get<ProfileRepoImplementation>())..getSpecificChefMealsFun(chefId: CacheHelper().getData(key: ApiKeys.id)),
-  child: SpecificChefMealsScreen(),
-), settings: routeSettings);
+                  create: (context) => locator<GetSpecificChefMealsCubit>()..getSpecificChefMealsFun(
+                        chefId: CacheHelper().getData(key: ApiKeys.id)),
+                  child: SpecificChefMealsScreen(),
+                ),
+            settings: routeSettings);
 
 
       case Routes.editProfileScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => EditProfileCubit(
-                      profileRepoImplementation: locator.get<ProfileRepoImplementation>()
-                  ),
+                  create: (context) => locator<EditProfileCubit>(),
                   child: EditProfileScreen(),
                 ),
             settings: routeSettings);
 
       case Routes.certificationScreen:
         return MaterialPageRoute(
-            builder: (context) => CertificationScreen(), settings: routeSettings);
+            builder: (context) => CertificationScreen(),
+            settings: routeSettings);
 
       case Routes.personalInfoScreen:
         return MaterialPageRoute(
-            builder: (context) => PersonalInfoScreen(), settings: routeSettings);
+            builder: (context) => PersonalInfoScreen(),
+            settings: routeSettings);
 
       case Routes.updateMealScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => UpdateMealCubit(
-                    homeRepoImplementation: locator.get<HomeRepoImplementation>()
-                  ),
+                  create: (context) => locator<UpdateMealCubit>(),
                   child: UpdateMealScreen(),
                 ),
             settings: routeSettings);
@@ -120,18 +126,19 @@ class AppRouter {
       case Routes.addMealScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => AddMealCubit(
-                 homeRepoImplementation: locator.get<HomeRepoImplementation>()),
+              create: (context) => locator<AddMealCubit>(),
               child: AddMealScreen(),
             ),
             settings: routeSettings);
       case Routes.mealDetailsScreen:
         return MaterialPageRoute(
-            builder: (context) => MealDetailsScreen(), settings: routeSettings);
+            builder: (context) => MealDetailsScreen(),
+            settings: routeSettings);
 
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
-            builder: (context) => OnboardingScreen(), settings: routeSettings);
+            builder: (context) => OnboardingScreen(),
+            settings: routeSettings);
 
       case Routes.homeScreen:
         return MaterialPageRoute(
@@ -142,10 +149,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) =>
                 BlocProvider(
-                  create: (context) =>
-                      LoginCubit(
-                        authRepoImplementation: locator.get<AuthRepoImplementation>()
-                      ),
+                  create: (context) => locator<LoginCubit>(),
                   child: LoginScreen(),
                 ), settings: routeSettings);
 
@@ -153,19 +157,14 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) =>
                 BlocProvider(
-                  create: (context) => SignupCubit(
-                      authRepoImplementation: locator.get<AuthRepoImplementation>()
-                  ),
+                  create: (context) => locator<SignupCubit>(),
                   child: SignupScreen(),
                 ), settings: routeSettings);
 
       case Routes.forgetPassSendCodeScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => ForgetPassCubit(
-                      authRepoImplementation: locator.get<AuthRepoImplementation>()
-
-                  ),
+                  create: (context) => locator<ForgetPassCubit>(),
                   child: ForgetPasswordSendCodeScreen(),
                 ),
             settings: routeSettings);
@@ -173,12 +172,13 @@ class AppRouter {
       case Routes.forgetPassChangeScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-              create: (context) => ForgetPassCubit(
-                  authRepoImplementation: locator.get<AuthRepoImplementation>()
-              ),
+              create: (context) => locator<ForgetPassCubit>(),
               child: ForgetPassChangeScreen(),
             ),
             settings: routeSettings);
+
+      default:
+        return MaterialPageRoute(builder: (context) => Scaffold(body: Text('No Screen'),),);
     }
   }
 

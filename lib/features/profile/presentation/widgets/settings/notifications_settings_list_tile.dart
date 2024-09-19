@@ -20,7 +20,7 @@ class NotificationsSettingsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(context.tr('notifications'),style: AppTextStyles.bold15(context).copyWith(
+      title: Text(context.tr('General Notifications'),style: AppTextStyles.bold15(context).copyWith(
           color: AppColors.c32343E
       ),),
       subtitle: Text('Allow fetch to send notifications to your device',style: AppTextStyles.regular14(context).copyWith(

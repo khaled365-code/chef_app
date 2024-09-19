@@ -6,7 +6,7 @@ import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
-import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
+import 'package:chef_app/features/home/data/models/get_meals_model/system_meals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,7 +15,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class HomeMealContainer extends StatelessWidget {
   const HomeMealContainer({super.key, required this.meal});
 
-  final Meals meal;
+  final SystemMeals meal;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,7 +51,7 @@ class HomeMealContainer extends StatelessWidget {
               SpaceWidget(width: 24,),
               SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.cFF7622, BlendMode.srcIn),),
               SpaceWidget(width: 9,),
-              Text(meal.category!,style: AppTextStyles.regular14(context).copyWith(
+              Text(meal.category??'',style: AppTextStyles.regular14(context).copyWith(
                   color: AppColors.c181C2E
               ),),
               SpaceWidget(width: 24,),

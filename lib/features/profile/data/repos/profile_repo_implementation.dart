@@ -7,10 +7,12 @@ import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/api/end_points.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/core/database/errors/server_exception.dart';
+import 'package:chef_app/features/profile/data/models/specific_chef_meals_model/chef_meals.dart';
 import 'package:chef_app/features/profile/data/models/specific_chef_meals_model/chef_meals_model.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:hive/hive.dart';
 
 class ProfileRepoImplementation implements ProfileRepo
 {
@@ -129,6 +131,20 @@ class ProfileRepoImplementation implements ProfileRepo
     {
      return Left(e.errorModel);
     }
+  }
+
+  @override
+  Either<Exception, List<SpecificChefMeals>> getCachedChefMeals()
+  {
+    var cachedChefMeals=Hive.box<SpecificChefMeals>('cached_chef_meals');
+    if(cachedChefMeals.values.isNotEmpty)
+      {
+        return Right(cachedChefMeals.values.toList());
+      }
+    else
+      {
+        return Left(Exception('No Cached Chef Meals Found'));
+      }
   }
 
 

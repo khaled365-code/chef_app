@@ -160,6 +160,10 @@ dependencies:
   workmanager: ^0.5.2
 
 
+  #A library designed for seamless internet connectivity checks. This library enables you to verify your internet connection
+  internet_connection_checker: ^2.0.0
+
+
 
 
 

@@ -2,8 +2,9 @@
 import 'package:chef_app/core/bloc_observer/bloc_observer.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/injection/injector.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/core/utilis/services/work_manager_service.dart';
-import 'package:chef_app/features/home/data/models/get_meals_model/meals.dart';
+import 'package:chef_app/features/home/data/models/get_meals_model/system_meals.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'features/profile/data/models/specific_chef_meals_model/chef_meals.dart';
 import 'meal_time.dart';
 import 'core/commons/global_models/local_notifications_model.dart';
 import 'core/database/api/api_keys.dart';
@@ -34,17 +36,23 @@ void main() async
    Hive.initFlutter(),
 
   ]);
-  Hive.registerAdapter(MealsAdapter());
+  Hive.registerAdapter(SystemMealsAdapter());
   Hive.registerAdapter(ChefDataAdapter());
   Hive.registerAdapter(LocalNotificationsModelAdapter());
+  Hive.registerAdapter(SpecificChefMealsAdapter());
   await Future.wait([
     WorkManagerService.init(),
-   Hive.openBox<Meals>('favourite_meals'),
-   Hive.openBox<Meals>('history_meals'),
+   Hive.openBox<SystemMeals>('favourite_meals'),
+   Hive.openBox<SystemMeals>('history_meals'),
+   Hive.openBox<SystemMeals>('cached_system_meals'),
+   Hive.openBox<SpecificChefMeals>('cached_chef_meals'),
    Hive.openBox<LocalNotificationsModel>('cached_local_notifications'),
   ]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await PushNotificationsService.init();
+  if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+    {
+      await PushNotificationsService.init();
+    }
 
   setUpLocator();
 

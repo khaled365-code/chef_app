@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'chef_data.dart';
 
-part 'meals.g.dart';
+part 'system_meals.g.dart';
 
 
 /// _id : "65de3dbe012b561fc7e8edb8"
@@ -19,9 +19,9 @@ part 'meals.g.dart';
 /// __v : 0
 ///
 ///
-@HiveType(typeId: 0)
-class Meals extends HiveObject {
-  Meals({
+@HiveType(typeId: 10)
+class SystemMeals extends HiveObject {
+  SystemMeals({
       this.id, 
       this.name, 
       this.description, 
@@ -35,7 +35,7 @@ class Meals extends HiveObject {
       this.updatedAt, 
       this.v,});
 
-  Meals.fromJson( json) {
+  SystemMeals.fromJson( json) {
     id = json['_id'];
     name = json['name'];
     description = json['description'];
@@ -61,23 +61,24 @@ class Meals extends HiveObject {
   String? howToSell;
   @HiveField(5)
   List<String>? images;
-  String? category;
   @HiveField(6)
-  ChefData? chefId;
+  String? category;
   @HiveField(7)
-  String? status;
+  ChefData? chefId;
   @HiveField(8)
-  String? createdAt;
+  String? status;
   @HiveField(9)
-  String? updatedAt;
+  String? createdAt;
   @HiveField(10)
-  num? v;
+  String? updatedAt;
   @HiveField(11)
+  num? v;
+  @HiveField(12)
   bool itemIsSelected=false;
 
 
 
-  toJson(Meals meal)
+  toJson(SystemMeals meal)
   {
     final map = <String, dynamic>{};
     map['_id'] = meal.id;

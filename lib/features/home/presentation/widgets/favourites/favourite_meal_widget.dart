@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
-import '../../../data/models/get_meals_model/meals.dart';
+import '../../../data/models/get_meals_model/system_meals.dart';
 
 class FavouriteMealWidget extends StatelessWidget {
   const FavouriteMealWidget({super.key, required this.meal, required this.ongoingMeal, required this.index,});
 
-  final Meals meal;
+  final SystemMeals meal;
   final bool ongoingMeal;
   final int index;
   @override

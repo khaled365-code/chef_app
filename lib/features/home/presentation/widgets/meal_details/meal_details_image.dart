@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../data/models/get_meals_model/meals.dart';
+import '../../../data/models/get_meals_model/system_meals.dart';
 
 class MealDetailsImage extends StatelessWidget {
   const MealDetailsImage({
@@ -12,7 +12,7 @@ class MealDetailsImage extends StatelessWidget {
     required this.receivedMeal,
   });
 
-  final Meals receivedMeal;
+  final SystemMeals receivedMeal;
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 /// _id : "669a8f9feabc664e27d9558d"
 /// name : "Blah Sham"
 /// description : "delicious and easy to eat"
@@ -9,9 +11,12 @@
 /// status : "accepted"
 /// createdAt : "2024-07-19T16:09:03.693Z"
 /// updatedAt : "2024-07-19T16:09:29.584Z"
-/// __v : 0
 
-class SpecificChefMeals {
+part 'chef_meals.g.dart';
+
+
+@HiveType(typeId: 5)
+class SpecificChefMeals extends HiveObject {
   SpecificChefMeals({
       this.id, 
       this.name, 
@@ -40,17 +45,29 @@ class SpecificChefMeals {
     updatedAt = json['updatedAt'];
     v = json['__v'];
   }
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? name;
+  @HiveField(2)
   String? description;
+  @HiveField(3)
   num? price;
+  @HiveField(4)
   String? howToSell;
+  @HiveField(5)
   List<String>? images;
+  @HiveField(6)
   String? category;
+  @HiveField(7)
   String? chefId;
+  @HiveField(8)
   String? status;
+  @HiveField(9)
   String? createdAt;
+  @HiveField(10)
   String? updatedAt;
+  @HiveField(11)
   num? v;
 
   Map<String, dynamic> toJson() {

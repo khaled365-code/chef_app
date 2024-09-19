@@ -89,13 +89,30 @@ class HomeScreen extends StatelessWidget {
                                          ),
                                        );
                                      }
-                                   else if(HomeScreenCubit.get(context).allMealsModel?.meals==null)
+                                   else if(HomeScreenCubit.get(context).allMealsModel?.meals==null
+                                        && HomeScreenCubit.get(context).cachedSystemMeals!=null)
                                      {
-                                       return SliverToBoxAdapter(child: SizedBox.shrink());
+                                        return SliverList(
+                                         delegate: SliverChildBuilderDelegate(
+                                               (context, index) => GestureDetector(
+                                             onTap: ()
+                                             {
+                                               navigate(context: context, route: Routes.mealDetailsScreen,arg: HomeScreenCubit.get(context).allMealsModel?.meals![index]);
+                                             },
+                                             child: Padding(
+                                               padding:  EdgeInsetsDirectional.only(start: 24.w, end: 24.w, bottom: 28.h),
+                                               child: HomeMealContainer(
+                                                 meal:HomeScreenCubit.get(context).cachedSystemMeals![index],
+                                               ),
+                                             ),
+                                           ),
+                                           childCount: HomeScreenCubit.get(context).cachedSystemMeals!.length,
+                                         ),
+                                       );
                                      }
                                    else
                                      {
-                                       return SliverToBoxAdapter(child: Center(child: Text('Error')));
+                                       return SliverToBoxAdapter(child: SizedBox.shrink());
                                      }
                                  }),
                              SliverToBoxAdapter(child: SpaceWidget(height: 32,))

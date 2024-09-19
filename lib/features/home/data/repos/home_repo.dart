@@ -9,7 +9,7 @@ import '../../../../core/database/errors/error_model.dart';
 import '../models/add_meal_model/add_meal_model.dart';
 import '../models/chef_info_model/chef_info_model.dart';
 import '../models/get_meals_model/get_all_meals_model.dart';
-import '../models/get_meals_model/meals.dart';
+import '../models/get_meals_model/system_meals.dart';
 
 abstract class HomeRepo
 {
@@ -17,6 +17,8 @@ abstract class HomeRepo
   Future<Either<ErrorModel,ChefInfoModel>>getChefData({required String chefIId});
 
   Future<Either<ErrorModel,GetAllMealsModel>>getAllMeals();
+
+
   Future<Either<ErrorModel,AddMealModel>>addNewMeal({
     required String name,
     required String description,
@@ -34,22 +36,21 @@ abstract class HomeRepo
     String? category,
   });
 
-  Future <Unit> saveCachedMeals({required List<Meals> mealList});
 
-  Future <Unit> saveCachedHistoryMeals({required Meals meal});
+  Future <Unit> saveCachedHistoryMeals({required SystemMeals meal});
 
-  Future <Unit> saveCachedFavouriteMeals({required Meals meal});
+  Future <Unit> saveCachedFavouriteMeals({required SystemMeals meal});
 
   Future<Unit> removeOngoingFavouriteMeal({required int index});
 
 
 
-  List<Meals> getCachedMeals();
+  Either<Exception,List<SystemMeals>> getCachedMeals();
 
-  Either<Exception,List<Meals>> getCachedFavouriteMeals();
+  Either<Exception,List<SystemMeals>> getCachedFavouriteMeals();
 
 
-  Either<Exception,List<Meals>> getCachedHistoryMeals();
+  Either<Exception,List<SystemMeals>> getCachedHistoryMeals();
 
 
   Future<Unit> saveLocalNotification({required LocalNotificationsModel localNotification});
@@ -59,6 +60,9 @@ abstract class HomeRepo
   Future<Unit> deleteNotification({required int localNotificationId,required int index});
 
   Future<Unit> clearAllNotifications();
+
+
+
 
 
 

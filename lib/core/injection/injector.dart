@@ -7,7 +7,6 @@ import 'package:chef_app/features/profile/data/repos/profile_repo_implementation
 import 'package:chef_app/features/profile/presentation/cubits/get_specific_chef_meals_cubit/get_specific_chef_meals_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-
 import '../../features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
 import '../../features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import '../../features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';

@@ -2,6 +2,7 @@
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import '../models/specific_chef_meals_model/chef_meals.dart';
 import '../models/specific_chef_meals_model/chef_meals_model.dart';
 
 abstract class ProfileRepo
@@ -23,9 +24,6 @@ abstract class ProfileRepo
        String? disc,  MultipartFile? profilePic});
 
 
-
-
-
-
+ Either<Exception,List<SpecificChefMeals>> getCachedChefMeals();
 
 }

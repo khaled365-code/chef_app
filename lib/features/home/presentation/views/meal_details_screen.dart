@@ -10,7 +10,7 @@ import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../../data/models/get_meals_model/meals.dart';
+import '../../data/models/get_meals_model/system_meals.dart';
 import '../widgets/meal_details/details_screen_app_bar.dart';
 import '../widgets/meal_details/meal_details_image.dart';
 
@@ -19,7 +19,7 @@ class MealDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var receivedMeal=ModalRoute.of(context)!.settings.arguments as Meals;
+    var receivedMeal=ModalRoute.of(context)!.settings.arguments as SystemMeals;
     return Scaffold(
       body: SafeArea(
           child: CustomScrollView(

@@ -17,7 +17,7 @@ import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../../core/widgets/space_widget.dart';
-import '../../../../home/data/models/get_meals_model/meals.dart';
+import '../../../../home/data/models/get_meals_model/system_meals.dart';
 import '../../cubits/delete_account_cubit/delete_account_cubit.dart';
 
 class DeleteAccountBottomSheet extends StatelessWidget {
@@ -122,8 +122,8 @@ class DeleteAccountBottomSheet extends StatelessWidget {
   {
     if(state is DeleteMyAccountSuccessState)
       {
-        var favouriteMealsBox=Hive.box<Meals>('favourite_meals');
-        var historyMealsBox=Hive.box<Meals>('history_meals');
+        var favouriteMealsBox=Hive.box<SystemMeals>('favourite_meals');
+        var historyMealsBox=Hive.box<SystemMeals>('history_meals');
         var localNotificationsBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
         await Future.wait([
           favouriteMealsBox.clear(),

@@ -30,6 +30,13 @@ final class ChangeCurrentSelectedCategoryPositionState extends HomeScreenState {
 
 
 final class GetAllMealsLoadingState extends HomeScreenState {}
+final class GetCachedMealsFailureState extends HomeScreenState {
+
+}
+final class GetCachedMealsSuccessState extends HomeScreenState {
+
+
+}
 
 
 final class GetAllMealsSuccessState extends HomeScreenState {
@@ -62,7 +69,7 @@ final class GetCachedFavouriteMealsFailureState extends HomeScreenState {
 
 final class GetCachedHistoryMealsSuccessState extends HomeScreenState {
 
-  final List<Meals> historyMealsList;
+  final List<SystemMeals> historyMealsList;
   GetCachedHistoryMealsSuccessState({required this.historyMealsList});
 
 }

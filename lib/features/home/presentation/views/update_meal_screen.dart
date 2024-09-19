@@ -14,7 +14,7 @@ import '../../../../core/widgets/shared_button.dart';
 import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../../../../core/widgets/name_and_text_field_widget.dart';
-import '../../data/models/get_meals_model/meals.dart';
+import '../../data/models/get_meals_model/system_meals.dart';
 import '../widgets/add_meal_photo_widget.dart';
 import '../widgets/update_meal/app_bar_update_screen.dart';
 import '../widgets/update_meal/update_description_field_widget.dart';
@@ -27,7 +27,7 @@ class UpdateMealScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var receivedMeal=ModalRoute.of(context)!.settings.arguments as Meals;
+    var receivedMeal=ModalRoute.of(context)!.settings.arguments as SystemMeals;
         return BlocListener<UpdateMealCubit,UpdateMealState>(
           listener: (context, state)
           {
@@ -195,7 +195,7 @@ class UpdateMealScreen extends StatelessWidget {
   }
 
 
-  Future<void> updateMealFun(BuildContext context, Meals receivedMeal) async
+  Future<void> updateMealFun(BuildContext context, SystemMeals receivedMeal) async
   {
      if( UpdateMealCubit.get(context).updatedMealImage == null &&
         UpdateMealCubit.get(context).updateMealNameController.text.isEmpty

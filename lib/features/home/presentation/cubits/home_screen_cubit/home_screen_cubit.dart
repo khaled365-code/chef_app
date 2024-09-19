@@ -2,10 +2,12 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/commons/global_models/adress_model/AddressComponents.dart';
 import 'package:chef_app/core/commons/global_models/adress_model/AddressModel.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/core/utilis/services/get_device_address_service.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/features/home/data/models/all_categories_model/all_categories_model.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
@@ -13,6 +15,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/commons/global_models/local_notifications_model.dart';
 import '../../../../../core/database/api/api_keys.dart';
@@ -20,7 +23,7 @@ import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
 import '../../../data/models/chef_info_model/chef_info_model.dart';
-import '../../../data/models/get_meals_model/meals.dart';
+import '../../../data/models/get_meals_model/system_meals.dart';
 
 part 'home_screen_state.dart';
 
@@ -90,15 +93,35 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
     // get meals fun
-    Future<void> getAllMealsFun() async
-    {
-      emit(GetAllMealsLoadingState());
-      final response=await homeRepoImplementation.getAllMeals();
-      emit(getStateAfterRequest(response));
-    }
-
 
   GetAllMealsModel? allMealsModel;
+  List<SystemMeals>? cachedSystemMeals;
+  Future<void> getAllMealsFun() async
+    {
+      if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+        {
+          emit(GetAllMealsLoadingState());
+          log('meals from api');
+          final response=await homeRepoImplementation.getAllMeals();
+          emit(getStateAfterRequest(response));
+        }
+      else
+        {
+          showToast(msg: 'No Internet connection', toastStates: ToastStates.error);
+          final data= homeRepoImplementation.getCachedMeals();
+         data.fold((exception)
+         {
+           emit(GetCachedMealsFailureState());
+
+         }, (mealsList)
+         {
+           cachedSystemMeals=mealsList;
+           emit(GetCachedMealsSuccessState());
+
+         },);
+        }
+    }
+
 
   HomeScreenState getStateAfterRequest(Either<ErrorModel, GetAllMealsModel> response)
   {
@@ -120,10 +143,10 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
 
-  List<Meals> favouriteMealsList=[];
-  List<Meals> historyMealsList=[];
+  List<SystemMeals> favouriteMealsList=[];
+  List<SystemMeals> historyMealsList=[];
 
-  changeMealFavouriteShape({required List<Meals> mealList,required int index}) async
+  changeMealFavouriteShape({required List<SystemMeals> mealList,required int index}) async
   {
     mealList[index].itemIsSelected=!mealList[index].itemIsSelected;
     if(mealList[index].itemIsSelected==true)
@@ -165,14 +188,14 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   }
 
-  removeOngoingFavouriteMeal({required Meals meal,required int index}) async
+  removeOngoingFavouriteMeal({required SystemMeals meal,required int index}) async
   {
     homeRepoImplementation.removeOngoingFavouriteMeal(index: index);
     favouriteMealsList.remove(meal);
     emit(GetCachedFavouriteMealsSuccessState());
   }
 
-  addToHistoryFavouriteMeal({required Meals meal,required int index}) async
+  addToHistoryFavouriteMeal({required SystemMeals meal,required int index}) async
   {
     removeOngoingFavouriteMeal(meal: meal,index:index);
     await homeRepoImplementation.saveCachedHistoryMeals(meal: meal);

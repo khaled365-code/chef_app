@@ -1,5 +1,6 @@
 
 
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
 import 'package:chef_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/commons/commons.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../core/widgets/space_widget.dart';
@@ -38,37 +40,31 @@ class ForgetPassChangeScreen extends StatelessWidget {
               ),
               Align(
                 alignment: AlignmentDirectional.bottomCenter,
-                child: Form(
-                  autovalidateMode: ForgetPassCubit.get(context).verifyCodeAutoValidateMode,
-                  key: ForgetPassCubit.get(context).verifyCodeFormKey,
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: MediaQuery.sizeOf(context).height*(570/812),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(25.r),
-                        topLeft: Radius.circular(25.r),
-                      ),
-                  ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width,
+                  height: MediaQuery.sizeOf(context).height*(520/812),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(25.r),
+                      topLeft: Radius.circular(25.r),
+                    ),
+                ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
+                    child: BlocBuilder<ForgetPassCubit, ForgetPassState>(
+                    builder: (context, state) {
+                   return Form(
+                      autovalidateMode: ForgetPassCubit.get(context).verifyCodeAutoValidateMode,
+                      key: ForgetPassCubit.get(context).verifyCodeFormKey,
                       child: Column(
                         children:
                         [
                           SpaceWidget(height: 24,),
-                          BlocBuilder<ForgetPassCubit, ForgetPassState>(
-                          builder: (context, state) {
-                            return NewPasswordField();
-                          },
-                        ),
+                          NewPasswordField(),
                           SpaceWidget(height: 24,),
-                          BlocBuilder<ForgetPassCubit, ForgetPassState>(
-                          builder: (context, state) {
-                            return ConfirmPassField();
-                          },
-                        ),
-                        SpaceWidget(height: 24.h,),
+                          ConfirmPassField(),
+                          SpaceWidget(height: 24.h,),
                           NameAndTextFieldWidget(
                               title: 'Code',
                               childWidget: Row(
@@ -84,31 +80,23 @@ class ForgetPassChangeScreen extends StatelessWidget {
                                     ),),
                               )),
                           SpaceWidget(height: 30,),
-                          BlocBuilder<ForgetPassCubit,ForgetPassState>
-                            (builder: (context,state)
-                          {
-                            if(state is ForgetPassChangeWithCodeLoadingState )
-                              {
-                                 return Center(
-                                   child: SharedLoadingIndicator(),);
-                              }
-                            else
-                              {
-                                return SharedButton(
-                                  btnText: 'Verify',
-                                  onPressed: ()
-                                  {
-                                    verifyCodeActionButton(context, emailText);
-                                  },
-                                );
-                              }
-                          })
-
+                          state is ForgetPassChangeWithCodeLoadingState ?
+                          Center(
+                            child: SharedLoadingIndicator(),):
+                          SharedButton(
+                            btnText: 'Verify',
+                            onPressed: ()
+                            {
+                              verifyCodeActionButton(context, emailText);
+                            },
+                          ),
                         ],
                       ),
-                    ),
-                ),
-              )
+                    );
+  },
+),
+                  ),
+                                )
 
           )]),
 
@@ -138,20 +126,29 @@ class ForgetPassChangeScreen extends StatelessWidget {
 
 
 
-  void verifyCodeActionButton(BuildContext context, String emailText) {
-     if(ForgetPassCubit.get(context).verifyCodeFormKey.currentState!.validate())
-    {
-      ForgetPassCubit.get(context).verifyCodeFormKey.currentState!.save();
-      ForgetPassCubit.get(context).forgetPassChangeWithCodeFun(
-          email: emailText,
-          code: getCompleteEmail(forgetPassCubit: ForgetPassCubit.get(context)),
-          password: ForgetPassCubit.get(context).newPasswordController.text,
-          confirmPassword: ForgetPassCubit.get(context).confirmNewPasswordController.text);
-    }
+  void verifyCodeActionButton(BuildContext context, String emailText) async {
+
+    if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+      {
+        if(ForgetPassCubit.get(context).verifyCodeFormKey.currentState!.validate())
+        {
+          ForgetPassCubit.get(context).verifyCodeFormKey.currentState!.save();
+          ForgetPassCubit.get(context).forgetPassChangeWithCodeFun(
+              email: emailText,
+              code: getCompleteEmail(forgetPassCubit: ForgetPassCubit.get(context)),
+              password: ForgetPassCubit.get(context).newPasswordController.text,
+              confirmPassword: ForgetPassCubit.get(context).confirmNewPasswordController.text);
+        }
+        else
+        {
+          ForgetPassCubit.get(context).activateVerifyCodeAutoValidateMode();
+        }
+      }
     else
       {
-        ForgetPassCubit.get(context).activateVerifyCodeAutoValidateMode();
+        buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
       }
+
   }
 
   TextEditingController getCodeController({required int index,required ForgetPassCubit forgetPassCubit})

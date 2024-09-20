@@ -28,10 +28,10 @@ class LoginCubit extends Cubit<LoginState> {
   AuthRepoImplementation authRepoImplementation;
 
   TextEditingController emailController=TextEditingController(
-    text: CacheHelper().getData(key: ApiKeys.savedEmail)!=null? CacheHelper().getData(key: ApiKeys.savedEmail):'',
+    text:  CacheHelper().getData(key: ApiKeys.savedEmail),
   );
   TextEditingController passwordController=TextEditingController(
-    text: CacheHelper().getData(key: ApiKeys.savedPassword)!=null? CacheHelper().getData(key: ApiKeys.savedPassword):'',
+    text:  CacheHelper().getData(key: ApiKeys.savedPassword),
   );
 
   GlobalKey<FormState> loginFormKey=GlobalKey();
@@ -87,6 +87,11 @@ class LoginCubit extends Cubit<LoginState> {
         await CacheHelper().saveData(key: ApiKeys.savedPassword, value: password);
       }
     }
+    if(isAccountRemembered==false)
+      {
+        await CacheHelper().removeData(key: ApiKeys.savedEmail);
+        await CacheHelper().removeData(key: ApiKeys.savedPassword);
+      }
 
   }
 

@@ -2,6 +2,7 @@
 
 
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../widgets/login/email_login_field.dart';
 import '../widgets/login/password_login_field.dart';
@@ -37,84 +39,73 @@ class LoginScreen extends StatelessWidget {
               subTitle: 'Please sign in to your existing account',
             ),
             // 579/812
-            Form(
-              key: LoginCubit.get(context).loginFormKey,
-              autovalidateMode: LoginCubit.get(context).loginAutoValidateMode,
-              child: Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height*(580/812),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(25.r),
-                      topLeft: Radius.circular(25.r),
-                    ),
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height*(520/812),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(25.r),
+                    topLeft: Radius.circular(25.r),
                   ),
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding:  EdgeInsetsDirectional.only(start: 24.w),
+                ),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding:  EdgeInsetsDirectional.only(start: 24.w),
+                    child: BlocBuilder<LoginCubit, LoginState>(
+                    builder: (context, state) {
+                      return Form(
+                      key: LoginCubit.get(context).loginFormKey,
+                      autovalidateMode: LoginCubit.get(context).loginAutoValidateMode,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:
                         [
                           SpaceWidget(height: 24,),
-                          BlocBuilder<LoginCubit, LoginState>(
-                              builder: (context, state) {
-                                return EmailLoginField();
-                              },
-                            ),
+                          EmailLoginField(),
                           SpaceWidget(height: 24,),
-                          BlocBuilder<LoginCubit, LoginState>(
-                              builder: (context, state) {
-                                return LoginPasswordField();
-                              },
-                            ),
+                          LoginPasswordField(),
                           SpaceWidget(height: 24,),
                           Padding(
                             padding:  EdgeInsetsDirectional.only(end: 24.w),
-                              child: BlocBuilder<LoginCubit, LoginState>(
-                                builder: (context, state) {
-                                  return RememberMeWidget(
+                              child: RememberMeWidget(
                                     isRemembered: LoginCubit.get(context).isAccountRemembered,
-                                  );
-                                },
-                              ),
+                                  )
                             ),
                           SpaceWidget(height: 31,),
-                          BlocBuilder<LoginCubit,LoginState>(
-                            builder: (context,state){
-                              if(state is LoginLoadingState )
+                          state is LoginLoadingState?
+                          Center(
+                            child: SharedLoadingIndicator(),
+                          ):
+                          Padding(
+                            padding:  EdgeInsetsDirectional.only(end: 24.w),
+                            child: SharedButton(
+                              btnText: 'Log In',
+                              onPressed: () async
+                              {
+                                if(await InternetConnectionCheckingService.checkInternetConnection()==true)
                                 {
-                                  return  Center(
-                                    child: SharedLoadingIndicator(),
-                                  );
+                                  if(LoginCubit.get(context).loginFormKey.currentState!.validate())
+                                  {
+                                    LoginCubit.get(context).loginFormKey.currentState!.save();
+                                    LoginCubit.get(context).loginFun(
+                                        email: LoginCubit.get(context).emailController.text,
+                                        password: LoginCubit.get(context).passwordController.text);
+                                  }
+                                  else
+                                  {
+                                    LoginCubit.get(context).changeValidateMode();
+                                  }
                                 }
-                              else
+                                else
                                 {
-                                  return Padding(
-                                    padding:  EdgeInsetsDirectional.only(end: 24.w),
-                                    child: SharedButton(
-                                      btnText: 'Log In',
-                                      onPressed: ()
-                                      {
-                                        if(LoginCubit.get(context).loginFormKey.currentState!.validate())
-                                        {
-                                          LoginCubit.get(context).loginFormKey.currentState!.save();
-                                          LoginCubit.get(context).loginFun(
-                                              email: LoginCubit.get(context).emailController.text,
-                                              password: LoginCubit.get(context).passwordController.text);
-                                        }
-                                        else
-                                          {
-                                            LoginCubit.get(context).changeValidateMode();
-                                          }
-                                      },
-                                    ),
-                                  );
+                                  buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
                                 }
-                            },
+                      
+                              },
+                            ),
                           ),
                           SpaceWidget(height: 38,),
                           OptionsForAccountWidget(
@@ -125,15 +116,15 @@ class LoginScreen extends StatelessWidget {
                               navigate(context: context, route: Routes.signUpScreen);
                             },
                           )
-
-
                         ],
                       ),
-                    ),
+                    );
+  },
+),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

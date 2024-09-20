@@ -1,4 +1,5 @@
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:chef_app/features/auth/presentation/widgets/auth_header.dart';
@@ -40,154 +41,133 @@ class SignupScreen extends StatelessWidget {
                 title: 'Sign Up',
                 subTitle: 'Please sign up to get started',
               ),
-              Form(
-                  key: SignupCubit.get(context).signupFormKey,
-                  autovalidateMode: SignupCubit.get(context).signUpAutoValidateMode,
-                  child: Align(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    child: Container(
-                        width: MediaQuery.sizeOf(context).width,
-                        height: MediaQuery.sizeOf(context).height * (585 / 812),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(25.r),
-                            topLeft: Radius.circular(25.r),
-                          ),
-                        ),
-                        child: CustomScrollView(
-                          slivers: [
-                            SliverFillRemaining(
-                              hasScrollBody: false,
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.only(start: 24.w,),
-                                child: Column(
-                                  children: [
-                                    SpaceWidget(height: 24,),
-                                    BlocBuilder<SignupCubit,SignupState>(
-                                      builder: (context, state)
-                                      {
-                                        return Center(child: SignupCubit.get(context).signupImage == null ?
-                                        ImagePickerWidget(
-                                          onCameraTap: ()
-                                          {
-                                            imagePick(imageSource: ImageSource.camera).then((value) {
-                                                SignupCubit.get(context).uploadSignupImage(image: value!);
-                                              },
-                                            );
-                                            Navigator.pop(context);
-                                          },
-                                          onGalleryTap: ()
-                                          {
-                                            imagePick(
-                                                imageSource: ImageSource.gallery).then((value) {
-                                                SignupCubit.get(context).uploadSignupImage(image: value!);
-                                              },
-                                            );
-                                            Navigator.pop(context);
-                                          },
-                                        ):
-                                        ImagePickerWidget(
-                                          onDeletePhotoTap: ()
-                                          {
-                                            SignupCubit.get(context).deleteSignupImage();
-                                          },
-                                          imagePath: SignupCubit.get(context).signupImage!.path,
-                                        )
-                                        );
-                                      },
-                                    ),
-                                    SpaceWidget(height: 24,),
-                              
-                                    NameField(),
-                              
-                                    SpaceWidget(height: 24,),
-                              
-                                    PhoneField(),
-                              
-                                    SpaceWidget(height: 24,),
-                              
-                                    EmailField(),
-                              
-                                    SpaceWidget(height: 24,),
-                              
-                                    BlocBuilder<SignupCubit, SignupState>(
-                                      builder: (context, state) {
-                                        return PasswordField();
-                                      },
-                                    ),
-                              
-                                    SpaceWidget(height: 24,),
-                              
-                                    BlocBuilder<SignupCubit, SignupState>(
-                                      builder: (context, state) {
-                                        return ConfirmPassField();
-                                      },
-                                    ),
-                              
-                                    SpaceWidget(height: 24,),
-                              
-                                    BrandNameField(),
-                              
-                                    SpaceWidget(height: 24,),
-                              
-                                    MinChargeField(),
-                              
-                                    SpaceWidget(height: 24,),
-                              
-                                    DescriptionField(),
-                              
-                                    SpaceWidget(height: 24),
-                              
-                                    BlocBuilder<SignupCubit, SignupState>(
-                                      builder: (context, state) {
-                                        return HealthCertificationSection();
-                                      },
-                                    ),
-                              
-                                    Expanded(child: SpaceWidget(height: 47,)),
-                              
-                                    BlocBuilder<SignupCubit, SignupState>(
-                                        builder: (context, state) {
-                                          if (state is SignUpLoadingState)
-                                          {
-                                            return Center(
-                                              child: SharedLoadingIndicator(),
-                                            );
-                                          }
-                                          else {
-                                            return Padding(
-                                              padding: EdgeInsetsDirectional.only(end: 24.w),
-                                              child: SharedButton(
-                                                btnText: 'Sign Up',
-                                                onPressed: () {
-                                                  performRegistrationProcess(SignupCubit.get(context), context);
-                                                },
-                                              ),
-                                            );
-                                          }
-                                        }),
-                                    SpaceWidget(height: 24),
-                                    OptionsForAccountWidget(
-                                      title1: 'Already have an account?',
-                                      title2: ' sign in',
-                                      onActionTapped: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                              
-                                    SpaceWidget(height: 30),
-                              
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-
-
+              Align(
+                alignment: AlignmentDirectional.bottomCenter,
+                child: Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height * (520/ 812),
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(25.r),
+                        topLeft: Radius.circular(25.r),
+                      ),
                     ),
-                  )),
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.only(start: 24.w,),
+                            child: BlocBuilder<SignupCubit, SignupState>(
+                            builder: (context, state) {
+                            return Form(
+                              key: SignupCubit.get(context).signupFormKey,
+                              autovalidateMode: SignupCubit.get(context).signUpAutoValidateMode,
+                              child: Column(
+                                children: [
+                                  SpaceWidget(height: 24,),
+                                   Center(child: SignupCubit.get(context).signupImage == null ?
+                                      ImagePickerWidget(
+                                        onCameraTap: ()
+                                        {
+                                          imagePick(imageSource: ImageSource.camera).then((value) {
+                                              SignupCubit.get(context).uploadSignupImage(image: value!);
+                                            },
+                                          );
+                                          Navigator.pop(context);
+                                        },
+                                        onGalleryTap: ()
+                                        {
+                                          imagePick(
+                                              imageSource: ImageSource.gallery).then((value) {
+                                              SignupCubit.get(context).uploadSignupImage(image: value!);
+                                            },
+                                          );
+                                          Navigator.pop(context);
+                                        },
+                                      ):
+                                      ImagePickerWidget(
+                                        onDeletePhotoTap: ()
+                                        {
+                                          SignupCubit.get(context).deleteSignupImage();
+                                        },
+                                        imagePath: SignupCubit.get(context).signupImage!.path,
+                                      )
+                                      ),
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  NameField(),
+                                                        
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  PhoneField(),
+                                                        
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  EmailField(),
+                                                        
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  PasswordField(),
+                                                        
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  ConfirmPassField(),
+                                                        
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  BrandNameField(),
+                                                        
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  MinChargeField(),
+                                                        
+                                  SpaceWidget(height: 24,),
+                                                        
+                                  DescriptionField(),
+                                                        
+                                  SpaceWidget(height: 24),
+                                                        
+                                  HealthCertificationSection(),
+                                                        
+                                  Expanded(child: SpaceWidget(height: 47,)),
+                                            
+                                  state is SignUpLoadingState?
+                                  Center(
+                                    child: SharedLoadingIndicator(),
+                                  ):
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.only(end: 24.w),
+                                    child: SharedButton(
+                                      btnText: 'Sign Up',
+                                      onPressed: ()
+                                      {
+                                        performRegistrationProcess(SignupCubit.get(context), context);
+                                      },
+                                    ),
+                                  ),
+                                            
+                                            
+                                  SpaceWidget(height: 24),
+                                  OptionsForAccountWidget(
+                                    title1: 'Already have an account?',
+                                    title2: ' sign in',
+                                    onActionTapped: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                                        
+                                  SpaceWidget(height: 30),
+
+                                ],
+                              ),
+                            );},),),
+                        ),
+                      ],
+                    )
+                ),
+              )
             ],
           ),
         ),
@@ -216,30 +196,41 @@ class SignupScreen extends StatelessWidget {
     }
   }
 
-  void performRegistrationProcess(SignupCubit signupCubit, BuildContext context) {
-    if (signupCubit.signupFormKey.currentState!.validate())
-    {
-      if (signupCubit.healthCertificateImage == null)
+  void performRegistrationProcess(SignupCubit signupCubit, BuildContext context) async
+  {
+
+    if(await InternetConnectionCheckingService.checkInternetConnection()==true)
       {
-        buildScaffoldMessenger(context: context, msg: 'Please upload image of your certificate to register as chef with us');
+        if (signupCubit.signupFormKey.currentState!.validate())
+        {
+          if (signupCubit.healthCertificateImage == null)
+          {
+            buildScaffoldMessenger(context: context, msg: 'Please upload image of your certificate to register as chef with us');
+          }
+          else {
+            SignupCubit.get(context).signupFormKey.currentState!.save();
+            signupCubit.signupFun(
+                name: signupCubit.nameController.text,
+                phone: signupCubit.phoneController.text,
+                email: signupCubit.emailController.text,
+                password: signupCubit.passwordController.text,
+                passwordConfirmation: signupCubit.confirmPassController.text,
+                brandName: signupCubit.brandNameController.text,
+                minimumCharge: double.parse(signupCubit.minimumChargeController.text),
+                description: signupCubit.descriptionController.text);
+          }
+        }
+        else
+        {
+          SignupCubit.get(context).activateSignUpValidateMode();
+        }
       }
-      else {
-        SignupCubit.get(context).signupFormKey.currentState!.save();
-        signupCubit.signupFun(
-            name: signupCubit.nameController.text,
-            phone: signupCubit.phoneController.text,
-            email: signupCubit.emailController.text,
-            password: signupCubit.passwordController.text,
-            passwordConfirmation: signupCubit.confirmPassController.text,
-            brandName: signupCubit.brandNameController.text,
-            minimumCharge: double.parse(signupCubit.minimumChargeController.text),
-            description: signupCubit.descriptionController.text);
-      }
-    }
     else
       {
-        SignupCubit.get(context).activateSignUpValidateMode();
+        buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
+
       }
+
   }
 
 }

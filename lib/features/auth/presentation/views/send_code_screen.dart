@@ -1,4 +1,5 @@
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cubit.dart';
@@ -35,58 +36,62 @@ class ForgetPasswordSendCodeScreen extends StatelessWidget {
                   ),
                   Align(
                     alignment: AlignmentDirectional.bottomCenter,
-                    child: Form(
-                      autovalidateMode: ForgetPassCubit.get(context).sendCodeAutoValidateMode,
-                      key: ForgetPassCubit.get(context).sendEmailFormKey,
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width,
-                        height: MediaQuery.sizeOf(context).height *(580/812),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(25.r),
-                            topLeft: Radius.circular(25.r),
-                          ),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: MediaQuery.sizeOf(context).height *(520/812),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(25.r),
+                          topLeft: Radius.circular(25.r),
                         ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
+                        child: BlocBuilder<ForgetPassCubit, ForgetPassState>(
+                         builder: (context, state) {
+                         return Form(
+                          autovalidateMode: ForgetPassCubit.get(context).sendCodeAutoValidateMode,
+                          key: ForgetPassCubit.get(context).sendEmailFormKey,
                           child: Column(
                             children: [
                               SpaceWidget(height: 24,),
                               EmailFieldSendCode(),
                               SpaceWidget(height: 30,),
-                              BlocBuilder<ForgetPassCubit,ForgetPassState>(
-                                  builder: (context, state)
+                              state is ForgetPassSendCodeLoadingState?
+                              Center(
+                                child: SharedLoadingIndicator(),
+                              ):
+                              SharedButton(
+                                btnText: 'Send Code',
+                                onPressed: () async
+                                {
+                                  if(await InternetConnectionCheckingService.checkInternetConnection()==true)
                                   {
-                                    if (state is ForgetPassSendCodeLoadingState )
-                                      {
-                                        return Center(
-                                          child: SharedLoadingIndicator(),
-                                        );
-                                      }
+                                    if (ForgetPassCubit.get(context).sendEmailFormKey.currentState!.validate())
+                                    {
+                                      ForgetPassCubit.get(context).sendEmailFormKey.currentState!.save();
+                                      ForgetPassCubit.get(context).forgetPassSendCodeFun(
+                                          email: ForgetPassCubit.get(context).emailForForgetPassController.text);
+                                    }
                                     else
-                                      {
-                                        return SharedButton(
-                                          btnText: 'Send Code',
-                                          onPressed: ()
-                                          {
-                                            if (ForgetPassCubit.get(context).sendEmailFormKey.currentState!.validate())
-                                            {
-                                              ForgetPassCubit.get(context).sendEmailFormKey.currentState!.save();
-                                              ForgetPassCubit.get(context).forgetPassSendCodeFun(
-                                                  email: ForgetPassCubit.get(context).emailForForgetPassController.text);
-                                            }
-                                            else
-                                              {
-                                                ForgetPassCubit.get(context).activateSendCodeAutoValidateMode();
-                                              }
-                                          },
-                                        );
-                                      }
-                                  },)
+                                    {
+                                      ForgetPassCubit.get(context).activateSendCodeAutoValidateMode();
+                                    }
+                                  }
+                                  else
+                                  {
+                                    buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
+
+                                  }
+
+                                },
+                              )
                             ],
                           ),
-                        ),
+                        );
+  },
+),
                       ),
                     ),
                   )

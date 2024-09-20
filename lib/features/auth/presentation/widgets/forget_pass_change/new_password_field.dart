@@ -3,8 +3,10 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../../../core/commons/commons.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../../core/widgets/name_and_text_field_widget.dart';
 import '../../cubits/forget_pass_cubit/forget_pass_cubit.dart';
@@ -37,12 +39,15 @@ class NewPasswordField extends StatelessWidget {
             {
               return 'You must enter your password';
             }
+            if(ForgetPassCubit.get(context).confirmNewPasswordController.text!=ForgetPassCubit.get(context).newPasswordController.text)
+            {
+              return 'passwords doesn\'t not match';
+            }
             else
             {
               return null;
             }
           },
-
         ));
   }
 }

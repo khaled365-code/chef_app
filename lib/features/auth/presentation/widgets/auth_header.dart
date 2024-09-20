@@ -30,7 +30,7 @@ final BuildContext? incomingContext;
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SpaceWidget(height: MediaQuery.of(context).size.height*(70/812),),
+              SpaceWidget(height: MediaQuery.of(context).size.height*(118/812),),
               Text(title,style: AppTextStyles.bold30(context).copyWith(color: AppColors.white),),
               SpaceWidget(height: 3,),
               Text(subTitle,style: AppTextStyles.regular16(context).copyWith(color: AppColors.white),),

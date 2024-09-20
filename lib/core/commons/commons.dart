@@ -3,6 +3,7 @@
 
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
+import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -67,14 +68,20 @@ Color getColor(ToastStates toastStates)
   }
 }
 
-buildScaffoldMessenger({required BuildContext context,required String msg,SnackBarBehavior? snackBarBehavior})
+buildScaffoldMessenger({required BuildContext context,required String msg,SnackBarBehavior? snackBarBehavior,Widget? iconWidget})
 {
 
    return ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-    content: Text(
-      msg,
-      style: AppTextStyles.bold15(context).copyWith(color: AppColors.white),
+    content: Row(
+      children: [
+        iconWidget??SizedBox.shrink(),
+         iconWidget!=null?SpaceWidget(width: 10,):SizedBox.shrink(),
+        Text(
+          msg,
+          style: AppTextStyles.bold15(context).copyWith(color: AppColors.white),
+        ),
+      ],
     ),
     elevation: 0,
     backgroundColor: AppColors.primaryColor,

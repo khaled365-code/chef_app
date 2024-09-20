@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/commons/commons.dart';
 import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../../core/widgets/name_and_text_field_widget.dart';
 import '../../cubits/login_cubit/login_cubit.dart';
@@ -32,17 +34,25 @@ class LoginPasswordField extends StatelessWidget {
               return null;
             }
           },
-          onFieldSubmitted: (value)
+          onFieldSubmitted: (value) async
           {
+            if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+            {
             if(LoginCubit.get(context).loginFormKey.currentState!.validate())
             {
-              LoginCubit.get(context).loginFormKey.currentState!.save();
-              LoginCubit.get(context).loginFun(email: LoginCubit.get(context).emailController.text,
-                  password: LoginCubit.get(context).passwordController.text);
+            LoginCubit.get(context).loginFormKey.currentState!.save();
+            LoginCubit.get(context).loginFun(
+            email: LoginCubit.get(context).emailController.text,
+            password: LoginCubit.get(context).passwordController.text);
             }
             else
             {
-              LoginCubit.get(context).changeValidateMode();
+            LoginCubit.get(context).changeValidateMode();
+            }
+            }
+            else
+            {
+            buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
             }
           },
           controller: LoginCubit.get(context).passwordController,

@@ -1,14 +1,17 @@
 
 
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../core/commons/commons.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
+import '../../../../core/widgets/no_internet_connection_dialog.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../../data/models/get_meals_model/system_meals.dart';
 import '../widgets/meal_details/details_screen_app_bar.dart';
@@ -158,9 +161,9 @@ class MealDetailsScreen extends StatelessWidget {
                         btnTextStyle: AppTextStyles.bold16(context).copyWith(
                             color: AppColors.white
                         ),
-                      onPressed: ()
+                      onPressed: () async
                         {
-                           navigate(context: context, route: Routes.updateMealScreen,arg: receivedMeal);
+                          navigate(context: context, route: Routes.updateMealScreen,arg: receivedMeal);
                         },),
                       SpaceWidget(height: 30,)
                     ],

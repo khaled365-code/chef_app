@@ -1,40 +1,71 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chef_app/core/commons/global_cubits/internet_checking_cubit.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:shimmer/shimmer.dart';
 import '../../../../core/database/api/api_keys.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/space_widget.dart';
 
-class DrawerHeaderWidget extends StatelessWidget {
+class DrawerHeaderWidget extends StatefulWidget {
   const DrawerHeaderWidget({
     super.key,
   });
 
+  @override
+  State<DrawerHeaderWidget> createState() => _DrawerHeaderWidgetState();
+}
+
+class _DrawerHeaderWidgetState extends State<DrawerHeaderWidget> {
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
      return Row(
           children: [
-            Container(
-              width: 100.w,
-              height: 100.h,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: CacheHelper().getData(key: ApiKeys.profilePic)!=null?
-                  DecorationImage(
-                      image: CachedNetworkImageProvider(
-                          CacheHelper().getData(key: ApiKeys.profilePic)
-                      ), fit: BoxFit.fill):
-                  DecorationImage(
+            BlocBuilder<InternetCheckingCubit,InternetCheckingState>(builder: (context, state) {
+              if(state is InternetIsConnectedState)
+              {
+               return  Container(
+                 width: 100.w,
+                 height: 100.h,
+                 decoration: BoxDecoration(
+                     shape: BoxShape.circle,
+                     image: CacheHelper().getData(key: ApiKeys.profilePic)!=null?
+                     DecorationImage(
+                         image: CachedNetworkImageProvider(
+                             CacheHelper().getData(key: ApiKeys.profilePic)
+                         ), fit: BoxFit.fill):
+                     DecorationImage(
+                         image: AssetImage(ImageConstants.userDefaultImage),
+                         fit: BoxFit.fill)
+
+                 ),
+               );
+              }
+              else
+                {
+                  return Shimmer.fromColors(
+                    baseColor: AppColors.white,
+                    highlightColor: AppColors.cD1D8E0,
+                    child: Container(
+                      width: 100.w,
+                      height: 100.h,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
                               image: AssetImage(ImageConstants.userDefaultImage),
                               fit: BoxFit.fill)
-
-              ),
-            ),
+                      ),
+                    ),
+                  );
+                }
+            },),
             SpaceWidget(width: 32,),
             Padding(
               padding: EdgeInsetsDirectional.only(end: 55.w),

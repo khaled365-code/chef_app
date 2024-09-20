@@ -1,3 +1,4 @@
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,7 @@ import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
+import '../../../../core/widgets/no_internet_connection_dialog.dart';
 import '../../../../core/widgets/shared_button.dart';
 import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../core/widgets/space_widget.dart';
@@ -197,29 +199,34 @@ class UpdateMealScreen extends StatelessWidget {
 
   Future<void> updateMealFun(BuildContext context, SystemMeals receivedMeal) async
   {
-     if( UpdateMealCubit.get(context).updatedMealImage == null &&
-        UpdateMealCubit.get(context).updateMealNameController.text.isEmpty
-        && UpdateMealCubit.get(context).updateMealDescriptionController.text.isEmpty
-        && UpdateMealCubit.get(context).updateMealPriceController.text.isEmpty
-        && UpdateMealCubit.get(context).selectedCategory == 'Beef')
-    {
-      showToast(msg: 'Nothing to update', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
-    }
+    if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+      {
+        if( UpdateMealCubit.get(context).updatedMealImage == null &&
+            UpdateMealCubit.get(context).updateMealNameController.text.isEmpty
+            && UpdateMealCubit.get(context).updateMealDescriptionController.text.isEmpty
+            && UpdateMealCubit.get(context).updateMealPriceController.text.isEmpty
+            && UpdateMealCubit.get(context).selectedCategory == 'Beef')
+        {
+          showToast(msg: 'Nothing to update', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
+        }
+        else
+        {
+          XFile mealImage = await getImageXFileByUrl(receivedMeal.images![0]);
+          UpdateMealCubit.get(context).updateMealFun(
+              mealId: receivedMeal.id!,
+              name: UpdateMealCubit.get(context).updateMealNameController.text.isEmpty?receivedMeal.name: UpdateMealCubit.get(context).updateMealNameController.text,
+              price: UpdateMealCubit.get(context).updateMealPriceController.text==' '?double.parse(UpdateMealCubit.get(context).updateMealPriceController.text):double.parse(receivedMeal.price.toString()),
+              description: UpdateMealCubit.get(context).updateMealDescriptionController.text.isEmpty?receivedMeal.description: UpdateMealCubit.get(context).updateMealDescriptionController.text,
+              category: UpdateMealCubit.get(context).selectedCategory,
+              newMealImage:  UpdateMealCubit.get(context).updatedMealImage==null? mealImage : UpdateMealCubit.get(context).updatedMealImage
+          );
+        }
+      }
     else
-    {
-        XFile mealImage = await getImageXFileByUrl(receivedMeal.images![0]);
-        UpdateMealCubit.get(context).updateMealFun(
-            mealId: receivedMeal.id!,
-            name: UpdateMealCubit.get(context).updateMealNameController.text.isEmpty?receivedMeal.name: UpdateMealCubit.get(context).updateMealNameController.text,
-            price: UpdateMealCubit.get(context).updateMealPriceController.text==' '?double.parse(UpdateMealCubit.get(context).updateMealPriceController.text):double.parse(receivedMeal.price.toString()),
-            description: UpdateMealCubit.get(context).updateMealDescriptionController.text.isEmpty?receivedMeal.description: UpdateMealCubit.get(context).updateMealDescriptionController.text,
-            category: UpdateMealCubit.get(context).selectedCategory,
-            newMealImage:  UpdateMealCubit.get(context).updatedMealImage==null? mealImage : UpdateMealCubit.get(context).updatedMealImage
-        );
+      {
+        showDialog(context: context, builder: (context) => NoInternetConnectionDialog(),);
+      }
 
-
-
-    }
   }
 }
 

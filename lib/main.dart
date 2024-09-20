@@ -1,5 +1,6 @@
 
 import 'package:chef_app/core/bloc_observer/bloc_observer.dart';
+import 'package:chef_app/core/commons/global_cubits/internet_checking_cubit.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/injection/injector.dart';
 import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
@@ -59,6 +60,7 @@ void main() async
   runApp(MultiBlocProvider(
     providers: 
     [
+      BlocProvider(create: (context) => InternetCheckingCubit()..checkStreamConnection(),),
       BlocProvider(create: (context) => locator<HomeScreenCubit>()..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
     ],
       child: EasyLocalization(

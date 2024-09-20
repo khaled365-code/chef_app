@@ -1,11 +1,13 @@
 
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
+import '../../../../core/widgets/no_internet_connection_dialog.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../widgets/available_meals/all_available_meals_row.dart';
 import '../widgets/available_meals/all_meal_app_bar.dart';
@@ -47,7 +49,7 @@ class AllMealsScreen extends StatelessWidget {
                   {
                     return AllAvailableMealsLoadingWidget();
                   }
-                   if (HomeScreenCubit.get(context).allMealsModel!.meals!.isNotEmpty)
+                   if (HomeScreenCubit.get(context).allMealsModel?.meals!=null)
                   {
                     return SliverFillRemaining(
                       child: Column(
@@ -65,7 +67,8 @@ class AllMealsScreen extends StatelessWidget {
                                itemCount: HomeScreenCubit.get(context).allMealsModel!.meals!.length,
                               itemBuilder: (context, index) {
                                return GestureDetector(
-                                    onTap: () {
+                                    onTap: ()
+                                    {
                                       navigate(context: context,
                                           route: Routes.mealDetailsScreen,
                                           arg: HomeScreenCubit.get(context).allMealsModel!.meals![index]);
@@ -84,13 +87,54 @@ class AllMealsScreen extends StatelessWidget {
                         ],
                       ),
                     );
+                  }
+                   if (HomeScreenCubit.get(context).allMealsModel?.meals==null &&
+                       HomeScreenCubit.get(context).cachedSystemMeals!.isNotEmpty)
+                   {
+                     return SliverFillRemaining(
+                       child: Column(
+                         children: [
+                           Expanded(
+                             child: GridView.builder(
+                               physics: const NeverScrollableScrollPhysics(),
+                               padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
+                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                   crossAxisCount: 2,
+                                   mainAxisSpacing: 21.h,
+                                   crossAxisSpacing: 21.w,
+                                   mainAxisExtent: 200.h
+                               ),
+                               itemCount: HomeScreenCubit.get(context).cachedSystemMeals!.length,
+                               itemBuilder: (context, index) {
+                                 return GestureDetector(
+                                   onTap: () {
+                                     navigate(context: context,
+                                         route: Routes.mealDetailsScreen,
+                                         arg: HomeScreenCubit.get(context).cachedSystemMeals![index]);
+
+                                   },
+                                   child: GridMealItem(
+                                     index: index,
+                                     mealsList: HomeScreenCubit.get(context).cachedSystemMeals!,
+                                     meal:HomeScreenCubit.get(context).cachedSystemMeals![index],
+                                   ),
+                                 );
+                               },
+
+                             ),
+                           ),
+                         ],
+                       ),
+                     );
 
                   }
-                   if (HomeScreenCubit.get(context).allMealsModel!.meals!.isEmpty) {
+                   if(HomeScreenCubit.get(context).allMealsModel?.meals==null &&
+                       HomeScreenCubit.get(context).cachedSystemMeals==null)
+                   {
                     return SliverFillRemaining(
-                        hasScrollBody: false,
-                        child: NoMealsYetWidget());
-                  }
+                       hasScrollBody: false,
+                       child: NoMealsYetWidget());
+                   }
                   else
                   {
                     return SliverToBoxAdapter(child: Text('Error'),);

@@ -1,6 +1,7 @@
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
+import 'package:chef_app/core/widgets/no_internet_connection_dialog.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/home/presentation/cubits/add_meal_cubit/add_meal_cubit.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
+import '../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../widgets/add_meal/add_category.dart';
@@ -161,24 +163,33 @@ class AddMealScreen extends StatelessWidget {
 );
   }
 
-  void handleAddMealPress(BuildContext context)
+  void handleAddMealPress(BuildContext context) async
   {
-     if (AddMealCubit.get(context).addMealFormKey.currentState!.validate())
-    {
-     if(AddMealCubit.get(context).mealImage==null)
-       {
-         showToast(msg: 'You must provide image to add meal !', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
-       }
-     else
-     {
-       AddMealCubit.get(context).addMealFun(
-         name: AddMealCubit.get(context).mealNameController.text,
-         description: AddMealCubit.get(context).mealDescriptionController.text,
-         price: double.parse(AddMealCubit.get(context).mealPriceController.text),
-         category: AddMealCubit.get(context).selectedCategory,
-         howToSell: getHowToSellValue(numberValue: AddMealCubit.get(context).numberRadioIsSelected,quantityValue: AddMealCubit.get(context).quantityRadioIsSelected),);
-     }
-    }
+    if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+      {
+        if (AddMealCubit.get(context).addMealFormKey.currentState!.validate())
+        {
+          if(AddMealCubit.get(context).mealImage==null)
+          {
+            showToast(msg: 'You must provide image to add meal !', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
+          }
+          else
+          {
+            AddMealCubit.get(context).addMealFun(
+              name: AddMealCubit.get(context).mealNameController.text,
+              description: AddMealCubit.get(context).mealDescriptionController.text,
+              price: double.parse(AddMealCubit.get(context).mealPriceController.text),
+              category: AddMealCubit.get(context).selectedCategory,
+              howToSell: getHowToSellValue(numberValue: AddMealCubit.get(context).numberRadioIsSelected,quantityValue: AddMealCubit.get(context).quantityRadioIsSelected),);
+          }
+        }
+      }
+    else
+      {
+        showDialog(context: context, builder: (context) => NoInternetConnectionDialog(),);
+      }
+
+
   }
 
   void handleListenerFunctions(AddMealState state, BuildContext context) {

@@ -1,6 +1,8 @@
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
+import 'package:chef_app/core/widgets/no_internet_connection_dialog.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/core/widgets/shared_loading_indicator.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
@@ -90,9 +92,16 @@ class LogoutBottomSheet extends StatelessWidget {
                       else
                         {
                           return SharedButton(
-                            onPressed: ()
+                            onPressed: () async
                             {
-                              LogoutCubit.get(context).logoutFun();
+                              if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+                                {
+                                  LogoutCubit.get(context).logoutFun();
+                                }
+                              else
+                                {
+                                  showDialog(context: context, builder: (context) => NoInternetConnectionDialog(),);
+                                }
                             },
                             btnText: 'Confirm',
                             btnTextStyle: AppTextStyles.bold16(context).copyWith(

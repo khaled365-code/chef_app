@@ -3,6 +3,7 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
+import 'package:chef_app/core/widgets/no_internet_connection_dialog.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
+import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../../core/widgets/space_widget.dart';
 import '../../../../home/data/models/get_meals_model/system_meals.dart';
@@ -98,9 +100,16 @@ class DeleteAccountBottomSheet extends StatelessWidget {
                         btnTextStyle: AppTextStyles.bold19(context).copyWith(
                           color: AppColors.white,
                         ),
-                        onPressed: ()
+                        onPressed: () async
                         {
-                          DeleteAccountCubit.get(context).deleteMyAccountFun(chefId: CacheHelper().getData(key: ApiKeys.id));
+                          if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+                            {
+                              DeleteAccountCubit.get(context).deleteMyAccountFun(chefId: CacheHelper().getData(key: ApiKeys.id));
+                            }
+                          else
+                            {
+                              showDialog(context: context, builder: (context) => NoInternetConnectionDialog(),);
+                            }
                         },
                         btnText: 'Delete Account',);
                     }

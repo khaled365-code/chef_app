@@ -1,6 +1,8 @@
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
+import 'package:chef_app/core/widgets/no_internet_connection_dialog.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/core/widgets/shared_loading_indicator.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
@@ -93,23 +95,31 @@ class EditProfileScreen extends StatelessWidget {
                             btnText: 'SAVE',
                             btnTextStyle: AppTextStyles.bold16(context)
                                 .copyWith(color: AppColors.white),
-                            onPressed: ()
+                            onPressed: () async
                             {
-                              if(EditProfileCubit.get(context).editProfileFormKey.currentState!.validate())
-                              {
-                                EditProfileCubit.get(context).editProfileFormKey.currentState!.save();
-                                EditProfileCubit.get(context).editProfileFun(
-                                  name: EditProfileCubit.get(context).nameController.text,
-                                  phone: EditProfileCubit.get(context).phoneController.text,
-                                  brandName: EditProfileCubit.get(context).brandNameController.text,
-                                  minCharge: EditProfileCubit.get(context).minChargeController.text.isNotEmpty? double.parse(EditProfileCubit.get(context).minChargeController.text):null,
-                                  disc: EditProfileCubit.get(context).discController.text,
-                                );
-                              }
+                              if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+                                {
+                                  if(EditProfileCubit.get(context).editProfileFormKey.currentState!.validate())
+                                  {
+                                    EditProfileCubit.get(context).editProfileFormKey.currentState!.save();
+                                    EditProfileCubit.get(context).editProfileFun(
+                                      name: EditProfileCubit.get(context).nameController.text,
+                                      phone: EditProfileCubit.get(context).phoneController.text,
+                                      brandName: EditProfileCubit.get(context).brandNameController.text,
+                                      minCharge: EditProfileCubit.get(context).minChargeController.text.isNotEmpty? double.parse(EditProfileCubit.get(context).minChargeController.text):null,
+                                      disc: EditProfileCubit.get(context).discController.text,
+                                    );
+                                  }
+                                  else
+                                  {
+                                    EditProfileCubit.get(context).activateEditProfileValidateMode();
+                                  }
+                                }
                               else
-                              {
-                                EditProfileCubit.get(context).activateEditProfileValidateMode();
-                              }
+                                {
+                                  showDialog(context: context, builder: (context) => NoInternetConnectionDialog(),);
+                                }
+
                             },
                           ),
                           Spacer(),

@@ -59,9 +59,11 @@ class HomeRepoImplementation implements HomeRepo
       GetAllMealsModel getAllMealsModel=GetAllMealsModel.fromJson(response);
       if(getAllMealsModel.meals!.isNotEmpty)
         {
+          await cachedSystemMeals.clear();
           for (var meal in getAllMealsModel.meals!)
             {
               await cachedSystemMeals.add(meal);
+
             }
         }
       return Right(getAllMealsModel);

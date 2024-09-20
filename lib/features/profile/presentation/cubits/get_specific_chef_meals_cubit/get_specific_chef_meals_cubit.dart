@@ -1,11 +1,13 @@
+
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
-
 import '../../../../../core/database/errors/error_model.dart';
-import '../../../../home/data/models/get_meals_model/system_meals.dart';
 import '../../../data/models/specific_chef_meals_model/chef_meals.dart';
 import '../../../data/models/specific_chef_meals_model/chef_meals_model.dart';
 
@@ -18,29 +20,35 @@ class GetSpecificChefMealsCubit extends Cubit<GetSpecificChefMealsState> {
   final ProfileRepoImplementation profileRepoImplementation;
 
   List<SpecificChefMeals>? chefMeals;
-  var chefMealsBox=Hive.box<SpecificChefMeals>('cached_chef_meals');
+  List<SpecificChefMeals>? cachedChefMeals;
 
   getSpecificChefMealsFun({required String chefId}) async
   {
-    emit(GetSpecificChefMealsLoadingState());
-    final response=await profileRepoImplementation.getChefMeals(chefIId: chefId);
-
-
-    response.fold(
-    (errorModel) => emit(GetSpecificChefMealsFailureState(errorModel: errorModel)),
-            (chefMealsModel)
-           {
-             chefMeals=chefMealsModel.meals;
-             if(chefMeals!.isNotEmpty)
-               {
-                 for (var element in chefMeals!)
-                   {
-                     chefMealsBox.add(element);
-                   }
-               }
+    if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+      {
+        emit(GetSpecificChefMealsLoadingState());
+        log('chef meals from api');
+        final response=await profileRepoImplementation.getChefMeals(chefIId: chefId);
+        response.fold(
+                (errorModel) => emit(GetSpecificChefMealsFailureState(errorModel: errorModel)),
+                (chefMealsModel)
+            {
+              chefMeals=chefMealsModel.meals;
               emit(GetSpecificChefMealsSuccessState(
                   specificChefMealsModel: chefMealsModel));
             });
+
+      }
+    else
+      {
+       final response= profileRepoImplementation.getCachedChefMeals();
+       response.fold((l) {
+         emit(GetCachedChefMealsFailureState());
+       }, (meals) {
+         cachedChefMeals=meals;
+         emit(GetCachedChefMealsSuccessState());
+       },);
+      }
 
   }
 

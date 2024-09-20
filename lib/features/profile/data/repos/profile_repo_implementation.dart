@@ -21,6 +21,21 @@ class ProfileRepoImplementation implements ProfileRepo
 
   ProfileRepoImplementation({required this.api});
 
+  var cachedChefMeals=Hive.box<SpecificChefMeals>('cached_chef_meals');
+
+  @override
+  Either<Exception, List<SpecificChefMeals>> getCachedChefMeals()
+  {
+    if(cachedChefMeals.values.isNotEmpty)
+    {
+      return Right(cachedChefMeals.values.toList());
+    }
+    else
+    {
+      return Left(Exception('No Cached Chef Meals Found'));
+    }
+  }
+
 
   @override
   Future<Either<ErrorModel, SpecificChefMealsModel>> getChefMeals({required String chefIId}) async
@@ -29,6 +44,14 @@ class ProfileRepoImplementation implements ProfileRepo
     {
       final response=await api.get(EndPoints.getSingleChefMealsEndPoint(chefIId: chefIId));
       SpecificChefMealsModel specificChefMealsModel=SpecificChefMealsModel.fromJson(response);
+      if(specificChefMealsModel.meals!.isNotEmpty)
+        {
+          await cachedChefMeals.clear();
+          for(var meal in specificChefMealsModel.meals!)
+            {
+              await cachedChefMeals.add(meal);
+            }
+        }
       return Right(specificChefMealsModel);
     } on ServerException catch(e)
     {
@@ -133,19 +156,7 @@ class ProfileRepoImplementation implements ProfileRepo
     }
   }
 
-  @override
-  Either<Exception, List<SpecificChefMeals>> getCachedChefMeals()
-  {
-    var cachedChefMeals=Hive.box<SpecificChefMeals>('cached_chef_meals');
-    if(cachedChefMeals.values.isNotEmpty)
-      {
-        return Right(cachedChefMeals.values.toList());
-      }
-    else
-      {
-        return Left(Exception('No Cached Chef Meals Found'));
-      }
-  }
+
 
 
 

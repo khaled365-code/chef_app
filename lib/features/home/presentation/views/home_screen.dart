@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                                                (context, index) => GestureDetector(
                                              onTap: ()
                                              {
-                                               navigate(context: context, route: Routes.mealDetailsScreen,arg: HomeScreenCubit.get(context).allMealsModel?.meals![index]);
+                                               navigate(context: context, route: Routes.mealDetailsScreen,arg: HomeScreenCubit.get(context).cachedSystemMeals![index]);
                                              },
                                              child: Padding(
                                                padding:  EdgeInsetsDirectional.only(start: 24.w, end: 24.w, bottom: 28.h),

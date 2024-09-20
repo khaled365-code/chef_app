@@ -164,6 +164,12 @@ dependencies:
   internet_connection_checker: ^2.0.0
 
 
+  #A Flutter package to check your internet connection with subsecond response times, even on mobile networks!
+  internet_connection_checker_plus: ^2.5.2
+
+
+
+
 
 
 

@@ -35,7 +35,7 @@ class SpecificChefMealsScreen extends StatelessWidget {
                             child: Text('Found ${GetSpecificChefMealsCubit
                                 .get(context)
                                 .chefMeals
-                                ?.length ?? 0} results ',
+                                ?.length ?? GetSpecificChefMealsCubit.get(context).cachedChefMeals?.length??0} results ',
                                 style: AppTextStyles.bold28(context).copyWith(
                                     color: AppColors.c32343E
                                 )),
@@ -79,8 +79,7 @@ class SpecificChefMealsScreen extends StatelessWidget {
                     );
 
                   }
-                  else if (state is GetSpecificChefMealsSuccessState &&
-                      GetSpecificChefMealsCubit.get(context).chefMeals!.isNotEmpty)
+                  else if (GetSpecificChefMealsCubit.get(context).chefMeals!=null)
                   {
 
                     return  SliverToBoxAdapter(
@@ -111,18 +110,49 @@ class SpecificChefMealsScreen extends StatelessWidget {
                     );
 
                   }
-                  else if (GetSpecificChefMealsCubit.get(context).chefMeals!.isEmpty)
+                  else if (GetSpecificChefMealsCubit.get(context).chefMeals==null&&
+                      GetSpecificChefMealsCubit.get(context).cachedChefMeals!=null)
+                  {
+                    return SliverToBoxAdapter(
+                      child: GridView.custom(
+                        padding:  EdgeInsets.symmetric(horizontal: 24.w),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        childrenDelegate: SliverChildBuilderDelegate(
+                              (context, index) => GridSpecificChefMealsItem(
+                            meal: GetSpecificChefMealsCubit.get(context).cachedChefMeals![index],
+                          ),
+                          childCount: GetSpecificChefMealsCubit.get(context).cachedChefMeals!.length,
+                        ),
+                        gridDelegate: SliverWovenGridDelegate.count(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 70,
+                          crossAxisSpacing: 30,
+                          pattern: [
+                            WovenGridTile(.67),
+                            WovenGridTile(
+                                220 / 252,
+                                alignment: AlignmentDirectional.bottomCenter
+                            ),
+                          ],
+
+                        ),
+                      ),
+                    );
+                  }
+                  if (GetSpecificChefMealsCubit.get(context).cachedChefMeals==null && 
+                      GetSpecificChefMealsCubit.get(context).chefMeals==null)
                   {
                     return SliverToBoxAdapter(
                       child: SizedBox.shrink(),
                     );
                   }
                   else
-                  {
-                    return SliverToBoxAdapter(
-                      child: Text('Error'),
-                    );
-                  }
+                    {
+                      return SliverToBoxAdapter(
+                        child: Text('error'),
+                      );
+                    }
                 },),
               SliverToBoxAdapter(child: SpaceWidget(height: 39,)),
 

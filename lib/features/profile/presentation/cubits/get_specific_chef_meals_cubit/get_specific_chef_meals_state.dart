@@ -23,5 +23,9 @@ final class GetSpecificChefMealsFailureState extends GetSpecificChefMealsState
 
   GetSpecificChefMealsFailureState({required this.errorModel});
 
-
 }
+
+final class GetCachedChefMealsSuccessState extends GetSpecificChefMealsState {}
+
+final class GetCachedChefMealsFailureState extends GetSpecificChefMealsState {}
+

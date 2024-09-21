@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:meta/meta.dart';
 part 'internet_checking_state.dart';
@@ -12,7 +12,7 @@ class InternetCheckingCubit extends Cubit<InternetCheckingState> {
 
   StreamSubscription? internetConnectionStream;
 
- void checkStreamConnection()
+  checkStreamConnection()
   {
     internetConnectionStream=InternetConnection().onStatusChange.listen((InternetStatus status)
     {

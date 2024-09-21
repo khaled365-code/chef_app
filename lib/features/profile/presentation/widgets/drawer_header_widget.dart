@@ -28,44 +28,44 @@ class _DrawerHeaderWidgetState extends State<DrawerHeaderWidget> {
   Widget build(BuildContext context)  {
      return Row(
           children: [
-            BlocBuilder<InternetCheckingCubit,InternetCheckingState>(builder: (context, state) {
-              if(state is InternetIsConnectedState)
-              {
-               return  Container(
-                 width: 100.w,
-                 height: 100.h,
-                 decoration: BoxDecoration(
-                     shape: BoxShape.circle,
-                     image: CacheHelper().getData(key: ApiKeys.profilePic)!=null?
-                     DecorationImage(
-                         image: CachedNetworkImageProvider(
-                             CacheHelper().getData(key: ApiKeys.profilePic)
-                         ), fit: BoxFit.fill):
-                     DecorationImage(
-                         image: AssetImage(ImageConstants.userDefaultImage),
-                         fit: BoxFit.fill)
-
-                 ),
-               );
-              }
-              else
-                {
-                  return Shimmer.fromColors(
-                    baseColor: AppColors.white,
-                    highlightColor: AppColors.cD1D8E0,
-                    child: Container(
-                      width: 100.w,
-                      height: 100.h,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage(ImageConstants.userDefaultImage),
-                              fit: BoxFit.fill)
-                      ),
-                    ),
-                  );
-                }
-            },),
+            // BlocBuilder<InternetCheckingCubit,InternetCheckingState>(builder: (context, state) {
+            //   if(state is InternetIsConnectedState)
+            //   {
+            //    return  Container(
+            //      width: 100.w,
+            //      height: 100.h,
+            //      decoration: BoxDecoration(
+            //          shape: BoxShape.circle,
+            //          image: CacheHelper().getData(key: ApiKeys.profilePic)!=null?
+            //          DecorationImage(
+            //              image: CachedNetworkImageProvider(
+            //                  CacheHelper().getData(key: ApiKeys.profilePic)
+            //              ), fit: BoxFit.fill):
+            //          DecorationImage(
+            //              image: AssetImage(ImageConstants.userDefaultImage),
+            //              fit: BoxFit.fill)
+            //
+            //      ),
+            //    );
+            //   }
+            //   else
+            //     {
+            //       return Shimmer.fromColors(
+            //         baseColor: AppColors.white,
+            //         highlightColor: AppColors.cD1D8E0,
+            //         child: Container(
+            //           width: 100.w,
+            //           height: 100.h,
+            //           decoration: BoxDecoration(
+            //               shape: BoxShape.circle,
+            //               image: DecorationImage(
+            //                   image: AssetImage(ImageConstants.userDefaultImage),
+            //                   fit: BoxFit.fill)
+            //           ),
+            //         ),
+            //       );
+            //     }
+            // },),
             SpaceWidget(width: 32,),
             Padding(
               padding: EdgeInsetsDirectional.only(end: 55.w),

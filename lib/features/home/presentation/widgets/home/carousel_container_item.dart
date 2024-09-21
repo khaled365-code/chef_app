@@ -51,7 +51,7 @@ class CarouselContainerItem extends StatelessWidget {
                     {
                       if(index==1)
                         {
-                          HomeScreenCubit.get(context).getAllMealsFun();
+                         // HomeScreenCubit.get(context).getAllMealsFun();
                           navigate(context: context,route: Routes.allMealsScreen);
                         }
                       else

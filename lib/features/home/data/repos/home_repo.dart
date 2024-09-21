@@ -18,6 +18,9 @@ abstract class HomeRepo
 
   Future<Either<ErrorModel,GetAllMealsModel>>getAllMeals();
 
+  Either<Exception,List<SystemMeals>> getCachedMeals();
+
+
 
   Future<Either<ErrorModel,AddMealModel>>addNewMeal({
     required String name,
@@ -37,22 +40,25 @@ abstract class HomeRepo
   });
 
 
+
+  // for history meals
   Future <Unit> saveCachedHistoryMeals({required SystemMeals meal});
+  Either<Exception,List<SystemMeals>> getCachedHistoryMeals();
 
+
+
+  // for favourite meals
+  Either<Exception,List<SystemMeals>> getCachedFavouriteMeals();
   Future <Unit> saveCachedFavouriteMeals({required SystemMeals meal});
-
   Future<Unit> removeOngoingFavouriteMeal({required int index});
 
 
 
-  Either<Exception,List<SystemMeals>> getCachedMeals();
-
-  Either<Exception,List<SystemMeals>> getCachedFavouriteMeals();
 
 
-  Either<Exception,List<SystemMeals>> getCachedHistoryMeals();
 
 
+  // for local notifications
   Future<Unit> saveLocalNotification({required LocalNotificationsModel localNotification});
 
   Either<Exception,List<LocalNotificationsModel>> getCachedLocalNotifications();

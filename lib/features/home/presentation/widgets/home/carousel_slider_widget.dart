@@ -2,9 +2,9 @@
 
 
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
+import 'package:chef_app/features/home/presentation/cubits/home_lists_cubit/home_lists_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'carousel_container_item.dart';
 
 class CarouselSliderWidget extends StatelessWidget {
@@ -34,7 +34,7 @@ class CarouselSliderWidget extends StatelessWidget {
             builder: (BuildContext context) {
               return CarouselContainerItem(
                 index: i,
-                carouselSliderModel:  HomeScreenCubit.get(context).carouselSliderList[i - 1],
+                carouselSliderModel:  HomeListsCubit.get(context).carouselSliderList[i - 1],
               );
             },
           );

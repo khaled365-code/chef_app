@@ -2,8 +2,6 @@
 
 
 import 'dart:developer';
-
-import 'package:chef_app/core/commons/global_models/app_notification_response.dart';
 import 'package:chef_app/core/database/api/api_consumer.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/api/end_points.dart';
@@ -16,9 +14,7 @@ import 'package:chef_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/src/multipart_file.dart';
-import 'package:flutter_local_notifications_platform_interface/src/types.dart';
 import 'package:hive/hive.dart';
-
 import '../../../../core/commons/global_models/local_notifications_model.dart';
 import '../../../../core/database/cache/cache_helper.dart';
 import '../models/add_meal_model/add_meal_model.dart';

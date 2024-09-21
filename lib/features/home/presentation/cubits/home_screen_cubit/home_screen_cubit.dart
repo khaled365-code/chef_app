@@ -1,6 +1,5 @@
 
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/commons/global_models/adress_model/AddressComponents.dart';
@@ -15,11 +14,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/commons/global_models/local_notifications_model.dart';
-import '../../../../../core/database/api/api_keys.dart';
-import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
 import '../../../data/models/chef_info_model/chef_info_model.dart';
@@ -46,95 +42,11 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
 
 
-  List<CarouselSliderModel> carouselSliderList=[
-    CarouselSliderModel(textTitle: 'Become a Culinary Mastermind,Create and share your signature dishes with the app\'s community! Add mouthwatering meals with detailed descriptions, so users can discover your culinary creations.', btnText: 'See meals'),
-    CarouselSliderModel(textTitle: 'Craft Your Culinary Identity: Edit and update your chef profile whenever you like. Add a captivating photo, write a compelling bio, and highlight your culinary expertise to impress the app\'s foodie community.', btnText: 'See your profile'),
-  ];
-
-  GlobalKey<RefreshIndicatorState>refreshIndicatorKey=GlobalKey();
 
 
 
-  List<AllCategoriesModel> allCategoriesList=[
-      AllCategoriesModel(name: 'Beef', image: ImageConstants.beefImage),
-      AllCategoriesModel(name: 'Chicken', image: ImageConstants.chickenImage),
-      AllCategoriesModel(name: 'Fish', image: ImageConstants.fishImage),
-      AllCategoriesModel(name: 'Seafood', image: ImageConstants.seafoodImage),
-      AllCategoriesModel(name: 'Pork', image: ImageConstants.porkImage),
-      AllCategoriesModel(name: 'Lamb', image: ImageConstants.lambImage),
-      AllCategoriesModel(name: 'Vegetarian', image: ImageConstants.vegetarianImage),
-      AllCategoriesModel(name: 'Vegan', image: ImageConstants.veganImage),
-      AllCategoriesModel(name: 'Gluten-free', image: ImageConstants.glutenFreeImage),
-      AllCategoriesModel(name: 'Dairy-free', image: ImageConstants.dairlyFreeImage),
-      AllCategoriesModel(name: 'Breakfast', image: ImageConstants.breakfastImage),
-      AllCategoriesModel(name: 'Lunch', image: ImageConstants.lunchImage),
-      AllCategoriesModel(name: 'Dinner', image: ImageConstants.dinnerImage),
-      AllCategoriesModel(name: 'Appetizers', image: ImageConstants.appetizaresImage),
-      AllCategoriesModel(name: 'Salads', image: ImageConstants.saladsImage),
-      AllCategoriesModel(name: 'Soups', image: ImageConstants.soupImage),
-      AllCategoriesModel(name: 'Sandwiches', image: ImageConstants.sandwichesImage),
-      AllCategoriesModel(name: 'Pasta', image: ImageConstants.pastaImage),
-      AllCategoriesModel(name: 'Pizza', image: ImageConstants.pizzaImage),
-      AllCategoriesModel(name: 'Rice dishes', image: ImageConstants.riceDishesImage),
-      AllCategoriesModel(name: 'Stir-fries', image: ImageConstants.stirFriesImage),
-      AllCategoriesModel(name: 'Curries', image: ImageConstants.curriesImage),
-      AllCategoriesModel(name: 'Desserts', image: ImageConstants.dessertsImage),
-      AllCategoriesModel(name: 'Baked goods', image: ImageConstants.bakedGoodsImage),
-      AllCategoriesModel(name: 'Snacks', image: ImageConstants.snacksImage),
-
-    ];
-
-    int currentSelectedCategoryIndex=0;
-    changeCurrentSelectedCategoryPosition({required int index})
-    {
-      currentSelectedCategoryIndex=index;
-      emit(ChangeCurrentSelectedCategoryPositionState());
-    }
 
 
-    // get meals fun
-
-  GetAllMealsModel? allMealsModel;
-  List<SystemMeals>? cachedSystemMeals;
-  Future<void> getAllMealsFun() async
-    {
-      if(await InternetConnectionCheckingService.checkInternetConnection()==true)
-        {
-          emit(GetAllMealsLoadingState());
-          log('meals from api');
-          final response=await homeRepoImplementation.getAllMeals();
-          emit(getStateAfterRequest(response));
-        }
-      else
-        {
-          showToast(msg: 'No Internet connection', toastStates: ToastStates.error);
-          final data= homeRepoImplementation.getCachedMeals();
-         data.fold((exception)
-         {
-           emit(GetCachedMealsFailureState());
-
-         }, (mealsList)
-         {
-           cachedSystemMeals=mealsList;
-           emit(GetCachedMealsSuccessState());
-
-         },);
-        }
-    }
-
-
-  HomeScreenState getStateAfterRequest(Either<ErrorModel, GetAllMealsModel> response)
-  {
-    return response.fold((errorModel)
-    {
-      return GetAllMealsFailureState(errorModel: errorModel);
-    }, (getAllMealsModel)
-    {
-      allMealsModel=getAllMealsModel;
-      return GetAllMealsSuccessState(getAllMealsModel: getAllMealsModel);
-    });
-
-  }
 
 
 

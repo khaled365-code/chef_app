@@ -60,8 +60,7 @@ void main() async
   runApp(MultiBlocProvider(
     providers: 
     [
-      BlocProvider(create: (context) => InternetCheckingCubit()..checkStreamConnection(),),
-      BlocProvider(create: (context) => locator<HomeScreenCubit>()..getAllMealsFun()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
+      BlocProvider(create: (context) => locator<HomeScreenCubit>()..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id))..getUserAddressFun(),),
     ],
       child: EasyLocalization(
           supportedLocales: [ Locale('en'), Locale('ar')],

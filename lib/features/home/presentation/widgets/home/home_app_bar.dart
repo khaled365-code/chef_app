@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/commons/global_cubits/internet_checking_cubit.dart';
 import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
 import 'package:chef_app/core/commons/global_models/scheduled_notification_model.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
@@ -14,6 +15,8 @@ import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import 'package:badges/badges.dart' as badges;
+
+import '../../cubits/get_system_meals_cubit/system_meals_cubit.dart';
 
 
 class HomeAppBar extends StatelessWidget {
@@ -53,9 +56,9 @@ class HomeAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(end: 24.w),
             child: GestureDetector(
-              onTap: () {
-                HomeScreenCubit.get(context).getAllMealsFun();
-                navigate(context: context, route: Routes.allMealsScreen);
+              onTap: ()
+              {
+                 navigate(context: context, route: Routes.allMealsScreen);
               },
               child: Container(
                 width: 45.w,
@@ -68,9 +71,10 @@ class HomeAppBar extends StatelessWidget {
                     child: badges.Badge(
                       ignorePointer: true,
                       position: BadgePosition.topEnd(top: -28, end: -18),
-                      badgeContent: BlocBuilder<HomeScreenCubit,HomeScreenState>(
+                      badgeContent: BlocBuilder<SystemMealsCubit,SystemMealsState>(
                         builder: (context, state) {
-                          return Text('${HomeScreenCubit.get(context).allMealsModel?.meals?.length ?? HomeScreenCubit.get(context).cachedSystemMeals?.length??0}',
+                          return Text('${SystemMealsCubit.get(context).allMealsModel?.meals?.length ??
+                              SystemMealsCubit.get(context).cachedSystemMeals?.length??0}',
                             style: AppTextStyles.bold16(context).copyWith(
                               color: AppColors.white
                           ),);

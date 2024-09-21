@@ -29,28 +29,6 @@ final class ChangeMealFavouriteActiveShapeState extends HomeScreenState {}
 final class ChangeCurrentSelectedCategoryPositionState extends HomeScreenState {}
 
 
-final class GetAllMealsLoadingState extends HomeScreenState {}
-final class GetCachedMealsFailureState extends HomeScreenState {
-
-}
-final class GetCachedMealsSuccessState extends HomeScreenState {
-
-
-}
-
-
-final class GetAllMealsSuccessState extends HomeScreenState {
-
-  final GetAllMealsModel getAllMealsModel;
-  GetAllMealsSuccessState({required this.getAllMealsModel});
-}
-
-
-final class GetAllMealsFailureState extends HomeScreenState {
-
-  final ErrorModel errorModel;
-  GetAllMealsFailureState({required this.errorModel});
-}
 
 
 final class GetCachedFavouriteMealsSuccessState extends HomeScreenState {

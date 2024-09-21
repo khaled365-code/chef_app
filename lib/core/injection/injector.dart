@@ -11,6 +11,7 @@ import '../../features/auth/presentation/cubits/forget_pass_cubit/forget_pass_cu
 import '../../features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import '../../features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import '../../features/home/presentation/cubits/add_meal_cubit/add_meal_cubit.dart';
+import '../../features/home/presentation/cubits/get_system_meals_cubit/system_meals_cubit.dart';
 import '../../features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
 import '../../features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 
@@ -25,6 +26,7 @@ setUpLocator()
   locator.registerLazySingleton<AuthRepoImplementation>(() =>AuthRepoImplementation(api: locator.get<DioConsumer>()),);
   
   locator.registerFactory(() => HomeScreenCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>()),);
+  locator.registerFactory(() => SystemMealsCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>()),);
   locator.registerFactory(() => GetSpecificChefMealsCubit(profileRepoImplementation: locator.get<ProfileRepoImplementation>()));
   locator.registerFactory(() => EditProfileCubit(profileRepoImplementation: locator.get<ProfileRepoImplementation>()),);
   locator.registerFactory(() => UpdateMealCubit(homeRepoImplementation: locator.get<HomeRepoImplementation>()),);

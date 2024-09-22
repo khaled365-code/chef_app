@@ -21,7 +21,7 @@ class HomeNoMealsYetWidget extends StatelessWidget {
        Column(
          crossAxisAlignment: CrossAxisAlignment.start,
          children: [
-           Text('No Meals yet 😢',style: AppTextStyles.medium_22_Poppins(context).copyWith(
+           Text('No Meals yet 🍔',style: AppTextStyles.medium_22_Poppins(context).copyWith(
              color: AppColors.c333333
            ),),
            SpaceWidget(height: 5,),

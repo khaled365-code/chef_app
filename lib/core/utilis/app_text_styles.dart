@@ -386,7 +386,16 @@ class AppTextStyles
   static  TextStyle regular_9_Poppins (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 9),
+        fontSize: 9.sp,
+        fontWeight: FontweightHelper.regular,
+        fontFamily: 'poppins'
+    );
+
+  }
+  static  TextStyle regular_14_Poppins (BuildContext context)
+  {
+    return TextStyle(
+        fontSize: 14.sp,
         fontWeight: FontweightHelper.regular,
         fontFamily: 'poppins'
     );
@@ -395,7 +404,7 @@ class AppTextStyles
   static  TextStyle medium_22_Poppins (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 22),
+        fontSize: 22.sp,
         fontWeight: FontweightHelper.medium,
         fontFamily: 'poppins'
     );
@@ -404,7 +413,7 @@ class AppTextStyles
   static  TextStyle medium_28_Poppins (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 28),
+        fontSize: 28.sp,
         fontWeight: FontweightHelper.medium,
         fontFamily: 'poppins'
     );
@@ -413,7 +422,7 @@ class AppTextStyles
   static  TextStyle medium_14_Poppins (BuildContext context)
   {
     return TextStyle(
-        fontSize: getResponsiveFontSize(context: context,fontSize: 14),
+        fontSize: 14.sp,
         fontWeight: FontweightHelper.medium,
         fontFamily: 'poppins'
     );
@@ -421,14 +430,14 @@ class AppTextStyles
   }
   static  TextStyle medium_12_Poppins(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveFontSize(context: context,fontSize: 12),
+      fontSize: 12.sp,
       fontWeight: FontweightHelper.medium,
       fontFamily: 'poppins',
     );
   }
   static  TextStyle medium_34_Poppins(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveFontSize(context: context,fontSize: 34),
+      fontSize: 34.sp,
       fontWeight: FontweightHelper.medium,
       fontFamily: 'poppins',
     );

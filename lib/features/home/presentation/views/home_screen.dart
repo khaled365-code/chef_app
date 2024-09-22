@@ -93,6 +93,7 @@ class HomeScreen extends StatelessWidget {
                         if (state is GetAllMealsSuccessState &&
                             SystemMealsCubit.get(context).allMealsModel?.meals != null)
                         {
+
                           return SliverList(
                             delegate: SliverChildBuilderDelegate(
                               (context, index) => GestureDetector(

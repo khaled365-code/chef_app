@@ -62,6 +62,8 @@ class ImageConstants
   static const String  adminLoginImage= 'assets/images/admin_login_image.png';
   static const String chefCokesImage='assets/images/chef_cooking_image.png';
   static const String editedNoMealsImage='assets/images/edited_no_meals_image.png';
+  static const String historyImage='assets/images/history_image.png';
+  static const String orderCarImage='assets/images/order_car_image.png';
 
 
 

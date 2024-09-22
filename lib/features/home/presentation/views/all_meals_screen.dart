@@ -18,173 +18,173 @@ class AllMealsScreen extends StatelessWidget {
   const AllMealsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocListener<InternetCheckingCubit,InternetCheckingState>(
-      listener: (context, state) {
-        if (state is InternetIsConnectedState)
-        {
-          SystemMealsCubit.get(context).getAllMealsFromApiFun();
-          buildScaffoldMessenger(context: context, msg: 'All fresh meals',iconWidget: Icon(Icons.check,color: AppColors.white,));
-        }
-        else
-        {
-          SystemMealsCubit.get(context).getMealsFromCacheFun();
-          buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
-        }
-      },
-      child: Scaffold(
-        backgroundColor: AppColors.white,
-        body: SafeArea(
-            child: RefreshIndicator(
-              onRefresh: () async
-              {
-                if(await InternetConnectionCheckingService.checkInternetConnection()==true)
-                  {
-                    SystemMealsCubit.get(context).getAllMealsFromApiFun();
-                  }
-              },
-              color: AppColors.primaryColor,
-              edgeOffset: 1,
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                      [
-                        SpaceWidget(height: 24,),
-                        AllMealsAppBar(),
-                        SpaceWidget(height: 24,),
-                        AllAvailableMeals(),
-                        SpaceWidget(height: 24,)
+  Widget build(BuildContext context)
+  {
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      body: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: () async
+            {
+              if(await InternetConnectionCheckingService.checkInternetConnection()==true)
+                {
+                 await SystemMealsCubit.get(context).getAllMealsFromApiFun();
+                 buildScaffoldMessenger(context: context, msg: 'All Meals fetched successfully',iconWidget: Icon(Icons.wifi,color: AppColors.white,));
+                }
+              else
+                {
+                  buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
+                }
+            },
+            color: AppColors.primaryColor,
+            edgeOffset: 1,
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:
+                    [
+                      SpaceWidget(height: 24,),
+                      AllMealsAppBar(),
+                      SpaceWidget(height: 24,),
+                      AllAvailableMeals(),
+                      SpaceWidget(height: 24,)
 
-                      ],
-                    ),
+                    ],
                   ),
-                  BlocBuilder<SystemMealsCubit, SystemMealsState>(
-                      builder: (context, state)
+                ),
+                BlocBuilder<SystemMealsCubit, SystemMealsState>(
+                    builder: (context, state)
+                    {
+                      if (state is GetAllMealsLoadingState)
                       {
-                        if (state is GetAllMealsLoadingState) {
-                          return AllAvailableMealsLoadingWidget();
-                        }
-                        else if (state is GetAllMealsSuccessState
-                            && SystemMealsCubit.get(context).allMealsModel?.meals != null)
-                        {
-                          return SliverFillRemaining(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GridView.builder(
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsetsDirectional.only(
-                                        start: 24.w,
-                                        end: 24.w),
-                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 21.h,
-                                        crossAxisSpacing: 21.w,
-                                        mainAxisExtent: 200.h
-                                    ),
-                                    itemCount: SystemMealsCubit
-                                        .get(context)
-                                        .allMealsModel!
-                                        .meals!
-                                        .length,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          navigate(context: context,
-                                              route: Routes.mealDetailsScreen,
-                                              arg: SystemMealsCubit
-                                                  .get(context)
-                                                  .allMealsModel!
-                                                  .meals![index]);
-                                        },
-                                        child: GridMealItem(
-                                          index: index,
-                                          mealsList: SystemMealsCubit
-                                              .get(context)
-                                              .allMealsModel!
-                                              .meals!,
-                                          meal: SystemMealsCubit
-                                              .get(context)
-                                              .allMealsModel!
-                                              .meals![index],
-                                        ),
-                                      );
-                                    },
-
+                        return AllAvailableMealsLoadingWidget();
+                      }
+                      else if (state is GetAllMealsSuccessState
+                          && SystemMealsCubit.get(context).allMealsModel?.meals != null)
+                      {
+                        return SliverFillRemaining(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: GridView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsetsDirectional.only(
+                                      start: 24.w,
+                                      end: 24.w),
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 21.h,
+                                      crossAxisSpacing: 21.w,
+                                      mainAxisExtent: 200.h
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                        else if (state is GetCachedMealsSuccessState
-                            && SystemMealsCubit.get(context).cachedSystemMeals != null)
-                        {
-                          return SliverFillRemaining(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: GridView.builder(
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsetsDirectional.only(
-                                        start: 24.w,
-                                        end: 24.w),
-                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 21.h,
-                                        crossAxisSpacing: 21.w,
-                                        mainAxisExtent: 200.h
-                                    ),
-                                    itemCount: SystemMealsCubit
-                                        .get(context)
-                                        .cachedSystemMeals!
-                                        .length,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          navigate(context: context,
-                                              route: Routes.mealDetailsScreen,
-                                              arg: SystemMealsCubit
-                                                  .get(context)
-                                                  .cachedSystemMeals![index]);
-                                        },
-                                        child: GridMealItem(
-                                          index: index,
-                                          mealsList: SystemMealsCubit
-                                              .get(context)
-                                              .cachedSystemMeals!,
-                                          meal: SystemMealsCubit
-                                              .get(context)
-                                              .cachedSystemMeals![index],
-                                        ),
-                                      );
-                                    },
+                                  itemCount: SystemMealsCubit
+                                      .get(context)
+                                      .allMealsModel!
+                                      .meals!
+                                      .length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        navigate(context: context,
+                                            route: Routes.mealDetailsScreen,
+                                            arg: SystemMealsCubit
+                                                .get(context)
+                                                .allMealsModel!
+                                                .meals![index]);
+                                      },
+                                      child: GridMealItem(
+                                        index: index,
+                                        mealsList: SystemMealsCubit
+                                            .get(context)
+                                            .allMealsModel!
+                                            .meals!,
+                                        meal: SystemMealsCubit
+                                            .get(context)
+                                            .allMealsModel!
+                                            .meals![index],
+                                      ),
+                                    );
+                                  },
 
-                                  ),
                                 ),
-                              ],
-                            ),
-                          );
-                        }
-                        else if (state is GetCachedMealsFailureState)
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      else if (state is GetCachedMealsSuccessState
+                          && SystemMealsCubit.get(context).cachedSystemMeals != null)
+                      {
+                        return SliverFillRemaining(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: GridView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsetsDirectional.only(
+                                      start: 24.w,
+                                      end: 24.w),
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 21.h,
+                                      crossAxisSpacing: 21.w,
+                                      mainAxisExtent: 200.h
+                                  ),
+                                  itemCount: SystemMealsCubit
+                                      .get(context)
+                                      .cachedSystemMeals!
+                                      .length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        navigate(context: context,
+                                            route: Routes.mealDetailsScreen,
+                                            arg: SystemMealsCubit
+                                                .get(context)
+                                                .cachedSystemMeals![index]);
+                                      },
+                                      child: GridMealItem(
+                                        index: index,
+                                        mealsList: SystemMealsCubit
+                                            .get(context)
+                                            .cachedSystemMeals!,
+                                        meal: SystemMealsCubit
+                                            .get(context)
+                                            .cachedSystemMeals![index],
+                                      ),
+                                    );
+                                  },
+
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      else if (state is GetCachedMealsFailureState)
+                      {
+                        return SliverFillRemaining(
+                            hasScrollBody: false,
+                            child: NoMealsYetWidget());
+                      }
+                      else if (state is GetAllMealsSuccessState &&
+                          SystemMealsCubit.get(context).allMealsModel?.meals == null)
                         {
                           return SliverFillRemaining(
                               hasScrollBody: false,
                               child: NoMealsYetWidget());
                         }
-                        else
-                        {
-                          return AllAvailableMealsLoadingWidget();
-                        }
-                      }),
-                ],
-              ),
-            )),
-        floatingActionButton: _buildFloatingButton(context),
-      ),
+                      else
+                      {
+                        return AllAvailableMealsLoadingWidget();
+                      }
+                    }),
+              ],
+            ),
+          )),
+      floatingActionButton: _buildFloatingButton(context),
     );
   }
 

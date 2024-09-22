@@ -56,9 +56,9 @@ class HomeAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(end: 24.w),
             child: GestureDetector(
-              onTap: ()
+              onTap: () async
               {
-                 navigate(context: context, route: Routes.allMealsScreen);
+                navigate(context: context, route: Routes.allMealsScreen,);
               },
               child: Container(
                 width: 45.w,

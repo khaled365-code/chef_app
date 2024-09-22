@@ -1,13 +1,17 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
+import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/database/errors/error_model.dart';
 import '../../../../../core/utilis/app_assets.dart';
+import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../data/models/all_categories_model/all_categories_model.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
@@ -52,6 +56,22 @@ class SystemMealsCubit extends Cubit<SystemMealsState> {
       emit(GetCachedMealsSuccessState());
 
     },);
+  }
+
+  generalGetMealsFun(BuildContext context) async
+  {
+    if (await InternetConnectionCheckingService.checkInternetConnection()==true)
+      {
+        await getAllMealsFromApiFun();
+        buildScaffoldMessenger(context: context, msg: 'All Meals fetched successfully',iconWidget: Icon(Icons.wifi,color: AppColors.white,));
+
+      }
+    else
+      {
+        getMealsFromCacheFun();
+        buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
+
+      }
   }
 
   SystemMealsState getStateAfterRequest(Either<ErrorModel, GetAllMealsModel> response)

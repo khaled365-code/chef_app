@@ -125,14 +125,11 @@ class AppRouter {
 
       case Routes.allMealsScreen:
         return MaterialPageRoute(
-            builder: (context) => MultiBlocProvider(
+            builder: (context) =>
+                MultiBlocProvider(
                   providers: [
                     BlocProvider(
-                      create: (context) => locator<SystemMealsCubit>(),
-                    ),
-                    BlocProvider(
-                      create: (context) =>
-                          InternetCheckingCubit()..checkStreamConnection(),
+                      create: (context) => locator<SystemMealsCubit>()..generalGetMealsFun(context),
                     ),
                   ],
                   child: AllMealsScreen(),
@@ -161,10 +158,8 @@ class AppRouter {
             builder: (context) => MultiBlocProvider(
                   providers: [
                     BlocProvider(
-                        create: (context) => InternetCheckingCubit()..checkStreamConnection(),),
-                    BlocProvider(
                       create: (context) =>
-                          locator<SystemMealsCubit>(),
+                          locator<SystemMealsCubit>()..generalGetMealsFun(context),
                     ),
                     BlocProvider(
                       create: (context) => HomeListsCubit(),

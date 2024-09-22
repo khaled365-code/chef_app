@@ -18,7 +18,7 @@ class CategoryItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(39.r),
-        color: isItemSelected==false?Colors.white:AppColors.cFFD27C,
+        color: isItemSelected==false?AppColors.cF3F3F3:AppColors.cFFD27C,
       ),
       child: Row(
         children: [

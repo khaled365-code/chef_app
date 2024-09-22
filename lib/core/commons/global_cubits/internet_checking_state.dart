@@ -5,6 +5,8 @@ sealed class InternetCheckingState {}
 
 final class InternetCheckingInitial extends InternetCheckingState {}
 
+final class InternetCheckingLoadingState extends InternetCheckingState {}
+
 final class InternetIsConnectedState extends InternetCheckingState {
 
   final String message;

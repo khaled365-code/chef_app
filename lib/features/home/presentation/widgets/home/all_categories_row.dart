@@ -22,7 +22,7 @@ class AllCategoriesRow extends StatelessWidget {
           start: 24.w, end: 24.w),
       child: Row(
         children: [
-          Text('All Categories', style: AppTextStyles.regular17(
+          Text('All Categories', style: AppTextStyles.regular18(
               context).copyWith(color: AppColors.c32343E),),
           Spacer(),
           Text('See All', style: AppTextStyles.regular16(

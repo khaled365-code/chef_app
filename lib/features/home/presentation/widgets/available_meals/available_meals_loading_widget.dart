@@ -17,7 +17,7 @@ class AllAvailableMealsLoadingWidget extends StatelessWidget {
           Expanded(
             child: GridView.builder(
               itemBuilder: (context, index) => GridShimmerMealItem(),
-              itemCount: 10,
+              itemCount: 12,
               physics: const NeverScrollableScrollPhysics(),
               padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

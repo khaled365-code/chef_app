@@ -1,5 +1,6 @@
 
 import 'package:chef_app/core/widgets/space_widget.dart';
+import 'package:chef_app/features/home/presentation/cubits/favourites_and_history_cubit/favourites_and_history_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class FavouritesScreen extends StatelessWidget {
               ListView(
                   children: [
                     SpaceWidget(height: 32,),
-                    BlocBuilder<HomeScreenCubit, HomeScreenState>(
+                    BlocBuilder<FavouritesAndHistoryCubit,FavouritesAndHistoryState>(
                       builder: (context, state) {
                         if( state is GetCachedFavouriteMealsSuccessState)
                         {
@@ -39,31 +40,35 @@ class FavouritesScreen extends StatelessWidget {
                             itemBuilder:  (context, index) => FavouriteMealWidget(
                               index: index,
                               ongoingMeal: true,
-                              meal: HomeScreenCubit.get(context).favouriteMealsList[index],
+                              meal: FavouritesAndHistoryCubit.get(context).favouriteMealsList[index],
                             ),
                             separatorBuilder: (context, index) => SpaceWidget(height: 24,),
-                            itemCount: HomeScreenCubit.get(context).favouriteMealsList.length,
+                            itemCount: FavouritesAndHistoryCubit.get(context).favouriteMealsList.length,
                           );
                         }
-                         if(state is GetCachedFavouriteMealsFailureState)
+                        else if (state is GetCachedFavouriteMealsFailureState)
                         {
                           return SizedBox.shrink();
+
                         }
                         else
-                        {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              padding: EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
-                              itemBuilder:  (context, index) => FavouriteMealWidget(
-                                index: index,
-                                ongoingMeal: true,
-                                meal: HomeScreenCubit.get(context).favouriteMealsList[index],
-                              ),
-                              separatorBuilder: (context, index) => SpaceWidget(height: 24,),
-                              itemCount: HomeScreenCubit.get(context).favouriteMealsList.length,
-                            );
-                        }
+                          {
+                          return ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding:
+                      EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
+                      itemBuilder: (context, index) => FavouriteMealWidget(
+                        index: index,
+                        ongoingMeal: true,
+                        meal: FavouritesAndHistoryCubit.get(context).favouriteMealsList[index],
+                      ),
+                      separatorBuilder: (context, index) => SpaceWidget(
+                        height: 24,
+                      ),
+                      itemCount: FavouritesAndHistoryCubit.get(context).favouriteMealsList.length,
+                    );
+                          }
                       },
                     ),
                     SpaceWidget(height: 67,),
@@ -72,9 +77,9 @@ class FavouritesScreen extends StatelessWidget {
               ListView(
                 children: [
                   SpaceWidget(height: 32,),
-                  BlocBuilder<HomeScreenCubit, HomeScreenState>(
+                  BlocBuilder<FavouritesAndHistoryCubit,FavouritesAndHistoryState>(
                   builder: (context, state) {
-                   if(HomeScreenCubit.get(context).historyMealsList.isNotEmpty)
+                   if(FavouritesAndHistoryCubit.get(context).historyMealsList.isNotEmpty)
                      {
                        return ListView.separated(
                          shrinkWrap: true,
@@ -83,27 +88,15 @@ class FavouritesScreen extends StatelessWidget {
                          itemBuilder:  (context, index) => FavouriteMealWidget(
                            index: index,
                            ongoingMeal: false,
-                           meal: HomeScreenCubit.get(context).historyMealsList[index],
+                           meal: FavouritesAndHistoryCubit.get(context).historyMealsList[index],
                          ),
                          separatorBuilder: (context, index) => SpaceWidget(height: 24,),
-                         itemCount: HomeScreenCubit.get(context).historyMealsList.length,
+                         itemCount: FavouritesAndHistoryCubit.get(context).historyMealsList.length,
                        );
                      }
-                   if(HomeScreenCubit.get(context).historyMealsList.isEmpty )
-                   {
-                     return SizedBox.shrink();
-                   }
                    else
                    {
-                       return Center(
-                           child: Container(
-                             width: 30.w,
-                             height: 30.h,
-                             child: CircularProgressIndicator(
-                               color: AppColors.primaryColor,
-                             ),
-                           ),);
-
+                     return SizedBox.shrink();
                    }
                    },
                   ),
@@ -118,6 +111,7 @@ class FavouritesScreen extends StatelessWidget {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
+      backgroundColor: AppColors.white,
         leading: Padding(
           padding:  EdgeInsetsDirectional.only(start: 10.w),
           child: GestureDetector(
@@ -145,15 +139,14 @@ class FavouritesScreen extends StatelessWidget {
           {
             if(index==1)
               {
-                HomeScreenCubit.get(context).getCachedHistoryMeals();
-
+                FavouritesAndHistoryCubit.get(context).getCachedHistoryMeals();
               }
             },
           unselectedLabelStyle: AppTextStyles.regular14(context).copyWith(
             color: AppColors.cA5A7B9
           ),
           labelStyle: AppTextStyles.bold14(context).copyWith(
-            color: AppColors.cFB6D3A
+            color: AppColors.cFF7622
           ),
             indicatorColor: AppColors.cFF7622,
              indicatorSize: TabBarIndicatorSize.tab,
@@ -161,13 +154,25 @@ class FavouritesScreen extends StatelessWidget {
             dividerColor: AppColors.cCED7DF,
             tabs:
             [
-              Tab(
-                child: Text('Ongoing',),
-              ),
-              Tab(
-                child: Text('History',),
-              )
-            ]),
+            BlocBuilder<FavouritesAndHistoryCubit, FavouritesAndHistoryState>(
+              builder: (context, state) {
+                return Tab(
+                  child: Text(
+                    'Ongoing (${FavouritesAndHistoryCubit.get(context).favouriteMealsList.length})',
+                  ),
+                );
+              },
+            ),
+              BlocBuilder<FavouritesAndHistoryCubit, FavouritesAndHistoryState>(
+              builder: (context, state) {
+                return Tab(
+                  child: Text(
+                    'History (${FavouritesAndHistoryCubit.get(context).historyMealsList.length})',
+                  ),
+                );
+              },
+            )
+          ]),
       );
   }
 

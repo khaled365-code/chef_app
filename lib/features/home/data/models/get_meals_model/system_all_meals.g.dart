@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'system_meals.dart';
+part of 'system_all_meals.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

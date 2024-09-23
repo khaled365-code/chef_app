@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chef_data.dart';
+part of 'chef_info.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

@@ -4,12 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
-import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
-import '../../../data/models/get_meals_model/system_meals.dart';
+import '../../../data/models/get_meals_model/system_all_meals.dart';
+import '../../cubits/favourites_and_history_cubit/favourites_and_history_cubit.dart';
 
 class FavouriteMealWidget extends StatelessWidget {
   const FavouriteMealWidget({super.key, required this.meal, required this.ongoingMeal, required this.index,});
@@ -24,11 +23,25 @@ class FavouriteMealWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children:
         [
-         Text(meal.category??'',style: AppTextStyles.regular14(context).copyWith(
-           color: AppColors.c181C2E
-         ),),
-         SpaceWidget(height: 32,),
-         Container(
+         Row(
+           children: [
+             Text(meal.category??'',style: AppTextStyles.regular14(context).copyWith(
+               color: AppColors.c181C2E
+             ),),
+             SpaceWidget(width: 28,),
+             ongoingMeal==true?
+             Text('Completed',style: AppTextStyles.bold14(context).copyWith(
+               color: AppColors.c059C6A
+             ),):SizedBox.shrink()
+           ],
+         ),
+         SpaceWidget(height: 16,),
+         Divider(
+           color: AppColors.cEEF2F6,
+           thickness: 2,
+         ),
+          SpaceWidget(height: 16,),
+          Container(
            height: 60.h,
            child:  Row(
              children: [
@@ -36,7 +49,7 @@ class FavouriteMealWidget extends StatelessWidget {
                  width: 60.w,
                  height: 60.h,
                  decoration: BoxDecoration(
-                     color: AppColors.primaryColor,
+                     color: AppColors.c98A8B8,
                      borderRadius: BorderRadius.circular(8.r),
                      image: meal.images!.first.isNotEmpty?
                      DecorationImage(
@@ -45,60 +58,73 @@ class FavouriteMealWidget extends StatelessWidget {
                  ),
                ),
                SpaceWidget(width: 14,),
-               Padding(
-                 padding:  EdgeInsets.only(top: 8.h),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children:
-                   [
-                     Text(meal.name!,style: AppTextStyles.bold14(context).copyWith(
-                         color: AppColors.c181C2E
-                     ),),
-                     SpaceWidget(height: 5.h,),
-                     IntrinsicHeight(
-                       child: Row(
-                         children: [
-                           Text('\$${meal.price}',style: AppTextStyles.bold14(context).copyWith(
-                               color: AppColors.c181C2E
-                           ),),
-                           ongoingMeal==false?
-                           Row(
-                             children: [
-                               SpaceWidget(width: 10,),
-                               VerticalDivider(
-                                 color: AppColors.cCACCDA,
-                                 width: 16.w,
-                                 thickness: 2,
-                               ),
-                               SpaceWidget(width: 14,),
-                               RichText(
-                                   text:
-                               TextSpan(
-                                   children: [
-                                     TextSpan(text: '${formatDate(dateTime: DateTime.now(),monthName: true)},',style: AppTextStyles.regular14(context).copyWith(
-                                         color: AppColors.c6B6E82
-                                     )),
-                                     TextSpan(text: ' ${formatClock(DateTime.now())}',style: AppTextStyles.regular14(context).copyWith(
-                                         color: AppColors.c6B6E82
-                                     )),
-                                   ]
-                               )),
-                               SpaceWidget(width: 8),
-                               Container(
-                                 width: 4.w,
-                                 height: 4.h,
-                                 decoration: BoxDecoration(
-                                     color: AppColors.c6B6E82,
-                                     shape: BoxShape.circle
-                                 ),
-                               )
-                             ],
-                           ): SizedBox.shrink()
-                         ],
+               Expanded(
+                 child: Padding(
+                   padding:  EdgeInsets.only(top: 8.h),
+                   child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children:
+                     [
+                       Expanded(
+                         child: Row(
+                           children: [
+                             Text(meal.name!,style: AppTextStyles.bold14(context).copyWith(
+                                 color: AppColors.c181C2E
+                             ),),
+                             Spacer(),
+                             Text('#${meal.id!.substring(0,5)}',style: AppTextStyles.regular14(context).copyWith(
+                               color: AppColors.c6B6E82))
+                           ],
+                         ),
                        ),
-                     ),
+                       SpaceWidget(height: 10.h,),
+                       IntrinsicHeight(
+                         child: Row(
+                           children: [
+                             Text('\$${meal.price}',style: AppTextStyles.bold14(context).copyWith(
+                                 color: AppColors.c181C2E
+                             ),),
+                             ongoingMeal==false?
+                             Expanded(
+                               child: Row(
+                                 children: [
+                                   SpaceWidget(width: 10,),
+                                   VerticalDivider(
+                                     color: AppColors.cCACCDA,
+                                     width: 16.w,
+                                     thickness: 2,
+                                   ),
+                                   Spacer(),
+                                   RichText(
+                                       text:
+                                   TextSpan(
+                                       children: [
+                                         TextSpan(text: '${formatDate(dateTime: DateTime.parse(meal.createdAt!),monthName: true)},',style: AppTextStyles.regular14(context).copyWith(
+                                             color: AppColors.c6B6E82
+                                         )),
+                                         TextSpan(text: ' ${formatClock(DateTime.parse(meal.createdAt!))}',style: AppTextStyles.regular14(context).copyWith(
+                                             color: AppColors.c6B6E82
+                                         )),
+                                       ]
+                                   )),
+                                   SpaceWidget(width: 8),
+                                   Container(
+                                     width: 4.w,
+                                     height: 4.h,
+                                     decoration: BoxDecoration(
+                                         color: AppColors.c6B6E82,
+                                         shape: BoxShape.circle
+                                     ),
+                                   )
+                                 ],
+                               ),
+                             ): SizedBox.shrink()
+                           ],
+                         ),
+                       ),
 
-                   ],
+                     ],
+                   ),
                  ),
                ),
 
@@ -124,7 +150,7 @@ class FavouriteMealWidget extends StatelessWidget {
                 ),
                   onPressed: ()
                   {
-                      HomeScreenCubit.get(context).addToHistoryFavouriteMeal(meal: meal,index: index);
+                    FavouritesAndHistoryCubit.get(context).addToHistoryFavouriteMeal(meal: meal,index: index);
                   },
                   child: Text('Add to history',style: AppTextStyles.bold12(context).copyWith(
                     color: AppColors.white
@@ -142,7 +168,7 @@ class FavouriteMealWidget extends StatelessWidget {
                       ),
                       onPressed: ()
                       {
-                        HomeScreenCubit.get(context).removeOngoingFavouriteMeal(meal: meal,index: index);
+                        FavouritesAndHistoryCubit.get(context).removeOngoingFavouriteMeal(meal: meal,index: index);
                       },
                       child: Text('Remove',style: AppTextStyles.bold12(context).copyWith(
                           color: AppColors.cFF7622

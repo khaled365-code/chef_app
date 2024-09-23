@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../data/models/get_meals_model/system_meals.dart';
+import '../../../data/models/get_meals_model/system_all_meals.dart';
 
 class MealDetailsImage extends StatelessWidget {
   const MealDetailsImage({

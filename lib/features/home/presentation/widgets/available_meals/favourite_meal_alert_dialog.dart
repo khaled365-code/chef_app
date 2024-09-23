@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/space_widget.dart';
-import '../../../data/models/get_meals_model/system_meals.dart';
+import '../../../data/models/get_meals_model/system_all_meals.dart';
 
 class AddMealToFavouritesAlertDialog extends StatelessWidget {
   const AddMealToFavouritesAlertDialog({

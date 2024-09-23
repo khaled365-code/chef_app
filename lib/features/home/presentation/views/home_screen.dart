@@ -6,7 +6,9 @@ import 'package:chef_app/features/home/presentation/cubits/home_lists_cubit/home
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../profile/presentation/views/custom_drawer_screen.dart';
@@ -36,11 +38,12 @@ class HomeScreen extends StatelessWidget {
                     if (await InternetConnectionCheckingService.checkInternetConnection() == true)
                     {
                       await SystemMealsCubit.get(context).getAllMealsFromApiFun();
-                      buildScaffoldMessenger(context: context, msg: 'All Meals fetched successfully',iconWidget: Icon(Icons.wifi,color: AppColors.white,));
+                      buildScaffoldMessenger(context: context, msg: 'Meals fetched successfully',iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon),snackBarBehavior: SnackBarBehavior.floating);
+
                     }
                     else
                       {
-                        buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
+                        buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,),snackBarBehavior: SnackBarBehavior.floating);
                       }
                   },
                   edgeOffset: 1,

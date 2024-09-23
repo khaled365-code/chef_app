@@ -20,7 +20,7 @@ class AddMealContainerShapeToFavourites extends StatelessWidget {
       height: 30.h,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.white,
+        color: AppColors.transparent,
       ),
       child: Center(
           child: isActivated==true? SvgPicture.asset(

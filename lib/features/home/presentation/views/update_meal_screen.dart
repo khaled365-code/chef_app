@@ -16,7 +16,7 @@ import '../../../../core/widgets/shared_button.dart';
 import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../../../../core/widgets/name_and_text_field_widget.dart';
-import '../../data/models/get_meals_model/system_meals.dart';
+import '../../data/models/get_meals_model/system_all_meals.dart';
 import '../widgets/add_meal_photo_widget.dart';
 import '../widgets/update_meal/app_bar_update_screen.dart';
 import '../widgets/update_meal/update_description_field_widget.dart';

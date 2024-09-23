@@ -21,7 +21,7 @@ class AllMealsRowWidget extends StatelessWidget {
           start: 24.w, end: 24.w),
       child: Row(
         children: [
-          Text('All Meals', style: AppTextStyles.regular17(
+          Text('Current Meals', style: AppTextStyles.regular18(
               context).copyWith(color: AppColors.c32343E),),
           Spacer(),
           Text('See All', style: AppTextStyles.regular16(

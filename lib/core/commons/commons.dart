@@ -73,6 +73,7 @@ buildScaffoldMessenger({required BuildContext context,required String msg,SnackB
 
    return ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
+         showCloseIcon: true,
     content: Row(
       children: [
         iconWidget??SizedBox.shrink(),

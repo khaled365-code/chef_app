@@ -5,10 +5,11 @@ import 'package:hive/hive.dart';
 /// phone : "01021570316"
 /// brandName : "Ammar Chef"
 ///
-part 'chef_data.g.dart';
+part 'chef_info.g.dart';
 
 @HiveType(typeId: 1)
-class ChefData extends HiveObject {
+class ChefData
+{
   ChefData({
       this.id, 
       this.name, 

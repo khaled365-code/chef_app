@@ -7,6 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/database/errors/error_model.dart';
@@ -16,7 +17,7 @@ import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../data/models/all_categories_model/all_categories_model.dart';
 import '../../../data/models/carousel_slider_data_model/carousel_slider_model.dart';
 import '../../../data/models/get_meals_model/get_all_meals_model.dart';
-import '../../../data/models/get_meals_model/system_meals.dart';
+import '../../../data/models/get_meals_model/system_all_meals.dart';
 
 part 'system_meals_state.dart';
 
@@ -58,18 +59,19 @@ class SystemMealsCubit extends Cubit<SystemMealsState> {
     },);
   }
 
-  generalGetMealsFun(BuildContext context) async
+  generalGetMealsFun(BuildContext context,bool isHomeScreen) async
   {
     if (await InternetConnectionCheckingService.checkInternetConnection()==true)
       {
         await getAllMealsFromApiFun();
-        buildScaffoldMessenger(context: context, msg: 'All Meals fetched successfully',iconWidget: Icon(Icons.wifi,color: AppColors.white,));
+        buildScaffoldMessenger(context: context, msg: 'Meals fetched successfully',iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon),snackBarBehavior: isHomeScreen==true? SnackBarBehavior.floating:SnackBarBehavior.fixed);
+
 
       }
     else
       {
         getMealsFromCacheFun();
-        buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
+        buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,),snackBarBehavior: isHomeScreen==true? SnackBarBehavior.floating:SnackBarBehavior.fixed);
 
       }
   }

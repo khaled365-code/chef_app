@@ -5,7 +5,9 @@ import 'package:chef_app/features/home/presentation/cubits/get_system_meals_cubi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../widgets/available_meals/all_available_meals_row.dart';
@@ -21,7 +23,7 @@ class AllMealsScreen extends StatelessWidget {
   Widget build(BuildContext context)
   {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.cF3F3F3,
       body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async
@@ -29,7 +31,8 @@ class AllMealsScreen extends StatelessWidget {
               if(await InternetConnectionCheckingService.checkInternetConnection()==true)
                 {
                  await SystemMealsCubit.get(context).getAllMealsFromApiFun();
-                 buildScaffoldMessenger(context: context, msg: 'All Meals fetched successfully',iconWidget: Icon(Icons.wifi,color: AppColors.white,));
+                 buildScaffoldMessenger(context: context, msg: 'Meals fetched successfully',iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon),);
+
                 }
               else
                 {

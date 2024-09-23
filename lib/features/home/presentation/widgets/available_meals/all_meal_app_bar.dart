@@ -1,6 +1,6 @@
 
 
-import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
+import 'package:chef_app/features/home/presentation/cubits/get_system_meals_cubit/system_meals_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,6 +9,7 @@ import '../../../../../core/commons/commons.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
+import '../../cubits/favourites_and_history_cubit/favourites_and_history_cubit.dart';
 
 class AllMealsAppBar extends StatelessWidget {
   const AllMealsAppBar({
@@ -42,10 +43,27 @@ class AllMealsAppBar extends StatelessWidget {
           Padding(
             padding: EdgeInsetsDirectional.only(end: 24.w),
             child: GestureDetector(
-              onTap: ()
+              onTap: () async
               {
-                HomeScreenCubit.get(context).getCachedFavouriteMeals();
-                navigate(context: context, route: Routes.favouritesScreen);
+                if(SystemMealsCubit.get(context).allMealsModel!.meals!=null)
+                  {
+                    for (int i = 0; i < SystemMealsCubit.get(context).allMealsModel!.meals!.length; i++)
+                    {
+                      if (SystemMealsCubit.get(context).allMealsModel!.meals![i].itemIsSelected == true)
+                        {
+                         await FavouritesAndHistoryCubit.get(context).saveFavouriteMealToCache(SystemMealsCubit.get(context).allMealsModel!.meals!, i);
+                        }
+                    }
+                  }
+               else if (SystemMealsCubit.get(context).cachedSystemMeals!=null)
+                  {
+                    for (int i=0;i<SystemMealsCubit.get(context).cachedSystemMeals!.length;i++)
+                      {
+                        await FavouritesAndHistoryCubit.get(context).saveFavouriteMealToCache(SystemMealsCubit.get(context).cachedSystemMeals!, i);
+                      }
+                  }
+                FavouritesAndHistoryCubit.get(context).getCachedFavouriteMeals();
+                navigate(context: context, route: Routes.favouritesScreen,arg: FavouritesAndHistoryCubit.get(context));
 
               },
               child: Container(

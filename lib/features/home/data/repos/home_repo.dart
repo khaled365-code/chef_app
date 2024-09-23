@@ -9,7 +9,7 @@ import '../../../../core/database/errors/error_model.dart';
 import '../models/add_meal_model/add_meal_model.dart';
 import '../models/chef_info_model/chef_info_model.dart';
 import '../models/get_meals_model/get_all_meals_model.dart';
-import '../models/get_meals_model/system_meals.dart';
+import '../models/get_meals_model/system_all_meals.dart';
 
 abstract class HomeRepo
 {
@@ -49,7 +49,7 @@ abstract class HomeRepo
 
   // for favourite meals
   Either<Exception,List<SystemMeals>> getCachedFavouriteMeals();
-  Future <Unit> saveCachedFavouriteMeals({required SystemMeals meal});
+  Future <Unit> saveFavouriteMealToCache({required SystemMeals meal});
   Future<Unit> removeOngoingFavouriteMeal({required int index});
 
 

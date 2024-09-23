@@ -19,7 +19,7 @@ import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../../core/widgets/space_widget.dart';
-import '../../../../home/data/models/get_meals_model/system_meals.dart';
+import '../../../../home/data/models/get_meals_model/system_all_meals.dart';
 import '../../cubits/delete_account_cubit/delete_account_cubit.dart';
 
 class DeleteAccountBottomSheet extends StatelessWidget {

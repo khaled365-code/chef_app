@@ -1,8 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'chef_data.dart';
+import 'chef_info.dart';
 
-part 'system_meals.g.dart';
+part 'system_all_meals.g.dart';
 
 
 /// _id : "65de3dbe012b561fc7e8edb8"
@@ -20,7 +20,7 @@ part 'system_meals.g.dart';
 ///
 ///
 @HiveType(typeId: 10)
-class SystemMeals extends HiveObject {
+class SystemMeals {
   SystemMeals({
       this.id, 
       this.name, 

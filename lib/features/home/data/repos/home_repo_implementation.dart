@@ -9,7 +9,7 @@ import 'package:chef_app/core/database/errors/error_model.dart';
 import 'package:chef_app/core/database/errors/server_exception.dart';
 import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/features/home/data/models/get_meals_model/get_all_meals_model.dart';
-import 'package:chef_app/features/home/data/models/get_meals_model/system_meals.dart';
+import 'package:chef_app/features/home/data/models/get_meals_model/system_all_meals.dart';
 import 'package:chef_app/features/home/data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -160,9 +160,8 @@ class HomeRepoImplementation implements HomeRepo
 
 
   // favourite meals:-
+
   var favouriteMealsBox=Hive.box<SystemMeals>('favourite_meals');
-
-
   @override
   Either<Exception,List<SystemMeals>> getCachedFavouriteMeals()
   {
@@ -177,8 +176,12 @@ class HomeRepoImplementation implements HomeRepo
   }
 
   @override
-  Future <Unit> saveCachedFavouriteMeals({required SystemMeals meal}) async
+  Future <Unit> saveFavouriteMealToCache({required SystemMeals meal}) async
   {
+    if(favouriteMealsBox.values.contains(meal))
+      {
+        return Future.value(unit);
+      }
     await  favouriteMealsBox.add(meal);
     return Future.value(unit);
 

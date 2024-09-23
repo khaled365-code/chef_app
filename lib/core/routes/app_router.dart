@@ -13,6 +13,7 @@ import 'package:chef_app/features/auth/presentation/views/send_code_screen.dart'
 import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/cubits/add_meal_cubit/add_meal_cubit.dart';
+import 'package:chef_app/features/home/presentation/cubits/favourites_and_history_cubit/favourites_and_history_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/get_system_meals_cubit/system_meals_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_lists_cubit/home_lists_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
@@ -76,7 +77,10 @@ class AppRouter {
 
       case Routes.favouritesScreen:
         return MaterialPageRoute(
-            builder: (context) => FavouritesScreen(),
+            builder: (context) => BlocProvider.value(
+              value: routeSettings.arguments as FavouritesAndHistoryCubit,
+              child: FavouritesScreen(),
+),
             settings: routeSettings);
 
       case Routes.mainSettingsScreen:
@@ -90,8 +94,8 @@ class AppRouter {
       case Routes.specificChefMealsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => locator<GetSpecificChefMealsCubit>()..getSpecificChefMealsFun(
-                        chefId: CacheHelper().getData(key: ApiKeys.id)),
+                  create: (context) => locator<GetSpecificChefMealsCubit>()..generalGetChefMealsFun(
+                      chefId: CacheHelper().getData(key: ApiKeys.id),context: context),
                   child: SpecificChefMealsScreen(),
                 ),
             settings: routeSettings);
@@ -128,8 +132,9 @@ class AppRouter {
             builder: (context) =>
                 MultiBlocProvider(
                   providers: [
+                    BlocProvider(create: (context) => locator<FavouritesAndHistoryCubit>(),),
                     BlocProvider(
-                      create: (context) => locator<SystemMealsCubit>()..generalGetMealsFun(context),
+                      create: (context) => locator<SystemMealsCubit>()..generalGetMealsFun(context,false),
                     ),
                   ],
                   child: AllMealsScreen(),
@@ -159,7 +164,7 @@ class AppRouter {
                   providers: [
                     BlocProvider(
                       create: (context) =>
-                          locator<SystemMealsCubit>()..generalGetMealsFun(context),
+                          locator<SystemMealsCubit>()..generalGetMealsFun(context,true),
                     ),
                     BlocProvider(
                       create: (context) => HomeListsCubit(),

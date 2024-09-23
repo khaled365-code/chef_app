@@ -15,9 +15,9 @@ class AllAvailableMeals extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(start: 24.w),
-      child: Text('Our meals',
-          style: AppTextStyles.medium_28_Poppins(context).copyWith(
-              color: AppColors.c32343E
+      child: Text('Popular Meals',
+          style: AppTextStyles.regular20(context).copyWith(
+              color: AppColors.c181C2E
           )),
     );
   }

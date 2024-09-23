@@ -5,7 +5,7 @@ import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/injection/injector.dart';
 import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/core/utilis/services/work_manager_service.dart';
-import 'package:chef_app/features/home/data/models/get_meals_model/system_meals.dart';
+import 'package:chef_app/features/home/data/models/get_meals_model/system_all_meals.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,7 +20,7 @@ import 'core/commons/global_models/local_notifications_model.dart';
 import 'core/database/api/api_keys.dart';
 import 'core/utilis/services/local_notifications_service.dart';
 import 'core/utilis/services/push_notifications_service.dart';
-import 'features/home/data/models/get_meals_model/chef_data.dart';
+import 'features/home/data/models/get_meals_model/chef_info.dart';
 import 'firebase_options.dart';
 
 

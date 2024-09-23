@@ -101,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                                 }
                                 else
                                 {
-                                  buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,));
+                                  buildScaffoldMessenger(context: context, msg: 'You are offline',iconWidget: Icon(Icons.wifi_off,color: AppColors.white,),snackBarBehavior: SnackBarBehavior.floating);
                                 }
                       
                               },

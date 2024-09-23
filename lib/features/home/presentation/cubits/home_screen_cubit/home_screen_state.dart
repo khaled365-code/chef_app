@@ -19,44 +19,6 @@ final class GetChefDataSuccessState extends HomeScreenState {
   GetChefDataSuccessState({required this.chefInfoModel});
 }
 
-final class RemoveMealFromFavouritesState extends HomeScreenState {}
-
-final class AddFavouriteMealToHistoryState extends HomeScreenState {}
-
-
-final class ChangeMealFavouriteActiveShapeState extends HomeScreenState {}
-
-final class ChangeCurrentSelectedCategoryPositionState extends HomeScreenState {}
-
-
-
-
-final class GetCachedFavouriteMealsSuccessState extends HomeScreenState {
-
-  GetCachedFavouriteMealsSuccessState();
-
-}
-
-final class GetCachedFavouriteMealsFailureState extends HomeScreenState {
-  final String errorMessage;
-  GetCachedFavouriteMealsFailureState({required this.errorMessage});
-}
-
-
-
-
-final class GetCachedHistoryMealsSuccessState extends HomeScreenState {
-
-  final List<SystemMeals> historyMealsList;
-  GetCachedHistoryMealsSuccessState({required this.historyMealsList});
-
-}
-
-final class GetCachedHistoryMealsFailureState extends HomeScreenState {
-
-  final String errorMessage;
-  GetCachedHistoryMealsFailureState({required this.errorMessage});
-}
 
 
 final class GetLocalNotificationsFailureState extends HomeScreenState {

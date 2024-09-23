@@ -13,7 +13,7 @@ import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';
 import '../../../../core/widgets/no_internet_connection_dialog.dart';
 import '../../../../core/widgets/space_widget.dart';
-import '../../data/models/get_meals_model/system_meals.dart';
+import '../../data/models/get_meals_model/system_all_meals.dart';
 import '../widgets/meal_details/details_screen_app_bar.dart';
 import '../widgets/meal_details/meal_details_image.dart';
 
@@ -58,13 +58,13 @@ class MealDetailsScreen extends StatelessWidget {
                               Text(receivedMeal.price.toString(),style: AppTextStyles.bold16(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
-                              Spacer(),
+                              SpaceWidget(width: 30,),
                               SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
                               SpaceWidget(width: 10,),
                               Text(receivedMeal.category!,style: AppTextStyles.regular14(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
-                              Spacer(),
+                              Spacer(flex: 2,),
                               SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
                               SpaceWidget(width: 10,),
                               FittedBox(
@@ -74,6 +74,7 @@ class MealDetailsScreen extends StatelessWidget {
                                     color: AppColors.c181C2E
                                 ),),
                               ),
+                              Spacer(),
                             ],
                           ),
                           SpaceWidget(height: 26.2,),

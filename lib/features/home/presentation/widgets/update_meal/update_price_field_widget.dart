@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../../core/widgets/name_and_text_field_widget.dart';
@@ -20,6 +21,10 @@ class UpdatePriceField extends StatelessWidget {
         childWidget: CustomOutlineTextField(
           controller: updateMealCubit.updateMealPriceController,
           hintText: 'write new meal price here',
+          inputFormatters: [
+           FilteringTextInputFormatter.digitsOnly,
+
+          ],
           onFieldSubmitted: (value) {
 
           },

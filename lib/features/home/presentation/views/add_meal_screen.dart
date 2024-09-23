@@ -36,129 +36,106 @@ class AddMealScreen extends StatelessWidget {
   }, child: Scaffold(
           backgroundColor: AppColors.white,
           body: SafeArea(
-              child: Form(
-                key: AddMealCubit.get(context).addMealFormKey,
-                child: CustomScrollView(
+              child: CustomScrollView(
                   slivers: [
-                    SliverToBoxAdapter(
+                    SliverFillRemaining(
+                      hasScrollBody: false,
                       child: Padding(
                         padding: EdgeInsetsDirectional.only(
                             start: 24.w, end: 24.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SpaceWidget(height: 24,),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                width: 45.w,
-                                height: 45.h,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.cECF0F4
-                                ),
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                      width: 10, ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.c181C2E, BlendMode.srcIn)),
-                                ),
-                              ),
-                            ),
-                            SpaceWidget(height: 24,),
-                            BlocBuilder<AddMealCubit,AddMealState>(
-                              builder: (context, state) => AddMealPhotoWidget(
-                                onDeletePhotoPressed: ()
-                                {
-                                  AddMealCubit.get(context).deleteMealPhoto();
-                                },
-                                imagePath: AddMealCubit.get(context).mealImage?.path,
-                                onCameraTap: ()
-                                {
-                                  imagePick(imageSource: ImageSource.camera).then(
-                                        (value) => AddMealCubit.get(context).addMealPhoto(image: value!),
-                                  );
-                                  Navigator.pop(context);
-                                },
-                                onGalleryTap: ()
-                                {
-                                  imagePick(imageSource: ImageSource.gallery).then(
-                                        (value) => AddMealCubit.get(context).addMealPhoto(image: value!),
-                                  );
-                                  Navigator.pop(context);
+                        child: BlocBuilder<AddMealCubit,AddMealState>(
+                        builder: (context, state) {
+                        return Form(
+                          key: AddMealCubit.get(context).addMealFormKey,
+                          autovalidateMode: AddMealCubit.get(context).addMealValidateMode,
+                          child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.start,
+                             children: [
+                               SpaceWidget(height: 24,),
+                               GestureDetector(
+                                 onTap: () {
+                                   Navigator.pop(context);
+                                 },
+                                 child: Container(
+                                   width: 45.w,
+                                   height: 45.h,
+                                   decoration: BoxDecoration(
+                                       shape: BoxShape.circle,
+                                       color: AppColors.cECF0F4
+                                   ),
+                                   child: Center(
+                                     child: SvgPicture.asset(
+                                         width: 10, ImageConstants.arrowBackIcon,colorFilter: ColorFilter.mode(AppColors.c181C2E, BlendMode.srcIn)),
+                                   ),
+                                 ),
+                               ),
+                               SpaceWidget(height: 24,),
+                               AddMealPhotoWidget(
+                                 onDeletePhotoPressed: ()
+                                 {
+                                   AddMealCubit.get(context).deleteMealPhoto();
+                                 },
+                                 imagePath: AddMealCubit.get(context).mealImage?.path,
+                                 onCameraTap: ()
+                                 {
+                                   imagePick(imageSource: ImageSource.camera).then(
+                                         (value) => AddMealCubit.get(context).addMealPhoto(image: value!),
+                                   );
+                                   Navigator.pop(context);
+                                 },
+                                 onGalleryTap: ()
+                                 {
+                                   imagePick(imageSource: ImageSource.gallery).then(
+                                         (value) => AddMealCubit.get(context).addMealPhoto(image: value!),
+                                   );
+                                   Navigator.pop(context);
 
-                                },
-                              ),
-                            ),
-                            SpaceWidget(height: AddMealCubit.get(context).mealImage == null ? 24 : 5,),
-                            AddMealNameTextField(),
-                            SpaceWidget(height: 24,),
-                            AddMealPriceTextField(),
-                            SpaceWidget(height: 24,),
-                            AddMealDiscTextField(),
-                            SpaceWidget(height: 24,),
-                            BlocBuilder<AddMealCubit, AddMealState>(
-                            builder: (context, state)
-                              {
-                              return AddMealCategoryWidget();
-                              },
-                            ),
-                            SpaceWidget(height: 24,),
-                            BlocBuilder<AddMealCubit,AddMealState>(
-                              builder: (context, state) => Row(
-                                children: [
-                                  NumberRadioButton(),
-                                  Spacer(),
-                                  QuantityRadioButton()
+                                 },
+                               ),
+                               SpaceWidget(height: AddMealCubit.get(context).mealImage == null ? 24 : 5,),
+                               AddMealNameTextField(),
+                               SpaceWidget(height: 24,),
+                               AddMealPriceTextField(),
+                               SpaceWidget(height: 24,),
+                               AddMealDiscTextField(),
+                               SpaceWidget(height: 24,),
+                               AddMealCategoryWidget(),
+                               SpaceWidget(height: 24,),
+                               Row(
+                                 children: [
+                                   NumberRadioButton(),
+                                   Spacer(),
+                                   QuantityRadioButton()
 
-                                ],
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                    SliverFillRemaining(
-                      hasScrollBody: false,
-                      child: Column(
-                        children: [
-                          Expanded(
+                                 ],
+                               ),
+                            Expanded(
                               child: SizedBox(
-                            height: 121.h,
-                          )),
-                          BlocBuilder<AddMealCubit,AddMealState>(
-                            builder: (context, state) {
-                              if(state is AddMealLoadingState )
-                                {
-                                  return Center(
-                                    child: SharedLoadingIndicator(),
-                                  );
-                                }
-                              else
-                                {
-                                  return SharedButton(
-                                    btnText: 'Add Meal',
-                                    btnTextStyle: AppTextStyles.bold16(context).copyWith(
-                                        color: AppColors.white
-                                    ),
-                                    onPressed: ()
-                                    {
-                                      handleAddMealPress(context);
+                                height: 121.h,
+                              ),
+                            ),
+                            state is AddMealLoadingState?
+                               Center(
+                                 child: SharedLoadingIndicator(),
+                               ):
+                               SharedButton(
+                                 btnText: 'Add Meal',
+                                 btnTextStyle: AppTextStyles.bold16(context).copyWith(
+                                     color: AppColors.white
+                                 ),
+                                 onPressed: ()
+                                 {
+                                   handleAddMealPress(context);
 
-                                    },);
-                                }
-                            },
-                          ),
-                          SpaceWidget(height: 30,)
+                                 },),
+                               SpaceWidget(height: 30,)
 
-                        ],
-                      ),
-                    )
-
-                  ],
-                ),
-              )),
+                             ],
+                           ),
+                        );
+                  },
+                ),),),],
+              ),),
         ),
 );
   }
@@ -169,9 +146,14 @@ class AddMealScreen extends StatelessWidget {
       {
         if (AddMealCubit.get(context).addMealFormKey.currentState!.validate())
         {
+          AddMealCubit.get(context).addMealFormKey.currentState!.save();
           if(AddMealCubit.get(context).mealImage==null)
           {
-            showToast(msg: 'You must provide image to add meal !', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
+            showToast(
+                context: context,
+                msg: 'You must provide image for meal !',
+                toastStates: ToastStates.error,
+                gravity: ToastGravity.CENTER);
           }
           else
           {
@@ -183,6 +165,10 @@ class AddMealScreen extends StatelessWidget {
               howToSell: getHowToSellValue(numberValue: AddMealCubit.get(context).numberRadioIsSelected,quantityValue: AddMealCubit.get(context).quantityRadioIsSelected),);
           }
         }
+        else
+          {
+            AddMealCubit.get(context).activateAutoValidateMode();
+          }
       }
     else
       {
@@ -192,10 +178,11 @@ class AddMealScreen extends StatelessWidget {
 
   }
 
-  void handleListenerFunctions(AddMealState state, BuildContext context) {
+  void handleListenerFunctions(AddMealState state, BuildContext context)
+  {
       if(state is AddMealSuccessState)
             {
-            buildScaffoldMessenger(context: context, msg: state.addMealModel.message!);
+            buildScaffoldMessenger(context: context, msg: 'Meal added successfully',snackBarBehavior: SnackBarBehavior.floating,iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon));
             AddMealCubit.get(context).mealImage=null;
             AddMealCubit.get(context).mealNameController.clear();
             AddMealCubit.get(context).mealDescriptionController.clear();
@@ -207,11 +194,16 @@ class AddMealScreen extends StatelessWidget {
 
             if(state.errorModel.error!=null)
             {
-               buildScaffoldMessenger(context: context, msg: state.errorModel.error!.toString().substring(1,state.errorModel.error!.toString().length-1));
+               buildScaffoldMessenger(context: context,
+                   msg: state.errorModel.error!.toString().substring(1,state.errorModel.error!.toString().length-1),
+                   iconWidget: Icon(Icons.error_outline,color: AppColors.white,size: 25.sp,));
             }
             else
             {
-                 buildScaffoldMessenger(context: context, msg: state.errorModel.errorMessage!);
+                 buildScaffoldMessenger(context: context,
+                     msg: state.errorModel.errorMessage!,
+                     iconWidget: Icon(Icons.error_outline,color: AppColors.white,size: 25.sp,)
+                 );
             }
           }
   }

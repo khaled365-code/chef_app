@@ -36,6 +36,7 @@ class UpdateMealScreen extends StatelessWidget {
             handleUpdateMealListener(state, context);
           },
   child: Scaffold(
+    backgroundColor: AppColors.white,
           body: SafeArea(
               child: CustomScrollView(
                 slivers: [
@@ -179,13 +180,17 @@ class UpdateMealScreen extends StatelessWidget {
      if (state is UpdateMealSuccessState)
     {
       buildScaffoldMessenger(
-          context: context, msg: 'Meal updated successfully');
+          context: context,
+          msg: 'Meal updated successfully',iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon),snackBarBehavior: SnackBarBehavior.floating);
       navigate(context: context, route: Routes.homeScreen);
     }
     if (state is UpdateMealFailureState)
     {
-      if (state.errorModel.error != null) {
-        buildScaffoldMessenger(context: context,
+      if (state.errorModel.error != null)
+      {
+
+        buildScaffoldMessenger(
+            context: context,
             msg: state.errorModel.error!.toString().substring(1, state.errorModel.error!.toString().length - 1));
       }
       else
@@ -207,7 +212,11 @@ class UpdateMealScreen extends StatelessWidget {
             && UpdateMealCubit.get(context).updateMealPriceController.text.isEmpty
             && UpdateMealCubit.get(context).selectedCategory == 'Beef')
         {
-          showToast(msg: 'Nothing to update', toastStates: ToastStates.error,gravity: ToastGravity.CENTER);
+          showToast(
+            context: context,
+              msg: 'Nothing to update',
+              toastStates: ToastStates.error,
+              gravity: ToastGravity.CENTER);
         }
         else
         {
@@ -215,7 +224,7 @@ class UpdateMealScreen extends StatelessWidget {
           UpdateMealCubit.get(context).updateMealFun(
               mealId: receivedMeal.id!,
               name: UpdateMealCubit.get(context).updateMealNameController.text.isEmpty?receivedMeal.name: UpdateMealCubit.get(context).updateMealNameController.text,
-              price: UpdateMealCubit.get(context).updateMealPriceController.text==' '?double.parse(UpdateMealCubit.get(context).updateMealPriceController.text):double.parse(receivedMeal.price.toString()),
+              price: UpdateMealCubit.get(context).updateMealPriceController.text.isNotEmpty?double.parse(UpdateMealCubit.get(context).updateMealPriceController.text):double.parse(receivedMeal.price.toString()),
               description: UpdateMealCubit.get(context).updateMealDescriptionController.text.isEmpty?receivedMeal.description: UpdateMealCubit.get(context).updateMealDescriptionController.text,
               category: UpdateMealCubit.get(context).selectedCategory,
               newMealImage:  UpdateMealCubit.get(context).updatedMealImage==null? mealImage : UpdateMealCubit.get(context).updatedMealImage

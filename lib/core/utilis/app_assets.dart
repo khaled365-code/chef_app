@@ -162,6 +162,8 @@ class ImageConstants
   static const String notificationQuestionIcon='assets/icons/notification_question_icon.svg';
   static const String howToInvestIcon='assets/icons/how_to_invest_icon.svg';
   static const String checkCircleIcon='assets/icons/check-circle.svg';
+  static const String triangleWarningIcon='assets/icons/triangle_warning_icon.svg';
+  static const String errorIcon='assets/icons/error_icon.svg';
 
 
 

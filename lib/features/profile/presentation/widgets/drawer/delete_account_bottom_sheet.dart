@@ -147,11 +147,15 @@ class DeleteAccountBottomSheet extends StatelessWidget {
 
         if(state.errorModel.error!=null)
         {
-          showToast(msg: state.errorModel.error.toString().substring(1,state.errorModel.error.toString().length-1), toastStates: ToastStates.error);
+          showToast(
+            context: context,
+              msg: state.errorModel.error.toString().substring(1,state.errorModel.error.toString().length-1), toastStates: ToastStates.error);
         }
         else
         {
-         showToast(msg: state.errorModel.errorMessage!, toastStates: ToastStates.error);
+         showToast(
+             context: context,
+             msg: state.errorModel.errorMessage!, toastStates: ToastStates.error);
         }
       }
   }

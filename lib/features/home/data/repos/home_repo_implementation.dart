@@ -217,6 +217,10 @@ class HomeRepoImplementation implements HomeRepo
   @override
   Future <Unit> saveCachedHistoryMeals({required SystemMeals meal}) async
   {
+    if(historyMealsBox.values.contains(meal))
+      {
+        return Future.value(unit);
+      }
     await historyMealsBox.add(meal);
     return Future.value(unit);
   }

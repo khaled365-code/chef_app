@@ -1,6 +1,7 @@
 
 
 
+import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
@@ -8,6 +9,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cross_file/cross_file.dart';
@@ -32,16 +34,45 @@ Future uploadImageToAPI(XFile image) async
 }
 
 
-void showToast({required String msg,required ToastStates toastStates,ToastGravity? gravity }) async
+ showToast({
+  required String msg,
+  required ToastStates toastStates,
+  ToastGravity? gravity,
+ required BuildContext context})
 {
- await Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: gravity??ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: getColor(toastStates),
-      textColor: Colors.white,
-      fontSize: 16.0.sp,
+  FToast().init(context);
+  FToast().showToast(
+      child: Container(
+      padding:  EdgeInsetsDirectional.only(start: 10.w,top: 20.h,bottom: 20.h ),
+      decoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        borderRadius: BorderRadius.circular(12.r),
+        color: toastStates == ToastStates.success ?
+        AppColors.c39AE53 :
+        toastStates==ToastStates.error?
+        AppColors.cDE4553:
+        AppColors.cFEC51A,
+      ),
+      child: Row(
+        children: [
+          toastStates==ToastStates.success?
+           SvgPicture.asset(ImageConstants.checkCircleIcon):
+          toastStates==ToastStates.error?
+          SvgPicture.asset(ImageConstants.errorIcon,
+            colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),):
+          SvgPicture.asset(ImageConstants.triangleWarningIcon,
+            colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),),
+          SpaceWidget(width: 10.w,),
+          Text(msg,style: TextStyle(
+            fontSize: 16.sp,
+            fontFamily: 'sen',
+            color:AppColors.white,
+          )),
+        ],
+      ),
+    ),
+   gravity: gravity??ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 5),
   );
 
 }
@@ -68,7 +99,7 @@ Color getColor(ToastStates toastStates)
   }
 }
 
-buildScaffoldMessenger({required BuildContext context,required String msg,SnackBarBehavior? snackBarBehavior,Widget? iconWidget})
+buildScaffoldMessenger({required BuildContext context,required String msg,SnackBarBehavior? snackBarBehavior,Widget? iconWidget,})
 {
 
    return ScaffoldMessenger.of(context).showSnackBar(
@@ -78,9 +109,13 @@ buildScaffoldMessenger({required BuildContext context,required String msg,SnackB
       children: [
         iconWidget??SizedBox.shrink(),
          iconWidget!=null?SpaceWidget(width: 10,):SizedBox.shrink(),
-        Text(
-          msg,
-          style: AppTextStyles.bold15(context).copyWith(color: AppColors.white),
+        FittedBox(
+          fit:BoxFit.scaleDown,
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(
+            msg,
+            style: AppTextStyles.bold15(context).copyWith(color: AppColors.white),
+          ),
         ),
       ],
     ),

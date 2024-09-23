@@ -24,6 +24,7 @@ class MealDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var receivedMeal=ModalRoute.of(context)!.settings.arguments as SystemMeals;
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SafeArea(
           child: CustomScrollView(
             slivers:
@@ -58,13 +59,13 @@ class MealDetailsScreen extends StatelessWidget {
                               Text(receivedMeal.price.toString(),style: AppTextStyles.bold16(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
-                              SpaceWidget(width: 30,),
+                              Spacer(),
                               SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
                               SpaceWidget(width: 10,),
                               Text(receivedMeal.category!,style: AppTextStyles.regular14(context).copyWith(
                                   color: AppColors.c181C2E
                               ),),
-                              Spacer(flex: 2,),
+                              Spacer(),
                               SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),),
                               SpaceWidget(width: 10,),
                               FittedBox(

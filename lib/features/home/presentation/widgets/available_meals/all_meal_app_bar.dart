@@ -45,7 +45,7 @@ class AllMealsAppBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () async
               {
-                if(SystemMealsCubit.get(context).allMealsModel!.meals!=null)
+                if(SystemMealsCubit.get(context).allMealsModel?.meals!=null)
                   {
                     for (int i = 0; i < SystemMealsCubit.get(context).allMealsModel!.meals!.length; i++)
                     {

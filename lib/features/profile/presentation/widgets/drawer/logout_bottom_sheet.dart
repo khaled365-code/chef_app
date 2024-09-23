@@ -139,13 +139,17 @@ class LogoutBottomSheet extends StatelessWidget {
     }
     if (state is LogoutFailureState) {
       if (state.errorModel.error != null) {
-        showToast(msg: state.errorModel.error.toString().substring(
+        showToast(
+            context: context,
+            msg: state.errorModel.error.toString().substring(
             1, state.errorModel.error
             .toString()
             .length - 1), toastStates: ToastStates.error);
       }
       else {
-        showToast(msg: state.errorModel.errorMessage!,
+        showToast(
+            context: context,
+            msg: state.errorModel.errorMessage!,
             toastStates: ToastStates.error);
       }
     }

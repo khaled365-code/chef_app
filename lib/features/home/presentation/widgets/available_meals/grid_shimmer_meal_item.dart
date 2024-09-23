@@ -18,6 +18,14 @@ class GridShimmerMealItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.r),
         color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+                color: AppColors.c96969A,
+                blurRadius: 10,
+                offset: const Offset(12, 12),
+                spreadRadius: 0
+            )
+          ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

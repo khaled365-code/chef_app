@@ -26,7 +26,7 @@ class GridMealItem extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 color: AppColors.c96969A,
-                blurRadius: 30,
+                blurRadius: 10,
                 offset: const Offset(12, 12),
                 spreadRadius: 0
             )

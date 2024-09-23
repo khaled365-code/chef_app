@@ -95,6 +95,13 @@ class AddMealCubit extends Cubit<AddMealState> {
   }
 
   GlobalKey<FormState> addMealFormKey=GlobalKey<FormState>();
+  AutovalidateMode addMealValidateMode=AutovalidateMode.disabled;
+
+  activateAutoValidateMode()
+  {
+    addMealValidateMode=AutovalidateMode.always;
+    emit(ActivateAddMealValidateModeState());
+  }
 
   TextEditingController mealNameController=TextEditingController();
   TextEditingController mealDescriptionController=TextEditingController();

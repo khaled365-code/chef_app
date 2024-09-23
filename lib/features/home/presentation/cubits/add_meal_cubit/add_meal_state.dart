@@ -5,6 +5,8 @@ sealed class AddMealState {}
 
 final class AddMealInitial extends AddMealState {}
 
+final class ActivateAddMealValidateModeState extends AddMealState {}
+
 final class ChangeCategoryValueState extends AddMealState {}
 
 final class ChangeNumberRadioValueState extends AddMealState {}

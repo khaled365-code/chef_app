@@ -23,7 +23,7 @@ class AllMealsScreen extends StatelessWidget {
   Widget build(BuildContext context)
   {
     return Scaffold(
-      backgroundColor: AppColors.cF3F3F3,
+      backgroundColor: AppColors.white,
       body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async

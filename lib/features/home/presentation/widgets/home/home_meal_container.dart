@@ -48,24 +48,24 @@ class HomeMealContainer extends StatelessWidget {
               Text(meal.price.toString(),style: AppTextStyles.bold16(context).copyWith(
                   color: AppColors.c181C2E
               ),),
-              SpaceWidget(width: 24,),
+              Spacer(),
               SvgPicture.asset(ImageConstants.categoryIcon,colorFilter: ColorFilter.mode(AppColors.cFF7622, BlendMode.srcIn),),
               SpaceWidget(width: 9,),
               Text(meal.category??'',style: AppTextStyles.regular14(context).copyWith(
                   color: AppColors.c181C2E
               ),),
-              SpaceWidget(width: 24,),
+              Spacer(),
               SvgPicture.asset(ImageConstants.userChefIcon,colorFilter: ColorFilter.mode(AppColors.cFF7622, BlendMode.srcIn),),
               SpaceWidget(width: 9,),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    meal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
-                      color: AppColors.c181C2E
-                  ),),
-                ),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  meal.chefId!.brandName!,style: AppTextStyles.regular14(context).copyWith(
+                    color: AppColors.c181C2E
+                ),),
               ),
+              Spacer(),
             ],
           )
 

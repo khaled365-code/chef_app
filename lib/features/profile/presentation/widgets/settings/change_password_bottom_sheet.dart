@@ -131,18 +131,24 @@ class ChangePasswordBottomSheet extends StatelessWidget {
         ChangePasswordCubit.get(context).oldPasswordController.clear();
         ChangePasswordCubit.get(context).newPasswordController.clear();
             ChangePasswordCubit.get(context).confirmPasswordController.clear();
-        showToast(msg: 'password updated successfully', toastStates: ToastStates.success);
+        showToast(
+            context: context,
+            msg: 'password updated successfully', toastStates: ToastStates.success);
         Navigator.pop(context);
       }
     if(state is ChangePasswordFailureState)
       {
         if(state.errorModel.error!=null)
         {
-          showToast(msg: state.errorModel.error!.toString().substring(1,state.errorModel.error!.toString().length-1), toastStates: ToastStates.error);
+          showToast(
+              context: context,
+              msg: state.errorModel.error!.toString().substring(1,state.errorModel.error!.toString().length-1), toastStates: ToastStates.error);
         }
         else
         {
-          showToast(msg: state.errorModel.errorMessage!, toastStates: ToastStates.error);
+          showToast(
+              context: context,
+              msg: state.errorModel.errorMessage!, toastStates: ToastStates.error);
         }
       }
   }

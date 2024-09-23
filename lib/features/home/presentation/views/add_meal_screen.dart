@@ -182,7 +182,7 @@ class AddMealScreen extends StatelessWidget {
   {
       if(state is AddMealSuccessState)
             {
-            buildScaffoldMessenger(context: context, msg: 'Meal added successfully',snackBarBehavior: SnackBarBehavior.floating,iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon));
+            buildScaffoldMessenger(context: context, msg: 'Meal added, wait for admin approval',snackBarBehavior: SnackBarBehavior.floating,);
             AddMealCubit.get(context).mealImage=null;
             AddMealCubit.get(context).mealNameController.clear();
             AddMealCubit.get(context).mealDescriptionController.clear();

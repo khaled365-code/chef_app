@@ -67,52 +67,52 @@ class AllMealsScreen extends StatelessWidget {
                       else if (state is GetAllMealsSuccessState
                           && SystemMealsCubit.get(context).allMealsModel?.meals != null)
                       {
-                        return SliverFillRemaining(
+                        return SliverToBoxAdapter(
                           child: Column(
                             children: [
-                              Expanded(
-                                child: GridView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsetsDirectional.only(
-                                      start: 24.w,
-                                      end: 24.w),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 21.h,
-                                      crossAxisSpacing: 21.w,
-                                      mainAxisExtent: 200.h
-                                  ),
-                                  itemCount: SystemMealsCubit
-                                      .get(context)
-                                      .allMealsModel!
-                                      .meals!
-                                      .length,
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        navigate(context: context,
-                                            route: Routes.mealDetailsScreen,
-                                            arg: SystemMealsCubit
-                                                .get(context)
-                                                .allMealsModel!
-                                                .meals![index]);
-                                      },
-                                      child: GridMealItem(
-                                        index: index,
-                                        mealsList: SystemMealsCubit
-                                            .get(context)
-                                            .allMealsModel!
-                                            .meals!,
-                                        meal: SystemMealsCubit
-                                            .get(context)
-                                            .allMealsModel!
-                                            .meals![index],
-                                      ),
-                                    );
-                                  },
-
+                              GridView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsetsDirectional.only(
+                                    start: 24.w,
+                                    end: 24.w),
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 21.h,
+                                    crossAxisSpacing: 21.w,
+                                    mainAxisExtent: 200.h
                                 ),
+                                itemCount: SystemMealsCubit
+                                    .get(context)
+                                    .allMealsModel!
+                                    .meals!
+                                    .length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      navigate(context: context,
+                                          route: Routes.mealDetailsScreen,
+                                          arg: SystemMealsCubit
+                                              .get(context)
+                                              .allMealsModel!
+                                              .meals![index]);
+                                    },
+                                    child: GridMealItem(
+                                      index: index,
+                                      mealsList: SystemMealsCubit
+                                          .get(context)
+                                          .allMealsModel!
+                                          .meals!,
+                                      meal: SystemMealsCubit
+                                          .get(context)
+                                          .allMealsModel!
+                                          .meals![index],
+                                    ),
+                                  );
+                                },
+
                               ),
+                              SpaceWidget(height: 30,),
                             ],
                           ),
                         );

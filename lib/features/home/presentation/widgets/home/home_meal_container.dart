@@ -22,16 +22,18 @@ class HomeMealContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 137.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6.r),
-              image: meal.images!.first.isNotEmpty?
-              DecorationImage(
-                  image: CachedNetworkImageProvider(
-                    meal.images!.first,
-                  ),fit: BoxFit.fill):null
-            ),),
+          AspectRatio(
+            aspectRatio: 327/137,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                image: meal.images!.first.isNotEmpty?
+                DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      meal.images!.first,
+                    ),fit: BoxFit.fill):null
+              ),),
+          ),
           SpaceWidget(height: 8,),
           Text(meal.name!,style: AppTextStyles.regular20(context).copyWith(
             color: AppColors.c181C2E

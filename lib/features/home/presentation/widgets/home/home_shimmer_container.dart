@@ -19,15 +19,17 @@ class HomeShimmerContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 137.h,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.r),
-              image: DecorationImage(
-                image: AssetImage(
-                  ImageConstants.noImage
-                ),fit: BoxFit.cover)
-            ),),
+          AspectRatio(
+            aspectRatio: 327/137,
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.r),
+                image: DecorationImage(
+                  image: AssetImage(
+                    ImageConstants.noImage
+                  ),fit: BoxFit.cover)
+              ),),
+          ),
           SpaceWidget(height: 8,),
           Shimmer.fromColors(
               baseColor: AppColors.white,

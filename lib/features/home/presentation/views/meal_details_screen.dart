@@ -146,7 +146,7 @@ class MealDetailsScreen extends StatelessWidget {
 
                         ],
                       ),
-                      SpaceWidget(height: 24,)
+                      SpaceWidget(height: 24,),
 
                     ],
                   ),

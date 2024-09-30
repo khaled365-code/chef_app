@@ -19,6 +19,7 @@ class EditProfileNameField extends StatelessWidget {
         childWidget: CustomOutlineTextField(
           controller: EditProfileCubit.get(context).nameController,
           keyboardType: TextInputType.text,
+          maxLines: 1,
           validator: (value)
           {
             if(value!.isEmpty)

@@ -22,7 +22,7 @@ class SpecificChefMealsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cF3F3F3,
+      backgroundColor: AppColors.white,
       body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async
@@ -50,7 +50,7 @@ class SpecificChefMealsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SpaceWidget(height: 24,),
+                        SpaceWidget(height: 32,),
                         SpecificChefMealsAppBar(),
                         SpaceWidget(height: 24,),
                         BlocBuilder<GetSpecificChefMealsCubit,GetSpecificChefMealsState>(
@@ -91,9 +91,9 @@ class SpecificChefMealsScreen extends StatelessWidget {
                             mainAxisSpacing: 70,
                             crossAxisSpacing: 30,
                             pattern: [
-                              WovenGridTile(.67),
+                              WovenGridTile(.55),
                               WovenGridTile(
-                                  220 / 252,
+                                  5 / 7,
                                   alignment: AlignmentDirectional.bottomCenter
                               ),
                             ],
@@ -103,7 +103,8 @@ class SpecificChefMealsScreen extends StatelessWidget {
                       );
 
                     }
-                    else if (
+                    else if
+                    (
                     state is GetSpecificChefMealsSuccessState &&
                     GetSpecificChefMealsCubit.get(context).chefMeals!=null)
                     {
@@ -124,9 +125,9 @@ class SpecificChefMealsScreen extends StatelessWidget {
                             mainAxisSpacing: 70,
                             crossAxisSpacing: 30,
                             pattern: [
-                              WovenGridTile(.67),
+                              WovenGridTile(.55),
                               WovenGridTile(
-                                220 / 252,
+                                5/7,
                                 alignment: AlignmentDirectional.bottomCenter
                               ),
                             ],
@@ -162,9 +163,9 @@ class SpecificChefMealsScreen extends StatelessWidget {
                             mainAxisSpacing: 70,
                             crossAxisSpacing: 30,
                             pattern: [
-                              WovenGridTile(.67),
+                              WovenGridTile(.55),
                               WovenGridTile(
-                                  220 / 252,
+                                  5 / 7,
                                   alignment: AlignmentDirectional.bottomCenter
                               ),
                             ],
@@ -195,9 +196,9 @@ class SpecificChefMealsScreen extends StatelessWidget {
                               mainAxisSpacing: 70,
                               crossAxisSpacing: 30,
                               pattern: [
-                                WovenGridTile(.67),
+                                WovenGridTile(.55),
                                 WovenGridTile(
-                                    220 / 252,
+                                    5/7,
                                     alignment: AlignmentDirectional.bottomCenter
                                 ),
                               ],

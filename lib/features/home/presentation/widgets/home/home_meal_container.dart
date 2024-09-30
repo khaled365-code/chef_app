@@ -26,7 +26,7 @@ class HomeMealContainer extends StatelessWidget {
             aspectRatio: 327/137,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(15.r),
                 image: meal.images!.first.isNotEmpty?
                 DecorationImage(
                     image: CachedNetworkImageProvider(

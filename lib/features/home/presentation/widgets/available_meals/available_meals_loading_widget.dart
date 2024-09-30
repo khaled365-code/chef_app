@@ -11,21 +11,20 @@ class AllAvailableMealsLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverFillRemaining(
+    return SliverToBoxAdapter(
       child: Column(
         children: [
-          Expanded(
-            child: GridView.builder(
-              itemBuilder: (context, index) => GridShimmerMealItem(),
-              itemCount: 12,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 21.h,
-                  crossAxisSpacing: 21.w,
-                  mainAxisExtent: 200.h
-              ),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => GridShimmerMealItem(),
+            itemCount: 12,
+            padding: EdgeInsetsDirectional.only(start: 24.w, end: 24.w),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 21.h,
+                crossAxisSpacing: 21.w,
+                mainAxisExtent: 200.h
             ),
           ),
         ],

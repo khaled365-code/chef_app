@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../../core/widgets/name_and_text_field_widget.dart';
@@ -19,6 +20,11 @@ class EditProfileMinChargeField extends StatelessWidget {
         childWidget: CustomOutlineTextField(
           controller: EditProfileCubit.get(context).minChargeController,
           keyboardType: TextInputType.number,
+          maxLines: 1,
+          inputFormatters:
+          [
+            FilteringTextInputFormatter.digitsOnly
+          ],
           validator: (value)
           {if(value!.isEmpty)
             {

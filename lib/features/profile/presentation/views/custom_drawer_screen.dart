@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/commons/global_cubits/internet_checking_cubit.dart';
+import '../../../../core/database/api/api_keys.dart';
+import '../../../../core/database/cache/cache_helper.dart';
+import '../../../../core/injection/injector.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/widgets/space_widget.dart';
+import '../../../home/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
 import '../widgets/drawer/drawer_app_bar.dart';
 import '../widgets/drawer_header_widget.dart';
 import '../widgets/drawer/logout_and_delete_account_container.dart';
@@ -16,42 +22,45 @@ class CustomDrawerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-        backgroundColor: AppColors.cF3F3F3,
+    return BlocProvider(
+      create: (context) => InternetCheckingCubit()..checkStreamConnection(),
+      child: Scaffold(
+        backgroundColor: AppColors.white,
         body: SafeArea(
-              child:
-              CustomScrollView(
-                  slivers:
-              [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.only(
-                        start: 24.w, end: 24.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SpaceWidget(height: 24,),
-                        DrawerAppBar(),
-                        SpaceWidget(height: 24,),
-                        DrawerHeaderWidget(),
-                        SpaceWidget(height: 32,),
-                        PersonalAndEditProfileBodyContainer(),
-                        SpaceWidget(height: 20,),
-                        MealsAndNotificationsContainer(),
-                        SpaceWidget(height: 20,),
-                        SettingsAndFaqContainer(),
-                        SpaceWidget(height: 20,),
-                        LogoutAndDeleteAccountContainer(),
-                        SpaceWidget(height: 29,),
+            child:
+            CustomScrollView(
+                slivers:
+                [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.only(
+                          start: 24.w, end: 24.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SpaceWidget(height: 32,),
+                          DrawerAppBar(),
+                          SpaceWidget(height: 24,),
+                          DrawerHeaderWidget(),
+                          SpaceWidget(height: 32,),
+                          PersonalAndEditProfileBodyContainer(),
+                          SpaceWidget(height: 20,),
+                          MealsAndNotificationsContainer(),
+                          SpaceWidget(height: 20,),
+                          SettingsAndFaqContainer(),
+                          SpaceWidget(height: 20,),
+                          LogoutAndDeleteAccountContainer(),
+                          SpaceWidget(height: 29,),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
 
-              ])),
-        );
+                ])),
+      ),
+    );
   }
 }
 

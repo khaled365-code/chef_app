@@ -1,9 +1,6 @@
 
 
 import 'package:chef_app/core/commons/commons.dart';
-import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
-import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
-import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,6 +10,7 @@ import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/space_widget.dart';
+import '../../cubits/notifications_cubit/notifications_cubit.dart';
 
 class MealsAndNotificationsContainer extends StatelessWidget {
   const MealsAndNotificationsContainer({
@@ -55,7 +53,7 @@ class MealsAndNotificationsContainer extends StatelessWidget {
             onTap: () async
             {
 
-              HomeScreenCubit.get(context).getAllCachedNotificationsFun();
+
               navigate(context: context, route: Routes.notificationsScreen);
             },
             contentPadding: EdgeInsetsDirectional.zero,

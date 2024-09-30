@@ -30,7 +30,7 @@ class PersonalInfoAppBar extends StatelessWidget {
             height: 45.h,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.cECF0F4
+                color: AppColors.cECF0F4,
             ),
             child: Center(
               child: SvgPicture.asset(

@@ -1,5 +1,4 @@
 import 'package:chef_app/core/commons/commons.dart';
-import 'package:chef_app/core/commons/global_cubits/internet_checking_cubit.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/home/presentation/cubits/get_system_meals_cubit/system_meals_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_lists_cubit/home_lists_cubit.dart';
@@ -11,6 +10,7 @@ import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/services/internet_connection_service.dart';
+import '../../../../core/utilis/services/local_notifications_service.dart';
 import '../../../profile/presentation/views/custom_drawer_screen.dart';
 import '../widgets/home/all_categories_row.dart';
 import '../widgets/home/all_meals_row.dart';
@@ -23,8 +23,24 @@ import '../widgets/home/sliver_list_loading_meals.dart';
 import '../widgets/home/welcome_text_widget.dart';
 
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    LocalNotificationsService.localNotificationsStreamController.stream.listen((notificationResponse)
+    {
+     navigate(context: context, route: Routes.notificationsScreen);
+    },);
+  }
   @override
   Widget build(BuildContext context) {
       {
@@ -171,7 +187,7 @@ class HomeScreen extends StatelessWidget {
                       }),
                       SliverToBoxAdapter(
                           child: SpaceWidget(
-                        height: 32,
+                        height: 30,
                       ))
                     ],
                   ),
@@ -180,7 +196,6 @@ class HomeScreen extends StatelessWidget {
       }
 
   }
-
 }
 
 

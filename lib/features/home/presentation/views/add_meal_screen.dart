@@ -1,9 +1,12 @@
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
 import 'package:chef_app/core/routes/routes.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
+import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/core/widgets/no_internet_connection_dialog.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/features/home/presentation/cubits/add_meal_cubit/add_meal_cubit.dart';
+import 'package:chef_app/features/profile/presentation/cubits/notifications_cubit/notifications_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -178,16 +181,26 @@ class AddMealScreen extends StatelessWidget {
 
   }
 
-  void handleListenerFunctions(AddMealState state, BuildContext context)
+  void handleListenerFunctions(AddMealState state, BuildContext context) async
   {
       if(state is AddMealSuccessState)
             {
-            buildScaffoldMessenger(context: context, msg: 'Meal added, wait for admin approval',snackBarBehavior: SnackBarBehavior.floating,);
+              LocalNotificationsModel localNotification = LocalNotificationsModel(
+                DateTime.now().toString(),
+                id: 40,
+                image: ImageConstants.newMealAlarmImage,
+                payload: AddMealCubit.get(context).mealImage?.path,
+                title: '${AddMealCubit.get(context).mealNameController.text+' Meal Added Successfully !'}',
+                body: 'Thank you for submitting ${AddMealCubit.get(context).mealNameController.text} Meal It is now pending approval by the admin. You will see it here once approved.',
+              );
+              LocalNotificationsService.showBasicNotification(
+                  localNotificationsModel: localNotification);
+              await NotificationsCubit.get(context).saveLocalNotificationsFun(localNotification: localNotification);
             AddMealCubit.get(context).mealImage=null;
             AddMealCubit.get(context).mealNameController.clear();
             AddMealCubit.get(context).mealDescriptionController.clear();
             AddMealCubit.get(context).mealPriceController.clear();
-            navigate(context: context, route: Routes.homeScreen);
+
             }
           if(state is AddMealFailureState)
           {

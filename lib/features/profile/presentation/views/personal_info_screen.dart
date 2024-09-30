@@ -24,7 +24,7 @@ class PersonalInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cF3F3F3,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: CustomScrollView(
           slivers:
@@ -34,7 +34,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 padding:  EdgeInsetsDirectional.only(start: 24.w,end: 24.w),
                 child: Column(
                   children: [
-                    SpaceWidget(height: 24,),
+                    SpaceWidget(height: 32,),
                     PersonalInfoAppBar(),
                     SpaceWidget(height: 24,),
                     DrawerHeaderWidget(),

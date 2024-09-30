@@ -3,13 +3,10 @@ import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
 import 'package:chef_app/core/database/errors/error_model.dart';
-import 'package:chef_app/features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
 import 'package:chef_app/features/profile/data/repos/profile_repo_implementation.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:meta/meta.dart';
 
 part 'edit_profile_state.dart';

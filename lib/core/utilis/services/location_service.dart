@@ -46,7 +46,7 @@ class LocationService
        }
    }
 
-  static Future  getAppLocation() async
+  static Future getAppLocation() async
    {
      var bool1=await checkAndRequestLocationService();
      var bool2=await checkAndRequestLocationPermission();

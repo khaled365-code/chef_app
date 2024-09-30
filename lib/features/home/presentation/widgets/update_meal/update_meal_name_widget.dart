@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../../core/widgets/name_and_text_field_widget.dart';
@@ -21,6 +22,9 @@ class UpdateMealNameField extends StatelessWidget {
         childWidget: CustomOutlineTextField(
           controller: updateMealCubit.updateMealNameController,
           hintText: 'write new meal name here',
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(30)
+          ],
           onFieldSubmitted: (value)
           {
 

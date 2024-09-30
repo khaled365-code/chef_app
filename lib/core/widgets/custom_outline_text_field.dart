@@ -8,7 +8,7 @@ import '../utilis/app_colors.dart';
 import '../utilis/app_text_styles.dart';
 
 class CustomOutlineTextField extends StatelessWidget {
-  const CustomOutlineTextField({super.key, this.contentPadding, this.hintText, this.hintStyle, this.suffixIcon, this.obscureText, this.keyboardType, this.filledTextStyle, this.crusorColor, required this.controller, this.validator, this.onFieldSubmitted, this.inputFormatters, this.fieldFocusNode, this.prefixIcon, this.fillColor, this.borderRadius});
+  const CustomOutlineTextField({super.key, this.contentPadding, this.hintText, this.hintStyle, this.suffixIcon, this.obscureText, this.keyboardType, this.filledTextStyle, this.crusorColor, required this.controller, this.validator, this.onFieldSubmitted, this.inputFormatters, this.fieldFocusNode, this.prefixIcon, this.fillColor, this.borderRadius, this.textInputAction, this.maxLines, this.maxLength, this.minLines});
 
   final EdgeInsetsGeometry? contentPadding;
   final String? hintText;
@@ -26,6 +26,10 @@ class CustomOutlineTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Color? fillColor;
   final BorderRadius? borderRadius;
+  final TextInputAction? textInputAction;
+  final int? maxLines;
+  final int? minLines;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,12 @@ class CustomOutlineTextField extends StatelessWidget {
         cursorColor: crusorColor??AppColors.c1E1E2E,
         obscureText: obscureText??false,
         keyboardType: keyboardType??TextInputType.text,
+        textInputAction: textInputAction,
+        maxLines: maxLines,
+        minLines: minLines,
+        maxLengthEnforcement: MaxLengthEnforcement.truncateAfterCompositionEnds,
         validator: validator,
+        maxLength: maxLength,
         onFieldSubmitted: onFieldSubmitted,
         inputFormatters: inputFormatters,
         focusNode: fieldFocusNode,
@@ -42,7 +51,7 @@ class CustomOutlineTextField extends StatelessWidget {
         decoration: InputDecoration(
         hintText: hintText??'',
         hintStyle: hintStyle??AppTextStyles.regular14(context).copyWith(color: AppColors.cA0A5BA),
-        contentPadding: contentPadding??EdgeInsetsDirectional.only(start: 20.w,top: 23.h),
+        contentPadding: contentPadding??EdgeInsetsDirectional.only(start: 20.w,top: 23.h,end: 20.w),
         filled: true,
         fillColor: fillColor??AppColors.cF0F5FA,
         suffixIcon: suffixIcon??null,

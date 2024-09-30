@@ -21,10 +21,14 @@ class UpdateDescriptionField extends StatelessWidget {
         childWidget: CustomOutlineTextField(
           controller: updateMealCubit.updateMealDescriptionController,
           hintText: 'write new meal description here',
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          maxLength: 214,
+          maxLines: null,
           onFieldSubmitted: (value) {
 
           },
-          keyboardType: TextInputType.text,
+
         ));
   }
 }

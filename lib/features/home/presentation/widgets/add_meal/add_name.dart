@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../../core/widgets/name_and_text_field_widget.dart';
@@ -16,9 +17,15 @@ class AddMealNameTextField extends StatelessWidget {
     return NameAndTextFieldWidget(
         title: 'Meal Name',
         childWidget: CustomOutlineTextField(
+          maxLines: 1,
+          inputFormatters:
+          [
+            LengthLimitingTextInputFormatter(30)
+          ],
           controller: AddMealCubit.get(context).mealNameController,
           hintText: 'write meal name here',
-          onFieldSubmitted: (value) {
+          onFieldSubmitted: (value)
+          {
 
           },
           validator: (value)
@@ -36,7 +43,7 @@ class AddMealNameTextField extends StatelessWidget {
               return null;
             }
           },
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.multiline,
         ));
   }
 }

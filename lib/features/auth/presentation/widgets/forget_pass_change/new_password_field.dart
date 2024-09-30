@@ -21,6 +21,7 @@ class NewPasswordField extends StatelessWidget {
     return NameAndTextFieldWidget(
         title: 'New Password',
         childWidget: CustomOutlineTextField(
+          maxLines: 1,
           obscureText: ForgetPassCubit.get(context).newPasswordObscure,
           suffixIcon: GestureDetector(
               onTap: ()

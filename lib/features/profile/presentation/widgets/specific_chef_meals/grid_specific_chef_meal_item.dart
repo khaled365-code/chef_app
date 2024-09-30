@@ -31,25 +31,38 @@ class GridSpecificChefMealsItem extends StatelessWidget {
               width: 156.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.r),
-                color: AppColors.white,
+                color: AppColors.cF3F3F3,
+                boxShadow:
+                [
+                  BoxShadow(
+                    spreadRadius: 0,
+                    offset: Offset(0.0, 1.0),
+                    blurRadius: 2,
+                  )
+                ]
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Spacer(flex: 5,),
-                  Text(meal.name!,
-                      style: AppTextStyles.semiBold22(context).copyWith(
-                          color: AppColors.c32343E
-                      )),
-                  SpaceWidget(height: 18,),
-                  Text('\$${meal.price}'.toString(), style: AppTextStyles
-                      .bold17(context).copyWith(
-                      color: AppColors.cFA4A0C
-                  )),
-                  Spacer(),
+              child: Padding(
+                padding:  EdgeInsetsDirectional.only(start: 16.5.w,end: 29.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Spacer(flex: 5,),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(meal.name!,
+                          style: AppTextStyles.semiBold22(context).copyWith(
+                              color: AppColors.c32343E
+                          )),
+                    ),
+                    SpaceWidget(height: 18,),
+                    Text('\$${meal.price}'.toString(), style: AppTextStyles
+                        .bold17(context).copyWith(
+                        color: AppColors.cFA4A0C
+                    )),
+                    Spacer(),
 
-                ],
+                  ],
+                ),
               ),
             ),
             PositionedDirectional(

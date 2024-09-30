@@ -19,7 +19,8 @@ class AddMealPriceTextField extends StatelessWidget {
         childWidget: CustomOutlineTextField(
           controller: AddMealCubit.get(context).mealPriceController,
           hintText: 'write meal price here',
-          inputFormatters: [
+          inputFormatters:
+          [
             FilteringTextInputFormatter.digitsOnly,
           ],
           onFieldSubmitted: (value) {

@@ -110,9 +110,8 @@ class AllMealsScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-
+                              
                               ),
-                              SpaceWidget(height: 30,),
                             ],
                           ),
                         );
@@ -120,47 +119,46 @@ class AllMealsScreen extends StatelessWidget {
                       else if (state is GetCachedMealsSuccessState
                           && SystemMealsCubit.get(context).cachedSystemMeals != null)
                       {
-                        return SliverFillRemaining(
+                        return SliverToBoxAdapter(
                           child: Column(
                             children: [
-                              Expanded(
-                                child: GridView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsetsDirectional.only(
-                                      start: 24.w,
-                                      end: 24.w),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 21.h,
-                                      crossAxisSpacing: 21.w,
-                                      mainAxisExtent: 200.h
-                                  ),
-                                  itemCount: SystemMealsCubit
-                                      .get(context)
-                                      .cachedSystemMeals!
-                                      .length,
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        navigate(context: context,
-                                            route: Routes.mealDetailsScreen,
-                                            arg: SystemMealsCubit
-                                                .get(context)
-                                                .cachedSystemMeals![index]);
-                                      },
-                                      child: GridMealItem(
-                                        index: index,
-                                        mealsList: SystemMealsCubit
-                                            .get(context)
-                                            .cachedSystemMeals!,
-                                        meal: SystemMealsCubit
-                                            .get(context)
-                                            .cachedSystemMeals![index],
-                                      ),
-                                    );
-                                  },
-
+                              GridView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsetsDirectional.only(
+                                    start: 24.w,
+                                    end: 24.w),
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 21.h,
+                                    crossAxisSpacing: 21.w,
+                                    mainAxisExtent: 200.h
                                 ),
+                                itemCount: SystemMealsCubit
+                                    .get(context)
+                                    .cachedSystemMeals!
+                                    .length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      navigate(context: context,
+                                          route: Routes.mealDetailsScreen,
+                                          arg: SystemMealsCubit
+                                              .get(context)
+                                              .cachedSystemMeals![index]);
+                                    },
+                                    child: GridMealItem(
+                                      index: index,
+                                      mealsList: SystemMealsCubit
+                                          .get(context)
+                                          .cachedSystemMeals!,
+                                      meal: SystemMealsCubit
+                                          .get(context)
+                                          .cachedSystemMeals![index],
+                                    ),
+                                  );
+                                },
+
                               ),
                             ],
                           ),
@@ -184,6 +182,7 @@ class AllMealsScreen extends StatelessWidget {
                         return AllAvailableMealsLoadingWidget();
                       }
                     }),
+                SliverToBoxAdapter(child: SpaceWidget(height: 30,)),
               ],
             ),
           )),

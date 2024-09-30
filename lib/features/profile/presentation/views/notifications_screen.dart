@@ -1,5 +1,6 @@
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
+import 'package:chef_app/features/profile/presentation/cubits/notifications_cubit/notifications_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +16,7 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: AppColors.white,
       body: SafeArea(
           child: CustomScrollView(
             slivers: [
@@ -24,10 +25,10 @@ class NotificationsScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: Column(
                     children: [
-                      SpaceWidget(height: 24,),
+                      SpaceWidget(height: 32,),
                       NotificationsAppBar(),
                       SpaceWidget(height: 24,),
-                      BlocBuilder<HomeScreenCubit, HomeScreenState>(
+                      BlocBuilder<NotificationsCubit, NotificationsState>(
                         builder: (context, state)
                         {
                           if(state is GetLocalNotificationsSuccessState)
@@ -36,7 +37,7 @@ class NotificationsScreen extends StatelessWidget {
                                 padding: EdgeInsetsDirectional.zero,
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
-                                itemCount: HomeScreenCubit.get(context).localNotificationsList.length,
+                                itemCount: NotificationsCubit.get(context).localNotificationsList.length,
                                 separatorBuilder: (context, index) =>
                                     Divider(
                                       height: 32.h,
@@ -51,20 +52,20 @@ class NotificationsScreen extends StatelessWidget {
                                           SlidableAction(
                                             onPressed: (_)
                                             {
-                                               HomeScreenCubit.get(context).deleteSpecificNotification(
-                                                   localNotificationId: HomeScreenCubit.get(context).localNotificationsList[index].id, index: index);
+                                              NotificationsCubit.get(context).deleteSpecificNotification(
+                                                   localNotificationId: NotificationsCubit.get(context).localNotificationsList[index].id, index: index);
                                             },
                                             backgroundColor: AppColors.primaryColor,
                                             icon: Icons.delete,
                                             label: 'Delete',
                                             foregroundColor: AppColors.white,
-                                            borderRadius: BorderRadius.circular(10.r),
+
 
                                           ),
                                         ],
                                       ),
                                       child: NotificationItem(
-                                        notificationModel: HomeScreenCubit.get(context).localNotificationsList[index],
+                                        notificationModel: NotificationsCubit.get(context).localNotificationsList[index],
                                       ),
                                     ),);
                             }

@@ -29,39 +29,49 @@ class GridShimmerChefMealItem extends StatelessWidget {
               width: 156.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.r),
-                color: AppColors.white,
+                color: AppColors.cF3F3F3,
+                  boxShadow:
+                  [
+                    BoxShadow(
+                      spreadRadius: 0,
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 2,
+                    )
+                  ]
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Spacer(flex: 5,),
-                  Shimmer.fromColors(
-                    baseColor: AppColors.white,
-                    highlightColor: AppColors.cD1D8E0,
-                    child: Container(
-                      height: 25.h,
-                      width: 45.w,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage(ImageConstants.loadingImage,),fit: BoxFit.fill)
+              child: Padding(
+                padding:  EdgeInsetsDirectional.only(start: 16.5.w,end: 29.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Spacer(flex: 5,),
+                    Shimmer.fromColors(
+                      baseColor: AppColors.white,
+                      highlightColor: AppColors.cD1D8E0,
+                      child: Container(
+                        height: 25.h,
+                        width: 90.w,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage(ImageConstants.loadingImage,),fit: BoxFit.fill)
+                        ),
                       ),
                     ),
-                  ),
-                  SpaceWidget(height: 18,),
-                  Shimmer.fromColors(
-                    baseColor: AppColors.white,
-                    highlightColor: AppColors.cD1D8E0,
-                    child: Container(
-                      height: 25.h,
-                      width: 45.w,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(image: AssetImage(ImageConstants.loadingImage),fit: BoxFit.fill)
+                    SpaceWidget(height: 18,),
+                    Shimmer.fromColors(
+                      baseColor: AppColors.white,
+                      highlightColor: AppColors.cD1D8E0,
+                      child: Container(
+                        height: 25.h,
+                        width: 90.w,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(image: AssetImage(ImageConstants.loadingImage),fit: BoxFit.fill)
+                        ),
                       ),
                     ),
-                  ),
-                  Spacer(),
+                    Spacer(),
 
-                ],
+                  ],
+                ),
               ),
             ),
             PositionedDirectional(

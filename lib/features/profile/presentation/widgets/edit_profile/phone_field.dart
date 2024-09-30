@@ -17,18 +17,20 @@ class EditProfilePhoneField extends StatelessWidget {
     return NameAndTextFieldWidget(
         title: 'Phone Number'.toUpperCase(),
         childWidget: CustomOutlineTextField(
-          inputFormatters: [
+          inputFormatters:
+          [
             FilteringTextInputFormatter.digitsOnly,
           ],
           controller: EditProfileCubit.get(context).phoneController,
           keyboardType: TextInputType.number,
+          maxLines: 1,
           validator: (value)
           {
             if(value!.isEmpty)
               {
                 return 'phone must not be empty';
               }
-            if(value!.length < 10)
+            if(value.length < 10)
             {
               return 'phone length must be at least 10 characters long';
             }

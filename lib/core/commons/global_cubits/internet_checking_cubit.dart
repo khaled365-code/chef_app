@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -20,7 +19,6 @@ class InternetCheckingCubit extends Cubit<InternetCheckingState> {
 
     internetConnectionStream=InternetConnection().onStatusChange.listen((InternetStatus status)
     {
-      emit(InternetCheckingLoadingState());
       if(status==InternetStatus.connected)
         {
           connected();

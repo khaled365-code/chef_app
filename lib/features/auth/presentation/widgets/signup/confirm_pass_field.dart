@@ -21,6 +21,7 @@ class ConfirmPassField extends StatelessWidget {
         padding: EdgeInsetsDirectional.only(
             end: 24.w),
         child: CustomOutlineTextField(
+          maxLines: 1,
           obscureText: SignupCubit.get(context).confirmPasswordSecureText,
           suffixIcon: GestureDetector(
             onTap: ()

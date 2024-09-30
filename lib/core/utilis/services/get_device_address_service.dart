@@ -8,7 +8,7 @@ import 'location_service.dart';
 class DeviceAddressService
 {
 
-  static String apiKey='AIzaSyDMjM_oncic_3ycIgRFh1Xe9eSGzpV_TXU';
+  static String currentAddressApiKey='AIzaSyDMjM_oncic_3ycIgRFh1Xe9eSGzpV_TXU';
 
  static Future<AddressModel> getAppAddress() async
   {
@@ -17,7 +17,7 @@ class DeviceAddressService
          LocationData dataLocation= await LocationService.getAppLocation();
          double longitude=dataLocation.longitude!;
          double latitude=dataLocation.latitude!;
-         final response= await http.get(Uri.parse('https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey&language=ar'));
+         final response= await http.get(Uri.parse('https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$currentAddressApiKey&language=ar'));
          if(response.statusCode==200)
          {
            var result = response.body;

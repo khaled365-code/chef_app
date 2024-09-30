@@ -40,6 +40,7 @@ class ApiKeys
   static const String savedEmail='savedEmail';
   static const String savedPassword='savedPassword';
   static const String appUpdateIsActive='savedPassword';
+  static const String userAddress='userAddress';
 
 
 

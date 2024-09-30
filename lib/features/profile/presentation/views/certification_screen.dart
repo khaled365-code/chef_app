@@ -25,7 +25,7 @@ class CertificationScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SpaceWidget(height: 24,),
+              SpaceWidget(height: 32,),
               Padding(
                 padding:  EdgeInsetsDirectional.only(start: 24.w),
                 child: CertificationAppBar(),
@@ -54,7 +54,7 @@ class CertificationScreen extends StatelessWidget {
               Center(
                 child: Text('Certification!',style: AppTextStyles.extraBold24(context).copyWith(
                   color: AppColors.c00243C,
-                  fontWeight: FontweightHelper.bold
+                  fontWeight: FontWeightHelper.bold
                 ),),
               ),
               SpaceWidget(height: 10,),

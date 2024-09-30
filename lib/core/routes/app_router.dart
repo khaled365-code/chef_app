@@ -14,6 +14,7 @@ import 'package:chef_app/features/auth/presentation/views/login_screen.dart';
 import 'package:chef_app/features/home/data/repos/home_repo_implementation.dart';
 import 'package:chef_app/features/home/presentation/cubits/add_meal_cubit/add_meal_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/favourites_and_history_cubit/favourites_and_history_cubit.dart';
+import 'package:chef_app/features/home/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/get_system_meals_cubit/system_meals_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_lists_cubit/home_lists_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
@@ -25,6 +26,7 @@ import 'package:chef_app/features/profile/data/repos/profile_repo_implementation
 import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/faq_cubit/faq_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/get_specific_chef_meals_cubit/get_specific_chef_meals_cubit.dart';
+import 'package:chef_app/features/profile/presentation/cubits/notifications_cubit/notifications_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/settings_cubit/settings_cubit.dart';
 import 'package:chef_app/features/profile/presentation/views/certification_screen.dart';
 import 'package:chef_app/features/profile/presentation/views/custom_drawer_screen.dart';
@@ -40,6 +42,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/presentation/views/signup_screen.dart';
 import '../../features/home/presentation/views/all_meals_screen.dart';
 import '../../features/home/presentation/views/favourites_screen.dart';
+import '../../features/profile/presentation/cubits/get_user_address_cubit/get_user_address_cubit.dart';
 import '../../features/splash_and_onbording/presentation/views/onbaording_screen.dart';
 import '../../features/splash_and_onbording/presentation/views/splash2_screen.dart';
 import '../injection/injector.dart';
@@ -64,47 +67,55 @@ class AppRouter {
       case Routes.faqScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => FaqCubit(),
-                  child: FaqScreen(),
-                ),
+              create: (context) => FaqCubit(),
+              child: FaqScreen(),
+            ),
             settings: routeSettings);
 
       case Routes.notificationsScreen:
         return MaterialPageRoute(
-            builder: (context) => NotificationsScreen(),
+            builder: (context) => BlocProvider(
+                  create: (context) => locator<NotificationsCubit>()..getAllCachedNotificationsFun(),
+                  child: NotificationsScreen(),
+                ),
             settings: routeSettings);
-
 
       case Routes.favouritesScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
               value: routeSettings.arguments as FavouritesAndHistoryCubit,
               child: FavouritesScreen(),
-),
+            ),
             settings: routeSettings);
 
       case Routes.mainSettingsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => SettingsCubit(),
-                  child: MainSettingsScreen(),
-                ),
+              create: (context) => SettingsCubit(),
+              child: MainSettingsScreen(),
+            ),
             settings: routeSettings);
 
       case Routes.specificChefMealsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => locator<GetSpecificChefMealsCubit>()..generalGetChefMealsFun(
-                      chefId: CacheHelper().getData(key: ApiKeys.id),context: context),
-                  child: SpecificChefMealsScreen(),
-                ),
+              create: (context) => locator<GetSpecificChefMealsCubit>()..generalGetChefMealsFun(
+                  chefId: CacheHelper().getData(key: ApiKeys.id),context: context),
+              child: SpecificChefMealsScreen(),
+            ),
             settings: routeSettings);
-
 
       case Routes.editProfileScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => locator<EditProfileCubit>(),
+            builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => locator<EditProfileCubit>(),
+                    ),
+                    BlocProvider(
+                      create: (context) => locator<GetChefDataCubit>(),
+                    ),
+                  ],
                   child: EditProfileScreen(),
                 ),
             settings: routeSettings);
@@ -116,13 +127,24 @@ class AppRouter {
 
       case Routes.personalInfoScreen:
         return MaterialPageRoute(
-            builder: (context) => PersonalInfoScreen(),
+            builder: (context) => BlocProvider.value(
+              value: routeSettings.arguments as InternetCheckingCubit,
+                  child: PersonalInfoScreen(),
+                ),
             settings: routeSettings);
 
       case Routes.updateMealScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => locator<UpdateMealCubit>(),
+            builder: (context) =>
+                MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => locator<UpdateMealCubit>(),
+                    ),
+                    BlocProvider(
+                      create: (context) => locator<NotificationsCubit>(),
+                    ),
+                  ],
                   child: UpdateMealScreen(),
                 ),
             settings: routeSettings);
@@ -143,10 +165,17 @@ class AppRouter {
 
       case Routes.addMealScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-              create: (context) => locator<AddMealCubit>(),
-              child: AddMealScreen(),
-            ),
+            builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => locator<AddMealCubit>(),
+                    ),
+                    BlocProvider(
+                      create: (context) => locator<NotificationsCubit>(),
+                    ),
+                  ],
+                  child: AddMealScreen(),
+                ),
             settings: routeSettings);
       case Routes.mealDetailsScreen:
         return MaterialPageRoute(
@@ -160,18 +189,32 @@ class AppRouter {
 
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (context) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                      create: (context) =>
-                          locator<SystemMealsCubit>()..generalGetMealsFun(context,true),
-                    ),
-                    BlocProvider(
-                      create: (context) => HomeListsCubit(),
-                    ),
-                  ],
-                  child: HomeScreen(),
-                ),
+            builder: (context) =>
+                MultiBlocProvider(
+                providers:
+                [
+                  BlocProvider(create: (context) => locator<NotificationsCubit>(),),
+                  BlocProvider(
+                    lazy: false,
+                    create: (context) => locator<GetUserAddressCubit>()..getUserAddressFun(),
+                  ),
+
+                  BlocProvider(
+                      lazy: false,
+                      create: (context) => locator<GetChefDataCubit>()
+                      ..getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id)),),
+
+                  BlocProvider(
+                    create: (context) => locator<SystemMealsCubit>()
+                      ..generalGetMealsFun(context, true),
+                  ),
+
+                  BlocProvider(
+                    create: (context) => HomeListsCubit(),
+                  ),
+                ],
+                child: HomeScreen(),
+                                  ),
             settings: routeSettings);
 
       case Routes.loginScreen:
@@ -193,9 +236,9 @@ class AppRouter {
       case Routes.forgetPassSendCodeScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => locator<ForgetPassCubit>(),
-                  child: ForgetPasswordSendCodeScreen(),
-                ),
+              create: (context) => locator<ForgetPassCubit>(),
+              child: ForgetPasswordSendCodeScreen(),
+            ),
             settings: routeSettings);
 
       case Routes.forgetPassChangeScreen:

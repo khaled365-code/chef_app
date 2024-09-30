@@ -36,6 +36,12 @@ class PushNotificationsService
     await fireMessaging.requestPermission();
   }
 
+  static Future<void> getDeviceToken() async
+  {
+    String? token=await fireMessaging.getToken();
+    log(token.toString());
+  }
+
   static Future<void> subscribeToTopicFun() async
   {
     await fireMessaging.subscribeToTopic('Your_Meals');
@@ -55,11 +61,7 @@ class PushNotificationsService
     await Firebase.initializeApp();
   }
 
-  static Future<void> getDeviceToken() async
-  {
-    String? token=await fireMessaging.getToken();
-    log(token.toString());
-  }
+
 
  static  Future<void> showForegroundNotification({required RemoteMessage remoteMessage}) async
   {

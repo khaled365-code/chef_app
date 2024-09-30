@@ -58,14 +58,6 @@ abstract class HomeRepo
 
 
 
-  // for local notifications
-  Future<Unit> saveLocalNotification({required LocalNotificationsModel localNotification});
-
-  Either<Exception,List<LocalNotificationsModel>> getCachedLocalNotifications();
-
-  Future<Unit> deleteNotification({required int localNotificationId,required int index});
-
-  Future<Unit> clearAllNotifications();
 
 
 

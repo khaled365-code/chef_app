@@ -228,50 +228,6 @@ class HomeRepoImplementation implements HomeRepo
 
 
 
-  // local Notifications :-
-  var notificationBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
-
-  @override
-  Either<Exception, List<LocalNotificationsModel>> getCachedLocalNotifications()
-  {
-    if(notificationBox.values.isNotEmpty)
-      {
-        return Right(notificationBox.values.toList());
-      }
-    else
-      {
-        return Left(Exception('No Notifications Found'));
-      }
-
-  }
-
-  @override
-  Future<Unit> saveLocalNotification({required LocalNotificationsModel localNotification}) async
-  {
-    await notificationBox.add(localNotification);
-    return Future.value(unit);
-  }
-
-  @override
-  Future<Unit> clearAllNotifications() async
-  {
-    await notificationBox.clear();
-    await LocalNotificationsService.cancelAllNotifications();
-    return Future.value(unit);
-
-  }
-
-  @override
-  Future<Unit> deleteNotification({required  int localNotificationId,required int index}) async
-  {
-     await notificationBox.deleteAt(index);
-     await LocalNotificationsService.cancelSpecificNotification(id: localNotificationId);
-    return Future.value(unit);
-
-  }
-
-
-
 
 
 

@@ -158,12 +158,13 @@ class MealDetailsScreen extends StatelessWidget {
                   color: AppColors.cF0F5FA,
                   child: Column(
                     children: [
-                      Spacer(),
-                      SharedButton(btnText: 'Update This Meal',
+                      Expanded(child: SpaceWidget(height: 92,)),
+                      SharedButton(
+                        btnText: 'Update This Meal',
                         btnTextStyle: AppTextStyles.bold16(context).copyWith(
                             color: AppColors.white
                         ),
-                      onPressed: () async
+                        onPressed: () async
                         {
                           navigate(context: context, route: Routes.updateMealScreen,arg: receivedMeal);
                         },),
@@ -176,8 +177,8 @@ class MealDetailsScreen extends StatelessWidget {
 
 
             ],
-          )),
-    );
+          )
+      ));
   }
 }
 

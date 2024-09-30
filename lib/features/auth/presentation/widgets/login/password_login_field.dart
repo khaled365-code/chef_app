@@ -23,6 +23,7 @@ class LoginPasswordField extends StatelessWidget {
         padding:  EdgeInsetsDirectional.only(end: 24.w),
         child: CustomOutlineTextField(
           obscureText: LoginCubit.get(context).isObsecureText,
+          maxLines: 1,
           validator: (value)
           {
             if(value!.isEmpty)

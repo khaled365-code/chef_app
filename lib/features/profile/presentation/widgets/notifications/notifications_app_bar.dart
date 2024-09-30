@@ -11,6 +11,7 @@ import '../../../../../core/utilis/app_assets.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
 import '../../../../../core/widgets/space_widget.dart';
+import '../../cubits/notifications_cubit/notifications_cubit.dart';
 
 class NotificationsAppBar extends StatelessWidget {
   const NotificationsAppBar({super.key});
@@ -45,9 +46,9 @@ class NotificationsAppBar extends StatelessWidget {
         GestureDetector(
           onTap: ()
           {
-            HomeScreenCubit.get(context).clearAllLocalNotifications();
+            NotificationsCubit.get(context).clearAllLocalNotifications();
           },
-            child: Text('Clear all',style: AppTextStyles.regular14(context).copyWith(color: AppColors.primaryColor))),
+            child: Text('Clear all',style: AppTextStyles.regular17(context).copyWith(color: AppColors.cFF7622))),
       ],
     );;
   }

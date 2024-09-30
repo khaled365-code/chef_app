@@ -19,6 +19,7 @@ class ImageConstants
 
   static const String cameraAndroidImage = 'assets/images/camera_image_android.png';
   static const String galleryAndroidImage = 'assets/images/gallery_image_android.jpg';
+  static const String newMealAlarmImage = 'assets/images/new_meal_alarm.jpg';
 
 
 

@@ -31,7 +31,7 @@ class WelcomeTextWidget extends StatelessWidget {
                         .copyWith(color: AppColors.c1E1D1D),
                   ),
                   TextSpan(
-                    text: ' ${getCurrentTime()}!',
+                    text: ' ${getCurrentGreetingTime()}!',
                     style: AppTextStyles.bold16(context).copyWith(
                         color: AppColors.c1E1D1D),
                   )

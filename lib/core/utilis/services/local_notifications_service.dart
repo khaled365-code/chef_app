@@ -10,7 +10,6 @@ import '../../commons/global_models/local_notifications_model.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/standalone.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-
 import '../../commons/global_models/scheduled_notification_model.dart';
 
 

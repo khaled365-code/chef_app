@@ -86,18 +86,6 @@ Future<XFile?> imagePick({required ImageSource imageSource}) async
 
 enum ToastStates{success,error,warning}
 
-Color getColor(ToastStates toastStates)
-{
-  switch (toastStates)
-  {
-    case ToastStates.success:
-      return Colors.green;
-    case ToastStates.error:
-      return Colors.redAccent;
-    case ToastStates.warning:
-      return Colors.redAccent;
-  }
-}
 
 buildScaffoldMessenger({required BuildContext context,required String msg,SnackBarBehavior? snackBarBehavior,Widget? iconWidget,})
 {
@@ -127,7 +115,8 @@ buildScaffoldMessenger({required BuildContext context,required String msg,SnackB
 
 }
 
-String formatDate({required DateTime dateTime,bool? monthName=false}) {
+String formatDate({required DateTime dateTime,bool? monthName=false})
+{
   int year = dateTime.year;
   int month = dateTime.month;
   int day = dateTime.day;
@@ -172,6 +161,7 @@ String getMonthName(int month)
       return 'December';
   }
 }
+
 String formatClock(DateTime dateTime)
 {
   int hour = dateTime.hour;
@@ -188,7 +178,8 @@ getAmorPm(DateTime dateTime)
     return 'AM';
   }
 }
-getCurrentTime()
+
+getCurrentGreetingTime()
 {
   if (DateTime.now().hour < 12) {
     return 'Good Morning';
@@ -204,7 +195,13 @@ getCurrentTime()
 
  Future<XFile> getImageXFileByUrl(String url) async
  {
-var file = await DefaultCacheManager().getSingleFile(url);
-XFile result = await XFile(file.path);
-return result;
-}
+   var file = await DefaultCacheManager().getSingleFile(url);
+   XFile result = await XFile(file.path);
+   return result;
+ }
+
+ Future<String> getImagePathFromUrl(String url) async
+ {
+   var file = await DefaultCacheManager().getSingleFile(url);
+   return file.path;
+ }

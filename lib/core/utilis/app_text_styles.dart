@@ -14,7 +14,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 16.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
     );
   }
@@ -22,7 +22,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 10.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
     );
   }
@@ -31,7 +31,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 14.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
       fontFamily: 'sen'
     );
 
@@ -41,7 +41,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 30.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
     );
 
@@ -50,7 +50,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 15.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
     );
 
@@ -59,7 +59,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 18.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
     );
 
@@ -68,7 +68,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 25.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
     );
 
@@ -77,7 +77,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 12.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
     );
 
@@ -85,7 +85,7 @@ class AppTextStyles
   static  TextStyle regular17 (BuildContext context) {
     return TextStyle(
         fontSize: 17.sp,
-        fontWeight:FontweightHelper.regular,
+        fontWeight:FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -93,7 +93,7 @@ class AppTextStyles
   static  TextStyle regular28 (BuildContext context) {
     return TextStyle(
         fontSize: 28.sp,
-        fontWeight:FontweightHelper.regular,
+        fontWeight:FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -101,7 +101,7 @@ class AppTextStyles
   static  TextStyle regular22_5(BuildContext context) {
     return TextStyle(
         fontSize: 22.5.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -110,7 +110,7 @@ class AppTextStyles
   static  TextStyle regular20(BuildContext context) {
     return TextStyle(
         fontSize: 20.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -118,7 +118,7 @@ class AppTextStyles
   static  TextStyle regular11(BuildContext context) {
     return TextStyle(
         fontSize: 11.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -127,7 +127,7 @@ class AppTextStyles
   static  TextStyle regular13(BuildContext context) {
     return TextStyle(
         fontSize: 13.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -135,7 +135,7 @@ class AppTextStyles
   static  TextStyle regular13_6(BuildContext context) {
     return TextStyle(
         fontSize: 13.6.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -144,7 +144,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 9.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'sen'
 
     );
@@ -153,7 +153,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 12.sp,
-        fontWeight: FontweightHelper.medium);
+        fontWeight: FontWeightHelper.medium);
   }
 
 
@@ -163,7 +163,7 @@ class AppTextStyles
     {
       return TextStyle(
           fontSize: 14.sp,
-          fontWeight: FontweightHelper.bold,
+          fontWeight: FontWeightHelper.bold,
           fontFamily: 'sen'
 
       );
@@ -173,7 +173,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 25.sp,
-        fontWeight: FontweightHelper.semiBold,
+        fontWeight: FontWeightHelper.semiBold,
         fontFamily: 'sen'
 
     );
@@ -182,7 +182,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 22.sp,
-        fontWeight: FontweightHelper.semiBold,
+        fontWeight: FontWeightHelper.semiBold,
         fontFamily: 'sen'
 
     );
@@ -191,7 +191,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 17.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -200,7 +200,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 19.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -209,7 +209,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 40.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -218,7 +218,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 60.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -227,7 +227,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 126.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -236,7 +236,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 41.sp,
-        fontWeight: FontweightHelper.extraBold,
+        fontWeight: FontWeightHelper.extraBold,
         fontFamily: 'sen'
 
     );
@@ -245,7 +245,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 52.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -254,7 +254,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 13.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -263,7 +263,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 13.67.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -272,7 +272,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 24.sp,
-        fontWeight: FontweightHelper.extraBold,
+        fontWeight: FontWeightHelper.extraBold,
         fontFamily: 'sen'
 
     );
@@ -281,7 +281,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 24.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -290,7 +290,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 30.sp,
-        fontWeight: FontweightHelper.extraBold,
+        fontWeight: FontWeightHelper.extraBold,
         fontFamily: 'sen'
 
     );
@@ -299,7 +299,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 30.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -308,7 +308,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 18.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -317,7 +317,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 10.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -326,7 +326,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize:16.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -335,7 +335,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 12.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -344,7 +344,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 20.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -353,7 +353,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 28.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -362,7 +362,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 22.sp,
-        fontWeight: FontweightHelper.bold,
+        fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -371,7 +371,7 @@ class AppTextStyles
   {
     return TextStyle(
       fontSize: 15.sp,
-      fontWeight: FontweightHelper.bold,
+      fontWeight: FontWeightHelper.bold,
         fontFamily: 'sen'
 
     );
@@ -387,7 +387,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 9.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'poppins'
     );
 
@@ -396,7 +396,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 14.sp,
-        fontWeight: FontweightHelper.regular,
+        fontWeight: FontWeightHelper.regular,
         fontFamily: 'poppins'
     );
 
@@ -405,7 +405,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 22.sp,
-        fontWeight: FontweightHelper.medium,
+        fontWeight: FontWeightHelper.medium,
         fontFamily: 'poppins'
     );
 
@@ -414,7 +414,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 28.sp,
-        fontWeight: FontweightHelper.medium,
+        fontWeight: FontWeightHelper.medium,
         fontFamily: 'poppins'
     );
 
@@ -423,7 +423,7 @@ class AppTextStyles
   {
     return TextStyle(
         fontSize: 14.sp,
-        fontWeight: FontweightHelper.medium,
+        fontWeight: FontWeightHelper.medium,
         fontFamily: 'poppins'
     );
 
@@ -431,14 +431,14 @@ class AppTextStyles
   static  TextStyle medium_12_Poppins(BuildContext context) {
     return TextStyle(
       fontSize: 12.sp,
-      fontWeight: FontweightHelper.medium,
+      fontWeight: FontWeightHelper.medium,
       fontFamily: 'poppins',
     );
   }
   static  TextStyle medium_34_Poppins(BuildContext context) {
     return TextStyle(
       fontSize: 34.sp,
-      fontWeight: FontweightHelper.medium,
+      fontWeight: FontWeightHelper.medium,
       fontFamily: 'poppins',
     );
   }

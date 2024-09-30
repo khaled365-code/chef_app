@@ -18,6 +18,7 @@ import '../../../../../core/database/cache/cache_helper.dart';
 import '../../../../../core/routes/routes.dart';
 import '../../../../../core/utilis/app_colors.dart';
 import '../../../../../core/utilis/app_text_styles.dart';
+import '../../cubits/get_user_address_cubit/get_user_address_cubit.dart';
 
 class PersonalInfoContainer2 extends StatelessWidget {
   const PersonalInfoContainer2({super.key});
@@ -88,7 +89,8 @@ class PersonalInfoContainer2 extends StatelessWidget {
                 fit: BoxFit.scaleDown,
                 child: Text(CacheHelper().getData(key: ApiKeys.description),style: AppTextStyles.regular14(context).copyWith(color: AppColors.c6B6E82,))),
           ),
-          HomeScreenCubit.get(context).userAddress!=''?
+          CacheHelper().getData(key: ApiKeys.userAddress)!=null &&
+          CacheHelper().getData(key: ApiKeys.userAddress)!=''?
           Column(
             children: [
               SpaceWidget(height: 16,),
@@ -105,7 +107,7 @@ class PersonalInfoContainer2 extends StatelessWidget {
                       child: SvgPicture.asset(ImageConstants.descIcon,colorFilter: ColorFilter.mode(AppColors.cFB4A59, BlendMode.srcIn),)),),
                 title: Text('Address'.toUpperCase(),style: AppTextStyles.regular14(context).copyWith(color: AppColors.c32343E,)),
                 subtitle: Text(
-                    HomeScreenCubit.get(context).userAddress,style: AppTextStyles.regular14(context).copyWith(color: AppColors.c6B6E82,)),),
+                    CacheHelper().getData(key: ApiKeys.userAddress),style: AppTextStyles.regular14(context).copyWith(color: AppColors.c6B6E82,)),),
             ],
           ):SizedBox.shrink(),
           SpaceWidget(height: 16,),

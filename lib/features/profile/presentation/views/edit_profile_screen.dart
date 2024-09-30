@@ -1,16 +1,18 @@
 import 'package:chef_app/core/commons/commons.dart';
 import 'package:chef_app/core/database/api/api_keys.dart';
 import 'package:chef_app/core/database/cache/cache_helper.dart';
+import 'package:chef_app/core/utilis/app_assets.dart';
 import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/core/widgets/no_internet_connection_dialog.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/core/widgets/shared_loading_indicator.dart';
+import 'package:chef_app/features/home/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
 import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_colors.dart';
@@ -36,22 +38,23 @@ class EditProfileScreen extends StatelessWidget {
         handleEditProfileListener(state, context);
       },
       child: Scaffold(
+        backgroundColor: AppColors.white,
         body: SafeArea(
             child: CustomScrollView(
               slivers: [
                 SliverFillRemaining(
                   hasScrollBody: false,
-                  child: Form(
+                  child: BlocBuilder<EditProfileCubit, EditProfileState>(
+                 builder: (context, state) {
+                  return Form(
                     key: EditProfileCubit.get(context).editProfileFormKey,
                     autovalidateMode: EditProfileCubit.get(context).editProfileValidateMode,
                     child: Padding(
                       padding: EdgeInsetsDirectional.only(
                           start: 24.w, end: 24.w),
-                      child: BlocBuilder<EditProfileCubit, EditProfileState>(
-                      builder: (context, state) {
-                      return Column(
+                      child: Column(
                         children: [
-                          SpaceWidget(height: 24,),
+                          SpaceWidget(height: 32,),
                           EditProfileAppBar(),
                           SpaceWidget(height: 25,),
                           ImagePickerWidget(
@@ -89,7 +92,8 @@ class EditProfileScreen extends StatelessWidget {
                           SpaceWidget(height: 24,),
                           EditProfileDescriptionField(),
                           Expanded(child: SpaceWidget(height: 32,)),
-                          state is EditProfileLoadingState? Center(
+                          state is EditProfileLoadingState?
+                          Center(
                             child: SharedLoadingIndicator(),
                           ):SharedButton(
                             btnText: 'SAVE',
@@ -124,20 +128,9 @@ class EditProfileScreen extends StatelessWidget {
                           ),
                           Spacer(),
                         ],
-                      );
-  },
-),
-                    ),
-                  ),
-                ),
-                // SliverFillRemaining(
-                //   hasScrollBody: false,
-                //   child: Column(
-                //     children: [
-                //
-                //     ],
-                //   ),
-                // )
+                      )
+                    ),);},),),
+
 
               ],
             )),
@@ -149,8 +142,8 @@ class EditProfileScreen extends StatelessWidget {
   {
      if(state is EditProfileSuccessState)
       {
-        buildScaffoldMessenger(context: context, msg: state.message);
-        await HomeScreenCubit.get(context).getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id));
+        buildScaffoldMessenger(context: context, msg: 'Profile updated successfully',iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon));
+        await GetChefDataCubit.get(context).getChefDataFun(chefIId: CacheHelper().getData(key: ApiKeys.id));
         Navigator.pushNamedAndRemoveUntil(context, Routes.homeScreen, (route) => true,);
 
       }
@@ -160,11 +153,15 @@ class EditProfileScreen extends StatelessWidget {
           {
             buildScaffoldMessenger(
                 context: context,
+                iconWidget: Icon(Icons.error_outline,color: AppColors.white,size: 25.sp,),
                 msg: state.errorModel.error.toString().substring(1,state.errorModel.error.toString().length-1));
           }
         else
           {
-            buildScaffoldMessenger(context: context, msg: state.errorModel.errorMessage!);
+            buildScaffoldMessenger(
+                context: context,
+                iconWidget: Icon(Icons.error_outline,color: AppColors.white,size: 25.sp,),
+                msg: state.errorModel.errorMessage!);
           }
       }
   }

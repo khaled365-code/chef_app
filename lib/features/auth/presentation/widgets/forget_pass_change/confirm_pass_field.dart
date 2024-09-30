@@ -19,6 +19,7 @@ class ConfirmPassField extends StatelessWidget {
     return NameAndTextFieldWidget(
         title: 'Confirm Password',
         childWidget: CustomOutlineTextField(
+          maxLines: 1,
           suffixIcon: GestureDetector(
               onTap: ()
               {

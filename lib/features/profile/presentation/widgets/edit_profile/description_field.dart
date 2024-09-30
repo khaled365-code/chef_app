@@ -17,8 +17,10 @@ class EditProfileDescriptionField extends StatelessWidget {
         title: 'Description'.toUpperCase(),
         childWidget: CustomOutlineTextField(
           controller: EditProfileCubit.get(context).discController,
-          keyboardType: TextInputType.text,
-          validator: (value) {
+          keyboardType: TextInputType.multiline,
+          textInputAction: TextInputAction.newline,
+          validator: (value)
+          {
             if(value!.isEmpty)
               {
                 return 'description must not be empty';

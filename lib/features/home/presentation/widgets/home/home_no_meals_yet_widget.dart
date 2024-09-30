@@ -16,7 +16,6 @@ class HomeNoMealsYetWidget extends StatelessWidget {
      children: [
        SpaceWidget(width: 24,),
        Image.asset(ImageConstants.orderCarImage,color: AppColors.primaryColor,),
-       SpaceWidget(height: 27,),
        SpaceWidget(width: 15,),
        Column(
          crossAxisAlignment: CrossAxisAlignment.start,

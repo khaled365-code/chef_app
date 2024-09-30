@@ -29,9 +29,9 @@ class BrandNameField extends StatelessWidget {
             {
               return 'brand name length must be at least 3 characters long';
             }
-            if(value.length>20)
+            if(value.length>15)
             {
-              return 'brand name length must be less than or equal to 20 characters long';
+              return 'brand name length must be less than or equal to 15 characters long';
             }
             else
             {

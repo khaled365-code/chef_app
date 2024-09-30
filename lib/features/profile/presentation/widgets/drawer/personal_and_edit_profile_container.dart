@@ -1,5 +1,6 @@
 
 import 'package:chef_app/core/commons/commons.dart';
+import 'package:chef_app/core/commons/global_cubits/internet_checking_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,7 +30,7 @@ class PersonalAndEditProfileBodyContainer extends StatelessWidget {
             contentPadding: EdgeInsetsDirectional.zero,
             onTap: ()
             {
-              navigate(context: context, route: Routes.personalInfoScreen);
+              navigate(context: context, route: Routes.personalInfoScreen,arg: InternetCheckingCubit.get(context));
             },
             leading: Container(
               width: 40.w,

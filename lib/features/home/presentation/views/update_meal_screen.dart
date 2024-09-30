@@ -1,4 +1,6 @@
+import 'package:chef_app/core/commons/global_models/local_notifications_model.dart';
 import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
+import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:chef_app/features/home/presentation/cubits/update_meal_cubit/update_meal_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ import '../../../../core/widgets/shared_button.dart';
 import '../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../core/widgets/space_widget.dart';
 import '../../../../core/widgets/name_and_text_field_widget.dart';
+import '../../../profile/presentation/cubits/notifications_cubit/notifications_cubit.dart';
 import '../../data/models/get_meals_model/system_all_meals.dart';
 import '../widgets/add_meal_photo_widget.dart';
 import '../widgets/update_meal/app_bar_update_screen.dart';
@@ -33,7 +36,7 @@ class UpdateMealScreen extends StatelessWidget {
         return BlocListener<UpdateMealCubit,UpdateMealState>(
           listener: (context, state)
           {
-            handleUpdateMealListener(state, context);
+            handleUpdateMealListener(state, context,receivedMeal);
           },
   child: Scaffold(
     backgroundColor: AppColors.white,
@@ -176,13 +179,25 @@ class UpdateMealScreen extends StatelessWidget {
 );
   }
 
-  void handleUpdateMealListener(UpdateMealState state, BuildContext context) {
+  void handleUpdateMealListener(UpdateMealState state, BuildContext context,SystemMeals receivedMeal) async
+  {
      if (state is UpdateMealSuccessState)
     {
-      buildScaffoldMessenger(
-          context: context,
-          msg: 'Meal updated successfully',iconWidget: SvgPicture.asset(ImageConstants.checkCircleIcon),snackBarBehavior: SnackBarBehavior.floating);
-      navigate(context: context, route: Routes.homeScreen);
+      var imagePath= await getImagePathFromUrl(receivedMeal.images![0]);
+      LocalNotificationsModel localNotificationsModel=LocalNotificationsModel(
+        DateTime.now().toString(),
+        id: 55,
+        image: ImageConstants.newMealAlarmImage,
+        payload: UpdateMealCubit.get(context).updatedMealImage?.path??imagePath,
+        title: '${receivedMeal.name} Meal Updated Successfully ${UpdateMealCubit.get(context).updateMealNameController.text.isEmpty?'':'to '+ UpdateMealCubit.get(context).updateMealNameController.text} !',
+        body: '${receivedMeal.name} details have been successfully modified. Feel free to review the changes at any time.'
+      );
+      LocalNotificationsService.showBasicNotification(localNotificationsModel: localNotificationsModel);
+     await NotificationsCubit.get(context).saveLocalNotificationsFun(localNotification: localNotificationsModel);
+     UpdateMealCubit.get(context).updateMealNameController.clear();
+     UpdateMealCubit.get(context).updateMealDescriptionController.clear();
+     UpdateMealCubit.get(context).updateMealPriceController.clear();
+      UpdateMealCubit.get(context).updatedMealImage=null;
     }
     if (state is UpdateMealFailureState)
     {

@@ -24,8 +24,8 @@ class AppUpdatesListTile extends StatelessWidget {
           color: AppColors.cA0A5BA
       ),),
       trailing: Switch(
-          value: CacheHelper().getData(key: ApiKeys.appUpdateIsActive)??
-              SettingsCubit.get(context).appUpdateIsActive,
+          value:
+          SettingsCubit.get(context).appUpdateIsActive,
           onChanged: (value)
           {
             SettingsCubit.get(context).switchOnAppUpdatesFun(value: value);

@@ -36,8 +36,7 @@ class FaqScreenAppBar extends StatelessWidget {
           ),
         ),
         Spacer(),
-        Icon(
-          FontAwesomeIcons.magnifyingGlass, color: AppColors.c181C2E, size: 20.sp,),
+        SvgPicture.asset(ImageConstants.searchLineIcon)
       ],
     );
   }

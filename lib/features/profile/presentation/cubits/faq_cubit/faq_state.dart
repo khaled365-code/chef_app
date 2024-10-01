@@ -4,3 +4,5 @@ part of 'faq_cubit.dart';
 sealed class FaqState {}
 
 final class FaqInitial extends FaqState {}
+
+final class FilterMyListState extends FaqState {}

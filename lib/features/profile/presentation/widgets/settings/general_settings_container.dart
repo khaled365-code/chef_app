@@ -27,14 +27,14 @@ class GeneralSettingsContainer extends StatelessWidget {
         children: [
           Text(
             context.tr('general_Settings'),
-            style: AppTextStyles.bold20(context).copyWith(
+            style: AppTextStyles.bold18(context).copyWith(
                 color: AppColors.c181C2E),),
           SpaceWidget(height: 16,),
           EditProfileRowSettings(),
           SpaceWidget(height: 16,),
           Divider(
             color: AppColors.cEEF2F6,
-            thickness: 3,
+            thickness: 4,
             height: 10,
           ),
           BlocBuilder<SettingsCubit, SettingsState>(
@@ -45,7 +45,7 @@ class GeneralSettingsContainer extends StatelessWidget {
           ),
           Divider(
             color: AppColors.cEEF2F6,
-            thickness: 3,
+            thickness: 4,
             height: 10,
           ),
           BlocBuilder<SettingsCubit,SettingsState>(
@@ -56,7 +56,7 @@ class GeneralSettingsContainer extends StatelessWidget {
           ),
           Divider(
             color: AppColors.cEEF2F6,
-            thickness: 3,
+            thickness: 4,
             height: 10,
           ),
           BlocBuilder<SettingsCubit,SettingsState>(

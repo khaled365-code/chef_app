@@ -13,23 +13,30 @@ class FaqCubit extends Cubit<FaqState> {
   FaqCubit() : super(FaqInitial());
 
    static FaqCubit get(context) => BlocProvider.of(context);
-  List<FamousQuestionsModel> famousQuestions = [
-    FamousQuestionsModel(icon: ImageConstants.notificationQuestionIcon,
+
+
+  List<FamousQuestionsModel> famousQuestions =
+  [
+    FamousQuestionsModel(
+        icon: ImageConstants.notificationQuestionIcon,
         questionTitle: 'Getting Started',
         questionColor: AppColors.cE2F2FF),
 
-    FamousQuestionsModel(icon: ImageConstants.howToInvestIcon,
+    FamousQuestionsModel(
+        icon: ImageConstants.howToInvestIcon,
         questionTitle: 'How to Invest',
         questionColor: AppColors.cEAFFED),
 
-    FamousQuestionsModel(icon: ImageConstants.notificationQuestionIcon,
+    FamousQuestionsModel(
+        icon: ImageConstants.notificationQuestionIcon,
         questionTitle: 'Notifications',
         questionColor: AppColors.cE2F2FF),
     
   ];
 
 
-  List<QuestionsAndAnswersModel> questionsAndAnswersList = [
+  List<QuestionsAndAnswersModel> originalQuestionsAndAnswersList =
+  [
 
     QuestionsAndAnswersModel(question: 'Can I add my own meals to the app?',
         answer: 'Yes, you can add your own meals to the App. Go to the Meals section, press add button, fill in the details like meal name, description, price, and category, and submit'),
@@ -76,8 +83,35 @@ class FaqCubit extends Cubit<FaqState> {
         answer: 'All your data will be saved and accessible only after you log back in. This will ensure that your data is not lost when you log out.'),
 
 
-
-
   ];
+
+  List<QuestionsAndAnswersModel> filteredQuestionsAndAnswersList = [];
+
+  void initializeList()
+  {
+    filteredQuestionsAndAnswersList = List.from(originalQuestionsAndAnswersList);
+    emit(FaqInitial());
+  }
+
+
+  filterMyList({required String searchQuery})
+  {
+    String query = searchQuery.toLowerCase();
+
+
+    if (query.isEmpty)
+    {
+      filteredQuestionsAndAnswersList = List.from(originalQuestionsAndAnswersList);
+    }
+    else
+    {
+
+      filteredQuestionsAndAnswersList = originalQuestionsAndAnswersList
+          .where((element) => element.question.toLowerCase().contains(query))
+          .toList();
+    }
+
+    emit(FilterMyListState());
+  }
 
 }

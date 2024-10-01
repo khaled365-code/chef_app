@@ -45,7 +45,7 @@ class _OpenedContainerState extends State<OpenedContainer> {
               children: [
                 Text(widget.questionsAndAnswersModel.question,
                   style: AppTextStyles.bold14(context).copyWith(
-                    color: AppColors.black
+                    color: AppColors.c1E1E2E
                   ),),
                 Spacer(),
                containerIsOpen==false? Icon(Icons.add,color: AppColors.primaryColor,):Icon(Icons.remove,color: AppColors.primaryColor,)

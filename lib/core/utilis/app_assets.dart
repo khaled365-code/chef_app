@@ -165,6 +165,7 @@ class ImageConstants
   static const String checkCircleIcon='assets/icons/check-circle.svg';
   static const String triangleWarningIcon='assets/icons/triangle_warning_icon.svg';
   static const String errorIcon='assets/icons/error_icon.svg';
+  static const String searchLineIcon='assets/icons/search_line_icon.svg';
 
 
 

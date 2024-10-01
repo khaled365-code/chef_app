@@ -48,8 +48,8 @@ class EditProfileRowSettings extends StatelessWidget {
                   color: AppColors.c32343E),),
             SpaceWidget(height: 1,),
             Text('Edit your profile',
-              style: AppTextStyles.regular14(context).copyWith(
-                  color: AppColors.c6B6E82),),
+              style: AppTextStyles.regular13(context).copyWith(
+                  color: AppColors.cA0A5BA),),
           ],
         ),
         Spacer(),
@@ -59,16 +59,16 @@ class EditProfileRowSettings extends StatelessWidget {
             navigate(context: context, route: Routes.editProfileScreen);
           },
           child: Container(
-              width: 60.w,
-              height: 40.h,
+              width: 65.w,
+              height: 46.h,
               decoration: BoxDecoration(
                   color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(25.r)
+                  borderRadius: BorderRadius.circular(33.r)
               ),
               child: Center(
                 child: Text(
                   'Edit',
-                  style: AppTextStyles.regular14(context).copyWith(
+                  style: AppTextStyles.regular16(context).copyWith(
                       color: AppColors.white
                   ),
                 ),

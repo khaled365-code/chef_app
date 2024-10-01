@@ -1,5 +1,4 @@
 import 'package:chef_app/core/commons/commons.dart';
-import 'package:chef_app/core/commons/global_cubits/internet_checking_cubit.dart';
 import 'package:chef_app/core/utilis/services/internet_connection_service.dart';
 import 'package:chef_app/features/home/presentation/cubits/get_system_meals_cubit/system_meals_cubit.dart';
 import 'package:flutter/material.dart';

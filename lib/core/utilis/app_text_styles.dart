@@ -155,6 +155,12 @@ class AppTextStyles
         fontSize: 12.sp,
         fontWeight: FontWeightHelper.medium);
   }
+  static  TextStyle medium14(BuildContext context)
+  {
+    return TextStyle(
+        fontSize: 14.sp,
+        fontWeight: FontWeightHelper.medium);
+  }
 
 
   // bold and extra bold

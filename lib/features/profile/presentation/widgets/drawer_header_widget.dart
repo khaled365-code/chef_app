@@ -31,8 +31,7 @@ class DrawerHeaderWidget extends StatelessWidget {
                 height: 100.h,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    image: CacheHelper().getData(key: ApiKeys.profilePic) !=
-                        null ?
+                    image: CacheHelper().getData(key: ApiKeys.profilePic) != null ?
                     DecorationImage(
                         image: CachedNetworkImageProvider(
                             CacheHelper().getData(key: ApiKeys.profilePic)

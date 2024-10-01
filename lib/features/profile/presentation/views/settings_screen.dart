@@ -19,7 +19,7 @@ class MainSettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: AppColors.cF3F3F3,
+     backgroundColor: AppColors.white,
       body:SafeArea(
           child: CustomScrollView(
             slivers: [
@@ -29,18 +29,13 @@ class MainSettingsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SpaceWidget(height: 24,),
+                      SpaceWidget(height: 32,),
                       SettingsAppBar(),
                       SpaceWidget(height: 24,),
                       GeneralSettingsContainer(),
                       SpaceWidget(height: 20,),
                       AccountSettingsContainer(),
                       SpaceWidget(height: 30,),
-
-
-
-
-
                     ],
                   ),
                 ),

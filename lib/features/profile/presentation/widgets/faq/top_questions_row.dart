@@ -16,7 +16,7 @@ class TopQuestionsRow extends StatelessWidget {
     return Row(
       children: [
         Text('Top Questions',style: AppTextStyles.bold17(context).copyWith(
-            color: AppColors.black
+            color: AppColors.c1E1E2E
         ),),
         Spacer(),
         Text('View all',style: AppTextStyles.bold14(context).copyWith(

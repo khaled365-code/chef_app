@@ -18,7 +18,7 @@ class FamousQuestionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsDirectional.only(start: 16.w,top: 16.h,end: 16.w),
+      padding: EdgeInsetsDirectional.only(start: 16.w,top: 16.h,end: 16.w,bottom: 20.h),
       decoration: BoxDecoration(
         color: famousQuestionsModel.questionColor,
         borderRadius: BorderRadius.circular(8.r),
@@ -35,6 +35,7 @@ class FamousQuestionItem extends StatelessWidget {
           FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(famousQuestionsModel.questionTitle,style: AppTextStyles.bold15(context).copyWith(color: AppColors.c1E1E2E),)),
+
         ],
       ),
     );

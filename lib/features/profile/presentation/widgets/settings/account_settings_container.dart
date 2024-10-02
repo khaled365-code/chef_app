@@ -27,12 +27,12 @@ class AccountSettingsContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.tr('account_settings'),style: AppTextStyles.bold20(context).copyWith(color: AppColors.c181C2E),),
+            context.tr('account_settings'),style: AppTextStyles.bold18(context).copyWith(color: AppColors.c181C2E),),
           SpaceWidget(height: 5,),
           LanguageListTile(),
           Divider(
             color: AppColors.cEEF2F6,
-            thickness: 3,
+            thickness: 4,
             height: 10,
           ),
           ChangePasswordListTile(),

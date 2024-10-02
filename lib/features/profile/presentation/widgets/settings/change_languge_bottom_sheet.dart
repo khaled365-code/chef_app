@@ -43,10 +43,10 @@ class ChangeLanguageBottomSheet extends StatelessWidget {
                 ),
                 SpaceWidget(height: 20,),
                 GestureDetector(
-                   onTap: ()
+                   onTap: () async
                     {
                       context.setLocale(Locale('ar'));
-                      CacheHelper().saveData(key: ApiKeys.appCurrentLanguage, value: 'ar');
+                     await CacheHelper().saveData(key: ApiKeys.appCurrentLanguage, value: 'ar');
                     },
                     child: Text('Change to Arabic (AR)',style: AppTextStyles.bold18(context).copyWith(color: AppColors.primaryColor),)),
                 SpaceWidget(height: 20,),
@@ -55,10 +55,10 @@ class ChangeLanguageBottomSheet extends StatelessWidget {
                 ),
                 SpaceWidget(height: 20,),
                 GestureDetector(
-                    onTap: ()
+                    onTap: () async
                     {
                       context.setLocale(Locale('en'));
-                      CacheHelper().saveData(key: ApiKeys.appCurrentLanguage, value: 'en');
+                     await CacheHelper().saveData(key: ApiKeys.appCurrentLanguage, value: 'en');
 
                     },
                     child: Text('Keep English',style: AppTextStyles.bold18(context).copyWith(color: AppColors.primaryColor),)),

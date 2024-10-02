@@ -56,7 +56,7 @@ class CarouselContainerItem extends StatelessWidget {
                         }
                       else
                         {
-                          navigate(context: context,route: Routes.personalInfoScreen);
+                          navigate(context: context,route: Routes.customDrawerScreen);
                         }
                     },
                     child: Container(

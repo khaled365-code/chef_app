@@ -23,7 +23,7 @@ class BillReminderListTile extends StatelessWidget {
       title: Text('Bill Reminder',style: AppTextStyles.bold15(context).copyWith(
           color: AppColors.c32343E
       ),),
-      subtitle: Text('Allows to activate bill reminder for you',style: AppTextStyles.regular14(context).copyWith(
+      subtitle: Text('Allows to activate bill reminder for you',style: AppTextStyles.regular13(context).copyWith(
           color: AppColors.cA0A5BA
       ),),
       contentPadding: EdgeInsetsDirectional.zero,
@@ -40,8 +40,6 @@ class BillReminderListTile extends StatelessWidget {
           onChanged: (value) async
           {
             await settingsCubit.onBillReminderSwitched(value: value);
-            SettingsCubit.get(context).billReminderFunction(value: value);
-
           }),
     );
   }

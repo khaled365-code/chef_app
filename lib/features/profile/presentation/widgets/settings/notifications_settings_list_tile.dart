@@ -23,7 +23,7 @@ class NotificationsSettingsListTile extends StatelessWidget {
       title: Text(context.tr('General Notifications'),style: AppTextStyles.bold15(context).copyWith(
           color: AppColors.c32343E
       ),),
-      subtitle: Text('Allow fetch to send notifications to your device',style: AppTextStyles.regular13(context).copyWith(
+      subtitle: Text('Allows us to send notifications to your device',style: AppTextStyles.regular13(context).copyWith(
           color: AppColors.cA0A5BA
       ),),
       contentPadding: EdgeInsetsDirectional.zero,

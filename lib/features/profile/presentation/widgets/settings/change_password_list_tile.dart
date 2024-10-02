@@ -30,7 +30,7 @@ class ChangePasswordListTile extends StatelessWidget {
       title: Text('Change Password',style: AppTextStyles.bold15(context).copyWith(
           color: AppColors.c32343E
       ),),
-      subtitle: Text('Allows to change your current password whenever you want',style: AppTextStyles.regular14(context).copyWith(
+      subtitle: Text('Allows to change your current password whenever you want',style: AppTextStyles.regular13(context).copyWith(
           color: AppColors.cA0A5BA
       ),),
       contentPadding: EdgeInsetsDirectional.zero,

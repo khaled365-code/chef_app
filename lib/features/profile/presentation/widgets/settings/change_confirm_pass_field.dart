@@ -4,8 +4,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utilis/app_colors.dart';
+import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../../core/widgets/custom_outline_text_field.dart';
 import '../../../../../core/widgets/name_and_text_field_widget.dart';
+import '../../../../../core/widgets/no_internet_connection_dialog.dart';
 import '../../cubits/change_password_cubit/change_password_cubit.dart';
 
 class ChangeConfirmPasswordField extends StatelessWidget {
@@ -18,6 +20,7 @@ class ChangeConfirmPasswordField extends StatelessWidget {
     return NameAndTextFieldWidget(
         title: 'Confirm password',
         childWidget: CustomOutlineTextField(
+            maxLines: 1,
             keyboardType: TextInputType.text,
             obscureText: ChangePasswordCubit.get(context).confirmPasswordObscure,
             suffixIcon: GestureDetector(
@@ -52,19 +55,26 @@ class ChangeConfirmPasswordField extends StatelessWidget {
             controller: ChangePasswordCubit.get(context).confirmPasswordController));
   }
 
-  void onSubmittedAction(BuildContext context)
+  void onSubmittedAction(BuildContext context) async
   {
-     if(ChangePasswordCubit.get(context).changePasswordFormKey.currentState!.validate())
+    if( await InternetConnectionCheckingService.checkInternetConnection()==true)
     {
-      ChangePasswordCubit.get(context).changePasswordFormKey.currentState!.save();
-      ChangePasswordCubit.get(context).changePasswordFun(
-          oldPassword: ChangePasswordCubit.get(context).oldPasswordController.text,
-          newPassword: ChangePasswordCubit.get(context).newPasswordController.text,
-          confirmPassword: ChangePasswordCubit.get(context).confirmPasswordController.text);
+    if(ChangePasswordCubit.get(context).changePasswordFormKey.currentState!.validate())
+    {
+    ChangePasswordCubit.get(context).changePasswordFormKey.currentState!.save();
+    ChangePasswordCubit.get(context).changePasswordFun(
+    oldPassword: ChangePasswordCubit.get(context).oldPasswordController.text,
+    newPassword: ChangePasswordCubit.get(context).newPasswordController.text,
+    confirmPassword: ChangePasswordCubit.get(context).confirmPasswordController.text);
     }
     else
     {
-      ChangePasswordCubit.get(context).activateChangePasswordAutoValidateMode();
+    ChangePasswordCubit.get(context).activateChangePasswordAutoValidateMode();
+    }
+    }
+    else
+    {
+    showDialog(context: context, builder: (context) => NoInternetConnectionDialog(),);
     }
   }
 }

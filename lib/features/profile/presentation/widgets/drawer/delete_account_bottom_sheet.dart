@@ -20,6 +20,7 @@ import '../../../../../core/utilis/services/internet_connection_service.dart';
 import '../../../../../core/widgets/shared_loading_indicator.dart';
 import '../../../../../core/widgets/space_widget.dart';
 import '../../../../home/data/models/get_meals_model/system_all_meals.dart';
+import '../../../data/models/specific_chef_meals_model/chef_meals.dart';
 import '../../cubits/delete_account_cubit/delete_account_cubit.dart';
 
 class DeleteAccountBottomSheet extends StatelessWidget {
@@ -28,9 +29,7 @@ class DeleteAccountBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-    create: (context) => DeleteAccountCubit(
-    profileRepoImplementation: locator.get<ProfileRepoImplementation>()
-  ),
+    create: (context) => locator<DeleteAccountCubit>(),
   child: BlocListener<DeleteAccountCubit, DeleteAccountState>(
   listener: (context, state)
   {
@@ -133,10 +132,14 @@ class DeleteAccountBottomSheet extends StatelessWidget {
       {
         var favouriteMealsBox=Hive.box<SystemMeals>('favourite_meals');
         var historyMealsBox=Hive.box<SystemMeals>('history_meals');
+        var systemMealsBox=Hive.box<SystemMeals>('cached_system_meals');
+        var chefMealsBox=Hive.box<SpecificChefMeals>('cached_chef_meals');
         var localNotificationsBox=Hive.box<LocalNotificationsModel>('cached_local_notifications');
         await Future.wait([
           favouriteMealsBox.clear(),
           historyMealsBox.clear(),
+          systemMealsBox.clear(),
+          chefMealsBox.clear(),
           localNotificationsBox.clear(),
           CacheHelper().clearData(),
         ]);
@@ -148,14 +151,16 @@ class DeleteAccountBottomSheet extends StatelessWidget {
         if(state.errorModel.error!=null)
         {
           showToast(
-            context: context,
-              msg: state.errorModel.error.toString().substring(1,state.errorModel.error.toString().length-1), toastStates: ToastStates.error);
+              context: context,
+              msg: state.errorModel.error.toString().substring(1,state.errorModel.error.toString().length-1),
+              toastStates: ToastStates.error);
         }
         else
         {
          showToast(
              context: context,
-             msg: state.errorModel.errorMessage!, toastStates: ToastStates.error);
+             msg: state.errorModel.errorMessage!,
+             toastStates: ToastStates.error);
         }
       }
   }

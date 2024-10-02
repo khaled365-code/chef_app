@@ -20,7 +20,7 @@ class AppUpdatesListTile extends StatelessWidget {
       title: Text('App updates',style: AppTextStyles.bold15(context).copyWith(
           color: AppColors.c32343E
       ),),
-      subtitle: Text('Allows to get all updates and new features',style: AppTextStyles.regular14(context).copyWith(
+      subtitle: Text('Allows to get all updates and new features',style: AppTextStyles.regular13(context).copyWith(
           color: AppColors.cA0A5BA
       ),),
       trailing: Switch(

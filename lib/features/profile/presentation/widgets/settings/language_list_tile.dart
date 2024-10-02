@@ -14,7 +14,8 @@ class LanguageListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: (){
+      onTap: ()
+      {
         showModalBottomSheet(
           backgroundColor: AppColors.transparent,
           context: context,
@@ -23,7 +24,7 @@ class LanguageListTile extends StatelessWidget {
       title: Text('Language',style: AppTextStyles.bold15(context).copyWith(
           color: AppColors.c32343E
       ),),
-      subtitle: Text('Allows to switch between english\nand arabic as you prefer',style: AppTextStyles.regular14(context).copyWith(
+      subtitle: Text('Allows to switch between english\nand arabic as you prefer',style: AppTextStyles.regular13(context).copyWith(
           color: AppColors.cA0A5BA
       ),),
       contentPadding: EdgeInsetsDirectional.zero,

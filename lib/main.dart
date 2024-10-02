@@ -15,7 +15,6 @@ import 'meal_time.dart';
 import 'core/commons/global_models/local_notifications_model.dart';
 import 'core/database/api/api_keys.dart';
 import 'core/utilis/services/local_notifications_service.dart';
-import 'core/utilis/services/push_notifications_service.dart';
 import 'features/home/data/models/get_meals_model/chef_info.dart';
 import 'firebase_options.dart';
 
@@ -35,7 +34,6 @@ void main() async
   Hive.registerAdapter(LocalNotificationsModelAdapter());
   Hive.registerAdapter(SpecificChefMealsAdapter());
   await Future.wait([
-    WorkManagerService.init(),
     Hive.openBox<SystemMeals>('favourite_meals'),
     Hive.openBox<SystemMeals>('history_meals'),
     Hive.openBox<SystemMeals>('cached_system_meals'),
@@ -43,18 +41,12 @@ void main() async
     Hive.openBox<LocalNotificationsModel>('cached_local_notifications'),
   ]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  if (await InternetConnectionCheckingService.checkInternetConnection() ==
-      true) {
-    await PushNotificationsService.init();
-  }
-
   setUpLocator();
 
   runApp(
       EasyLocalization(
           supportedLocales: [ Locale('en'), Locale('ar')],
           path: 'assets/translations',
-          // <-- change the path of the translation files
           fallbackLocale: Locale(
               CacheHelper().getData(key: ApiKeys.appCurrentLanguage) ?? 'en'),
           child: const MealTimeApp()));

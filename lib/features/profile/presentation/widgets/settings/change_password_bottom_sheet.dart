@@ -22,17 +22,15 @@ class ChangePasswordBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ChangePasswordCubit(profileRepoImplementation: locator.get<ProfileRepoImplementation>()),
+      create: (context) => locator<ChangePasswordCubit>(),
       child: BlocListener<ChangePasswordCubit,ChangePasswordState>(
-  listener: (context, state)
-  {
-    handleChangePasswordListener(state, context);
-  },
+      listener: (context, state)
+      {
+         handleChangePasswordListener(state, context);
+      },
   child: Scaffold(
             backgroundColor: Colors.transparent,
             resizeToAvoidBottomInset: true,
-            extendBodyBehindAppBar: true,
             body: Builder(
               builder: (context) {
                 return BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
@@ -53,7 +51,8 @@ class ChangePasswordBottomSheet extends StatelessWidget {
                             children: [
                               SpaceWidget(height: 15,),
                               ChangePasswordWhiteContainer(),
-                              state is ChangePasswordLoadingState? Column(
+                              state is ChangePasswordLoadingState?
+                              Column(
                                 children:
                                 [
                                   SpaceWidget(height: 20,),
@@ -115,7 +114,8 @@ class ChangePasswordBottomSheet extends StatelessWidget {
     );
   }
 
-  BoxDecoration _buildBottomSheetDecoration() {
+  BoxDecoration _buildBottomSheetDecoration()
+  {
     return BoxDecoration(
                       color: AppColors.white,
                       borderRadius: BorderRadius.only(

@@ -63,7 +63,8 @@ Future uploadImageToAPI(XFile image) async
           SvgPicture.asset(ImageConstants.triangleWarningIcon,
             colorFilter: ColorFilter.mode(AppColors.white, BlendMode.srcIn),),
           SpaceWidget(width: 10.w,),
-          Text(msg,style: TextStyle(
+          Text(msg,
+              style: TextStyle(
             fontSize: 16.sp,
             fontFamily: 'sen',
             color:AppColors.white,

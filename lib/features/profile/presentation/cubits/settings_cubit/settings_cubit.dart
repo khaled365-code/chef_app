@@ -5,6 +5,7 @@ import 'package:chef_app/core/utilis/services/work_manager_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import '../../../../../core/database/api/api_keys.dart';
+import '../../../../../core/utilis/services/internet_connection_service.dart';
 
 part 'settings_state.dart';
 
@@ -22,21 +23,16 @@ class SettingsCubit extends Cubit<SettingsState> {
         isBillReminderActive=value;
         await CacheHelper().saveData(key: ApiKeys.billReminderIsActive, value: value);
         emit(BillReminderSwitchedState());
+        if(isBillReminderActive==true)
+          {
+            WorkManagerService.init();
+          }
+        else
+          {
+            WorkManagerService.cancelTask(uniqueName: 'periodic scheduled notification id 10');
+          }
 
   }
-
-  billReminderFunction({required bool value})
-  {
-    if(value==true)
-      {
-        WorkManagerService.init();
-      }
-    else
-    {
-        WorkManagerService.cancelTask(uniqueName: 'periodic scheduled notification id 10');
-    }
-  }
-
 
 
 
@@ -49,18 +45,18 @@ class SettingsCubit extends Cubit<SettingsState> {
         emit(NotificationSwitchedState());
         if(notificationIsActive==false)
           {
+
             await Future.wait([
-            // LocalNotificationsService.cancelAllNotifications(),
              PushNotificationsService.disablePushNotifications(),
              PushNotificationsService.unSubscribeToTopicFun(),
             ]);
           }
         else
           {
-            await Future.wait([
-              PushNotificationsService.init(),
-            ]);
-
+            if (await InternetConnectionCheckingService.checkInternetConnection() == true)
+            {
+              await PushNotificationsService.init();
+            }
           }
 
   }
@@ -71,13 +67,13 @@ class SettingsCubit extends Cubit<SettingsState> {
   {
     if(appUpdateIsActive==value)
       {
-        return ;
+        return;
       }
     else
       {
         appUpdateIsActive=value;
         await CacheHelper().saveData(key: ApiKeys.appUpdateIsActive, value: value);
-        emit(SoundSwitchedState());
+        emit(AppUpdatesSwitchedState());
       }
 
   }

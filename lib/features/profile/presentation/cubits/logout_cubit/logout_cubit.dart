@@ -18,7 +18,6 @@ class LogoutCubit extends Cubit<LogoutState> {
     emit(LogoutLoadingState());
 
     final response=await profileRepoImplementation.logOut();
-
     response.fold((errorModel) {
       emit(LogoutFailureState(errorModel: errorModel));
     }, (message) => emit(LogoutSuccessState(successMessage: message)));

@@ -7,7 +7,6 @@ import 'package:chef_app/core/widgets/no_internet_connection_dialog.dart';
 import 'package:chef_app/core/widgets/shared_button.dart';
 import 'package:chef_app/core/widgets/shared_loading_indicator.dart';
 import 'package:chef_app/features/home/presentation/cubits/get_chef_data_cubit/get_chef_data_cubit.dart';
-import 'package:chef_app/features/home/presentation/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:chef_app/features/profile/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

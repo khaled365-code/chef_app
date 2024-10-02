@@ -26,9 +26,7 @@ class LogoutBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          LogoutCubit(
-              profileRepoImplementation: locator.get<ProfileRepoImplementation>()),
+      create: (context) => locator<LogoutCubit>(),
       child: BlocListener<LogoutCubit,LogoutState>(
         listener: (context, state)
         {
@@ -109,7 +107,7 @@ class LogoutBottomSheet extends StatelessWidget {
                         }
                     },
                   ),
-                  SpaceWidget(height: 15,),
+                  Spacer(),
                   GestureDetector(
                     onTap: ()
                     {
@@ -133,18 +131,21 @@ class LogoutBottomSheet extends StatelessWidget {
 
   void handleLogoutListener(LogoutState state, BuildContext context) async
   {
-    if (state is LogoutSuccessState) {
+    if (state is LogoutSuccessState)
+    {
       await CacheHelper().removeData(key: ApiKeys.token);
       navigate(context: context, route: Routes.loginScreen,replacement: true);
     }
-    if (state is LogoutFailureState) {
+    if (state is LogoutFailureState)
+    {
       if (state.errorModel.error != null) {
         showToast(
             context: context,
             msg: state.errorModel.error.toString().substring(
             1, state.errorModel.error
             .toString()
-            .length - 1), toastStates: ToastStates.error);
+            .length - 1),
+            toastStates: ToastStates.error);
       }
       else {
         showToast(

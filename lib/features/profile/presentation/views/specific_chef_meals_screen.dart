@@ -59,7 +59,7 @@ class SpecificChefMealsScreen extends StatelessWidget {
                               child: Text('Found ${GetSpecificChefMealsCubit
                                   .get(context)
                                   .chefMeals
-                                  ?.length ?? GetSpecificChefMealsCubit.get(context).cachedChefMeals?.length??0} results ',
+                                  ?.length ?? GetSpecificChefMealsCubit.get(context).cachedChefMeals?.length??0} meals ',
                                   style: AppTextStyles.bold28(context).copyWith(
                                       color: AppColors.c32343E
                                   )),

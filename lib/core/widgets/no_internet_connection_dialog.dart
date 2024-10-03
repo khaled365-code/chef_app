@@ -4,6 +4,7 @@ import 'package:chef_app/core/utilis/app_colors.dart';
 import 'package:chef_app/core/utilis/app_text_styles.dart';
 import 'package:chef_app/core/widgets/space_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NoInternetConnectionDialog extends StatelessWidget {
   const NoInternetConnectionDialog({super.key});
@@ -12,7 +13,7 @@ class NoInternetConnectionDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppColors.cF0F0F0,
-      contentPadding: EdgeInsetsDirectional.zero,
+      contentPadding: EdgeInsetsDirectional.only(start: 3.w,top: 5.h),
 
       title: Text('No internet Connection',style: AppTextStyles.bold20(context).copyWith(
         color: AppColors.c181C2E
@@ -23,16 +24,16 @@ class NoInternetConnectionDialog extends StatelessWidget {
          children:
          [
            Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 20),
-             child: Text('Please check your internet connection and try again.',
+             padding:  EdgeInsets.symmetric(horizontal: 20.w),
+             child: Text('Please check your internet connection and try again later',
              style: AppTextStyles.regular14(context).copyWith(
-               color: AppColors.c181C2E
+               color: AppColors.c363636
              ),),
            ),
            SpaceWidget(height: 10,),
            Divider(
              color: AppColors.cD3D3D3,
-             thickness: 3,
+             thickness: 2,
            ),
          ],
       ),

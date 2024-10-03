@@ -9,7 +9,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/commons/commons.dart';
-import '../../../../core/routes/routes.dart';
 import '../../../../core/utilis/app_assets.dart';
 import '../../../../core/utilis/app_colors.dart';
 import '../../../../core/utilis/app_text_styles.dart';

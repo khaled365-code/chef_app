@@ -1,11 +1,14 @@
 
 
 
+import 'dart:developer';
+import 'package:chef_app/core/utilis/services/local_notifications_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
 
 class WorkManagerService
 {
@@ -25,52 +28,12 @@ class WorkManagerService
   static Future<void> registerTask() async
   {
     await workManager.registerPeriodicTask(
-      'periodic scheduled notification id 10',
-      'periodic scheduled notification task',
+      'periodic scheduled daily notification at 12 AM ',
+      'periodic scheduled notification task at 12 AM ',
       frequency: Duration(hours: 12),
     );
   }
 
-
- static Future<void> showDailyScheduledNotification() async
-  {
-    NotificationDetails notificationDetails=NotificationDetails(
-        android: AndroidNotificationDetails(
-            '7',
-            'periodic daily scheduled notification',
-            importance: Importance.max,
-            priority: Priority.high,
-          playSound: true,
-          sound: RawResourceAndroidNotificationSound('meal_time_app_notification'),
-        ),
-        iOS: DarwinNotificationDetails()
-    );
-    UILocalNotificationDateInterpretation uiLocalNotificationDateInterpretation=UILocalNotificationDateInterpretation.absoluteTime;
-     await setCurrentDeviceLocation();
-    // كل يوم الساعه 12 يكون فيه scheduled Notification very important
-    var currentTime=tz.TZDateTime.now(tz.local);
-    var scheduledTime= tz.TZDateTime(
-      tz.local,
-      currentTime.year,
-      currentTime.month,
-      currentTime.day,
-      24,
-    );
-    if(scheduledTime.isBefore(currentTime))
-    {
-      scheduledTime=scheduledTime.add(Duration(days: 1));
-    }
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-        10,
-        'Time for a Tasty Treat!',
-        'Discover new meals added today! Check out the latest recipes from our chefs or add your own to the collection',
-        scheduledTime,
-        notificationDetails,
-        uiLocalNotificationDateInterpretation: uiLocalNotificationDateInterpretation,
-       // matchDateTimeComponents: DateTimeComponents.time,  // Ensures it fires daily at the same time
-
-    );
-  }
 
 
   static Future<void> setCurrentDeviceLocation() async
@@ -98,7 +61,8 @@ class WorkManagerService
 {
   Workmanager().executeTask((taskName, inputData) async
   {
-    await WorkManagerService.showDailyScheduledNotification();
+    log('hello egypt');
+    await LocalNotificationsService.showDailyScheduledNotification();
     return Future.value(true);
   },);
 }

@@ -16,7 +16,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
 
 
-  bool isBillReminderActive=true;
+  bool isBillReminderActive=false;
 
   Future<void> onBillReminderSwitched({required bool value}) async
   {
@@ -25,18 +25,18 @@ class SettingsCubit extends Cubit<SettingsState> {
         emit(BillReminderSwitchedState());
         if(isBillReminderActive==true)
           {
-            WorkManagerService.init();
+           await WorkManagerService.init();
           }
         else
           {
-            WorkManagerService.cancelTask(uniqueName: 'periodic scheduled notification id 10');
+            WorkManagerService.cancelTask(uniqueName: 'periodic scheduled daily notification at 12 AM ');
           }
 
   }
 
 
 
-  bool notificationIsActive=true;
+  bool notificationIsActive=false;
 
   Future<void> onNotificationSwitched({required bool value}) async
   {

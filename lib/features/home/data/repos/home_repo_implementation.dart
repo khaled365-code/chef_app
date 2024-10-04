@@ -182,8 +182,12 @@ class HomeRepoImplementation implements HomeRepo
       {
         return Future.value(unit);
       }
-    await  favouriteMealsBox.add(meal);
-    return Future.value(unit);
+    else
+      {
+        await  favouriteMealsBox.add(meal);
+        return Future.value(unit);
+      }
+
 
   }
 
@@ -221,8 +225,12 @@ class HomeRepoImplementation implements HomeRepo
       {
         return Future.value(unit);
       }
-    await historyMealsBox.add(meal);
-    return Future.value(unit);
+    else
+      {
+        await historyMealsBox.add(meal);
+        return Future.value(unit);
+      }
+
   }
 
 

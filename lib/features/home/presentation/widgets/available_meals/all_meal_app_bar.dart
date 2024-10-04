@@ -59,7 +59,10 @@ class AllMealsAppBar extends StatelessWidget {
                   {
                     for (int i=0;i<SystemMealsCubit.get(context).cachedSystemMeals!.length;i++)
                       {
-                        await FavouritesAndHistoryCubit.get(context).saveFavouriteMealToCache(SystemMealsCubit.get(context).cachedSystemMeals!, i);
+                        if(SystemMealsCubit.get(context).cachedSystemMeals![i].itemIsSelected==true)
+                          {
+                            await FavouritesAndHistoryCubit.get(context).saveFavouriteMealToCache(SystemMealsCubit.get(context).cachedSystemMeals!, i);
+                          }
                       }
                   }
                 FavouritesAndHistoryCubit.get(context).getCachedFavouriteMeals();
